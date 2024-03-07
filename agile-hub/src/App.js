@@ -6,16 +6,19 @@ function App() {
   const [responseText, setResponseText] = useState('');
 
   useEffect(() => {
-    const apiUrl = 'http://www.agilehub.store/api/health'; // 서버 주소로 변경
+    const apiUrl = "/api/health"; // 프록시 설정한 URL을 포함하지 않음
 
     axios.get(apiUrl)
       .then(response => {
+        console.log(response.data);
         setResponseText(response.data);
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
+    
   }, []);
+  
 
   return (
     <div>
