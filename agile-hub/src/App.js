@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const [responseText, setResponseText] = useState('');
+
+  useEffect(() => {
+    const apiUrl = "/api/health"; // 프록시 설정한 URL을 포함하지 않음!!
+    
+    axios.get(apiUrl)
+      .then(response => {
+        console.log(response.data);
+        setResponseText(response.data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    
+  }, []);
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>API Response:{responseText}</h1>
     </div>
   );
 }
