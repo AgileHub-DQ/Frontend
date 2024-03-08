@@ -6,7 +6,7 @@ function App() {
   const [responseText, setResponseText] = useState('');
 
   useEffect(() => {
-    const apiUrl = "/api/health"; // 프록시 설정한 URL을 포함하지 않음
+    const apiUrl = "/api/health"; // 프록시 설정한 URL을 포함하지 않음!!
     
     axios.get(apiUrl)
       .then(response => {
