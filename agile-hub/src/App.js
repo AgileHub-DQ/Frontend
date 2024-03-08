@@ -6,7 +6,7 @@ function App() {
   const [responseText, setResponseText] = useState('');
 
   useEffect(() => {
-    const apiUrl = 'http://www.agilehub.store/api/health'; // 서버 주소로 변경
+    const apiUrl = 'http://www.agilehub.store/api/health'; 
 
     axios.get(apiUrl)
       .then(response => {
@@ -19,11 +19,9 @@ function App() {
 
   return (
     <div>
-      <h1>API Response:</h1>
-      <p>{responseText}</p>
+      <h1>API Response:{responseText}</h1>
     </div>
   );
 }
-
 
 export default App;
