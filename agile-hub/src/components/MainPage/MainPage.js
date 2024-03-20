@@ -18,13 +18,14 @@ function MainPage() {
       });
     
   }, []);
-
+  
   return (
-    <div>
+    <>
       <h1>여기는 MainPage입니다.</h1>
-      <h1>API Response:{responseText}</h1>
-    </div>
+      <h2>API Response:{responseText}</h2>
+    </>
   );
+  
 }
 
 export default MainPage;
