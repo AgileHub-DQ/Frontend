@@ -3,7 +3,6 @@
     display: flex; /* 요소들을 수평으로 배치 */
   }
 
-/* LoginPage.css */
 .background-container {
     width: 100%; /* 화면 전체 너비를 차지하도록 설정 */
     height: 100vh; /* 화면 높이를 전체 화면으로 설정 */
