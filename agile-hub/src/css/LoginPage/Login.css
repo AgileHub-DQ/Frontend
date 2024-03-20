@@ -17,7 +17,7 @@
 
 .slider-show{
   display: flex;
-  width: 1100px; /*보여줄 영역을 표시하기 위해 수정*/
+  width: 500px; /*보여줄 영역을 표시하기 위해 수정*/
   height: 400px; /*보여줄 영역을 표시하기 위해 수정*/
   overflow: hidden;
   align-items: center;
