@@ -38,7 +38,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://www.agilehub.store",
 
   "devDependencies": {
     "eslint": "^8.57.0",
