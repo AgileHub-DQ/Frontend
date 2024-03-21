@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
-import axios from 'axios';
+import MainPage from './components/MainPage/MainPage.js'; // 로그인 페이지 컴포넌트
+import LoginPage from './components/LoginPage/LoginPage.js'; // 로그인 페이지 컴포넌트
 
 function App() {
-  const [responseText, setResponseText] = useState('');
-
-  useEffect(() => {
-    const apiUrl = "/api/health"; // 프록시 설정한 URL을 포함하지 않음!!
-    
-    axios.get(apiUrl)
-      .then(response => {
-        console.log(response.data);
-        setResponseText(response.data);
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
-    
-  }, []);
-  
-
   return (
     <div>
-      <h1>API Response:{responseText}</h1>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </Router>
     </div>
   );
+  
 }
 
 export default App;
