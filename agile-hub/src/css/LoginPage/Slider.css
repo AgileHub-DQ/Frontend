@@ -1,0 +1,23 @@
+.slider {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50%; /* 화면 가로의 반만 차지 */
+  }
+  
+  .slider-show {
+    display: flex;
+    width: 300px; 
+    height: 250px; 
+    overflow: hidden;
+    align-items: center;
+    border: 2px green dotted;
+    margin: 0 auto;
+  }
+  
+/* 커스텀 css의 우선순위를 높이기 위해 !important 적용*/
+.carousel .legend {
+    background: transparent !important;
+    color: black !important;
+  }
+  

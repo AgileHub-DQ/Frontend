@@ -1,10 +1,11 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // 슬라이더 스타일 import
+import '../../css/LoginPage/Slider.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Slider = () => {
   return (
-    <Carousel autoPlay interval={2000} infiniteLoop >
+    <Carousel autoPlay interval={2000} infiniteLoop showIndicators showArrows>
       <div>
         <img src="https://via.placeholder.com/600x550" alt="slide1" />
         <p className="legend">어떤 환경에서든 AgileHub와 함께!</p>
@@ -22,7 +23,6 @@ const Slider = () => {
 };
 
 export default Slider;
-
 
 
 /* 
