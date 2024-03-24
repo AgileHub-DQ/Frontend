@@ -1,12 +1,11 @@
 import React from 'react';
-import '../../css/LoginPage/Logo.css';
 
-function Logo() {
-    return (
-      <div className="logo">
-        logo component
-      </div>
-    );
-  }
+const Logo = () => {
+  return (
+    <div className="logo">
+     <img src="/assets/images/AgileHub.png" alt="agilehub" style={{ width: '250px', height: '50px' }} />
+    </div>
+  );
+};
 
 export default Logo;
