@@ -1,8 +1,8 @@
 /* kakao-login-button.css */
 .kakao-login-button img  {
-    width: 350px;
-    height: 50px;
+    width: 320px;
+    height: 45px;
     position: absolute;
-    left: 135px;
-    top: 540px;
+    left: 140px;
+    top: 530px;
 }

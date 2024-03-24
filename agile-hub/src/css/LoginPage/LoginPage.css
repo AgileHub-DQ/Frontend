@@ -9,5 +9,6 @@
 
 .left-panel,
 .right-panel {
-  width: 50%; /* 화면 가로의 반만큼 차지*/
+  width: 50%;
+  height: 100vh;
 }

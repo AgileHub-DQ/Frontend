@@ -3,5 +3,13 @@
 .carousel .legend {
     background: transparent !important;
     color: black !important;
+    top: 100px !important; 
+    font-size: 50px !important;
   }
-  
+
+/* showIndicators 위치 세로 정렬 코드 */
+.showIndicators {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
