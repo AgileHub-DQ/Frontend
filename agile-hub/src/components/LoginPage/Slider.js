@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import '../../css/LoginPage/Slider.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import '../../css/LoginPage/Slider.css'; // 슬라이더 텍스트 css
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; //슬라이더 css
 
 const Slider = () => {
   return (
@@ -23,44 +23,3 @@ const Slider = () => {
 };
 
 export default Slider;
-
-
-/* 
-import React, { useState, useEffect } from 'react';
-
-const Slider = () => {
-  const trainCompartment = ['1 칸', '2 칸', '3 칸']; // 이미지 = 칸
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % trainCompartment.length);
-    }, 3000); // 3초마다 슬라이드 변경
-
-    return () => clearInterval(intervalId); // 컴포넌트가 언마운트될 때 인터벌 제거
-  }, [trainCompartment.length]); // trainCompartment.length를 의존성 배열에 추가
-
-  return (
-    <div className='slider'>
-      <div className='slider-show'>
-        {trainCompartment.map((item, index) => (
-          <div
-            className='compartment'
-            key={index}
-            style={{
-              transform: `translateX(${index * -1100}px)`, // 슬라이드 이동 위치 계산
-              transition: 'transform 0.4s ease-in-out', // 슬라이드 효과
-              opacity: index === currentIndex ? 1 : 0, // 현재 슬라이드만 표시되도록 opacity 설정
-            }}
-          >
-            {item}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Slider;
-
-*/

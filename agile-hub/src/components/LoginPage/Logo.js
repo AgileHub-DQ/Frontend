@@ -1,9 +1,10 @@
 import React from 'react';
+import '../../css/LoginPage/Logo.css';
 
 const Logo = () => {
   return (
     <div className="logo">
-     <img src="/assets/images/AgileHub.png" alt="agilehub" style={{ width: '250px', height: '50px' }} />
+     <img src="/assets/images/AgileHub.png" alt="agilehub" />
     </div>
   );
 };

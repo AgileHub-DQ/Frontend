@@ -1,0 +1,12 @@
+/* LoginPage.css */
+.container {
+  display: flex; /* 화면에 출력된 컴포넌트 정렬 */
+  background-color: #D3DEFF; 
+}
+
+.left-panel,
+.right-panel {
+  width: 50%; /* 화면 가로의 반만큼 차지*/
+}
+
+

@@ -1,9 +1,7 @@
-.logo {
+.logo img {
+    width: 380px;
+    height: 200px;
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-        width: 50%; /* 이미지의 가로 크기를 반으로 줄임 */
-        height: 50%; /* 이미지의 세로 크기를 반으로 줄임 */
-    }
-  
+    left: 135px;
+    top: 339px;
+}
