@@ -1,3 +1,4 @@
+// Logo.js
 import React from 'react';
 import '../../css/LoginPage/Logo.css';
 

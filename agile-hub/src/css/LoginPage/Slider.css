@@ -1,3 +1,4 @@
+/* Slider.css */
 .slider {
     display: flex;
     justify-content: center;
@@ -15,7 +16,7 @@
     margin: 0 auto;
   }
   
-/* 커스텀 css의 우선순위를 높이기 위해 !important 적용*/
+/* 커스텀 css의 우선순위를 높이기 위해 !important 적용 */
 .carousel .legend {
     background: transparent !important;
     color: black !important;
