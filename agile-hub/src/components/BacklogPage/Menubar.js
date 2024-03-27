@@ -1,11 +1,10 @@
 // Menubar.js
 import React from 'react';
-//import '../css/BacklogPage/BacklogPage.css';
-
+import '../../css/BacklogPage/Menubar.css';
 function Menubar() {
 
   return (
-    <div>
+    <div className='menubar'>
         메뉴바
     </div>
   );
