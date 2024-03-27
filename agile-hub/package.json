@@ -42,6 +42,7 @@
     ]
   },
   "_comment":"proxy http://www.agilehub.store",
+  "proxy": "https://www.agilehub.store",
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",

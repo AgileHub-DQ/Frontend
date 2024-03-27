@@ -1,9 +1,10 @@
 // LoginPage.js
 import React from 'react';
-import '../../css/LoginPage/LoginPage.css';
-import Slider from './Slider';
-import KakaoLoginButton from './KakaoLoginButton';
-import Logo from './Logo.js';
+import '../css/LoginPage/LoginPage.css';
+import Slider from '../components/LoginPage/Slider.js';
+import KakaoLoginButton from '../components/LoginPage/KakaoLoginButton.js';
+import Logo from '../components/LoginPage/Logo.js';
+
 
 function LoginPage() {
   return (
@@ -20,6 +21,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-
-
