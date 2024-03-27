@@ -1,3 +1,4 @@
+// Slider.js
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import '../../css/LoginPage/Slider.css'; // 슬라이더 텍스트 css, 슬라이더 css보다 위에 import 해주어야 함
