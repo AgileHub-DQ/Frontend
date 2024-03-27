@@ -1,12 +1,13 @@
 // AddBacklog.js
 import React from 'react';
-//import '../css/BacklogPage/BacklogPage.css';
+//import '../../css/BacklogPage/AddBacklog.css';
+import AddEpic from '../BacklogPage/AddEpic.js'; // epic 추가하는 컴포넌트
 
 function AddBacklog() {
 
   return (
-    <div>
-        백로그 추가하는 영역
+    <div className='addBacklog'>
+        <AddEpic/>
     </div>
   );
 }
