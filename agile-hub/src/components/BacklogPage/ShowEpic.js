@@ -1,6 +1,6 @@
 // ShowEpic.js
 import React from 'react';
-import AddStory from './AddStory.js';
+// import AddStory from './AddStory.js';
 
 function ShowEpic({ epicInfo }) {
     // epicInfo가 없거나 비어 있는 경우를 처리합니다.
@@ -17,7 +17,7 @@ function ShowEpic({ epicInfo }) {
     return (
         <div className='showEpic'>
             <p>에픽 이름1: {epicInfo.info1}</p>
-            <AddStory/>
+            {/* <AddStory/> */}
             {/* 원하는 추가적인 UI 요소나 기능을 여기에 추가하세요 */}
         </div>
     );
