@@ -7,6 +7,7 @@ import Logo from '../components/LoginPage/Logo.js';
 
 
 function LoginPage() {
+
   return (
     <div className="container">
       <div className="left-panel">
