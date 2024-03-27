@@ -1,16 +1,32 @@
 // AddEpic.js
-import React from 'react';
-import '../../css/BacklogPage/AddEpic.css';
-function AddEpic() {
+import React, { useState } from 'react';
+import Modal from '../modal/Modal.js'; // EpicModal 컴포넌트를 불러옴
+import ShowEpic from './ShowEpic.js'; // ShowEpic 컴포넌트를 불러옴
 
-  return (
-    <div className='addEpic'>
-        <button type="button" class="button">
-            <span class="button__text">Epic생성하기</span>
-            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
-        </button>
-    </div>
-  );
+function AddEpic() {
+    const [showModal, setShowModal] = useState(false);
+    const [epicInfo, setEpicInfo] = useState({
+        info1: '',
+        info2: ''
+    });
+
+    const handleToggleModal = () => {
+        setShowModal(!showModal); // showModal 상태를 토글합니다.
+    };
+
+    const handleEpicSubmit = (epicInfo) => {
+        setEpicInfo(epicInfo); // 입력된 에픽 정보를 상태에 저장합니다.
+    };
+
+    return (
+        <div className='addEpic'>
+            <button className="button" onClick={handleToggleModal}>
+                <span className="button__text">에픽 생성하기</span>
+            </button>
+            {showModal && <Modal onClose={handleToggleModal} onSubmit={handleEpicSubmit} />} {/* showModal 상태에 따라 EpicModal 컴포넌트를 렌더링합니다. */}
+            <ShowEpic epicInfo={epicInfo} /> {/* 입력된 에픽 정보를 ShowEpic 컴포넌트로 전달합니다. */}
+        </div>
+    );
 }
 
 export default AddEpic;
