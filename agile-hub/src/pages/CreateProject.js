@@ -26,16 +26,10 @@ function CreateProject() {
           'Content-Type': 'application/json' // 헤더 명시 
       }
       });
-  
-      
-  
     } catch (error) {
-      
         console.error('프로젝트 생성 실패:', error);
-      
     }
   };
-  
 
   return (
     <div className="container">
