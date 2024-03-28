@@ -21,18 +21,21 @@ function CreateProject() {
       const response = await axios.post('/api/projects', {
         name: projectName,
         key: projectKey,
-      }, {
-        headers: {
-          'Content-Type': 'application/json' // 헤더 명시 
-      }
       });
   
-      
+      // 리다이렉션 경로 구성
+      const projectKeyReceived = response.data.key; // 응답으로 받은 프로젝트 키
+      const redirectPath = `/api/projects/${projectKeyReceived}/boards`;
+      window.location = redirectPath; // 사용자를 새 위치로 리다이렉트
   
     } catch (error) {
-      
+      if (error.response && error.response.status === 303) {
+        // 서버에서 반환한 Location 헤더에 따라 리다이렉트
+        const location = error.response.headers.location;
+        window.location = location; // 사용자를 새 위치로 리다이렉트
+      } else {
         console.error('프로젝트 생성 실패:', error);
-      
+      }
     }
   };
   
