@@ -1,5 +1,5 @@
 /* KakaoLoginButton.css */
-/* 버튼 css */
+/* 버튼 css */  
 .kakao-login-button {
     position: absolute;
     display: inline-flex; /* 내부 요소를 가로 정렬 */
@@ -14,7 +14,7 @@
     align-items: center; 
     border-radius: 12px;
     background: var(--kakao-bg, #FEE500); 
-}
+  }
 
 /* 카카오톡 버튼 hover css */
 .kakao-login-button:hover {
@@ -23,8 +23,8 @@
 
 /* 카카오톡 아이콘 이미지 css */
 .kakao-icon{
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-right: 3% /* 아이콘과 텍스트 여백 설정 */
 }
 
