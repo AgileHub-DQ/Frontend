@@ -1,6 +1,6 @@
 // StoryModal.js
 import React, { useState } from 'react';
-//import '../../css/modal/StoryModal.css'; // 모달에 대한 CSS 파일
+//import '../../css/modal/EpicModal.css'; // 모달에 대한 CSS 파일
 
 function StoryModal({ onClose, onSubmit }) {
     const [epicInfo, setEpicInfo] = useState({
