@@ -1,5 +1,6 @@
 // ShowEpic.js
 import React from 'react';
+import CreateStoryButton from '../button/CreateStoryButton.js';
 // import AddStory from './AddStory.js';
 
 function ShowEpic({ epicInfo }) {
@@ -17,7 +18,7 @@ function ShowEpic({ epicInfo }) {
     return (
         <div className='showEpic'>
             <p>에픽 이름1: {epicInfo.info1}</p>
-            {/* <AddStory/> */}
+            <CreateStoryButton/>
             {/* 원하는 추가적인 UI 요소나 기능을 여기에 추가하세요 */}
         </div>
     );

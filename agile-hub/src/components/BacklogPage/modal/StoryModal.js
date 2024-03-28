@@ -1,8 +1,8 @@
-// EpicModal.js
+// StoryModal.js
 import React, { useState } from 'react';
-import '../../css/modal/EpicModal.css'; // 모달에 대한 CSS 파일
+//import '../../css/modal/StoryModal.css'; // 모달에 대한 CSS 파일
 
-function Modal({ onClose, onSubmit }) {
+function StoryModal({ onClose, onSubmit }) {
     const [epicInfo, setEpicInfo] = useState({
         info1: '',
         info2: ''
@@ -30,12 +30,12 @@ function Modal({ onClose, onSubmit }) {
         <div className="modal-content">
             <div className="modal-header">
                 <span className="close" onClick={handleCloseModal}>&times;</span>
-                <h2>에픽 생성 모달창</h2>
+                <h2>스토리 생성 모달창</h2>
             </div>
             <div className="modal-body">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="info1">에픽 이름: </label>
+                        <label htmlFor="info1">스토리 이름: </label>
                         <input type="text" id="info1" name="info1" value={epicInfo.info1} onChange={handleChange} />
                     </div>
                     <button type="submit">완료</button>
@@ -48,4 +48,4 @@ function Modal({ onClose, onSubmit }) {
     );
 }
 
-export default Modal;
+export default StoryModal;
