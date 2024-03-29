@@ -2,6 +2,6 @@
 .menubar {
     background-color: blue;
     width: 15%;
-    height: 835px; /* %로 바꾸면 세로 크기가 글씨에 맞춰짐 */
+    height: 840px; /* %로 바꾸면 세로 크기가 글씨에 맞춰짐 */
     float: left; /* 왼쪽 정렬 */
 }

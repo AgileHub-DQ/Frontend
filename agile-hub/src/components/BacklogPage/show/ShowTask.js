@@ -6,7 +6,7 @@ function TaskStory({ taskInfo }) {
     if (!taskInfo || !taskInfo.info1) {
         return (
             <div className='taskStory'>
-                <p>태스크 정보를 불러올 수 없습니다.</p>
+                {/* <p>태스크 정보를 불러올 수 없습니다.</p> */}
             </div>
 
         );
