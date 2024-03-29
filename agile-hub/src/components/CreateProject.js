@@ -14,31 +14,22 @@ function CreateProject() {
       setError('프로젝트 키는 영숫자 문자만 포함하고, 길이가 2자 이상이어야 합니다.');
       return;
     }
-  
+    
     setError('');
   
     try {
       const response = await axios.post('/api/projects', {
         name: projectName,
         key: projectKey,
-      });
-  
-      // 리다이렉션 경로 구성
-      const projectKeyReceived = response.data.key; // 응답으로 받은 프로젝트 키
-      const redirectPath = `/api/projects/${projectKeyReceived}/boards`;
-      window.location = redirectPath; // 사용자를 새 위치로 리다이렉트
-  
-    } catch (error) {
-      if (error.response && error.response.status === 303) {
-        // 서버에서 반환한 Location 헤더에 따라 리다이렉트
-        const location = error.response.headers.location;
-        window.location = location; // 사용자를 새 위치로 리다이렉트
-      } else {
-        console.error('프로젝트 생성 실패:', error);
+      }, {
+        headers: {
+          'Content-Type': 'application/json' // 헤더 명시 
       }
+      });
+    } catch (error) {
+        console.error('프로젝트 생성 실패:', error);
     }
   };
-  
 
   return (
     <div className="container">

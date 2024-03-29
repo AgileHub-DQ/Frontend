@@ -29,9 +29,10 @@ function ProjectsList() {
     setEditedKey(project.key); // 현재 프로젝트 키로 초기화
   }; 
   
-  const saveProject = async () => {
+  const saveProject = async (project) => {
+    console.log(project.key);
     try {
-      await axios.put(`/api/projects/${editedKey}`, {
+      await axios.put(`/api/projects/${project.key}`, {
         name: editedName,
         key: editedKey
       });
@@ -66,7 +67,7 @@ function ProjectsList() {
                   value={editedKey}
                   onChange={(e) => setEditedKey(e.target.value)}
                 />
-                <button onClick={saveProject}>저장하기</button>
+                <button onClick={() => saveProject(project)}>저장하기</button>
               </>
             ) : (
               <>
