@@ -1,7 +1,6 @@
 /* PlanSprint.css */
 .plansprint {
     width: 80%; /* 메뉴바 너비 제외한 가로 길이 */ 
-    /* height: 16.75rem; */
     height: 30%;
     background: rgba(96, 156, 226, 0.5);
     float: right; /* 오른쪽 정렬 */ 
