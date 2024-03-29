@@ -1,4 +1,4 @@
-// StoryModal.js
+// TaskModal.js
 import React, { useState } from 'react';
 
 function TaskModal({ onClose, onSubmit }) {
@@ -17,12 +17,12 @@ function TaskModal({ onClose, onSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(taskInfo); // 입력된 값 전달
-        onClose(); // 모달을 닫습니다.
+        onSubmit(taskInfo); 
+        onClose(); 
     };
 
     const handleCloseModal = () => {
-        onClose(); // onClose prop으로 전달된 함수를 호출하여 모달을 닫습니다.
+        onClose(); 
     };
 
     return (

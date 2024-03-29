@@ -1,9 +1,9 @@
+/* AddBacklog.css */
 .addBacklog {
-    width: 100%;
+    width: 80%; /* 메뉴바 너비 제외한 가로 길이 */ 
     height: 36.25rem;
-    left: 991px;
-    top: 0%;
     background: #F5B6F7;
+    float: right; /* 오른쪽 정렬 */ 
 }
 
 

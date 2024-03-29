@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../../css/BacklogPage/CreateEpicButton.css'; // 모달에 대한 CSS 파일
+import '../../../css/BacklogPage/CreateEpicButton.css';
 import EpicModal from '../modal/EpicModal.js';
 import ShowEpic from '../show/ShowEpic.js';
 
@@ -8,20 +8,19 @@ function CreateEpicButton() {
     const [epicList, setEpicList] = useState([]);
 
     const handleToggleModal = () => {
-        setShowModal(!showModal); // showModal 상태를 토글합니다.
+        setShowModal(!showModal);
     };
 
     const handleEpicSubmit = (newEpicInfo) => {
-        // 새로운 에픽 정보를 에픽 목록에 추가합니다.
+        // 새로운 에픽 정보를 에픽 목록에 추가
         setEpicList([...epicList, newEpicInfo]);
-        // 모달을 닫습니다.
+        // 모달 닫기
         setShowModal(false);
     };
 
     return (
         <div className='addEpic'>
-            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} />} {/* showModal 상태에 따라 EpicModal 컴포넌트를 렌더링합니다. */}
-            {/* 저장된 에픽 목록을 모두 ShowEpic 컴포넌트로 전달합니다. */}
+            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} />} 
             {epicList.map((epicInfo, index) => (
                 <ShowEpic key={index} epicInfo={epicInfo} />
             ))}

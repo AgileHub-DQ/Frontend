@@ -7,13 +7,11 @@ function CreateStoryButton() {
     const [storyList, setStoryList] = useState([]);
 
     const handleToggleModal = () => {
-        setShowModal(!showModal); // showModal 상태를 토글합니다.
+        setShowModal(!showModal);
     };
 
     const handleStorySubmit = (newStoryInfo) => {
-        // 새로운 스토리 정보를 스토리 목록에 추가합니다.
         setStoryList([...storyList, newStoryInfo]);
-        // 모달을 닫습니다.
         setShowModal(false);
     };
 
@@ -22,8 +20,7 @@ function CreateStoryButton() {
             <button className="story_button" onClick={handleToggleModal}>
                 <span className="story_button__text">스토리 생성하기</span>
             </button>
-            {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} />} {/* showModal 상태에 따라 StoryModal 컴포넌트를 렌더링합니다. */}
-            {/* 저장된 스토리 목록을 모두 ShowStory 컴포넌트로 전달합니다. */}
+            {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} />} 
             {storyList.map((storyInfo, index) => (
                 <ShowStory key={index} storyInfo={storyInfo} />
             ))}

@@ -1,6 +1,6 @@
 // EpicModal.js
 import React, { useState } from 'react';
-import '../../../css/modal/EpicModal.css'; // 모달에 대한 CSS 파일
+import '../../../css/modal/EpicModal.css'; 
 
 function EpicModal({ onClose, onSubmit }) {
     const [epicInfo, setEpicInfo] = useState({
@@ -19,11 +19,11 @@ function EpicModal({ onClose, onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(epicInfo); // 입력된 값 전달
-        onClose(); // 모달을 닫습니다.
+        onClose(); // 모달 닫기
     };
 
     const handleCloseModal = () => {
-        onClose(); // onClose prop으로 전달된 함수를 호출하여 모달을 닫습니다.
+        onClose(); // onClose prop으로 전달된 함수를 호출하여 모달 닫기
     };
 
     return (

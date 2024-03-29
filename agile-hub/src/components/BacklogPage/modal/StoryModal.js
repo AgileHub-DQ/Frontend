@@ -1,6 +1,5 @@
 // StoryModal.js
 import React, { useState } from 'react';
-//import '../../css/modal/EpicModal.css'; // 모달에 대한 CSS 파일
 
 function StoryModal({ onClose, onSubmit }) {
     const [epicInfo, setEpicInfo] = useState({
@@ -18,12 +17,12 @@ function StoryModal({ onClose, onSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(epicInfo); // 입력된 값 전달
-        onClose(); // 모달을 닫습니다.
+        onSubmit(epicInfo); 
+        onClose(); 
     };
 
     const handleCloseModal = () => {
-        onClose(); // onClose prop으로 전달된 함수를 호출하여 모달을 닫습니다.
+        onClose(); 
     };
 
     return (
