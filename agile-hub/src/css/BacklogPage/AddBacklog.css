@@ -1,7 +1,7 @@
 /* AddBacklog.css */
 .addBacklog {
     width: 80%; /* 메뉴바 너비 제외한 가로 길이 */ 
-    height: 69.95%;
+    height: 70%; /* (100 - 31(스프린트 계획 영역 세로 길이) = 69하면 안 됨) */ 
     background: #F5B6F7;
     float: right; /* 오른쪽 정렬 */ 
 }
