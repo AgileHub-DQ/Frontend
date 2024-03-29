@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../../../css/BacklogPage/CreateEpicButton.css'; // 모달에 대한 CSS 파일
 import EpicModal from '../modal/EpicModal.js';
 import ShowEpic from '../show/ShowEpic.js';
 
@@ -19,14 +20,16 @@ function CreateEpicButton() {
 
     return (
         <div className='addEpic'>
-            <button className="button" onClick={handleToggleModal}>
-                <span className="button__text">에픽 생성하기</span>
-            </button>
             {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} />} {/* showModal 상태에 따라 EpicModal 컴포넌트를 렌더링합니다. */}
             {/* 저장된 에픽 목록을 모두 ShowEpic 컴포넌트로 전달합니다. */}
             {epicList.map((epicInfo, index) => (
                 <ShowEpic key={index} epicInfo={epicInfo} />
             ))}
+            <div className='epic_button_container'>
+                <button className="epic_button" onClick={handleToggleModal}>
+                    <span className="epic_button__text">에픽 생성하기</span>
+                </button>
+            </div>
         </div>
     );
 }

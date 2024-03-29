@@ -1,7 +1,7 @@
 // ShowEpic.js
 import React from 'react';
+import '../../../css/BacklogPage/ShowEpic.css';
 import CreateStoryButton from '../button/CreateStoryButton.js';
-// import AddStory from './AddStory.js';
 
 function ShowEpic({ epicInfo }) {
     // epicInfo가 없거나 비어 있는 경우를 처리합니다.

@@ -19,8 +19,8 @@ function CreateStoryButton() {
 
     return (
         <div className='addStory'>
-            <button className="button" onClick={handleToggleModal}>
-                <span className="button__text">스토리 생성하기</span>
+            <button className="story_button" onClick={handleToggleModal}>
+                <span className="story_button__text">스토리 생성하기</span>
             </button>
             {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} />} {/* showModal 상태에 따라 StoryModal 컴포넌트를 렌더링합니다. */}
             {/* 저장된 스토리 목록을 모두 ShowStory 컴포넌트로 전달합니다. */}

@@ -8,7 +8,7 @@ import AddBacklog from '../components/BacklogPage/AddBacklog.js';
 function BacklogPage() {
 
   return (
-    <div>
+    <div className='backlog_container'>
       <Menubar/>
       <PlanSprint/>
       <AddBacklog/>

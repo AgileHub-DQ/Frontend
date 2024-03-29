@@ -5,7 +5,7 @@ function Menubar() {
 
   return (
     <div className='menubar'>
-        메뉴바
+      menubar
     </div>
   );
 }
