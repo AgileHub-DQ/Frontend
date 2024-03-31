@@ -1,0 +1,24 @@
+.story_button {
+    width: 900px;
+    height: 50px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 10px;
+    background: #003AF6;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.story_button:hover {
+    background: #0058ff;
+}
+
+.story_button__text {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px; /* Adjust padding as needed */
+    box-sizing: border-box;
+    text-align: center;
+}
