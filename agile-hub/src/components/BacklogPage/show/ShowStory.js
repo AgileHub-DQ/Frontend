@@ -15,12 +15,15 @@ function ShowStory({ storyInfo }) {
 
     // 입력된 정보를 사용하여 작업을 수행합니다.
     return (
-        <div className='showStory' style={{ display: 'flex', alignItems: 'center' }}>
-            <p style={{ marginRight: '10px' }}>스토리 이름1: {storyInfo.info1}</p>
-            <CreateTaskButton />
-            {/* 원하는 추가적인 UI 요소나 기능을 여기에 추가하세요 */}
+        <div className='showStory' style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <p>스토리 이름1: {storyInfo.info1}</p>
+            <div style={{ marginTop: '10px' }}>
+                <CreateTaskButton />
+                {/* 원하는 추가적인 UI 요소나 기능을 여기에 추가하세요 */}
+            </div>
         </div>
     );
+    
 }
 
 export default ShowStory;

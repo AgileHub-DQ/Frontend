@@ -20,13 +20,13 @@ function CreateStoryButton() {
 
     return (
         <div className='addStory'>
-            <button className="story_button" onClick={handleToggleModal}>
-                <span className="story_button__text">스토리 생성하기</span>
-            </button>
             {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} />} 
             {storyList.map((storyInfo, index) => (
                 <ShowStory key={index} storyInfo={storyInfo} />
             ))}
+                        <button className="story_button" onClick={handleToggleModal}>
+                <span className="story_button__text">스토리 생성하기</span>
+            </button>
         </div>
     );
 }

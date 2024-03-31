@@ -20,13 +20,13 @@ function CreateTaskButton() {
 
     return (
         <div className='addTask'>
-            <button className="task_button" onClick={handleToggleModal}>
-                <span className="task_button__text">태스크 생성하기</span>
-            </button>
             {showModal && <TaskModal onClose={handleToggleModal} onSubmit={handleTaskSubmit} />}
             {taskList.map((taskInfo, index) => (
                 <ShowTask key={index} taskInfo={taskInfo} />
             ))}
+            <button className="task_button" onClick={handleToggleModal}>
+                <span className="task_button__text">태스크 생성하기</span>
+            </button>
         </div>
     );
 }

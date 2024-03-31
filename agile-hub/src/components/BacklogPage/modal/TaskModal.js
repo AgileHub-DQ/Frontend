@@ -25,22 +25,23 @@ function TaskModal({ onClose, onSubmit }) {
         onClose(); 
     };
 
+
     return (
-        <div>
-            <div>
-                <span onClick={handleCloseModal}>&times;</span>
+        <div className="modal-content">
+            <div className="modal-header">
+                <span className="close" onClick={handleCloseModal}>&times;</span>
                 <h2>태스크 생성 모달창</h2>
             </div>
-            <div>
+            <div className="modal-body">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="info1">태스크 이름: </label>
+                        <label htmlFor="info1">태크 이름: </label>
                         <input type="text" id="info1" name="info1" value={taskInfo.info1} onChange={handleChange} />
                     </div>
                     <button type="submit">완료</button>
                 </form>
             </div>
-            <div>
+            <div className="modal-footer">
                 <h3>footer</h3>
             </div>
         </div>
