@@ -1,46 +1,10 @@
-/* .epic_button {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    
-    background: #001762;
-    border-radius: 10px;
-}
-
-.epic_button__text{
-    position: absolute;
-    left: 40.56%;
-    right: 38.56%;
-    top: 13.86%;
-    bottom: 14.86%;
-    
-    font-family: '';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 36px;
-    
-    color: #FFFFFF;
-}
-
-.epic_button_container{
-    position: absolute;
+/* CreateEpicButton.css */
+.epic_button_container {
     width: 50rem;
     height: 3rem;
-}
-
-
-
-
- */
-
-
- .epic_button_container {
-    width: 900px;
-    height: 50.506px;
     flex-shrink: 0;
+    margin-left: auto; /* 버튼 이동되는 현상 제거 */
+    margin-right: auto;  /* 버튼 이동되는 현상 제거 */
 }
 
 .epic_button {
@@ -62,7 +26,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 10px; 
     box-sizing: border-box;
     text-align: center;
 }

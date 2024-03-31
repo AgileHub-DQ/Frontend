@@ -14,12 +14,10 @@ function ShowEpic({ epicInfo }) {
         );
     }
 
-    // 입력된 정보를 사용하여 작업을 수행합니다.
     return (
-        <div className='showEpic'>
-            <p>에픽 이름1: {epicInfo.info1}</p>
+        <div className='showEpic' style={{ border: '1px solid black', padding: '10px' }}>
+            <p>에픽: {epicInfo.info1}</p>
             <CreateStoryButton/>
-            {/* 원하는 추가적인 UI 요소나 기능을 여기에 추가하세요 */}
         </div>
     );
 }

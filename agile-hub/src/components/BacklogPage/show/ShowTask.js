@@ -2,20 +2,18 @@
 import React from 'react';
 
 function ShowTask({ taskInfo }) {
-    // epicInfo가 없거나 비어 있는 경우를 처리합니다.
     if (!taskInfo || !taskInfo.info1) {
         return (
             <div className='showTask'>
-                {/* <p>태스크 정보를 불러올 수 없습니다.</p> */}
+                <p>태스크 정보를 불러올 수 없습니다.</p>
             </div>
 
         );
     }
 
-    // 입력된 정보를 사용하여 작업을 수행합니다.
     return (
-        <div className='showTask'>
-            <p>태스크 이름1: {taskInfo.info1}</p>
+        <div className='showTask' style={{ border: '1px solid black', padding: '3px', margin: '5px 0'}}>
+            <p>태스크: {taskInfo.info1}</p>
         </div>
     );
 }

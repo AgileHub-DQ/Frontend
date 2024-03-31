@@ -24,9 +24,11 @@ function CreateTaskButton() {
             {taskList.map((taskInfo, index) => (
                 <ShowTask key={index} taskInfo={taskInfo} />
             ))}
-            <button className="task_button" onClick={handleToggleModal}>
-                <span className="task_button__text">태스크 생성하기</span>
-            </button>
+            <div className='task_button_container'>
+                <button className="task_button" onClick={handleToggleModal}>
+                    <span className="task_button__text">태스크 생성하기</span>
+                </button>
+            </div>
         </div>
     );
 }
