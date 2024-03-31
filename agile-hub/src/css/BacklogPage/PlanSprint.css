@@ -4,6 +4,16 @@
     height: 30%;
     background: rgba(96, 156, 226, 0.5);
     float: right; /* 오른쪽 정렬 */ 
+    background-image: url('../../../public/assets/images/PlanSprint.png');
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-size: 100% 100%;
+}
+
+.plansprint_content{
+    margin-top: 5%;
+    text-align: center;
+    /* 폰트 넣어야 함 */
 }
 
 
