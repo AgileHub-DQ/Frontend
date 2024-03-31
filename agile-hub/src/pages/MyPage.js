@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
@@ -8,6 +9,7 @@ function ProjectsList() {
   const [editedName, setEditedName] = useState(''); // 수정된 프로젝트 이름
   const [editedKey, setEditedKey] = useState(''); // 수정된 프로젝트 키
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate(); 
 
   const fetchProjects = async () => {
     try {
@@ -48,6 +50,12 @@ function ProjectsList() {
     console.log("삭제하기 버튼 클릭"); 
   }
 
+  const navigateToIssue = (projectKey) => {
+    navigate(`/issue`, { state: { key: projectKey } }); // 첫 번째 방법: state를 사용하여 프로젝트 키 전달
+    // 또는
+    // navigate(`/issue/${projectKey}`); // 두 번째 방법: URL 파라미터를 사용하여 프로젝트 키 전달
+  };
+
   return (
     <div className="container">
       <h1>프로젝트 목록</h1>
@@ -75,6 +83,7 @@ function ProjectsList() {
                 <div>생성일: {project.createdAt}</div>
                 <button onClick={() => editProject(project)}>수정하기</button>
                 <button onClick={deleteProject}>삭제하기</button>
+                <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
               </>
             )}
           </li>

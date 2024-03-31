@@ -3,7 +3,8 @@ import './App.css';
 import MainPage from './components/MainPage/MainPage.js'; // 로그인 페이지 컴포넌트
 import LoginPage from './components/LoginPage/LoginPage.js'; // 로그인 페이지 컴포넌트
 import CreateProject from './pages/CreateProject.js'; // 프로젝트 생성 페이지 
-import MyPage from './pages/MyPage.js'; 
+import MyPage from './pages/MyPage.js'; //마이페이지 
+import IssuePage from './pages/Issue.js'; //이슈페이지
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/createProject" element={<CreateProject />} />
           <Route path="/myPage" element={<MyPage />} />
+          <Route path="/issue" element={<IssuePage />} />
         </Routes>
       </Router>
     </div>
