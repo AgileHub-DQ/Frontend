@@ -7,7 +7,7 @@ function Issue() {
   const [type, setType] = useState('EPIC');
   const [status, setStatus] = useState('DO');
   const [content, setContent] = useState('');
-  const [files, setFiles] = useState(''); // 단일 이미지 URL 상태
+  const [files, setFiles] = useState(''); 
   const [imageURLInput, setImageURLInput] = useState(''); // 입력된 이미지 URL을 임시 저장할 상태
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -17,56 +17,46 @@ function Issue() {
 
   const location = useLocation(); 
 
-  // 이미지 URL 추가 핸들러
-  const handleAddImageURL = (e) => {
-    e.preventDefault(); // 폼 제출을 방지
-    if (imageURLInput) {
-      setFiles([...files, imageURLInput]); // 상태에 URL 추가
-      setImageURLInput(''); // 입력 필드 초기화
-    }
+  const handleFileChange = (e) => {
+    setFiles(e.target.files); 
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
-      // 필수 필드 검증
-    if (!issueTitle || !type || !status) {
-        alert('이슈 제목, 이슈 타입, 이슈 상태는 필수로 입력해야 합니다.');
-        return; 
+    const formData = new FormData();
+    formData.append('title', issueTitle);
+    formData.append('type', type);
+    formData.append('status', status);
+    formData.append('content', content);
+    formData.append('startDate', startDate);
+    formData.append('endDate', endDate);
+    formData.append('assigneeId', assigneeId);
+    formData.append('parentId', parentId);
+
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
     }
 
-    const issueData = {
-      title: issueTitle,
-      type,
-      status,
-      // content: {
-      //   text: contentText,
-      //   imageURLs: imageURL ? [imageURL] : []
-      // },
-      content, 
-      // files, 
-      startDate,
-      endDate,
-      assigneeId,
-      parentId
-    };
-
     try {
-        const endpoint = `/api/projects/${projectKey}/issues`;
-        const response = await axios.post(endpoint, issueData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.error('떼잉~~ 실패!!', error);
-      }
+      const endpoint = `/api/projects/${projectKey}/issues`;
+      const response = await axios.post(endpoint, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('떼잉~~ 실패!!', error);
+    }
   };
+  
 
   useEffect(() => {
     if (location.state && location.state.key) {
-      setProjectKey(location.state.key); // 넘겨받은 projectKey 값을 상태에 설정합니다.
+      setProjectKey(location.state.key); 
     }
   }, [location]);
 
@@ -101,15 +91,13 @@ function Issue() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-{/* 
-        <p>이미지 URL</p>
+
+        <p>이미지 파일</p>
         <input
-          type="text"
-          placeholder="Image URL"
-          value={imageURLInput}
-          onChange={(e) => setImageURLInput(e.target.value)}
+          type="file"
+          multiple 
+          onChange={handleFileChange}
         />
-        <button onClick={handleAddImageURL}>이미지 추가</button> */}
 
         <p>시작날짜</p>
         <input
