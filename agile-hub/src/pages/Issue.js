@@ -6,14 +6,14 @@ function Issue() {
   const [issueTitle, setIssueTitle] = useState('');
   const [type, setType] = useState('EPIC');
   const [status, setStatus] = useState('DO');
-  const [contentText, setContentText] = useState('');
-  const [imageURL, setImageURL] = useState(''); // 단일 이미지 URL 상태
+  const [content, setContent] = useState('');
+  const [files, setFiles] = useState(''); // 단일 이미지 URL 상태
   const [imageURLInput, setImageURLInput] = useState(''); // 입력된 이미지 URL을 임시 저장할 상태
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
-  const [projectKey, setProjectKey] = useState('');
+  const [projectKey, setProjectKey] = useState('P1');
 
   const location = useLocation(); 
 
@@ -21,7 +21,7 @@ function Issue() {
   const handleAddImageURL = (e) => {
     e.preventDefault(); // 폼 제출을 방지
     if (imageURLInput) {
-      setImageURL([...imageURL, imageURLInput]); // 상태에 URL 추가
+      setFiles([...files, imageURLInput]); // 상태에 URL 추가
       setImageURLInput(''); // 입력 필드 초기화
     }
   };
@@ -39,10 +39,12 @@ function Issue() {
       title: issueTitle,
       type,
       status,
-      content: {
-        text: contentText,
-        imageURLs: imageURL ? [imageURL] : []
-      },
+      // content: {
+      //   text: contentText,
+      //   imageURLs: imageURL ? [imageURL] : []
+      // },
+      content, 
+      // files, 
       startDate,
       endDate,
       assigneeId,
@@ -96,10 +98,10 @@ function Issue() {
         <p>내용</p>
         <textarea
           placeholder="Content Text"
-          value={contentText}
-          onChange={(e) => setContentText(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
-
+{/* 
         <p>이미지 URL</p>
         <input
           type="text"
@@ -107,7 +109,7 @@ function Issue() {
           value={imageURLInput}
           onChange={(e) => setImageURLInput(e.target.value)}
         />
-        <button onClick={handleAddImageURL}>이미지 추가</button>
+        <button onClick={handleAddImageURL}>이미지 추가</button> */}
 
         <p>시작날짜</p>
         <input
