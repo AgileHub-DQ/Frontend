@@ -13,7 +13,7 @@ function CreateProject() {
       setError('프로젝트 키는 영숫자 문자만 포함하고, 길이가 2자 이상이어야 합니다.');
       return;
     }
-  
+    
     setError('');
   
     try {
