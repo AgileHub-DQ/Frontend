@@ -13,7 +13,7 @@ function Issue() {
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
-  const [projectKey, setProjectKey] = useState('P1');
+  const [projectKey, setProjectKey] = useState('');
 
   const location = useLocation(); 
 
