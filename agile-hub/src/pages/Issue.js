@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Issue() {
   const [issueTitle, setIssueTitle] = useState('');
@@ -14,6 +14,7 @@ function Issue() {
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
   const [projectKey, setProjectKey] = useState('');
+  const navigate = useNavigate(); 
 
   const location = useLocation(); 
 
@@ -52,13 +53,16 @@ function Issue() {
       console.error('떼잉~~ 실패!!', error);
     }
   };
-  
 
   useEffect(() => {
     if (location.state && location.state.key) {
       setProjectKey(location.state.key); 
     }
   }, [location]);
+
+  const navigateToCheck = (projectKey) => { 
+    navigate(`/CheckIssue`, { state: { key: projectKey } }); 
+  }
 
   return (
     <div className="container">
@@ -117,6 +121,7 @@ function Issue() {
         <p/>
         <button type="submit">이슈 생성</button>
       </form>
+      <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button>
     </div>
   );
 }

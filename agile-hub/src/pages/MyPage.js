@@ -51,9 +51,7 @@ function ProjectsList() {
   }
 
   const navigateToIssue = (projectKey) => {
-    navigate(`/issue`, { state: { key: projectKey } }); // 첫 번째 방법: state를 사용하여 프로젝트 키 전달
-    // 또는
-    // navigate(`/issue/${projectKey}`); // 두 번째 방법: URL 파라미터를 사용하여 프로젝트 키 전달
+    navigate(`/issue`, { state: { key: projectKey } }); 
   };
 
   return (
