@@ -1,0 +1,42 @@
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #1916df;
+    color: white;
+  }
+  
+  /* Modal Body */
+  .modal-body {padding: 2px 16px;}
+  
+  /* Modal Footer */
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #1916df;
+    color: white;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+  }
+  
+  .close {
+    position: absolute; /* absolute로 설정 */
+    top: 10px; /* 상단 여백 조정 */
+    right: 10px; /* 우측 여백 조정 */
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
