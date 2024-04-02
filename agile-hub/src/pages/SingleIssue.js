@@ -33,9 +33,6 @@ function SingleIssue() {
             'Content-Type': 'application/json'
           }
         });
-        // 삭제 후 이슈 목록 페이지로 이동하면서 projectKey를 state로 전달합니다.
-        // 이 예제에서는 /issues 경로를 이슈 목록 페이지로 가정합니다.
-        // 실제 애플리케이션의 이슈 목록 페이지 경로에 맞게 수정해야 합니다.
         navigate('/issues', { state: { projectKey: key } });
       } catch (error) {
         console.error('이슈 삭제에 실패했습니다:', error);
