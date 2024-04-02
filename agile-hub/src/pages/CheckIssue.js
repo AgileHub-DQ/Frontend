@@ -7,6 +7,7 @@ function CheckIssue() {
   const projectKey = location.state?.key; // useLocation을 통해 전달된 state에서 projectKey 추출
   const [issues, setIssues] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate(); 
 
   const fetchIssues = async () => {
     try {
@@ -20,7 +21,10 @@ function CheckIssue() {
       setError('이슈 정보를 가져오는 데 실패했습니다.');
     }
   };
-  
+
+  const handleIssueClick = (key, issueId) => {
+    navigate(`/singleIssue`, { state: { key, issueId } }); // navigate 함수를 사용하여 이동할 경로와 state로 전달할 데이터 설정
+  };
 
   useEffect(() => {
     fetchIssues();
@@ -40,6 +44,7 @@ function CheckIssue() {
             <strong>시작일:</strong> {issue.startDate || "N/A"} <br />
             <strong>종료일:</strong> {issue.endDate || "N/A"} <br />
             <strong>부모 ID:</strong> {issue.parentId || "N/A"} <br />
+            <button onClick={() => handleIssueClick(projectKey, issue.id)}>이슈 조회하러 가기</button>
           </li>
         ))}
       </ul>
