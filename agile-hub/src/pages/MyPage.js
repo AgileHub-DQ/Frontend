@@ -54,6 +54,10 @@ function ProjectsList() {
     navigate(`/issue`, { state: { key: projectKey } }); 
   };
 
+  const navigateToCheckIssue = (projectKey) => { 
+    navigate(`/checkIssue`, { state: { key: projectKey } }); 
+  }
+
   return (
     <div className="container">
       <h1>프로젝트 목록</h1>
@@ -82,6 +86,7 @@ function ProjectsList() {
                 <button onClick={() => editProject(project)}>수정하기</button>
                 <button onClick={deleteProject}>삭제하기</button>
                 <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
+                <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button>
               </>
             )}
           </li>

@@ -60,9 +60,9 @@ function Issue() {
     }
   }, [location]);
 
-  const navigateToCheck = (projectKey) => { 
-    navigate(`/CheckIssue`, { state: { key: projectKey } }); 
-  }
+  // const navigateToCheck = (projectKey) => { 
+  //   navigate(`/CheckIssue`, { state: { key: projectKey } }); 
+  // }
 
   return (
     <div className="container">
@@ -121,7 +121,7 @@ function Issue() {
         <p/>
         <button type="submit">이슈 생성</button>
       </form>
-      <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button>
+      {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}
     </div>
   );
 }
