@@ -20,7 +20,7 @@ function App() {
           <Route path="/createProject" element={<CreateProject />} />
           <Route path="/myPage" element={<MyPage />} />
           <Route path="/issue" element={<IssuePage />} />
-          <Route path="/CheckIssue" element={<CheckIssue />} />
+          <Route path="/checkIssue" element={<CheckIssue />} />
         </Routes>
       </Router>
     </div>

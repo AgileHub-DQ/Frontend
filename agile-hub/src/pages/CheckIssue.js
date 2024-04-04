@@ -3,41 +3,36 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function CheckIssue() {
-    
-    const [issues, setIssues] = useState([]); // 이슈들을 저장할 상태
-  const location = useLocation(); // 현재 위치를 알아내기 위한 hook
-  const [projectKey, setProjectKey] = useState('');
+  const location = useLocation();
+  const projectKey = location.state?.key; // useLocation을 통해 전달된 state에서 projectKey 추출
+  const [issues, setIssues] = useState([]);
+  const [error, setError] = useState('');
+
+  const fetchIssues = async () => {
+    try {
+      if (projectKey) {
+        const response = await axios.get(`/api/projects/${projectKey}/issues`);
+        setIssues(response.data.result); // 이슈 목록을 상태에 저장
+      }
+    } catch (error) {
+      console.error('이슈 정보를 가져오는 데 실패했습니다:', error);
+      setError('이슈 정보를 가져오는 데 실패했습니다.');
+    }
+  };
 
   useEffect(() => {
-    // 프로젝트 키를 URL에서 추출
-    const projectKey = location.pathname.split('/')[3]; // URL 구조에 따라 수정할 수 있음
-    const fetchIssues = async () => {
-      try {
-        const response = await axios.get(`/api/projects/${projectKey}/issues`, {
-          headers: {
-            'accept': 'application/json'
-          }
-        });
-        setIssues(response.data); // 응답 데이터로 이슈 상태 업데이트
-      } catch (error) {
-        console.error('이슈 조회 실패:', error);
-      }
-    };
-
     fetchIssues();
-  }, [location.pathname]); // location.pathname이 변경될 때마다 요청
+  }, [projectKey]); // projectKey가 바뀔 때마다 이슈 목록을 다시 가져옴
 
   return (
-  <div className="container">
+    <div className="container">
       <h1>이슈 목록</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
-        {issues.map((issue, index) => (
-          <li key={index}>
-            <p><strong>제목:</strong> {issue.title}</p>
-            <p><strong>타입:</strong> {issue.type}</p>
-            <p><strong>상태:</strong> {issue.status}</p>
-            <p><strong>내용:</strong> {issue.content}</p>
-            {/* 추가적으로 표시하고 싶은 내용이 있다면 여기에 추가 */}
+        {issues.map(issue => (
+          <li key={issue.id}>
+            <strong>{issue.title}</strong> - {issue.status}
+            <div>설명: {issue.description}</div>
           </li>
         ))}
       </ul>
