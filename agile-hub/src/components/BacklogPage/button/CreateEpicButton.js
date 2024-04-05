@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../../../css/BacklogPage/CreateEpicButton.css';
 import Issue from '../../../pages/Issue.js'; // Issue 컴포넌트 경로에 맞게 수정
 
 function CreateEpicButton() {
