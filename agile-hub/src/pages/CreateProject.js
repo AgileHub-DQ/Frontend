@@ -1,6 +1,7 @@
 // CreateProject.js
 import React, { useState } from 'react';
 import axios from 'axios';
+
 function CreateProject() {
   const [projectName, setProjectName] = useState('');
   const [projectKey, setProjectKey] = useState('');
@@ -29,7 +30,7 @@ function CreateProject() {
         console.error('프로젝트 생성 실패:', error);
     }
   };
-  
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
