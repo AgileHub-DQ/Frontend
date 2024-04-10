@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import '../../css/SprintPage/DashBoard.css';
 import PlusBox from './PlusBox.js';
 import Task from './Task.js';
-import Issue from '../../pages/Issue.js';
 
 export default function DashBoard() {
 
     return (
         <div className="kanban-board">
-            <Issue/>
             <div className="column">
                 <div className='textdiv'>
                     <div className="status-indicator preparing"></div>
