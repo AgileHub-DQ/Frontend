@@ -1,0 +1,51 @@
+.container {
+    position: absolute;
+    width: 407px;
+    height: 713px;
+    left: 1062px;
+    top: 126px;
+    background: #b85151;
+    display: block;
+  }
+
+
+/* .container form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .container form p {
+    margin: 5px 0;
+  }
+  
+  .container form input[type="text"],
+  .container form textarea,
+  .container form select,
+  .container form input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .container form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .container form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .container form input[type="file"] {
+    
+  }  */
+  
+
+  

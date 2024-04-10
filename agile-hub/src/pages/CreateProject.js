@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/CreateProject.css';
-import Menubar from '../components/Menubar.js';
 
 function CreateProject() {
   const [projectName, setProjectName] = useState('');
@@ -45,13 +44,10 @@ function CreateProject() {
 
   return (
     <div className="container">
-      <Menubar/>
-      {/* <div className='group183'/> */}
       <div className={`text1 ${isProjectNameEntered ? 'blue-text' : 'grey-text'}`}>프로젝트 이름</div>
       <div className={`text2 ${isProjectKeyEntered ? 'blue-text' : 'grey-text'}`}>프로젝트 키</div>
       <form onSubmit={handleSubmit}>
         <div>
-          {/* <label htmlFor="projectName">프로젝트 이름:</label> */}
           <input
             id="projectName"
             type="text"
@@ -62,7 +58,6 @@ function CreateProject() {
           />
         </div>
         <div>
-          {/* <label htmlFor="projectKey">프로젝트 키:</label> */}
           <input
             id="projectKey"
             type="text"

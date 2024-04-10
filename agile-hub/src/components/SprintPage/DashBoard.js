@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../css/SprintPage/DashBoard.css';
+import PlusBox from './PlusBox';
 
 export default function DashBoard() {
+
     return (
         <div className="kanban-board">
             <div className="column">
@@ -9,10 +11,7 @@ export default function DashBoard() {
                     <div className="status-indicator preparing"></div>
                     <h2>Preparing</h2> 
                 </div>
-                <div className="plusbox">
-                        <div className="rectangle33"></div>
-                        <div className="image62"></div>
-                </div>
+                <PlusBox/>
                 <div className="task">
                     <h3>Task 1</h3>
                     <p>This is a description for task 1.</p>
@@ -27,10 +26,7 @@ export default function DashBoard() {
                     <div className="status-indicator in-progress"></div>
                     <h2>In Progress</h2> 
                 </div>
-                <div className="plusbox">
-                        <div className="rectangle33"></div>
-                        <div className="image62"></div>
-                </div>
+                <PlusBox/>
                 <div className="task">
                     <h3>Task 3</h3>
                     <p>This is a description for task 3.</p>
@@ -45,10 +41,7 @@ export default function DashBoard() {
                     <div className="status-indicator complete"></div>
                     <h2>Complete</h2> 
                 </div>
-                <div className="plusbox">
-                        <div className="rectangle33"></div>
-                        <div className="image62"></div>
-                </div>
+                <PlusBox/>
                 <div className="task">
                     <h3>Task 5</h3>
                     <p>This is a description for task 5.</p>

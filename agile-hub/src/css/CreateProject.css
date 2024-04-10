@@ -3,38 +3,45 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    text-align: center;
     padding: 10px 243px;
+    gap: 10px;
     
     position: absolute;
-    left: calc(50% - 601px/2 + 0.5px);
-    top: calc(50% - 44px/2 - 28px);
+    left: 29.41%;
+    right: 29.68%;
+    top: 42.55%;
+    bottom: 47.91%;
     
     border: 3px solid #003AF6;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .projectKey{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 10px 243px;
-    
-    position: absolute;
-    left: calc(50% - 599px/2 - 0.5px);
-    top: calc(50% - 44px/2 + 50px);
-    
-    border: 3px solid #003AF6;
-    border-radius: 5px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px 243px;
+gap: 10px;
+
+position: absolute;
+left: 29.54%;
+right: 29.68%;
+top: 58.05%;
+bottom: 32.42%;
+
+border: 3px solid #003AF6;
+border-radius: 10px;
+
 }
 
 .button{
     position: absolute;
-    height: 50px;
-    top: calc(50% - 44px/2 + 120px);
-    left: 670px;
+    width: 199px;
+    left: calc(50% - 199px/2);
+    top: 73.42%;
+    bottom: 18.24%;
+
     cursor: pointer;
     transition: all .2s;
     padding: 10px 20px;
@@ -57,7 +64,7 @@ button:hover {
   }
   
   button:hover svg {
-    transform: translateX(5px);
+    transform: translateX(15px);
   }
   
   button:active {
@@ -71,23 +78,35 @@ button:hover {
 .grey-text{
     color: grey;
 }
+
 .text1{
-    position: absolute;
-    width: 200px;
-    height: 22px;
-    left: 488px;
-    top: 70px;
-    font-size: 30px;
+position: absolute;
+width: 179px;
+height: 24px;
+left: 542px;
+top: 154px;
+
+font-family: 'Abhaya Libre ExtraBold';
+font-style: normal;
+font-weight: 800;
+font-size: 30px;
+line-height: 35px;
 }
 
 .text2{
-    position: absolute;
-    width: 200px;
-    height: 22px;
-    left: 700px;
-    top: 70px;
-    font-size: 30px;
+position: absolute;
+width: 144px;
+height: 24px;
+left: 782px;
+top: 154px;
+
+font-family: 'Abhaya Libre ExtraBold';
+font-style: normal;
+font-weight: 800;
+font-size: 30px;
+line-height: 35px;
 }
+
 
 .error{
     color: red;
@@ -96,3 +115,9 @@ button:hover {
     left: calc(50% - 601px/2 + 0.5px);
     top: calc(50% - 44px/2 - 80px);
 }
+
+
+
+
+
+

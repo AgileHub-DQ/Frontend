@@ -117,7 +117,6 @@ function Issue() {
           min={startDate}
           onChange={(e) => setEndDate(e.target.value)}
         />
-
         <p/>
         <button type="submit">이슈 생성</button>
       </form>
