@@ -8,7 +8,7 @@ import CreateProject from './pages/CreateProject.js'; // 프로젝트 생성 페
 import MyPage from './pages/MyPage.js'; //마이페이지 
 import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
-import SprintPage from './pages/SprintPage.js';
+import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 
 function App() {
   return (

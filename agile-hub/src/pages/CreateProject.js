@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/CreateProject.css';
-import Menubar from '../components/BacklogPage/Menubar.js';
+import Menubar from '../components/Menubar.js';
 
 function CreateProject() {
   const [projectName, setProjectName] = useState('');

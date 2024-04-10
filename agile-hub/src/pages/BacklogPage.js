@@ -1,7 +1,7 @@
 // BacklogPage.js
 import React from 'react';
 import '../css/BacklogPage/BacklogPage.css';
-import Menubar from '../components/BacklogPage/Menubar.js';
+import Menubar from '../components/Menubar.js';
 import PlanSprint from '../components/BacklogPage/PlanSprint.js';
 import AddBacklog from '../components/BacklogPage/AddBacklog.js';
 
