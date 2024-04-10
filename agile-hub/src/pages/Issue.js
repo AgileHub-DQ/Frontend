@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import '../css/Issue.css';
 
 function Issue() {
   const [issueTitle, setIssueTitle] = useState('');
@@ -64,65 +65,86 @@ function Issue() {
   //   navigate(`/CheckIssue`, { state: { key: projectKey } }); 
   // }
 
-  return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <p>이슈제목</p>
-        <input
-          type="text"
-          placeholder="Issue Title"
-          value={issueTitle}
-          onChange={(e) => setIssueTitle(e.target.value)}
-        />
+return (
+<div className="container">
+  <form onSubmit={handleSubmit}>
+  <div className='form-row'>
+    {/* <p className="form-label">이슈제목</p> */}
+    <input
+        type="text"
+        className="form-input"
+        placeholder="Issue Title"
+        value={issueTitle}
+        onChange={(e) => setIssueTitle(e.target.value)}
+    />
+        <select
+      className="form-select"
+      value={type}
+      onChange={(e) => setType(e.target.value)}
+    >
+      <option value="EPIC">EPIC</option>
+      <option value="STORY">STORY</option>
+      <option value="TASK">TASK</option>
+    </select>
+</div>
+<div className='form-row'>
+    {/* <p className="form-label">이슈타입</p> */}
 
-        <p>이슈타입</p>
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="EPIC">EPIC</option>
-          <option value="STORY">STORY</option>
-          <option value="TASK">TASK</option>
-        </select>
-
-        <p>이슈상태</p>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="DO">DO</option>
-          <option value="PROGRESS">PROGRESS</option>
-          <option value="DONE">DONE</option>
-        </select>
-
-        <p>내용</p>
-        <textarea
-          placeholder="Content Text"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-
-        <p>이미지 파일</p>
-        <input
-          type="file"
-          multiple 
-          onChange={handleFileChange}
-        />
-
-        <p>시작날짜</p>
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-
-        <p>마감날짜</p>
-        <input
-          type="date"
-          value={endDate}
-          min={startDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        <p/>
-        <button type="submit">이슈 생성</button>
-      </form>
-      {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}
+</div>
+<div className='form-row'>
+    <p className="form-label">이슈상태</p>
+    <select
+      className="form-select"
+      value={status}
+      onChange={(e) => setStatus(e.target.value)}
+    >
+      <option value="DO">DO</option>
+      <option value="PROGRESS">PROGRESS</option>
+      <option value="DONE">DONE</option>
+    </select>
+</div>
+<div className='form-row'>
+    <p className="form-label">내용</p>
+    <textarea
+      className="form-textarea"
+      placeholder="Content Text"
+      value={content}
+      onChange={(e) => setContent(e.target.value)}
+    />
     </div>
-  );
+<div className='form-row'>
+    <p className="form-label">이미지 파일</p>
+    <input
+      type="file"
+      className="form-file"
+      multiple 
+      onChange={handleFileChange}
+    />
+</div>
+<div className='form-row'>
+    <p className="form-label">시작날짜</p>
+    <input
+      type="date"
+      className="form-date"
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+    />
+    </div>
+<div className='form-row'>
+    <p className="form-label">마감날짜</p>
+    <input
+      type="date"
+      className="form-date"
+      value={endDate}
+      min={startDate}
+      onChange={(e) => setEndDate(e.target.value)}
+    />
+</div>
+    <button className="form-button" type="submit">이슈 생성</button>
+  </form>
+  {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}
+</div>
+);
 }
 
 export default Issue;

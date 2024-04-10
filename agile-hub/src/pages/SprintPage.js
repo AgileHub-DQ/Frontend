@@ -3,6 +3,7 @@ import '../css/SprintPage/SprintPage.css';
 import Menubar from '../components/Menubar.js';
 import DashBoard from '../components/SprintPage/DashBoard.js';
 import Component from '../components/SprintPage/Component.js';
+import Issue from './Issue.js';
 
 function SprintPage() {
 
@@ -11,6 +12,7 @@ function SprintPage() {
       <Menubar/>
       <Component/>
       <DashBoard/>
+      <Issue/>
     </div>
   );
 }
