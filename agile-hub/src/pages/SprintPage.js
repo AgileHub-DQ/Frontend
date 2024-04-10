@@ -1,7 +1,7 @@
 import React from 'react';
-import './component.css'; // CSS 파일을 import합니다.
+import '../css/SprintPage/SprintPage.css';
 
-export default function Component() {
+export default function SprintPage() {
     return (
         <div className="kanban-board">
             <div className="column">

@@ -8,7 +8,7 @@ import CreateProject from './pages/CreateProject.js'; // 프로젝트 생성 페
 import MyPage from './pages/MyPage.js'; //마이페이지 
 import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
-import Component from "./component.js";
+import SprintPage from './pages/SprintPage.js';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/myPage" element={<MyPage />} />
           <Route path="/issue" element={<IssuePage />} />
           <Route path="/checkIssue" element={<CheckIssue />} />
-          <Route path="/component" element={<Component />} />
+          <Route path="/sprint" element={<SprintPage />} />
         </Routes>
       </Router>
     </div>
