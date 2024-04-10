@@ -5,7 +5,7 @@ import '../css/Issue.css';
 
 function Issue() {
   const [issueTitle, setIssueTitle] = useState('');
-  const [type, setType] = useState('EPIC');
+  const [type, setType] = useState('EPIC'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
   const [status, setStatus] = useState('DO');
   const [content, setContent] = useState('');
   const [files, setFiles] = useState(''); 
@@ -28,7 +28,7 @@ function Issue() {
 
     const formData = new FormData();
     formData.append('title', issueTitle);
-    formData.append('type', type);
+    formData.append('type', type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
     formData.append('status', status);
     formData.append('content', content);
     formData.append('startDate', startDate);
@@ -79,22 +79,6 @@ return (
     />
         <select
       className="form-select"
-      value={type}
-      onChange={(e) => setType(e.target.value)}
-    >
-      <option value="EPIC">EPIC</option>
-      <option value="STORY">STORY</option>
-      <option value="TASK">TASK</option>
-    </select>
-</div>
-<div className='form-row'>
-    {/* <p className="form-label">이슈타입</p> */}
-
-</div>
-<div className='form-row'>
-    <p className="form-label">이슈상태</p>
-    <select
-      className="form-select"
       value={status}
       onChange={(e) => setStatus(e.target.value)}
     >
@@ -104,10 +88,39 @@ return (
     </select>
 </div>
 <div className='form-row'>
-    <p className="form-label">내용</p>
+    <p className="form-label">기간</p>
+    <input
+      type="date"
+      className="form-date"
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+    />
+    <input
+      type="date"
+      className="form-date"
+      value={endDate}
+      min={startDate}
+      onChange={(e) => setEndDate(e.target.value)}
+    />
+</div>
+<div className='form-row'>
+    <p className="form-label">상위</p>
+    <select
+      className="form-select"
+      value={type}
+      onChange={(e) => setType(e.target.value)}
+    >
+      <option value="EPIC">EPIC</option>
+      <option value="STORY">STORY</option>
+      <option value="TASK">TASK</option>
+    </select>
+</div>
+
+<div className='form-row'>
+    <p className="form-label">설명</p>
     <textarea
       className="form-textarea"
-      placeholder="Content Text"
+      placeholder="설명 입력"
       value={content}
       onChange={(e) => setContent(e.target.value)}
     />
@@ -122,23 +135,14 @@ return (
     />
 </div>
 <div className='form-row'>
-    <p className="form-label">시작날짜</p>
-    <input
-      type="date"
-      className="form-date"
-      value={startDate}
-      onChange={(e) => setStartDate(e.target.value)}
-    />
-    </div>
-<div className='form-row'>
-    <p className="form-label">마감날짜</p>
-    <input
-      type="date"
-      className="form-date"
-      value={endDate}
-      min={startDate}
-      onChange={(e) => setEndDate(e.target.value)}
-    />
+  <button>하위 이슈 추가</button>
+  {/* <input
+        type="text"
+        className=""
+        placeholder="무엇을 완료해야 합니까?"
+        value={}
+        onChange={(e) => set(e.target.value)}
+    /> */}
 </div>
     <button className="form-button" type="submit">이슈 생성</button>
   </form>
