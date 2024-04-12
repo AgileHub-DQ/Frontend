@@ -61,15 +61,18 @@ function Issue() {
     }
   }, [location]);
 
+
+
   // const navigateToCheck = (projectKey) => { 
   //   navigate(`/CheckIssue`, { state: { key: projectKey } }); 
   // }
 
 return (
-<div className="container">
+<div className="modalContainer">
   <form onSubmit={handleSubmit}>
   <div className='form-row'>
     {/* <p className="form-label">이슈제목</p> */}
+    <div className='colorBox'></div>
     <input
         type="text"
         className="form-input"
@@ -78,7 +81,7 @@ return (
         onChange={(e) => setIssueTitle(e.target.value)}
     />
         <select
-      className="form-select"
+      className="form-select-status"
       value={status}
       onChange={(e) => setStatus(e.target.value)}
     >
@@ -87,7 +90,7 @@ return (
       <option value="DONE">DONE</option>
     </select>
 </div>
-<div className='form-row'>
+<div className='form-row-2'>
     <p className="form-label">기간</p>
     <input
       type="date"
@@ -95,6 +98,7 @@ return (
       value={startDate}
       onChange={(e) => setStartDate(e.target.value)}
     />
+    <p>~</p>
     <input
       type="date"
       className="form-date"
@@ -103,10 +107,25 @@ return (
       onChange={(e) => setEndDate(e.target.value)}
     />
 </div>
-<div className='form-row'>
-    <p className="form-label">상위</p>
+{/* <div className='form-row-3'> */}
+    <p className="form-label-tag">단계</p>
+<div className='form-row-3'>
+    <div className='box1'>계획</div>
+    <div className='box2'>디자인</div>
+    <div className='box3'>개발</div>
+    <div className='box4'>테스트</div>
+    <div className='box5'>피드백</div>
+    {/* <div className='box1'>계획</div>
+    <div className='box2'>디자인</div>
+    <div className='box3'>개발</div>
+    <div className='box4'>테스트</div>
+    <div className='box5'>피드백</div> */}
+</div>
+{/* </div> */}
+<div className='form-row-4'>
+    <p className="form-label">타입</p>
     <select
-      className="form-select"
+      className="form-select-type"
       value={type}
       onChange={(e) => setType(e.target.value)}
     >
@@ -116,26 +135,24 @@ return (
     </select>
 </div>
 
-<div className='form-row'>
-    <p className="form-label">설명</p>
+    <p className="form-label-d">설명</p>
     <textarea
       className="form-textarea"
       placeholder="설명 입력"
       value={content}
       onChange={(e) => setContent(e.target.value)}
     />
-    </div>
-<div className='form-row'>
+<div className='form-row-5'>
     <p className="form-label">이미지 파일</p>
     <input
       type="file"
       className="form-file"
-      multiple 
+      multiple
       onChange={handleFileChange}
     />
 </div>
-<div className='form-row'>
-  <button>하위 이슈 추가</button>
+<div className='form-row-6'>
+  <button className='addUnderIssue'>하위 이슈 추가</button>
   {/* <input
         type="text"
         className=""
@@ -144,7 +161,9 @@ return (
         onChange={(e) => set(e.target.value)}
     /> */}
 </div>
+  <div className='form-row-7'>
     <button className="form-button" type="submit">이슈 생성</button>
+  </div> 
   </form>
   {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}
 </div>

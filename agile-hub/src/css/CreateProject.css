@@ -82,7 +82,6 @@ transform: scale(0.95);
 
 .text1{
 position: absolute;
-width: 179px;
 height: 24px;
 left: 542px;
 top: 154px;
@@ -96,7 +95,6 @@ line-height: 35px;
 
 .text2{
 position: absolute;
-width: 144px;
 height: 24px;
 left: 782px;
 top: 154px;

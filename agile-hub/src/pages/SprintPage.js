@@ -12,6 +12,7 @@ function SprintPage() {
       <Menubar/>
       <Component/>
       <DashBoard/>
+      <Issue/>
     </div>
   );
 }
