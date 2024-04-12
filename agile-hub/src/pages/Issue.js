@@ -107,7 +107,6 @@ return (
       onChange={(e) => setEndDate(e.target.value)}
     />
 </div>
-{/* <div className='form-row-3'> */}
     <p className="form-label-tag">단계</p>
 <div className='form-row-3'>
     <div className='box1'>계획</div>
@@ -115,15 +114,10 @@ return (
     <div className='box3'>개발</div>
     <div className='box4'>테스트</div>
     <div className='box5'>피드백</div>
-    {/* <div className='box1'>계획</div>
-    <div className='box2'>디자인</div>
-    <div className='box3'>개발</div>
-    <div className='box4'>테스트</div>
-    <div className='box5'>피드백</div> */}
 </div>
-{/* </div> */}
 <div className='form-row-4'>
-    <p className="form-label">타입</p>
+    <p className="form-label">상위 항목</p>
+    {/* 에픽 목록 보여주는 코드로 변경되어야함 */}
     <select
       className="form-select-type"
       value={type}
@@ -150,6 +144,7 @@ return (
       multiple
       onChange={handleFileChange}
     />
+    {/* 파일 삭제 코드 있어야 함 */}
 </div>
 <div className='form-row-6'>
   <button className='addUnderIssue'>하위 이슈 추가</button>
