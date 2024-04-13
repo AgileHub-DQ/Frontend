@@ -5,7 +5,7 @@ import '../css/Issue.css';
 
 function Issue() {
   const [issueTitle, setIssueTitle] = useState('');
-  const [type, setType] = useState('EPIC'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+  const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
   const [status, setStatus] = useState('DO');
   const [content, setContent] = useState('');
   const [files, setFiles] = useState(''); 
@@ -15,6 +15,7 @@ function Issue() {
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
   const [projectKey, setProjectKey] = useState('');
+  const [color, setColor] = useState('#00FF75'); // 초기 색상
   const navigate = useNavigate(); 
 
   const location = useLocation(); 
@@ -22,6 +23,26 @@ function Issue() {
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
   };
+
+  const handleTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setType(selectedType);
+    // 선택한 값에 따라 색상 변경
+    switch (selectedType) {
+      case 'EPIC':
+        setColor('#FF7041');
+        break;
+      case 'STORY':
+        setColor('#00FF75');
+        break;
+      case 'TASK':
+        setColor('#FB55B3');
+        break;
+      default:
+        setColor('#95ADF6');
+    }
+  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +93,7 @@ return (
   <form onSubmit={handleSubmit}>
   <div className='form-row'>
     {/* <p className="form-label">이슈제목</p> */}
-    <div className='colorBox'></div>
+    <div className='colorBox' style={{backgroundColor: color}}></div>
     <input
         type="text"
         className="form-input"
@@ -116,12 +137,13 @@ return (
     <div className='box5'>피드백</div>
 </div>
 <div className='form-row-4'>
-    <p className="form-label">상위 항목</p>
+    <p className="form-label">타입</p>
     {/* 에픽 목록 보여주는 코드로 변경되어야함 */}
     <select
       className="form-select-type"
       value={type}
-      onChange={(e) => setType(e.target.value)}
+      onChange={handleTypeChange}
+      // onChange={(e) => setType(e.target.value)}
     >
       <option value="EPIC">EPIC</option>
       <option value="STORY">STORY</option>
