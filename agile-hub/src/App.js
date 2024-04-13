@@ -9,6 +9,7 @@ import MyPage from './pages/MyPage.js'; //마이페이지
 import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
 import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
+import TimelinePage from "./pages/TimelinePage.js"; //타임라인 페이지
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/issue" element={<IssuePage />} />
           <Route path="/checkIssue" element={<CheckIssue />} />
           <Route path="/sprint" element={<SprintPage />} />
+          <Route path="/timeline" element={<TimelinePage />} />
         </Routes>
       </Router>
     </div>
