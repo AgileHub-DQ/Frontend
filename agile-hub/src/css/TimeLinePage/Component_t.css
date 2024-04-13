@@ -167,8 +167,21 @@ select option:checked {
     flex-grow: 0;
 }
 
+/* .fieldset{
+    width: 100px;
+    margin: 5px;
+    padding: 10px;
+} */
 
-.status {
+/* .status {
+    width: 90px;
+    height: 25px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    background-color: #E9F2FF;
+} */
+.status-label{
     width: 90px;
     height: 25px;
     flex: none;
@@ -176,16 +189,28 @@ select option:checked {
     flex-grow: 0;
     background-color: #E9F2FF;
     color: #0B66E4;
+    text-align: center;
+    line-height: 25px;
 }
-
-
-.type {
+.type-label{
     width: 90px;
     height: 25px;
     flex: none;
     order: 2;
     flex-grow: 0;
+    background-color: #E9F2FF;
+    color: #0B66E4;
+    text-align: center;
+    line-height: 25px;
 }
+
+/* .type {
+    width: 90px;
+    height: 25px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+} */
 
 
 .timeline_text{
