@@ -1,8 +1,8 @@
 // Component.js
-import { useState } from 'react';
-import '../../css/TimeLinePage/Component_t.css';
+// import { useState } from 'react';
+import '../../css/TimeLinePage/ComponentTimeline.css';
 import { FaSearch } from 'react-icons/fa';
-function Component_t() {
+function ComponentTimeline() {
   // const [showOptions, setShowOptions] = useState(false); 
 
 
@@ -58,4 +58,4 @@ function Component_t() {
   );
 }
 
-export default Component_t;
+export default ComponentTimeline;

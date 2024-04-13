@@ -1,0 +1,13 @@
+.timeline-container{
+    display: flex;
+    flex-direction: row;
+}
+.timeline-issue {
+    display: flex;
+    flex-direction: row;
+  }
+  
+.table{
+    width: 200px;
+    height: 15px;
+}

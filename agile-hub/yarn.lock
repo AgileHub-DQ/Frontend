@@ -7832,7 +7832,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.8, prop-types@^15.8.1:
+prop-types@^15.5.8, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8088,6 +8088,13 @@ react-slideshow-image@^4.3.1:
   dependencies:
     "@tweenjs/tween.js" "^18.6.4"
     resize-observer-polyfill "^1.5.1"
+
+react-timelines@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/react-timelines/-/react-timelines-2.6.1.tgz#28c0b2418519fb3967e48f0b862aaf1bca24510b"
+  integrity sha512-z22XOLp1a0iFIAneP6CxX1QasQL3t5BXsCW1LZeln/tQuJPyfYW8uZyCZSPYyRczenhXvUMmyNvHWrXkSI0DRA==
+  dependencies:
+    prop-types "^15.7.2"
 
 react@^18.2.0:
   version "18.2.0"
