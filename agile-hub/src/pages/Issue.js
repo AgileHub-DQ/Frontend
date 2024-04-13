@@ -145,9 +145,18 @@ return (
       onChange={handleTypeChange}
       // onChange={(e) => setType(e.target.value)}
     >
-      <option value="EPIC">EPIC</option>
+      {/* <option value="EPIC">EPIC</option> */}
       <option value="STORY">STORY</option>
       <option value="TASK">TASK</option>
+    </select>
+</div>
+<div className='form-row-10'>
+    <p className="form-label">상위 항목</p>
+    <select
+      className="form-select-type">
+      {/* 여기에 에픽 목록 출력 */}
+      <option>EPIC1</option>
+      <option>EPIC2</option>
     </select>
 </div>
 
