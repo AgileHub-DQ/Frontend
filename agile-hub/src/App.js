@@ -10,6 +10,7 @@ import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
 import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 import TimelinePage from "./pages/TimelinePage.js"; 
+import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.js";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/checkIssue" element={<CheckIssue />} />
           <Route path="/sprint" element={<SprintPage />} />
           <Route path="/timeline" element={<TimelinePage />} />
+          <Route path="/createSprintModal" element={<CreateSprintModal />} />
         </Routes>
       </Router>
     </div>

@@ -23,4 +23,13 @@
     /* 폰트 넣어야 함 */
 }
 
+.createSprintButton:hover{
+    background-color: white;
+    color: black;
+}
 
+.test{
+    width: 537px;
+    height: 743px;
+    background-color: white;
+}
