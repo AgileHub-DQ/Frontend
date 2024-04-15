@@ -33,6 +33,7 @@
 .red{
     color:red;
 }
+
 /* 1개의 이슈를 이 스프린트에 포함합니다. */
 .dd{
 position: absolute;
@@ -154,7 +155,6 @@ height: 38px;
 left: 33px;
 top: 426px;
 
-opacity: 0.3;
 }
 
 /* 스프린트 목표 */

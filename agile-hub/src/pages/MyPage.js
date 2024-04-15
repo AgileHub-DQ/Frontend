@@ -6,8 +6,8 @@ function ProjectsList() {
   const [projects, setProjects] = useState([
     {
       "id": 0,
-      "key": "string",
-      "name": "string",
+      "key": "project1",
+      "name": "project",
       "createdAt": "2024-04-06T03:13:52.994Z"
     }
   ]);
@@ -65,6 +65,10 @@ function ProjectsList() {
     navigate(`/checkIssue`, { state: { key: projectKey } }); 
   }
 
+  const navigateToCreateSprintModal = (projectKey) => { 
+    navigate(`/createSprintModal`, { state: { key: projectKey } }); 
+  }
+
   return (
     <div className="container">
       <h1>프로젝트 목록</h1>
@@ -94,6 +98,7 @@ function ProjectsList() {
                 <button onClick={deleteProject}>삭제하기</button>
                 <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
                 <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button>
+                <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
               </>
             )}
           </li>
