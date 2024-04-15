@@ -1,9 +1,76 @@
-/* Rectangle 92 */
-.rectangle92 {
-    position: absolute;
+.bar {
+    position: relative;
     width: calc(100% - 20%);
     height: 127px;
-    background: #f8f5f5;
-    top: 0;
-    left: 20%; /* 메뉴바의 너비(20%) 만큼 왼쪽으로 이동 */
+    background: #f3efef;
+    top: 0px;
+    left: 20%; 
+}
+
+.sprintbarContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    width: 234px;
+    height: 53px;
+    margin-left: 3%;
+}
+
+
+.sprint_title{
+    position: absolute;
+    width: 234px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    
+    color: #B1B7C3;
+}
+
+.sprint_description{
+    position: absolute;
+    top: 35px; 
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.dateContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    position: absolute;
+    width: 530px;
+    height: 40px;
+    top: 75px; 
+    margin-left: 3%;
+    
+}
+
+.dateBar{
+    width: 100px;
+    height: 15px;
+    background-color: blue;
+}
+
+
+.sprintbarcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    width: 234px;
+    height: 53px;
+    margin-left: 3%;
+}
+
+.sprint_finish{
+   
 }

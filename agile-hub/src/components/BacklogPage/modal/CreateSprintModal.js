@@ -38,8 +38,8 @@ function CreateSprintModal() {
                 'Content-Type': 'application/json'
             }
           });
-          console.log(response.data);
-          navigate('/sprint'); 
+          console.log(response.data.result);
+          navigate('/sprint', { state: { sprintData: response.data.result } });
         } catch (error) {
           console.error('create sprint error!!', error);
         }

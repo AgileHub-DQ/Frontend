@@ -9,6 +9,7 @@ export default function DashBoard() {
         <div className="kanban-board">
             <div className="column">
                 <div className='textdiv'>
+                    
                     <div className="status-indicator preparing"></div>
                     <h2>Preparing</h2> 
                 </div>
