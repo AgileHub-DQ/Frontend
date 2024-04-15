@@ -1,135 +1,3 @@
-/* .project{
-    position: absolute;
-    width: 234px;
-    height: 24px;
-
-    font-family: 'Abhaya Libre ExtraBold';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 24px;
-    
-    color: #B1B7C3;
-}
-
-.timeline_text{
-position: absolute;
-width: 125px;
-height: 29px;
-
-font-family: 'Abhaya Libre ExtraBold';
-font-style: normal;
-font-weight: 800;
-font-size: 30px;
-line-height: 35px;
-
-color: #000000;
-}
-
-.searchBox{
-box-sizing: border-box;
-position: absolute;
-width: 180px;
-height: 40px;
-
-background: #FFFFFF;
-border: 1px solid #D6D6D6;
-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-border-radius: 10px;
-
-}
-
-.vector{
-    position: absolute;
-    width: 23px;
-    height: 23px;
-    background: #979797;
-    border: 1px solid #979797;
-}
-
-.bar {
-    position: relative;
-    width: calc(100% - 20%);
-    height: 127px;
-    background: #f3efef;
-} */
-
-/* 
-.bar {
-    position: relative;
-    width: calc(100% - 20%);
-    height: 127px;
-    background: #f3efef;
-    top: 0;
-    left: 20%; 
-}
-
-.project {
-    position: absolute;
-    top: 20px; 
-    left: 20px;
-    font-family: 'Abhaya Libre ExtraBold';
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 24px;
-    color: #B1B7C3;
-}
-
-.timeline_text {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-family: 'Abhaya Libre ExtraBold';
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 35px;
-    color: #000000;
-}
-
-.search-container {
-    position: absolute;
-    top: 70px; 
-    left: 20px; 
-}
-
-.search-container input[type="text"] {
-    width: 180px;
-    height: 40px;
-    padding-left: 10px;
-    border: 1px solid #D6D6D6;
-    border-radius: 10px;
-}
-
-.search-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 23px;
-    height: 23px;
-    color: #979797;
-}
-
-select {
-    position: absolute;
-    top: 120px; 
-    left: 20px; 
-    width: 180px;
-    height: 40px;
-    padding: 5px;
-    border: 1px solid #D6D6D6;
-    border-radius: 10px;
-    font-family: 'Abhaya Libre ExtraBold';
-    font-weight: 800;
-    font-size: 16px;
-    color: #000000;
-    background-color: #ffffff;
-}
-
-select option:checked {
-    background-color: #f3efef;
-} 
-*/
-
 .bar {
     position: relative;
     width: calc(100% - 20%);
@@ -167,20 +35,6 @@ select option:checked {
     flex-grow: 0;
 }
 
-/* .fieldset{
-    width: 100px;
-    margin: 5px;
-    padding: 10px;
-} */
-
-/* .status {
-    width: 90px;
-    height: 25px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-    background-color: #E9F2FF;
-} */
 .status-label{
     width: 90px;
     height: 25px;
@@ -203,16 +57,6 @@ select option:checked {
     text-align: center;
     line-height: 25px;
 }
-
-/* .type {
-    width: 90px;
-    height: 25px;
-    flex: none;
-    order: 2;
-    flex-grow: 0;
-} */
-
-
 .timeline_text{
     position: absolute;
     top: 35px; 
