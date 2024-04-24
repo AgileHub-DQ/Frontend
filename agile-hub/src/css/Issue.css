@@ -36,6 +36,7 @@
     display: flex; 
     align-items: center;
     margin-top: 10px;
+    white-space: nowrap; /* 줄 바꿈 방지 */
 }
 
 /* 태그 */

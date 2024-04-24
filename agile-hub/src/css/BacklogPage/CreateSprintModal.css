@@ -30,6 +30,16 @@
     color: #000000;
 }
 
+.errorMessage{
+    position: absolute;
+    width: 190px;
+    left: 180px;
+    top: 45px;
+    font-size: 15px; 
+    color: red;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
 .red{
     color:red;
 }

@@ -4,12 +4,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 function ProjectsList() {
   const [projects, setProjects] = useState([
-    {
-      "id": 0,
-      "key": "project1",
-      "name": "project",
-      "createdAt": "2024-04-06T03:13:52.994Z"
-    }
   ]);
   const [error, setError] = useState('');
   const [editingProjectId, setEditingProjectId] = useState(null); // 현재 수정 중인 프로젝트의 ID, 현재 사용자가 편집하고자 하는 특정 프로젝트를 구별하기 위함. 

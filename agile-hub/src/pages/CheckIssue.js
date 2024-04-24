@@ -12,6 +12,7 @@ function CheckIssue() {
     try {
       if (projectKey) {
         const response = await axios.get(`/api/projects/${projectKey}/issues`);
+        console.log(response);
         setIssues(response.data.result); // 이슈 목록을 상태에 저장
       }
     } catch (error) {

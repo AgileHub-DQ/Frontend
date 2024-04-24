@@ -42,6 +42,7 @@ function CreateSprintModal() {
           navigate('/sprint', { state: { sprintData: response.data.result } });
         } catch (error) {
           console.error('create sprint error!!', error);
+          setError('입력되지 않은 빈칸이 존재합니다.');
         }
       };
 
@@ -50,6 +51,7 @@ function CreateSprintModal() {
     <div className='createSprintModal'>
         <div className='date'>
             <div className='sprintStart'>스프린트 시작</div>
+            <div className='errorMessage'>{error}</div>
             <div className='dd'>1개의 이슈를 이 스프린트에 포함합니다.</div>
             <div className='dd2'>필수 필드는 별표 <span className='red'>*</span>로 표시되어 있습니다.</div>
                 <div className='titleText'>스프린트 이름<span className='red'>*</span></div>
