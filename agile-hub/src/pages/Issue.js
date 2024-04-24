@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
 
-function Issue({projectKey}) {
+function Issue({projectKey, sprintId}) {
   const [issueTitle, setIssueTitle] = useState('');
   const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
   const [status, setStatus] = useState('DO');
@@ -56,6 +56,7 @@ function Issue({projectKey}) {
     formData.append('endDate', endDate);
     formData.append('assigneeId', assigneeId);
     formData.append('parentId', parentId);
+    formData.append('sprintId',sprintId);
 
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
@@ -71,6 +72,15 @@ function Issue({projectKey}) {
         }
       });
       console.log(response.data);
+      setIssueTitle('');
+      setType('STORY');
+      setStatus('DO');
+      setContent('');
+      setFiles('');
+      setStartDate('');
+      setEndDate('');
+      setAssigneeId('2');
+      setParentId('1');
     } catch (error) {
       console.error('떼잉~~ 실패!!', error);
     }

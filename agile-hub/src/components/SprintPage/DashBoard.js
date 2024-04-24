@@ -9,19 +9,19 @@ export default function DashBoard() {
         <div className="kanban-board">
             <div className="column">
                 <div className='textdiv'>
-                    
                     <div className="status-indicator preparing"></div>
                     <h2>Preparing</h2> 
                 </div>
                 <PlusBox/>
-                <div className="task">
+                <Task/>
+                {/* <div className="task">
                     <h3>Task 1</h3>
                     <p>This is a description for task 1.</p>
                 </div>
                 <div className="task">
                     <h3>Task 2</h3>
                     <p>This is a description for task 2.</p>
-                </div>
+                </div> */}
             </div>
             <div className="column">
             <div className='textdiv'>
