@@ -9,6 +9,7 @@ import Issue from './Issue.js';
 function SprintPage() {
   const location = useLocation();
   const sprintData = location.state?.sprintData;
+  const projectKey = location.state?.projectKey; // projectKey 가져오기
 
 
   return (
@@ -16,7 +17,7 @@ function SprintPage() {
       <Menubar/>
       <Component sprintData={sprintData} />
       <DashBoard/>
-      <Issue/>
+      <Issue projectKey={projectKey} />
     </div>
   );
 }

@@ -39,7 +39,7 @@ function CreateSprintModal() {
             }
           });
           console.log(response.data.result);
-          navigate('/sprint', { state: { sprintData: response.data.result } });
+          navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey } });
         } catch (error) {
           console.error('create sprint error!!', error);
           setError('입력되지 않은 빈칸이 존재합니다.');

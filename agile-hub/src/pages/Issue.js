@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
 
-function Issue() {
+function Issue({projectKey}) {
   const [issueTitle, setIssueTitle] = useState('');
   const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
   const [status, setStatus] = useState('DO');
@@ -14,7 +14,7 @@ function Issue() {
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
-  const [projectKey, setProjectKey] = useState('');
+  // const [projectKey, setProjectKey] = useState('');
   const [color, setColor] = useState('#00FF75'); // 초기 색상
   const navigate = useNavigate(); 
 
@@ -76,11 +76,11 @@ function Issue() {
     }
   };
 
-  useEffect(() => {
-    if (location.state && location.state.key) {
-      setProjectKey(location.state.key); 
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (location.state && location.state.key) {
+  //     setProjectKey(location.state.key); 
+  //   }
+  // }, [location]);
 
 
 
