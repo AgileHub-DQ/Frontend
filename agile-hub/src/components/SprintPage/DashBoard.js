@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../css/SprintPage/DashBoard.css';
 import PlusBox from './PlusBox.js';
+// import CheckIssue from '../../pages/CheckIssue.js';
 import Task from './Task.js';
 
-export default function DashBoard() {
+export default function DashBoard({projectKey,sprintId}) {
 
     return (
         <div className="kanban-board">
@@ -13,7 +15,8 @@ export default function DashBoard() {
                     <h2>Preparing</h2> 
                 </div>
                 <PlusBox/>
-                <Task/>
+                <Task projectKey={projectKey}/>
+                {/* <Task projectKey={projectKey}/> */}
                 {/* <div className="task">
                     <h3>Task 1</h3>
                     <p>This is a description for task 1.</p>

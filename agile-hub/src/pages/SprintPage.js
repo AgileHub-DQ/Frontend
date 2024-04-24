@@ -17,7 +17,7 @@ function SprintPage() {
     <div className='sprint_container'>
       <Menubar/>
       <Component sprintData={sprintData} />
-      <DashBoard/>
+      <DashBoard projectKey={projectKey} sprintId={sprintId}/>
       <Issue projectKey={projectKey} sprintId={sprintId} />
     </div>
   );
