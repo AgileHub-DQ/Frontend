@@ -31,7 +31,7 @@ function CheckIssue() {
   }, [projectKey]); // projectKey가 바뀔 때마다 이슈 목록을 다시 가져옴
 
   return (
-    <div className="container">
+    <div className="container">       
       <h1>이슈 목록</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
