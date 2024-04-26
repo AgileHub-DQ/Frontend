@@ -154,8 +154,11 @@ function SingleIssue() {
       setError('이슈 수정에 실패했습니다.');
     }
   };
-  
 
+  const handleAddComment = () => {
+    navigate('/issueComment', { state: { projectKey: key, issueId: issueId } });
+  };
+  
   useEffect(() => {
     if (key && issueId) {
       fetchIssueDetails();
@@ -205,6 +208,7 @@ function SingleIssue() {
             <p>내용: {issueDetails.issue.content.text}</p>
             <button onClick={handleEditIssue}>이슈 수정</button>
             <button onClick={handleDeleteIssue}>이슈 삭제</button>
+            <button onClick={handleAddComment}>댓글 달기</button>
           </>
         )}
       </div>

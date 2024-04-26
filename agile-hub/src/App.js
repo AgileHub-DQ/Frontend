@@ -7,6 +7,7 @@ import MyPage from './pages/MyPage.js'; //마이페이지
 import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
 import SingleIssue from './pages/SingleIssue.js'; 
+import IssueComment from './pages/IssueComment.js'; 
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/issue" element={<IssuePage />} />
           <Route path="/checkIssue" element={<CheckIssue />} />
           <Route path="/singleIssue" element={<SingleIssue />} />
+          <Route path="/issueComment" element={<IssueComment />} />
         </Routes>
       </Router>
     </div>
