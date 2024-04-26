@@ -1,0 +1,115 @@
+.projectName{
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 243px;
+    gap: 10px;
+    
+    position: absolute;
+    left: 29.41%;
+    right: 29.68%;
+    top: 42.55%;
+    bottom: 47.91%;
+    
+    border: 3px solid #003AF6;
+    border-radius: 10px;
+}
+
+.projectKey{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 243px;
+    gap: 10px;
+
+    position: absolute;
+    left: 29.54%;
+    right: 29.68%;
+    top: 58.05%;
+    bottom: 32.42%;
+
+    border: 3px solid #003AF6;
+    border-radius: 10px;
+}
+
+.button{
+    position: absolute;
+    width: 199px;
+    left: calc(50% - 199px/2);
+    top: 73.42%;
+    bottom: 18.24%;
+
+    cursor: pointer;
+    transition: all .2s;
+    padding: 10px 20px;
+    border-radius: 100px;
+
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #003AF6;
+    color: white;
+}
+
+button > svg {
+width: 34px;
+margin-left: 10px;
+transition: transform .3s ease-in-out;
+}
+
+button:hover svg {
+transform: translateX(15px);
+}
+
+button:active {
+transform: scale(0.95);
+}
+
+.blue-text{
+    color: blue;
+}
+
+.grey-text{
+    color: grey;
+}
+
+.text1{
+position: absolute;
+height: 24px;
+left: 542px;
+top: 154px;
+
+font-family: 'Abhaya Libre ExtraBold';
+font-style: normal;
+font-weight: 800;
+font-size: 30px;
+line-height: 35px;
+}
+
+.text2{
+position: absolute;
+height: 24px;
+left: 782px;
+top: 154px;
+
+font-family: 'Abhaya Libre ExtraBold';
+font-style: normal;
+font-weight: 800;
+font-size: 30px;
+line-height: 35px;
+}
+
+.error{
+    color: red;
+    display: flex;
+    position: absolute;
+    left: calc(50% - 601px/2 + 0.5px);
+    top: calc(50% - 44px/2 - 80px);
+}

@@ -13,8 +13,8 @@ function CheckIssue() {
     try {
       if (projectKey) {
         const response = await axios.get(`/api/projects/${projectKey}/issues`);
-        // 배열 데이터에 접근하기 위한 경로를 수정하였습니다. 실제 경로는 서버 응답의 구조에 따라 다를 수 있습니다.
-        setIssues(response.data.result || []); // 예를 들어, 'result' 키 안에 배열 데이터가 있다고 가정
+        console.log(response);
+        setIssues(response.data.result); // 이슈 목록을 상태에 저장
       }
     } catch (error) {
       console.error('이슈 정보를 가져오는 데 실패했습니다:', error);

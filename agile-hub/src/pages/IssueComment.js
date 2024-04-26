@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 function IssueComment() {
   const location = useLocation();
-  const { key, issueId } = location.state; // 이전 페이지에서 받은 state
+  const { projectKey: key, issueId } = location.state;
   const [commentText, setCommentText] = useState('');
 
   const postComment = async () => {
@@ -12,6 +12,12 @@ function IssueComment() {
       alert('댓글을 입력해주세요.');
       return;
     }
+
+    if (!key || !issueId) {
+      console.error('프로젝트 키 또는 이슈 ID가 제공되지 않았습니다.');
+      // 사용자에게 오류 메시지를 표시하고, 적절한 페이지로 리다이렉션합니다.
+      // 예: navigate('/errorPage'); 또는 상태를 기본값으로 설정합니다.
+    }    
 
     try {
       const response = await axios.post(`/api/projects/${key}/issues/${issueId}/comments`, {

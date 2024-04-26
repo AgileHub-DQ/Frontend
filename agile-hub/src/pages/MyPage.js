@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function ProjectsList() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([
+  ]);
   const [error, setError] = useState('');
   const [editingProjectId, setEditingProjectId] = useState(null); // 현재 수정 중인 프로젝트의 ID, 현재 사용자가 편집하고자 하는 특정 프로젝트를 구별하기 위함. 
   const [editedName, setEditedName] = useState(''); // 수정된 프로젝트 이름
@@ -58,6 +59,14 @@ function ProjectsList() {
     navigate(`/checkIssue`, { state: { key: projectKey } }); 
   }
 
+  const navigateToCreateSprintModal = (projectKey) => { 
+    navigate(`/createSprintModal`, { state: { key: projectKey } }); 
+  }
+
+  const navigateToBacklog = (projectKey) => { 
+    navigate(`/backlog`, { state: { key: projectKey } }); 
+  }
+
   return (
     <div className="container">
       <h1>프로젝트 목록</h1>
@@ -87,6 +96,8 @@ function ProjectsList() {
                 <button onClick={deleteProject}>삭제하기</button>
                 <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
                 <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button>
+                <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
+                <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지</button>
               </>
             )}
           </li>
