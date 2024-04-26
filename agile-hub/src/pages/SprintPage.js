@@ -9,7 +9,7 @@ import Issue from './Issue.js';
 function SprintPage() {
   const location = useLocation();
   const sprintData = location.state?.sprintData;
-  const sprintId = sprintData.sprintId;
+  const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey; // projectKey 가져오기
 
 
