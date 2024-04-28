@@ -20,6 +20,7 @@ function Task({ text, draggable, onDragStart, onDragEnd, projectKey }) {
     try {
       const issueId = 3;
       const response = await axios.get(`/api/projects/${projectKey}/issues/${issueId}`);
+      
       setResponse(response.data);
       setIsLoading(false);
     } catch (error) {
