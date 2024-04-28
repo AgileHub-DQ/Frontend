@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/SprintPage/DashBoard.css';
+import '../../css/Issue.css';
 import PlusBox from './PlusBox.js';
-// import CheckIssue from '../../pages/CheckIssue.js';
+import Issue from '../../pages/Issue.js';
 import Task from './Task.js';
 
 export default function DashBoard({projectKey,sprintId}) {
-
     return (
         <div className="kanban-board">
             <div className="column">
@@ -14,7 +14,7 @@ export default function DashBoard({projectKey,sprintId}) {
                     <div className="status-indicator preparing"></div>
                     <h2>Preparing</h2> 
                 </div>
-                <PlusBox/>
+                <PlusBox projectKey={projectKey} sprintId={sprintId} />
                 <Task projectKey={projectKey}/>
                 {/* <Task projectKey={projectKey}/> */}
                 {/* <div className="task">

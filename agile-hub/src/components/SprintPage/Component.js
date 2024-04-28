@@ -7,8 +7,8 @@ function Component({sprintData}) {
     {sprintData && (
                 <div>
                   <div className='sprintbarcontainer'>
-                    <div className='sprint_title'>스프린트 이름 / [{sprintData.title}]</div>
-                    <div className='sprint_description'>스프린트 목표 / {sprintData.description}</div>
+                    <div className='sprint_title'>스프린트 이름 / 스프린트 목표</div>
+                    <div className='sprint_description'>[{sprintData.title}] / {sprintData.description}</div>
                     {/* <div className='sprint_text'>스프린트</div> */}
                     </div>
                   <div className="dateContainer">

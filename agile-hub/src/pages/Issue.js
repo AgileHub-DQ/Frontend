@@ -86,21 +86,9 @@ function Issue({projectKey, sprintId}) {
     }
   };
 
-  // useEffect(() => {
-  //   if (location.state && location.state.key) {
-  //     setProjectKey(location.state.key); 
-  //   }
-  // }, [location]);
-
-
-
-  // const navigateToCheck = (projectKey) => { 
-  //   navigate(`/CheckIssue`, { state: { key: projectKey } }); 
-  // }
-
 return (
 <div className="modalContainer">
-  <form onSubmit={handleSubmit}>
+  <form className="form" onSubmit={handleSubmit}>
   <div className='form-row'>
     {/* <p className="form-label">이슈제목</p> */}
     <div className='colorBox' style={{backgroundColor: color}}></div>

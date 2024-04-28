@@ -18,7 +18,7 @@ function SprintPage() {
       <Menubar/>
       <Component sprintData={sprintData} />
       <DashBoard projectKey={projectKey} sprintId={sprintId}/>
-      <Issue projectKey={projectKey} sprintId={sprintId} />
+      {/* <Issue projectKey={projectKey} sprintId={sprintId} /> */}
     </div>
   );
 }
