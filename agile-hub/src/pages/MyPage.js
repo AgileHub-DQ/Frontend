@@ -3,8 +3,7 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function ProjectsList() {
-  const [projects, setProjects] = useState([
-  ]);
+  const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
   const [editingProjectId, setEditingProjectId] = useState(null); // 현재 수정 중인 프로젝트의 ID, 현재 사용자가 편집하고자 하는 특정 프로젝트를 구별하기 위함. 
   const [editedName, setEditedName] = useState(''); // 수정된 프로젝트 이름
@@ -12,10 +11,21 @@ function ProjectsList() {
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate(); 
 
+  // const fetchProjects = async () => {
+  //   try {
+  //     // const response = await axios.get('/api/projects');
+  //     const response = await axios.get('/projects');
+  //     setProjects(response.data.result);
+  //   } catch (error) {
+  //     console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
+  //     setError('프로젝트 정보를 가져오는 데 실패했습니다.');
+  //   }
+  // };
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('/api/projects');
-      setProjects(response.data.result);
+      const response = await axios.get('/projects');
+      console.log("API Response:", response.data);  // API 응답 전체를 로그로 출력
+      setProjects(response.data.result || []);  // 안전하게 데이터 설정
     } catch (error) {
       console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
       setError('프로젝트 정보를 가져오는 데 실패했습니다.');
@@ -35,7 +45,8 @@ function ProjectsList() {
   const saveProject = async (project) => {
     console.log(project.key);
     try {
-      await axios.put(`/api/projects/${project.key}`, {
+      // await axios.put(`/api/projects/${project.key}`, {
+      await axios.put(`/projects/${project.key}`, {
         name: editedName,
         key: editedKey
       });

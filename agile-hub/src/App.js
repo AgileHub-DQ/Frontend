@@ -8,9 +8,12 @@ import CreateProject from './pages/CreateProject.js'; // 프로젝트 생성 페
 import MyPage from './pages/MyPage.js'; //마이페이지 
 import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
-import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 import TimelinePage from "./pages/TimelinePage.js"; 
 import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.js";
+import Task from "./components/SprintPage/Task.js";
+import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
+import IssueComment from './pages/IssueComment.js';
+import SingleIssue from './pages/SingleIssue.js'; 
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
           <Route path="/sprint" element={<SprintPage />} />
           <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/createSprintModal" element={<CreateSprintModal />} />
+          <Route path="/issueComment" element={<IssueComment />} />
+          <Route path="/singleIssue" element={<SingleIssue />} />
         </Routes>
       </Router>
     </div>

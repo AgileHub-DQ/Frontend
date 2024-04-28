@@ -36,7 +36,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://www.agilehub.store",
+  "proxy": "https://api.agilehub.store",
   "devDependencies": {
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.1"
