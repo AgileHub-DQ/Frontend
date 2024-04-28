@@ -43,7 +43,7 @@ function ProjectsList() {
 
       console.log("API Response:", response.data);  // API 응답 전체를 로그로 출력
       
-      setProjects(response.data.result || []);  // 안전하게 데이터 설정
+      setProjects(response.data.result);  // 안전하게 데이터 설정
     } catch (error) {
       console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
       setError('프로젝트 정보를 가져오는 데 실패했습니다.');
