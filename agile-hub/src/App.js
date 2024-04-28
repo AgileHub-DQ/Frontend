@@ -10,7 +10,6 @@ import IssuePage from './pages/Issue.js'; //이슈페이지
 import CheckIssue from './pages/CheckIssue.js'; 
 import TimelinePage from "./pages/TimelinePage.js"; 
 import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.js";
-import Task from "./components/SprintPage/Task.js";
 import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 import IssueComment from './pages/IssueComment.js';
 import SingleIssue from './pages/SingleIssue.js'; 
