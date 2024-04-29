@@ -13,12 +13,14 @@ import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.
 import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 import IssueComment from './pages/IssueComment.js';
 import SingleIssue from './pages/SingleIssue.js'; 
+import DraggableList from "./pages/DraggableList.js";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
+        <Route path="/draggablelist" element={<DraggableList />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/backlog" element={<BacklogPage />} />
