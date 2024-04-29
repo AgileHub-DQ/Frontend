@@ -36,7 +36,7 @@ export default function DashBoard({ projectKey, sprintId }) {
             <div className="status-indicator preparing"></div>
             <h2>Preparing</h2> 
         </div>
-        <PlusBox projectKey={projectKey} sprintId={sprintId} />
+        <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} />
         {issues.map((issue, index) => (
         <Task key={index} issue={issue} projectKey={projectKey} />
         ))}

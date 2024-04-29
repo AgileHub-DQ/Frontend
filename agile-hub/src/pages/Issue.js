@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
 
-function Issue({projectKey, sprintId}) {
+function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState('');
   const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
@@ -98,6 +98,7 @@ function Issue({projectKey, sprintId}) {
       setAssigneeId('2');
       setParentId('1');
       setIsModalOpen(false); 
+      onIssuesUpdated();
       // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
     
     } catch (error) {
