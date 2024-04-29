@@ -40,7 +40,9 @@ function Task({ projectKey, issue }) {
   }
 
   const handleIssueTitleClick = () =>{
-    //const issueDetail = `/projects/${projectKey}/issues/${issue.id}`;
+    // showStory(response.result);
+    console.log("projectKey 클릭함");
+
   }
   return (
     <div className="task">
@@ -59,50 +61,3 @@ function Task({ projectKey, issue }) {
 }
 
 export default Task;
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import IssueCard from './IssueCard';
-
-// function Task({ projectKey }) {
-//   const [issues, setIssues] = useState([]);
-
-//   useEffect(() => {
-//     const fetchIssues = async () => {
-//       try {
-//         const response = await axios.get(`/api/projects/${projectKey}/issues/3`);
-//         setIssues(response.data);
-//         console.log(response.data);
-//       } catch (error) {
-//         console.error('이슈 목록을 불러오는데 실패했습니다:', error);
-//       }
-//     };
-
-//     fetchIssues();
-//   }, [projectKey]);
-
-//   return (
-//     <div className="task-container">
-      
-      
-//       {/* 이슈 카드를 반복하여 렌더링합니다. */}
-//       {/* {issues.map(issue => (
-//         <IssueCard key={issue.issueId} issue={issue} />
-//       ))} */}
-//     </div>
-//   );
-// }
-
-// export default Task;

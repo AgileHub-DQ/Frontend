@@ -19,6 +19,10 @@ function Issue({projectKey, sprintId}) {
   const navigate = useNavigate(); 
 
   const location = useLocation(); 
+  
+  const handleClose = () =>{
+    
+  }
 
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
@@ -92,6 +96,9 @@ function Issue({projectKey, sprintId}) {
       setEndDate('');
       setAssigneeId('2');
       setParentId('1');
+      handleClose(); 
+      // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
+    
     } catch (error) {
       console.error('떼잉~~ 실패!!', error);
       console.log(error.response)
@@ -198,7 +205,7 @@ return (
     /> */}
 </div>
   <div className='form-row-7'>
-    <button className="form-button" type="submit">이슈 생성</button>
+    <button className="form-button" type="submit" onClick={handleClose}>이슈 생성</button>
   </div> 
   </form>
   {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}

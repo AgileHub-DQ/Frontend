@@ -9,9 +9,10 @@ function PlusBox({ projectKey, sprintId, handlePlusBoxClick }) {
     setAddIssue(!addIssue); 
   };
 
+
   return (
     <div>
-        {addIssue && <Issue projectKey={projectKey} sprintId={sprintId} />} 
+        {addIssue && <Issue projectKey={projectKey} sprintId={sprintId}/>} 
         <div className="plusbox" onClick={handleAddIssue}>
           <div className="rectangle33"></div>
           <div className="image62"></div>
