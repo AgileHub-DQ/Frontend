@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 function DraggableList() {
   const [tasks, setTasks] = useState({
     todo: ['a', 'b', 'c'],
-    doing: ['e']
+    doing: ['e'],
+    complete: ['f']
   });
 
   const [currentCategory, setCurrentCategory] = useState(null);
@@ -74,7 +75,25 @@ function DraggableList() {
             {item}
           </div>
         ))}
-      </div>
+        </div>
+        <div 
+  style={{ width: '50%' }}
+  onDrop={(e) => onDrop(e, 'complete')}
+  onDragOver={onDragOver}
+>
+  <h2>Complete</h2>
+  {tasks.complete.map((item) => (
+    <div 
+      key={item}
+      draggable 
+      onDragStart={(e) => onDragStart(e, item)}
+      style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
+    >
+      {item}
+    </div>
+  ))}
+</div>
+
     </div>
   );
 }
