@@ -1,5 +1,6 @@
 .modalContainer {
-    position: absolute;
+    z-index: 100;
+    position: fixed;
     left: 70%;
     right: 0%;
     top: 135px;
