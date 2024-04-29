@@ -4,7 +4,6 @@ import '../css/SprintPage/SprintPage.css';
 import Menubar from '../components/Menubar.js';
 import DashBoard from '../components/SprintPage/DashBoard.js';
 import Component from '../components/SprintPage/Component.js';
-import Issue from './Issue.js';
 
 function SprintPage() {
   const location = useLocation();
@@ -18,7 +17,6 @@ function SprintPage() {
       <Menubar/>
       <Component sprintData={sprintData} />
       <DashBoard projectKey={projectKey} sprintId={sprintId}/>
-      {/* <Issue projectKey={projectKey} sprintId={sprintId} /> */}
     </div>
   );
 }

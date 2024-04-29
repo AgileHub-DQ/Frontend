@@ -7,7 +7,6 @@ import Task from './Task.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
   const [issues, setIssues] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState(null);
 
   useEffect(() => {
     fetchIssues();
@@ -30,38 +29,10 @@ export default function DashBoard({ projectKey, sprintId }) {
     }
   };
 
-  const onDragStart = (e, item, category) => {
-    e.dataTransfer.setData("text/plain", item);
-    setCurrentCategory(category);
-  };
-
-  const onDrop = (e, category) => {
-    const item = e.dataTransfer.getData("text/plain");
-    
-    if (category === currentCategory) {
-      return;
-    }
-  
-    const newIssues = { ...issues };
-  
-    Object.keys(newIssues).forEach((key) => {
-      newIssues[key] = newIssues[key].filter((i) => i !== item);
-    });
-  
-    newIssues[category].push(item);
-  
-    setIssues(newIssues);
-  };
-  
-
-  const onDragOver = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="kanban-board">
     <div className="column">
-        <div className='textdiv' onDrop={(e) => onDrop(e, 'todo')} onDragOver={onDragOver}>
+        <div className='textdiv'>
             <div className="status-indicator preparing" ></div>
             <h2>Preparing</h2> 
         </div>
@@ -71,7 +42,7 @@ export default function DashBoard({ projectKey, sprintId }) {
         ))}
     </div>
     <div className="column">
-    <div className='textdiv' onDrop={(e) => onDrop(e, 'doing')} onDragOver={onDragOver}>
+    <div className='textdiv'>
             <div className="status-indicator in-progress"></div>
             <h2>In Progress</h2> 
         </div>
@@ -86,7 +57,7 @@ export default function DashBoard({ projectKey, sprintId }) {
         </div>
     </div>
     <div className="column">
-    <div className='textdiv' onDrop={(e) => onDrop(e, 'complete')} onDragOver={onDragOver}>
+    <div className='textdiv'>
             <div className="status-indicator complete"></div>
             <h2>Complete</h2> 
         </div>

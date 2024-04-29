@@ -1,11 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function DraggableList() {
-  const [tasks, setTasks] = useState({
-    todo: ['a', 'b', 'c'],
-    doing: ['e'],
-    complete: ['f']
-  });
+  const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
+  const projectKey = 'P1';
+
+  useEffect(() => {
+    fetchIssues();
+  }, []);
+
+  const fetchIssues = async () => {
+    try {
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const endpoint = `/projects/${projectKey}/stories`;
+      const response = await axios.get(endpoint, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Issues:', response.data.result);
+
+      const updatedIssues = { todo: [], doing: [], complete: [] };
+    response.data.result.forEach((item) => {
+      if (item.type === 'STORY') {
+        updatedIssues.todo.push(item);
+      } else if (item.type === 'TASK') {
+        updatedIssues.doing.push(item);
+      }
+    });
+
+    setIssues(updatedIssues);
+      //setIssues(response.data.result);
+    } catch (error) {
+      console.error('Failed to fetch issues:', error);
+    }
+  };
 
   const [currentCategory, setCurrentCategory] = useState(null);
 
@@ -22,7 +52,7 @@ function DraggableList() {
       return;
     }
   
-    const newTasks = { ...tasks };
+    const newTasks = { ...issues };
   
     // 아이템을 현재 카테고리에서 제거
     Object.keys(newTasks).forEach((key) => {
@@ -32,7 +62,7 @@ function DraggableList() {
     // 아이템을 새 카테고리에 추가
     newTasks[category].push(item);
   
-    setTasks(newTasks);
+    setIssues(newTasks);
   };
   
 
@@ -48,14 +78,14 @@ function DraggableList() {
         onDragOver={onDragOver}
       >
         <h2>To Do</h2>
-        {tasks.todo.map((item) => (
+        {issues.todo?.map((item) => (
           <div 
-            key={item}
+            key={item.id}
             draggable 
-            onDragStart={(e) => onDragStart(e, item)}
+            onDragStart={(e) => onDragStart(e, item.title)}
             style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
           >
-            {item}
+            {item.title}
           </div>
         ))}
       </div>
@@ -65,35 +95,34 @@ function DraggableList() {
         onDragOver={onDragOver}
       >
         <h2>Doing</h2>
-        {tasks.doing.map((item) => (
+        {issues.doing?.map((item) => (
           <div 
-            key={item}
+            key={item.id}
             draggable 
-            onDragStart={(e) => onDragStart(e, item)}
+            onDragStart={(e) => onDragStart(e, item.title)}
             style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
           >
-            {item}
+            {item.title}
           </div>
         ))}
-        </div>
-        <div 
-  style={{ width: '50%' }}
-  onDrop={(e) => onDrop(e, 'complete')}
-  onDragOver={onDragOver}
->
-  <h2>Complete</h2>
-  {tasks.complete.map((item) => (
-    <div 
-      key={item}
-      draggable 
-      onDragStart={(e) => onDragStart(e, item)}
-      style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
-    >
-      {item}
-    </div>
-  ))}
-</div>
-
+      </div>
+      <div 
+        style={{ width: '50%' }}
+        onDrop={(e) => onDrop(e, 'complete')}
+        onDragOver={onDragOver}
+      >
+        <h2>Complete</h2>
+        {issues.complete?.map((item) => (
+          <div 
+            key={item.id}
+            draggable 
+            onDragStart={(e) => onDragStart(e, item.title)}
+            style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
+          >
+            {item.title}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
