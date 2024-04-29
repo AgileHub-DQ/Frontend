@@ -114,6 +114,9 @@ function CreateProject() {
           'Authorization': `Bearer ${accessToken}`
         }
       });
+
+      console.log("API Response:", response.data);
+      
     } catch (error) {
         console.error('프로젝트 생성 실패:', error);
         setError('프로젝트 생성 실패: ' + (error.response?.data?.message || error.message));
