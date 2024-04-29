@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+// import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
 
 function Issue({projectKey, sprintId, onIssuesUpdated}) {
@@ -15,15 +15,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
-  // const [projectKey, setProjectKey] = useState('');
   const [color, setColor] = useState('#00FF75'); // 초기 색상
-  const navigate = useNavigate(); 
-
-  const location = useLocation(); 
-  
-  // const handleClose = () => {
-  //   setIsModalOpen(false); // 모달 상태를 false로 변경하여 모달을 닫습니다.
-  // };
 
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
@@ -70,12 +62,6 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
     }
 
     try {
-      // const response = await axios.post(endpoint, formData, {
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data'
-      //   }
-      // });
-
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
       const endpoint = `/projects/${projectKey}/issues`;
       console.log("endpoint:"+endpoint);
@@ -112,7 +98,6 @@ return (
 <div className="modalContainer">
   <form className="form" onSubmit={handleSubmit}>
   <div className='form-row'>
-    {/* <p className="form-label">이슈제목</p> */}
     <div className='colorBox' style={{backgroundColor: color}}></div>
     <input
         type="text"
@@ -163,9 +148,7 @@ return (
       className="form-select-type"
       value={type}
       onChange={handleTypeChange}
-      // onChange={(e) => setType(e.target.value)}
     >
-      {/* <option value="EPIC">EPIC</option> */}
       <option value="STORY">STORY</option>
       <option value="TASK">TASK</option>
     </select>
@@ -199,19 +182,11 @@ return (
 </div>
 <div className='form-row-6'>
   <button className='addUnderIssue'>하위 이슈 추가</button>
-  {/* <input
-        type="text"
-        className=""
-        placeholder="무엇을 완료해야 합니까?"
-        value={}
-        onChange={(e) => set(e.target.value)}
-    /> */}
 </div>
   <div className='form-row-7'>
     <button className="form-button" type="submit">이슈 생성</button>
   </div> 
   </form>
-  {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}
 </div>
 )
 );

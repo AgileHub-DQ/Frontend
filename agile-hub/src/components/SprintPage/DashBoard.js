@@ -33,7 +33,7 @@ export default function DashBoard({ projectKey, sprintId }) {
     <div className="kanban-board">
     <div className="column">
         <div className='textdiv'>
-            <div className="status-indicator preparing"></div>
+            <div className="status-indicator preparing" ></div>
             <h2>Preparing</h2> 
         </div>
         <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} />
