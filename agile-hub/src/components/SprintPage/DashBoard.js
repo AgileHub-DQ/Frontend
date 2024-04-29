@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import '../../css/SprintPage/DashBoard.css';
 import '../../css/Issue.css';
 import PlusBox from './PlusBox.js';
-import Issue from '../../pages/Issue.js';
 import Task from './Task.js';
 
 export default function DashBoard({projectKey,sprintId}) {
