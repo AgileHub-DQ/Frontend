@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 
-function Task({ text, draggable, onDragStart, onDragEnd, projectKey }) {
+function Task({ text, draggable, onDragStart, onDragEnd, projectKey,issue }) {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
