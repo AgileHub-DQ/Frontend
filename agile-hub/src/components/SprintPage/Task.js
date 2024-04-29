@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 
-function Task({ text, draggable, onDragStart, onDragEnd, projectKey,issue }) {
+function Task({ text, draggable, onDragStart, onDragEnd, projectKey, issue }) {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ function Task({ text, draggable, onDragStart, onDragEnd, projectKey,issue }) {
 
   const fetchIssues = async () => {
     try {
-      const issueId = 12;
+      const issueId = issue.id;
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
       const response = await axios.get(`/projects/${projectKey}/issues/${issueId}`, {
         headers: {
@@ -26,9 +26,6 @@ function Task({ text, draggable, onDragStart, onDragEnd, projectKey,issue }) {
           'Content-Type': 'application/json' 
         }
       });
-
-
-      //onst response = await axios.get(`/projects/${projectKey}/issues/${issueId}`);
       
       setResponse(response.data);
       setIsLoading(false);
@@ -54,9 +51,13 @@ function Task({ text, draggable, onDragStart, onDragEnd, projectKey,issue }) {
   return (
     <div className="task" draggable={draggable} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className='typecolor'></div> {/* 단계의 값으로 설정 */}
-      <div className='issueTitle'> {response.result.issue.title} </div>
+      <div className='issueTitle'> {issue.title} </div>
+      <div className='issueType'> {issue.type} </div>
+      {/* <div className='issueAssigneeName'> 담당자: {issue.assignee.name} </div> */}
+      
+      {/* <div className='issueTitle'> {response.result.issue.title} </div>
       <div className='issueType'> {response.result.issue.type} </div>
-      <div className='issueAssigneeName'> 담당자: {response.result.issue.assignee.name} </div>
+      <div className='issueAssigneeName'> 담당자: {response.result.issue.assignee.name} </div> */}
       {/* <pre>{JSON.stringify(response.result.issue, null, 2)}</pre> */}
     </div>
   );

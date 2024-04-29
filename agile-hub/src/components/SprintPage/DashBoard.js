@@ -22,11 +22,8 @@ export default function DashBoard({ projectKey, sprintId }) {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Issues:', response.data); 
-      response.data.result.map((item, index) => {
-        console.log(`Index ${index}: `, item);
-      });
-      setIssues(Object.values(response.data));
+    //console.log('Issues:', response.data.result); 
+    setIssues(response.data.result);
     } catch (error) {
       console.error('Failed to fetch issues:', error);
     }
@@ -40,16 +37,9 @@ export default function DashBoard({ projectKey, sprintId }) {
             <h2>Preparing</h2> 
         </div>
         <PlusBox projectKey={projectKey} sprintId={sprintId} />
-        <Task projectKey={projectKey}/>
-        {/* <Task projectKey={projectKey}/> */}
-        {/* <div className="task">
-            <h3>Task 1</h3>
-            <p>This is a description for task 1.</p>
-        </div>
-        <div className="task">
-            <h3>Task 2</h3>
-            <p>This is a description for task 2.</p>
-        </div> */}
+        {issues.map((issue, index) => (
+        <Task key={index} issue={issue} projectKey={projectKey} />
+        ))}
     </div>
     <div className="column">
     <div className='textdiv'>
