@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettify": "prettier --write *.js **/*.js"
+    "prettify": "prettier --write .js **/.js"
   },
   "eslintConfig": {
     "extends": [
@@ -44,7 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://api.agilehub.store",
+  "proxy": "https://api.agilehub.store/",
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
