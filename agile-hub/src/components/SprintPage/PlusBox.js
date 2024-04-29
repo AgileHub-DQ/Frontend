@@ -11,7 +11,7 @@ function PlusBox({ projectKey, sprintId, handlePlusBoxClick }) {
 
   return (
     <div>
-        {addIssue && <Issue />} 
+        {addIssue && <Issue projectKey={projectKey} sprintId={sprintId} />} 
         <div className="plusbox" onClick={handleAddIssue}>
           <div className="rectangle33"></div>
           <div className="image62"></div>

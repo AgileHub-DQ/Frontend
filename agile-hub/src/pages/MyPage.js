@@ -61,13 +61,20 @@ function ProjectsList() {
   }; 
   
   const saveProject = async (project) => {
+    const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+
     console.log(project.key);
     try {
       // await axios.put(`/api/projects/${project.key}`, {
       await axios.put(`/projects/${project.key}`, {
         name: editedName,
         key: editedKey
+      }, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
       });
+
       setEditingProjectId(null); // 편집 모드 종료
       fetchProjects(); // 프로젝트 목록 갱신
     } catch (error) {

@@ -12,7 +12,7 @@ function CheckIssue() {
   const fetchIssues = async () => {
     try {
       if (projectKey) {
-        const response = await axios.get(`/api/projects/${projectKey}/issues`);
+        const response = await axios.get(`/projects/${projectKey}/issues`);
         console.log(response);
         setIssues(response.data.result); // 이슈 목록을 상태에 저장
       }
