@@ -71,6 +71,7 @@ function Issue({projectKey, sprintId}) {
           'Content-Type': 'multipart/form-data'
         }
       });
+
       console.log(response.data);
       setIssueTitle('');
       setType('STORY');
