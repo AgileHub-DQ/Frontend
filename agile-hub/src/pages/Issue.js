@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
 
 function Issue({projectKey, sprintId}) {
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState('');
   const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
   const [status, setStatus] = useState('DO');
@@ -20,9 +21,9 @@ function Issue({projectKey, sprintId}) {
 
   const location = useLocation(); 
   
-  const handleClose = () =>{
-    
-  }
+  // const handleClose = () => {
+  //   setIsModalOpen(false); // 모달 상태를 false로 변경하여 모달을 닫습니다.
+  // };
 
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
@@ -96,7 +97,7 @@ function Issue({projectKey, sprintId}) {
       setEndDate('');
       setAssigneeId('2');
       setParentId('1');
-      handleClose(); 
+      setIsModalOpen(false); 
       // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
     
     } catch (error) {
@@ -106,6 +107,7 @@ function Issue({projectKey, sprintId}) {
   };
 
 return (
+  isModalOpen && (
 <div className="modalContainer">
   <form className="form" onSubmit={handleSubmit}>
   <div className='form-row'>
@@ -205,11 +207,12 @@ return (
     /> */}
 </div>
   <div className='form-row-7'>
-    <button className="form-button" type="submit" onClick={handleClose}>이슈 생성</button>
+    <button className="form-button" type="submit">이슈 생성</button>
   </div> 
   </form>
   {/* <button onClick={() => navigateToCheck(projectKey)}>이슈 전체 조회</button> */}
 </div>
+)
 );
 }
 
