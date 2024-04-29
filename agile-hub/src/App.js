@@ -13,7 +13,6 @@ import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.
 import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 import IssueComment from './pages/IssueComment.js';
 import SingleIssue from './pages/SingleIssue.js'; 
-import Test1 from './components/SprintPage/Test1.js'
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
           <Route path="/createSprintModal" element={<CreateSprintModal />} />
           <Route path="/issueComment" element={<IssueComment />} />
           <Route path="/singleIssue" element={<SingleIssue />} />
-          <Route path="/test1" element={<Test1 />} />
         </Routes>
       </Router>
     </div>
