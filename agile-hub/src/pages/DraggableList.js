@@ -23,9 +23,9 @@ function DraggableList() {
 
       const updatedIssues = { todo: [], doing: [], complete: [] };
     response.data.result.forEach((item) => {
-      if (item.type === 'STORY') {
+      if (item.title === 'STORY1') {
         updatedIssues.todo.push(item);
-      } else if (item.type === 'TASK') {
+      } else if (item.title === 'STORY2') {
         updatedIssues.doing.push(item);
       }
     });
