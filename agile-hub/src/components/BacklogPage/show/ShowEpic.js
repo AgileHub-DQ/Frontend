@@ -5,7 +5,6 @@ import CreateStoryButton from '../button/CreateStoryButton.js';
 
 function ShowEpic({ epicInfo }) {
     // epicInfo가 없거나 비어 있는 경우를 처리합니다.
-    console.log(epicInfo.title);
     if (!epicInfo || !epicInfo.info1) {
         return (
             <div className='showEpic'>

@@ -4,17 +4,17 @@
 // import '../../../css/modal/EpicModal.css'; 
 
 // function EpicModal({ onClose, onSubmit }) {
-//     const [issueTitle, setIssueTitle] = useState('');
-//     const [type, setType] = useState('EPIC'); 
-//     const [status, setStatus] = useState('DO');
-//     const [content, setContent] = useState('');
-//     const [files, setFiles] = useState(''); 
-//     const [imageURLInput, setImageURLInput] = useState('');
-//     const [startDate, setStartDate] = useState('');
-//     const [endDate, setEndDate] = useState('');
-//     const [assigneeId, setAssigneeId] = useState('1');
-//     const [parentId, setParentId] = useState('1');
-//     const [color, setColor] = useState('#FF7041'); 
+    // const [issueTitle, setIssueTitle] = useState('');
+    // const [type, setType] = useState('EPIC'); 
+    // const [status, setStatus] = useState('DO');
+    // const [content, setContent] = useState('');
+    // const [files, setFiles] = useState(''); 
+    // const [imageURLInput, setImageURLInput] = useState('');
+    // const [startDate, setStartDate] = useState('');
+    // const [endDate, setEndDate] = useState('');
+    // const [assigneeId, setAssigneeId] = useState('1');
+    // const [parentId, setParentId] = useState('1');
+    // const [color, setColor] = useState('#FF7041'); 
 
 //     // const handleChange = (e) => {
 //     //     const { name, value } = e.target;
@@ -212,6 +212,18 @@ function EpicModal({ onClose, onSubmit }) {
         info2: ''
     });
 
+    const [issueTitle, setIssueTitle] = useState('');
+    const [type, setType] = useState('EPIC'); 
+    const [status, setStatus] = useState('DO');
+    const [content, setContent] = useState('');
+    const [files, setFiles] = useState(''); 
+    const [imageURLInput, setImageURLInput] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [assigneeId, setAssigneeId] = useState('1');
+    const [parentId, setParentId] = useState('1');
+    const [color, setColor] = useState('#FF7041'); 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEpicInfo(prevState => ({
@@ -220,11 +232,38 @@ function EpicModal({ onClose, onSubmit }) {
         }));
     };
 
+
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(epicInfo); // 입력된 값 전달
         onClose(); // 모달 닫기
     };
+
+    const handleTypeChange = (e) => {
+        const selectedType = e.target.value;
+        setType(selectedType);
+        // 선택한 값에 따라 색상 변경
+        switch (selectedType) {
+          case 'EPIC':
+            setColor('#FF7041');
+            break;
+          case 'STORY':
+            setColor('#00FF75');
+            break;
+          case 'TASK':
+            setColor('#FB55B3');
+            break;
+          default:
+            setColor('#95ADF6');
+        }
+      };
+
+    
+  const handleFileChange = (e) => {
+    setFiles(e.target.files); 
+  };
+  
 
     const handleCloseModal = () => {
         onClose(); // onClose prop으로 전달된 함수를 호출하여 모달 닫기
@@ -234,20 +273,100 @@ function EpicModal({ onClose, onSubmit }) {
         <div className="modal-content">
             <div className="modal-header">
                 <span className="close" onClick={handleCloseModal}>&times;</span>
-                <h2>에픽 생성 모달창</h2>
             </div>
             <div className="modal-body">
+
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="info1">에픽 이름: </label>
                         <input type="text" id="info1" name="info1" value={epicInfo.info1} onChange={handleChange} />
                     </div>
-                    <button type="submit">완료</button>
+                    
+                    <div className='form-row'>
+
+    <div className='colorBox' style={{backgroundColor: color}}></div>
+    <input
+        type="text"
+        className="form-input"
+        placeholder="Issue Title"
+        value={issueTitle}
+        onChange={(e) => setIssueTitle(e.target.value)}
+    />
+        <select
+      className="form-select-status"
+      value={status}
+      onChange={(e) => setStatus(e.target.value)}
+    >
+      <option value="DO">DO</option>
+      <option value="PROGRESS">PROGRESS</option>
+      <option value="DONE">DONE</option>
+    </select>
+</div>
+<div className='form-row-2'>
+    <p className="form-label">기간</p>
+    <input
+      type="date"
+      className="form-date"
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+    />
+    <p>~</p>
+    <input
+      type="date"
+      className="form-date"
+      value={endDate}
+      min={startDate}
+      onChange={(e) => setEndDate(e.target.value)}
+    />
+</div>
+    <p className="form-label-tag">단계</p>
+<div className='form-row-3'>
+    <div className='box1'>계획</div>
+    <div className='box2'>디자인</div>
+    <div className='box3'>개발</div>
+    <div className='box4'>테스트</div>
+    <div className='box5'>피드백</div>
+</div>
+<div className='form-row-4'>
+    <p className="form-label">타입</p>
+    <select
+      className="form-select-type"
+      value={type}
+      onChange={handleTypeChange}
+    >
+       <option value="EPIC">EPIC</option>
+
+    </select>
+</div>
+
+
+    <p className="form-label-d">설명</p>
+    <textarea
+      className="form-textarea"
+      placeholder="설명 입력"
+      value={content}
+      onChange={(e) => setContent(e.target.value)}
+    />
+<div className='form-row-5'>
+    <p className="form-label">이미지 파일</p>
+    <input
+      type="file"
+      className="form-file"
+      multiple
+      onChange={handleFileChange}
+    />
+
+</div>
+
+  <div className='form-row-7'>
+    <button className="form-button" type="submit">이슈 생성</button>
+  </div> 
                 </form>
+
             </div>
-            <div className="modal-footer">
+            {/* <div className="modal-footer">
                 <h3>footer</h3>
-            </div>
+            </div> */}
         </div>
     );
 }
