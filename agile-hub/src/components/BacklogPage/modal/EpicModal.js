@@ -204,13 +204,10 @@
 
 // EpicModal.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import '../../../css/modal/EpicModal.css'; 
 
 function EpicModal({ onClose, onSubmit }) {
-    const [epicInfo, setEpicInfo] = useState({
-        info1: '',
-        info2: ''
-    });
 
     const [issueTitle, setIssueTitle] = useState('');
     const [type, setType] = useState('EPIC'); 
@@ -224,20 +221,55 @@ function EpicModal({ onClose, onSubmit }) {
     const [parentId, setParentId] = useState('1');
     const [color, setColor] = useState('#FF7041'); 
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setEpicInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setEpicInfo(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+    // };
 
 
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSubmit(epicInfo); // 입력된 값 전달
+
+        const formData = new FormData();
+        formData.append('title', issueTitle);
+        formData.append('type', type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+        formData.append('status', status);
+        formData.append('content', content);
+        formData.append('startDate', startDate);
+        formData.append('endDate', endDate);
+        formData.append('assigneeId', assigneeId);
+        formData.append('parentId', parentId);
+        // formData.append('sprintId',sprintId);
+
+        if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+              formData.append('files', files[i]);
+            }
+          }
+        
+          try {
+            const projectKey = 'P1';
+            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+            const endpoint = `/projects/${projectKey}/issues`;
+            console.log("endpoint:"+endpoint);
+            const response = await axios.post(endpoint, formData, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+
+        console.log(response.data);
+        onSubmit(response.data); // 입력된 값 전달
         onClose(); // 모달 닫기
+    }catch (error) {
+        console.error('epic modal error!!', error);
+        console.log(error.response)
+      }
     };
 
     const handleTypeChange = (e) => {
@@ -277,10 +309,10 @@ function EpicModal({ onClose, onSubmit }) {
             <div className="modal-body">
 
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    {/* <div>
                         <label htmlFor="info1">에픽 이름: </label>
                         <input type="text" id="info1" name="info1" value={epicInfo.info1} onChange={handleChange} />
-                    </div>
+                    </div> */}
                     
                     <div className='form-row'>
 
