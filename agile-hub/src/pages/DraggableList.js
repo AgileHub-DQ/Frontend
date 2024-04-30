@@ -27,11 +27,12 @@ function DraggableList() {
         updatedIssues.todo.push(item);
       } else if (item.title === 'STORY2') {
         updatedIssues.doing.push(item);
+      }else if (item.title === 'STORY3') {
+        updatedIssues.complete.push(item);
       }
     });
 
     setIssues(updatedIssues);
-      //setIssues(response.data.result);
     } catch (error) {
       console.error('Failed to fetch issues:', error);
     }
@@ -66,6 +67,29 @@ function DraggableList() {
   };
   
 
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+    if (!destination) return;
+
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    ) {
+      return;
+    }
+
+    const start = issues[source.droppableId];
+    const finish = issues[destination.droppableId];
+    const [removed] = start.splice(source.index, 1);
+    finish.splice(destination.index, 0, removed);
+
+    setIssues({
+      ...issues,
+      [source.droppableId]: start,
+      [destination.droppableId]: finish
+    });
+  };
+  
   const onDragOver = (e) => {
     e.preventDefault(); // 드롭을 가능하게 하는 기본 이벤트 방지
   };
