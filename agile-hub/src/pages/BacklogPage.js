@@ -22,7 +22,7 @@ function BacklogPage() {
     <div className='backlog_container'>
       <Menubar/>
       <PlanSprint projectKey={projectKey}/>
-      <AddBacklog/>
+      <AddBacklog projectKey={projectKey}/>
     </div>
   );
 }

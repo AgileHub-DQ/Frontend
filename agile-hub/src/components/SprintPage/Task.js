@@ -20,7 +20,7 @@ function Task({ projectKey, issue }) {
           'Content-Type': 'application/json'
         }
       });
-      setResponse(response.data);  // 저장되는 부분 확인
+      setResponse(response.data); 
       setIsLoading(false);
     } catch (error) {
       console.error('API request failed:', error);
@@ -31,7 +31,7 @@ function Task({ projectKey, issue }) {
 
   const handleIssueTitleClick = () => {
     if (response) {
-      setStoryDetails(response);  // response.data에서 response로 변경
+      setStoryDetails(response);  
       setIsModalVisible(true);
       console.log(storyDetails);
     }
@@ -39,7 +39,7 @@ function Task({ projectKey, issue }) {
 
   useEffect(() => {
     fetchIssues();
-  }, [projectKey, issue.id]);  // useEffect 의존성 명시
+  }, [projectKey, issue.id]); 
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -54,6 +54,8 @@ function Task({ projectKey, issue }) {
       <div className='typecolor'></div>
       <div className='issueTitle' onClick={handleIssueTitleClick}>{issue.title}</div>
       <div className='issueType'>{issue.type}</div>
+      <div className='issueAssigneeName'> 담당자: {issue.assignee.name} </div>
+
       {isModalVisible && (
         <Modal
           isVisible={isModalVisible}

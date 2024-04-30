@@ -27,12 +27,12 @@ export default function DashBoard({ projectKey, sprintId }) {
       const newIssues = { todo: [], doing: [], complete: [] };
   
       response.data.result.forEach(issue => {
-        const type = issue.type; //status로 변경만 하면 됨
-        if (type === 'STORY') {
+        const status = issue.status;
+        if (status === 'DO') {
           newIssues.todo.push(issue);
-        } else if (type === 'progress') {
+        } else if (status === 'PROGRESS') {
           newIssues.doing.push(issue);
-        } else if (type === 'done') {
+        } else if (status === 'DONE') {
           newIssues.complete.push(issue);
         }
       });

@@ -99,6 +99,10 @@ function ProjectsList() {
     navigate(`/createSprintModal`, { state: { key: projectKey } }); 
   }
 
+  const navigateToBacklog = (projectKey) => { 
+    navigate(`/backlog`, { state: { key: projectKey } }); 
+  }
+
   return (
     <div className="container">
       <h1>프로젝트 목록</h1>
@@ -129,6 +133,7 @@ function ProjectsList() {
                 {/* <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
                 <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button> */}
                 <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
+                <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</button>
               </>
             )}
           </li>
