@@ -27,12 +27,12 @@ export default function DashBoard({ projectKey, sprintId }) {
       const newIssues = { todo: [], doing: [], complete: [] };
   
       response.data.result.forEach(issue => {
-        const type = issue.title; //status로 변경만 하면 됨
-        if (type === 'p2 issue') {
+        const type = issue.type; //status로 변경만 하면 됨
+        if (type === 'STORY') {
           newIssues.todo.push(issue);
-        } else if (type === 'Task') {
+        } else if (type === 'progress') {
           newIssues.doing.push(issue);
-        } else if (type === 'hello') {
+        } else if (type === 'done') {
           newIssues.complete.push(issue);
         }
       });
@@ -76,6 +76,7 @@ export default function DashBoard({ projectKey, sprintId }) {
         <div
           key={category}
           className="column"
+          style={{ overflowY: 'auto', maxHeight: '90vh' }}
           onDrop={e => onDrop(e, category)}
           onDragOver={onDragOver}
         >
