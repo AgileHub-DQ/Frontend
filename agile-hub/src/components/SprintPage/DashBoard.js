@@ -6,8 +6,9 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
-  const [issues, setIssues] = useState([]);
+  const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
   const [currentCategory, setCurrentCategory] = useState(null);
+
 
   useEffect(() => {
     fetchIssues();
@@ -15,7 +16,7 @@ export default function DashBoard({ projectKey, sprintId }) {
 
   const fetchIssues = async () => {
     try {
-      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg'; // 실제 액세스 토큰으로 대체해야 함
       const endpoint = `/projects/${projectKey}/stories`;
       const response = await axios.get(endpoint, {
         headers: {
@@ -23,36 +24,50 @@ export default function DashBoard({ projectKey, sprintId }) {
           'Content-Type': 'application/json'
         }
       });
-    //console.log('Issues:', response.data.result); 
-    setIssues(response.data.result);
+  
+      console.log(response.data.result);
+  
+      const newIssues = { todo: [], doing: [], complete: [] };
+  
+      response.data.result.forEach(issue => {
+        const type = issue.title; //status로 변경만 하면 됨
+        if (type === 'p2 issue') {
+          newIssues.todo.push(issue);
+        } else if (type === 'Task') {
+          newIssues.doing.push(issue);
+        } else if (type === 'hello') {
+          newIssues.complete.push(issue);
+        }
+      });
+  
+      setIssues(newIssues);
     } catch (error) {
       console.error('Failed to fetch issues:', error);
     }
   };
 
   const onDragStart = (e, item, category) => {
-    e.dataTransfer.setData("text/plain", item);
-    setCurrentCategory(category);
+    const itemData = JSON.stringify({ id: item.id, originalCategory: category });
+    e.dataTransfer.setData("text/plain", itemData);
   };
 
-  const onDrop = (e, category) => {
-    const item = e.dataTransfer.getData("text/plain");
-    
-    if (category === currentCategory) {
+  const onDrop = (e, newCategory) => {
+    const itemData = e.dataTransfer.getData("text/plain");
+    const { id, originalCategory } = JSON.parse(itemData);
+
+    if (newCategory === originalCategory) {
       return;
     }
-  
-    const newIssues = { ...issues };
-  
-    Object.keys(newIssues).forEach((key) => {
-      newIssues[key] = newIssues[key].filter((i) => i !== item);
-    });
-  
-    newIssues[category].push(item);
-  
+
+    const movedItem = issues[originalCategory].find(item => item.id === id);
+    const newIssues = {
+      ...issues,
+      [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
+      [newCategory]: [...issues[newCategory], movedItem],
+    };
+
     setIssues(newIssues);
   };
-  
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -60,46 +75,32 @@ export default function DashBoard({ projectKey, sprintId }) {
 
   return (
     <div className="kanban-board">
-    <div className="column">
-        <div className='textdiv' onDrop={(e) => onDrop(e, 'todo')} onDragOver={onDragOver}>
-            <div className="status-indicator preparing" ></div>
-            <h2>Preparing</h2> 
+      {Object.keys(issues).map(category => (
+        <div
+          key={category}
+          className="column"
+          onDrop={e => onDrop(e, category)}
+          onDragOver={onDragOver}
+        >
+          <div className='textdiv'>
+            <div className={`status-indicator ${category}`} ></div>
+            <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+          </div>
+          {issues[category].map((item) => (
+            <div 
+              key={item.id}
+              draggable
+              onDragStart={e => onDragStart(e, item, category)}
+              style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
+            >
+              {item.title}
+            </div>
+          ))}
         </div>
-        <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} />
-        {issues.map((issue, index) => (
-        <Task key={index} issue={issue} projectKey={projectKey} />
-        ))}
+      ))}
     </div>
-    <div className="column">
-    <div className='textdiv' onDrop={(e) => onDrop(e, 'doing')} onDragOver={onDragOver}>
-            <div className="status-indicator in-progress"></div>
-            <h2>In Progress</h2> 
-        </div>
-        <PlusBox/>
-        <div className="task">
-            <h3>Task 3</h3>
-            <p>This is a description for task 3.</p>
-        </div>
-        <div className="task">
-            <h3>Task 4</h3>
-            <p>This is a description for task 4.</p>
-        </div>
-    </div>
-    <div className="column">
-    <div className='textdiv' onDrop={(e) => onDrop(e, 'complete')} onDragOver={onDragOver}>
-            <div className="status-indicator complete"></div>
-            <h2>Complete</h2> 
-        </div>
-        <PlusBox/>
-        <div className="task">
-            <h3>Task 5</h3>
-            <p>This is a description for task 5.</p>
-        </div>
-        <div className="task">
-            <h3>Task 6</h3>
-            <p>This is a description for task 6.</p>
-        </div>
-    </div>
-</div>
-);
+  );
 }
+
+
+

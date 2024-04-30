@@ -45,26 +45,27 @@ function DraggableList() {
   };
   
 
-  const onDragStart = (e, item) => {
-    const itemData = JSON.stringify(item);
+  const onDragStart = (e, item, category) => {
+    const itemData = JSON.stringify({ id: item.id, originalCategory: category });
     e.dataTransfer.setData("text/plain", itemData);
   };
 
   const onDrop = (e, newCategory) => {
     const itemData = e.dataTransfer.getData("text/plain");
-    const item = JSON.parse(itemData);
-    
-    if (item.category === newCategory) {
+    const { id, originalCategory } = JSON.parse(itemData);
+
+    if (newCategory === originalCategory) {
       return;
     }
 
-    setIssues(prevIssues => {
-      return {
-        ...prevIssues,
-        [item.category]: prevIssues[item.category].filter(issue => issue.id !== item.id),
-        [newCategory]: [...prevIssues[newCategory], item]
-      };
-    });
+    const movedItem = issues[originalCategory].find(item => item.id === id);
+    const newIssues = {
+      ...issues,
+      [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
+      [newCategory]: [...issues[newCategory], movedItem],
+    };
+
+    setIssues(newIssues);
   };
 
   const onDragOver = (e) => {
@@ -72,20 +73,23 @@ function DraggableList() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <div className="kanban-board">
       {Object.keys(issues).map(category => (
         <div
           key={category}
-          style={{ width: '30%' }}
+          className="column"
           onDrop={e => onDrop(e, category)}
           onDragOver={onDragOver}
         >
-          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+          <div className='textdiv'>
+            <div className={`status-indicator ${category}`} ></div>
+            <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+          </div>
           {issues[category].map((item) => (
             <div 
               key={item.id}
-              draggable 
-              onDragStart={e => onDragStart(e, { ...item, category })}
+              draggable
+              onDragStart={e => onDragStart(e, item, category)}
               style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
             >
               {item.title}
