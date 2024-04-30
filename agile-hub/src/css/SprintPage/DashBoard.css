@@ -47,21 +47,45 @@
 }
 
 
-.Todo{
+/* .Todo{
     width: 15px;
     height: 15px;
     border-radius: 50%;
     margin-right: 5px; 
     background-color: #945EB4;
-}
+} */
 
-.complete {
+.status-indicator.todo {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #945EB4;
+  }
+  
+  .status-indicator.doing {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #E97373; 
+  }
+  
+  .status-indicator.complete {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     margin-right: 5px; 
     background-color: #0DC94D; 
-} 
+  }
+
+/* .complete {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #0DC94D; 
+}  */
 
 
 .textdiv {
@@ -70,13 +94,13 @@
 }
 
 
-.preparing {
+/* .preparing {
     width: 15px;
     height: 15px;
     border-radius: 50%;
     margin-right: 5px; 
     background-color: #E97373; 
-}
+} */
 
 
 
