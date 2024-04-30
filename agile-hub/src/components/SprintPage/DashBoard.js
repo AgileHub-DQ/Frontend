@@ -7,9 +7,6 @@ import Task from './Task.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
-  const [currentCategory, setCurrentCategory] = useState(null);
-
-
   useEffect(() => {
     fetchIssues();
   }, []);
@@ -86,16 +83,15 @@ export default function DashBoard({ projectKey, sprintId }) {
             <div className={`status-indicator ${category}`} ></div>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           </div>
+          <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} />
           {issues[category].map((item) => (
-            <div 
-              key={item.id}
-              draggable
-              onDragStart={e => onDragStart(e, item, category)}
-              style={{ margin: '8px', padding: '8px', backgroundColor: '#f9caca' }}
-            >
-              {item.title}
-            </div>
-          ))}
+          <div 
+          key={item.id}
+          draggable
+          onDragStart={e => onDragStart(e, item, category)} >
+        <Task key={item.id} issue={item} projectKey={projectKey} />
+                </div>
+        ))}
         </div>
       ))}
     </div>

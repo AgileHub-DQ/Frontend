@@ -85,6 +85,7 @@ function DraggableList() {
             <div className={`status-indicator ${category}`} ></div>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           </div>
+          
           {issues[category].map((item) => (
             <div 
               key={item.id}
