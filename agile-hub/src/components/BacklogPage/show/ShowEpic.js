@@ -4,6 +4,7 @@ import '../../../css/BacklogPage/ShowEpic.css';
 import CreateStoryButton from '../button/CreateStoryButton.js';
 
 function ShowEpic({ epicInfo }) {
+    console.log("showEpic");
     // epicInfo가 없거나 비어 있는 경우를 처리합니다.
     if (!epicInfo || !epicInfo.info1) {
         return (
