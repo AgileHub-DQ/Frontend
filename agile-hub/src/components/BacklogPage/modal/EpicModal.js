@@ -207,7 +207,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../../css/modal/EpicModal.css'; 
 
-function EpicModal({ onClose, onSubmit }) {
+function EpicModal({ onClose, onSubmit, projectKey }) {
+
+    console.log("EpicModal: "+projectKey);
 
     const [issueTitle, setIssueTitle] = useState('');
     const [type, setType] = useState('EPIC'); 
@@ -252,7 +254,7 @@ function EpicModal({ onClose, onSubmit }) {
           }
         
           try {
-            const projectKey = 'P1';
+            // const projectKey = 'P1';
             const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
             const endpoint = `/projects/${projectKey}/issues`;
             console.log("endpoint:"+endpoint);

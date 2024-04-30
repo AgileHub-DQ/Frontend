@@ -3,10 +3,11 @@ import '../../../css/BacklogPage/CreateEpicButton.css';
 import EpicModal from '../modal/EpicModal.js';
 import ShowEpic from '../show/ShowEpic.js';
 
-function CreateEpicButton() {
+function CreateEpicButton({projectKey}) {
     const [showModal, setShowModal] = useState(false);
     const [epicList, setEpicList] = useState([]);
 
+    console.log("CreateEpicButton: "+projectKey);
     const handleToggleModal = () => {
         setShowModal(!showModal);
     };
@@ -20,9 +21,9 @@ function CreateEpicButton() {
 
     return (
         <div className='addEpic'>
-            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} />}
+            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} projectKey={projectKey} />}
             {epicList.map((epicData, index) => (
-                <ShowEpic key={index} epicData={epicData} />
+                <ShowEpic key={index} epicData={epicData} projectKey={projectKey} />
             ))}
             <div className='epic_button_container'>
                 <button className="epic_button" onClick={handleToggleModal}>
