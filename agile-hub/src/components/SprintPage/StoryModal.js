@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import '../../css/modal/Modal.css'; // 모달 스타일을 위한 CSS 파일
 
 const Modal = ({ isVisible, details, onClose }) => {
   if (!isVisible) return null;
 
-  
-  return (
-    <div className="modal">
-      <button onClick={onClose}>Close</button>
-      <h2>Issue Details</h2>
-      {details && (
-        <div>
-          <p>Title: {details.result.issue.title}</p>
-          <p>Type: {details.type}</p>
-          {/* 추가적으로 필요한 다른 상세 정보를 출력합니다. */}
-        </div>
-      )}
-    </div>
-  );
+  return(
+<div className="modalContainer">
+
+<div>{details.result.issue.title}</div>
+
+
+</div>
+  )
 };
+
 
 export default Modal;
