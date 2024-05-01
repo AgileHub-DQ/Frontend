@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 // import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
@@ -16,6 +16,8 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState('1');
   const [color, setColor] = useState('#00FF75'); // 초기 색상
+  const [epicList, setEpicList] = useState([]);
+  const [storyList, setStoryList] = useState([]);
 
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
@@ -93,6 +95,78 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
     }
   };
 
+  const fetchIssues = async () => {
+    try {
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
+      const epicResponse = await axios.get(`/projects/${projectKey}/epics`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const storyResponse = await axios.get(`/projects/${projectKey}/stories`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      setEpicList(epicResponse.data.result); 
+      setStoryList(storyResponse.data.result);
+      
+      console.log("epicList: ", epicResponse.data.result);
+      console.log("storyList: ", storyResponse.data.result);
+    } catch (error) {
+      console.error('API request failed:', error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchIssues();
+  }, []);
+  
+  // const fetchIssues = async () => { // 에픽 목록 출력하기 위한 코드
+  //   try {
+  //     const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
+  //     const response = await axios.get(`/projects/${projectKey}/epics`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //         'Content-Type': 'application/json'
+  //       }
+  //     });
+  //     setEpicList(response.data.result); 
+      
+  //     console.log("sprint page epicList: "+epicList);
+  //   } catch (error) {
+  //     console.error('API request failed:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchIssues();
+  // }, []);
+
+  // const fetchIssues = async () => { //스토리 목록 출력하기 위한 코드
+  //   try {
+  //     const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
+  //     const response = await axios.get(`/projects/${projectKey}/stories`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //         'Content-Type': 'application/json'
+  //       }
+  //     });
+  //     setStoryList(response.data.result); 
+      
+  //     console.log("storyList: "+storyList);
+  //   } catch (error) {
+  //     console.error('API request failed:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchIssues();
+  // }, []);
+  
+
 return (
   isModalOpen && (
 <div className="modalContainer">
@@ -155,11 +229,16 @@ return (
 </div>
 <div className='form-row-10'>
     <p className="form-label">상위 항목</p>
-    <select
-      className="form-select-type">
-      {/* 여기에 에픽 목록 출력 */}
-      <option>EPIC1</option>
-      <option>EPIC2</option>
+    <select className="form-select-type">
+      {type === 'STORY' ? (
+        epicList.map(epic => (
+          <option key={epic.id}>{epic.title}</option>
+        ))
+      ) : (
+        storyList.map(story => (
+          <option key={story.id}>{story.title}</option>
+        ))
+      )}
     </select>
 </div>
 
@@ -180,9 +259,9 @@ return (
     />
     {/* 파일 삭제 코드 있어야 함 */}
 </div>
-<div className='form-row-6'>
+{/* <div className='form-row-6'>
   <button className='addUnderIssue'>하위 이슈 추가</button>
-</div>
+</div> */}
   <div className='form-row-7'>
     <button className="form-button" type="submit">이슈 생성</button>
   </div> 
