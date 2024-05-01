@@ -77,7 +77,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
 
       console.log(response.data);
       setIssueTitle('');
-      setType('STORY');
+      setType('');
       setStatus('DO');
       setContent('');
       setFiles('');
