@@ -14,6 +14,7 @@ import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
 import IssueComment from './pages/IssueComment.js';
 import SingleIssue from './pages/SingleIssue.js'; 
 import DraggableList from './pages/DraggableList.js';
+import SprintAllList from './components/SprintPage/SprintAllList.js';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/createSprintModal" element={<CreateSprintModal />} />
           <Route path="/issueComment" element={<IssueComment />} />
           <Route path="/singleIssue" element={<SingleIssue />} />
+          <Route path="/sprintAllList" element={<SprintAllList />} />
         </Routes>
       </Router>
     </div>

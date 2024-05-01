@@ -11,26 +11,6 @@ function ProjectsList() {
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate(); 
 
-  // const fetchProjects = async () => {
-  //   try {
-  //     // const response = await axios.get('/api/projects');
-  //     const response = await axios.get('/projects');
-  //     setProjects(response.data.result);
-  //   } catch (error) {
-  //     console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
-  //     setError('프로젝트 정보를 가져오는 데 실패했습니다.');
-  //   }
-  // };
-  // const fetchProjects = async () => {
-  //   try {
-  //     const response = await axios.get('/projects');
-  //     console.log("API Response:", response.data);  // API 응답 전체를 로그로 출력
-  //     setProjects(response.data.result || []);  // 안전하게 데이터 설정
-  //   } catch (error) {
-  //     console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
-  //     setError('프로젝트 정보를 가져오는 데 실패했습니다.');
-  //   }
-  // };
   const fetchProjects = async () => {
     try {
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
@@ -65,7 +45,6 @@ function ProjectsList() {
 
     console.log(project.key);
     try {
-      // await axios.put(`/api/projects/${project.key}`, {
       await axios.put(`/projects/${project.key}`, {
         name: editedName,
         key: editedKey
@@ -103,6 +82,10 @@ function ProjectsList() {
     navigate(`/backlog`, { state: { key: projectKey } }); 
   }
 
+  const navigateToSprintAllList = (projectKey) => { 
+    navigate(`/sprintAllList`, { state: { key: projectKey } }); 
+  }
+
   return (
     <div className="container">
       <h1>프로젝트 목록</h1>
@@ -134,6 +117,7 @@ function ProjectsList() {
                 <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button> */}
                 <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
                 <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</button>
+                <button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러가기</button>
               </>
             )}
           </li>
