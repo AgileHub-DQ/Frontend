@@ -14,7 +14,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
-  const [parentId, setParentId] = useState('1');
+  const [parentId, setParentId] = useState('');
   const [color, setColor] = useState('#00FF75'); // 초기 색상
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
@@ -84,7 +84,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
       setStartDate('');
       setEndDate('');
       setAssigneeId('2');
-      setParentId('1');
+      setParentId('');
       setIsModalOpen(false); 
       onIssuesUpdated();
       // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
@@ -229,17 +229,18 @@ return (
 </div>
 <div className='form-row-10'>
     <p className="form-label">상위 항목</p>
-    <select className="form-select-type">
-      {type === 'STORY' ? (
+    <select className="form-select-type" onChange={(e) => setParentId(e.target.value)}>
+  {type === 'STORY' ? (
         epicList.map(epic => (
-          <option key={epic.id}>{epic.title}</option>
+          <option key={epic.id} value={epic.id}>{epic.title}</option>
+
         ))
-      ) : (
-        storyList.map(story => (
-          <option key={story.id}>{story.title}</option>
-        ))
-      )}
-    </select>
+  ) : (
+    storyList.map(story => (
+      <option key={story.id} value={story.id}>{story.title}</option>
+    ))
+  )}
+</select>
 </div>
 
     <p className="form-label-d">설명</p>
