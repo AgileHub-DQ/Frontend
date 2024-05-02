@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../css/modal/Modal.css'; // 모달 스타일을 위한 CSS 파일
 
 const Modal = ({ isVisible, details, onClose, projectKey }) => {
+
   const issueId = details.result.issue.issueId;
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -15,7 +16,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('');
-  const [parentId, setParentId] = useState(details.result.parentIssue.parentId);
+  const [parentId, setParentId] = useState(details.result.parentIssue.issueId);
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
@@ -26,6 +27,8 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
   });
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]); 
+
+
 
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
@@ -94,6 +97,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       setAssigneeId('');
       setParentId('');
       setIsModalOpen(false); 
+      onClose();
       // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
     
     } catch (error) {
@@ -195,21 +199,21 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
     </select>
 </div>
 
-    <div className='form-row-10'>
-    <p className="form-label">상위 항목</p>
-    <select className="form-select-type" onChange={(e) => setParentId(e.target.value)}>
-  {type === 'STORY' ? (
-        epicList.map(epic => (
-          <option key={epic.id} value={epic.id}>{epic.title}</option>
-
-        ))
-  ) : (
-    storyList.map(story => (
-      <option key={story.id} value={story.id}>{story.title}</option>
-    ))
-  )}
-</select>
+<div className='form-row-10'>
+  <p className="form-label">상위 항목</p>
+  <select className="form-select-type" value={parentId} onChange={(e) => setParentId(e.target.value)}>
+    {type === 'STORY' ? (
+      epicList.map(epic => (
+        <option key={epic.id} value={epic.id}>{epic.title}</option>
+      ))
+    ) : (
+      storyList.map(story => (
+        <option key={story.id} value={story.id}>{story.title}</option>
+      ))
+    )}
+  </select>
 </div>
+
 
 
 
