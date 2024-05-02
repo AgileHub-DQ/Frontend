@@ -180,7 +180,7 @@ return (
         value={issueTitle}
         onChange={(e) => setIssueTitle(e.target.value)}
     />
-        <select
+      <select
       className="form-select-status"
       value={status}
       onChange={(e) => setStatus(e.target.value)}
@@ -263,6 +263,7 @@ return (
 {/* <div className='form-row-6'>
   <button className='addUnderIssue'>하위 이슈 추가</button>
 </div> */}
+
   <div className='form-row-7'>
     <button className="form-button" type="submit">이슈 생성</button>
   </div> 

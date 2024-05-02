@@ -1,41 +1,228 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import '../../css/modal/Modal.css'; // 모달 스타일을 위한 CSS 파일
 
-const Modal = ({ isVisible, details, onClose }) => {
+const Modal = ({ isVisible, details, onClose, projectKey }) => {
+
+  const [issueTitle, setIssueTitle] = useState('');
+  const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+  const [status, setStatus] = useState('DO');
+  const [content, setContent] = useState('');
+  const [files, setFiles] = useState(''); 
+  const [imageURLInput, setImageURLInput] = useState(''); // 입력된 이미지 URL을 임시 저장할 상태
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [assigneeId, setAssigneeId] = useState('1');
+  const [parentId, setParentId] = useState('');
+  const [color, setColor] = useState('#00FF75'); // 초기 색상
+  const [epicList, setEpicList] = useState([]);
+  const [storyList, setStoryList] = useState([]); 
+
+  const handleFileChange = (e) => {
+    setFiles(e.target.files); 
+  };
+
+  const handleTypeChange = (e) => {
+    const selectedType = e.target.value;
+    setType(selectedType);
+    // 선택한 값에 따라 색상 변경
+    switch (selectedType) {
+      case 'EPIC':
+        setColor('#FF7041');
+        break;
+      case 'STORY':
+        setColor('#00FF75');
+        break;
+      case 'TASK':
+        setColor('#FB55B3');
+        break;
+      default:
+        setColor('#95ADF6');
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', issueTitle);
+    formData.append('type', type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+    formData.append('status', status);
+    formData.append('content', content);
+    formData.append('startDate', startDate);
+    formData.append('endDate', endDate);
+    formData.append('assigneeId', assigneeId);
+    formData.append('parentId', parentId);
+    // formData.append('sprintId',sprintId);
+
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
+    }
+
+    try {
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const endpoint = `/projects/${projectKey}/issues`;
+      console.log("endpoint:"+endpoint);
+      const response = await axios.post(endpoint, formData, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+
+      console.log(response.data);
+      setIssueTitle('');
+      setType('');
+      setStatus('');
+      setContent('');
+      setFiles('');
+      setStartDate('');
+      setEndDate('');
+      setAssigneeId('');
+      setParentId('');
+      // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
+    
+    } catch (error) {
+      console.error('떼잉~~ 실패!!', error);
+      console.log(error.response)
+    }
+  };
+
+  const fetchIssues = async () => {
+    try {
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
+      const epicResponse = await axios.get(`/projects/${projectKey}/epics`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const storyResponse = await axios.get(`/projects/${projectKey}/stories`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      setEpicList(epicResponse.data.result); 
+      setStoryList(storyResponse.data.result);
+      
+      console.log("epicList: ", epicResponse.data.result);
+      console.log("storyList: ", storyResponse.data.result);
+    } catch (error) {
+      console.error('API request failed:', error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchIssues();
+  }, []);
+
 
   if (!isVisible) return null;
 
-
-
   return(
 <div className="modalContainer">
+<form className="form" onSubmit={handleSubmit}>
 <div className='폼로우'>
-    {/* <div className='colorBox' style={{backgroundColor: color}}></div> */}
-    {/* <input
+<div className='form-row'>
+      <div className='colorBox' style={{backgroundColor: color}}/>
+      <input
         type="text"
         className="form-input"
         placeholder="Issue Title"
-        value={issueTitle}
+        defaultValue={details.result.issue.title}
         onChange={(e) => setIssueTitle(e.target.value)}
-    /> */}
-    <div className='issueTitle'>{details.result.issue.title}</div>
-    <select className='issueStatus' defaultValue={details.result.issue.status}>
+    />
+    <select className='form-select-status' defaultValue={details.result.issue.status}>
         <option value="DO">DO</option>
         <option value="PROGRESS">PROGRESS</option>
         <option value="DONE">DONE</option>
     </select>
-    <div>{details.result.issue.type}</div>
-    <div>{details.result.issue.startDate}</div>
-    <div>{details.result.issue.endDate}</div>
-    <div>{details.result.issue.assignee.name}</div>
-    <div>...</div>
-    <button onClick={onClose}>닫기</button>
-    <button>수정하기</button>
+</div>
+<div className='form-row-2'>
+    <p className="form-label">기간</p>
+    <input
+      type="date"
+      className="form-date"
+      value={details.result.issue.startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+    />
+    <p>~</p>
+    <input
+      type="date"
+      className="form-date"
+      value={details.result.issue.endDate}
+      min={startDate}
+      onChange={(e) => setEndDate(e.target.value)}
+    />
 
 </div>
-{/* <div>{details.result.issue.title}</div> */}
+<p className="form-label-tag">단계</p>
+<div className='form-row-3'>
+    <div className='box1'>계획</div>
+    <div className='box2'>디자인</div>
+    <div className='box3'>개발</div>
+    <div className='box4'>테스트</div>
+    <div className='box5'>피드백</div>
+</div>
+<div className='form-row-4'>
+    <p className="form-label">타입</p>
+    <select
+      className="form-select-type"
+      defaultValue={details.result.issue.type}
+    >
+      <option value="STORY">STORY</option>
+      <option value="TASK">TASK</option>
+    </select>
+    {/* <div>{details.result.issue.type}</div> */}
+    </div>
+    <div className='form-row-10'>
+    <p className="form-label">상위 항목</p>
+    <select className="form-select-type" onChange={(e) => setParentId(e.target.value)}>
+  {type === 'STORY' ? (
+        epicList.map(epic => (
+          <option key={epic.id} value={epic.id}>{epic.title}</option>
+
+        ))
+  ) : (
+    storyList.map(story => (
+      <option key={story.id} value={story.id}>{story.title}</option>
+    ))
+  )}
+</select>
+</div>
 
 
+<p className="form-label-d">설명</p>
+    <textarea
+      className="form-textarea"
+      placeholder="설명 입력"
+      defaultValue={details.result.issue.content.text}
+      onChange={(e) => setContent(e.target.value)}
+    />
+
+<div className='form-row-5'>
+    <p className="form-label">이미지 파일</p>
+    <input
+      type="file"
+      className="form-file"
+      multiple
+      onChange={handleFileChange}
+    />
+    {/* 파일 삭제 코드 있어야 함 */}
+</div>
+
+    <div>{details.result.issue.assignee.name}</div>
+    <div>...</div>
+
+
+    <button onClick={onClose}>닫기</button>
+    <button>수정하기</button>
+</div>
+</form>
 </div>
   )
 };

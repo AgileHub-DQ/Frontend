@@ -61,6 +61,7 @@ function Task({ projectKey, issue }) {
           isVisible={isModalVisible}
           details={storyDetails}
           onClose={() => setIsModalVisible(false)}
+          projectKey={projectKey}
         />
       )}
     </div>
