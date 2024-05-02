@@ -3,18 +3,30 @@ import axios from 'axios';
 import '../../css/modal/Modal.css'; // 모달 스타일을 위한 CSS 파일
 
 const Modal = ({ isVisible, details, onClose, projectKey }) => {
+  const issueId = details.result.issue.issueId;
 
-  const [issueTitle, setIssueTitle] = useState('');
-  const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
-  const [status, setStatus] = useState('DO');
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
+  const [type, setType] = useState(details.result.issue.type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+  const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent] = useState('');
   const [files, setFiles] = useState(''); 
-  const [imageURLInput, setImageURLInput] = useState(''); // 입력된 이미지 URL을 임시 저장할 상태
+  const [imageURLInput, setImageURLInput] = useState(''); 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [assigneeId, setAssigneeId] = useState('1');
-  const [parentId, setParentId] = useState('');
-  const [color, setColor] = useState('#00FF75'); // 초기 색상
+  const [assigneeId, setAssigneeId] = useState('');
+  const [parentId, setParentId] = useState(details.result.parentIssue.parentId);
+  const [color, setColor] = useState(() => {
+    // 초기 색상 설정
+    switch (details.result.issue.type) {
+      case 'TASK':
+        return '#FB55B3'; // 빨간색
+      case 'STORY':
+        return '#00FF75'; // 초록색
+      default:
+        return '#95ADF6'; // 기본값
+    }
+  });
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]); 
 
@@ -41,7 +53,8 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -63,9 +76,9 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
     try {
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
-      const endpoint = `/projects/${projectKey}/issues`;
+      const endpoint = `/projects/${projectKey}/issues/${issueId}`;
       console.log("endpoint:"+endpoint);
-      const response = await axios.post(endpoint, formData, {
+      const response = await axios.put(endpoint, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data'
@@ -83,6 +96,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       setEndDate('');
       setAssigneeId('');
       setParentId('');
+      setIsModalOpen(false); 
       // 폼 입력을 마치면 폼은 초기화 되고 폼은 닫힘
     
     } catch (error) {
@@ -125,7 +139,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
   return(
 <div className="modalContainer">
-<form className="form" onSubmit={handleSubmit}>
+<form className="form" onSubmit={handleEditSubmit}>
 <div className='폼로우'>
 <div className='form-row'>
       <div className='colorBox' style={{backgroundColor: color}}/>
@@ -133,9 +147,11 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         type="text"
         className="form-input"
         placeholder="Issue Title"
-        defaultValue={details.result.issue.title}
+        value={issueTitle}
         onChange={(e) => setIssueTitle(e.target.value)}
+
     />
+  
     <select className='form-select-status' defaultValue={details.result.issue.status}>
         <option value="DO">DO</option>
         <option value="PROGRESS">PROGRESS</option>
@@ -168,17 +184,20 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
     <div className='box4'>테스트</div>
     <div className='box5'>피드백</div>
 </div>
+
 <div className='form-row-4'>
     <p className="form-label">타입</p>
+    {/* 에픽 목록 보여주는 코드로 변경되어야함 */}
     <select
       className="form-select-type"
-      defaultValue={details.result.issue.type}
+      value={type}
+      onChange={handleTypeChange}
     >
       <option value="STORY">STORY</option>
       <option value="TASK">TASK</option>
     </select>
-    {/* <div>{details.result.issue.type}</div> */}
-    </div>
+</div>
+
     <div className='form-row-10'>
     <p className="form-label">상위 항목</p>
     <select className="form-select-type" onChange={(e) => setParentId(e.target.value)}>
@@ -194,6 +213,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
   )}
 </select>
 </div>
+
 
 
 <p className="form-label-d">설명</p>
@@ -220,7 +240,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
 
     <button onClick={onClose}>닫기</button>
-    <button>수정하기</button>
+    <button onClick={handleEditSubmit}>수정하기</button>
 </div>
 </form>
 </div>

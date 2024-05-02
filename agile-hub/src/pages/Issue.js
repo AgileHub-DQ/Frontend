@@ -215,6 +215,7 @@ return (
     <div className='box4'>테스트</div>
     <div className='box5'>피드백</div>
 </div>
+
 <div className='form-row-4'>
     <p className="form-label">타입</p>
     {/* 에픽 목록 보여주는 코드로 변경되어야함 */}
