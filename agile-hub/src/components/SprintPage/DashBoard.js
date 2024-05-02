@@ -14,19 +14,39 @@ export default function DashBoard({ projectKey, sprintId }) {
   const fetchIssues = async () => {
     try {
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg'; // 실제 액세스 토큰으로 대체해야 함
-      const endpoint = `/projects/${projectKey}/stories`;
-      const response = await axios.get(endpoint, {
+      const endpoint1 = `/projects/${projectKey}/stories`;
+      const endpoint2 = `/projects/${projectKey}/tasks`;
+      const response1 = await axios.get(endpoint1, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const response2 = await axios.get(endpoint2, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
         }
       });
   
-      console.log(response.data.result);
+      console.log(response1.data.result);
+      console.log(response2.data.result);
   
       const newIssues = { todo: [], doing: [], complete: [] };
   
-      response.data.result.forEach(issue => {
+      response1.data.result.forEach(issue => {
+        const status = issue.status;
+        if (status === 'DO') {
+          newIssues.todo.push(issue);
+        } else if (status === 'PROGRESS') {
+          newIssues.doing.push(issue);
+        } else if (status === 'DONE') {
+          newIssues.complete.push(issue);
+        }
+      });
+
+      response2.data.result.forEach(issue => {
         const status = issue.status;
         if (status === 'DO') {
           newIssues.todo.push(issue);
