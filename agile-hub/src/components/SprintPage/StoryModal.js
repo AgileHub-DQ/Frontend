@@ -17,14 +17,11 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
   const [assigneeId, setAssigneeId] = useState('');
   const [parentId, setParentId] = useState(details.result.parentIssue.parentId);
   const [color, setColor] = useState(() => {
-    // 초기 색상 설정
     switch (details.result.issue.type) {
       case 'TASK':
-        return '#FB55B3'; // 빨간색
+        return '#FB55B3'; 
       case 'STORY':
-        return '#00FF75'; // 초록색
-      default:
-        return '#95ADF6'; // 기본값
+        return '#00FF75'; 
     }
   });
   const [epicList, setEpicList] = useState([]);
