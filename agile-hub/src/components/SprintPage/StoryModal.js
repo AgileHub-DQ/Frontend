@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/modal/Modal.css';
 
+
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   console.log(projectKey);
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
 
+  console.log(issueId);
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
@@ -133,6 +138,10 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
 
   if (!isVisible) return null;
 
+  const handleAddComment = () => {
+    navigate('/issueComment', { state: { projectKey: projectKey, issueId: issueId } });
+  };
+
   return (
     <div className="modalContainer">
       <form className="form" onSubmit={handleEditSubmit}>
@@ -230,6 +239,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
           <button onClick={onClose}>닫기</button>
           <button onClick={handleEditSubmit}>수정하기</button>
           <button onClick={handleDelete}>삭제하기</button>
+          <button onClick={handleAddComment}>댓글 달기</button>
         </div>
       </form>
     </div>
