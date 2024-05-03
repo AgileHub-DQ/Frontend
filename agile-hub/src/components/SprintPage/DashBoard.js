@@ -64,27 +64,57 @@ export default function DashBoard({ projectKey, sprintId }) {
   };
 
   const onDragStart = (e, item, category) => {
-    const itemData = JSON.stringify({ id: item.id, originalCategory: category });
+    const itemData = JSON.stringify({ id: item.id, title: item.title, type: item.type, status: item. status, originalCategory: category });
     e.dataTransfer.setData("text/plain", itemData);
+    console.log(itemData);
   };
 
-  const onDrop = async (e, newCategory) => {
-  e.preventDefault();
-    const itemData = e.dataTransfer.getData("text/plain"); // 드래그된 아이템의 데이터 -> 이동할 issueId와 기존 카테고리
-    const { id, originalCategory } = JSON.parse(itemData);
 
-    if (newCategory === originalCategory) { // 같은 카테고리 안에서는 아무것도 처리되지 않음 
+  const onDrop = async (e, newCategory) => {
+    e.preventDefault();
+    const itemData = e.dataTransfer.getData("text/plain");
+    const { id, title, type, status, originalCategory } = JSON.parse(itemData);
+  
+    if (newCategory === originalCategory) {
       return;
     }
+  
+    const movedItem = issues[originalCategory].find(item => item.id === id);
+  
+    try { // 해당 카테고리로 이동되면 데이터의 status 값 변경
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const movedItemEditStatus = await axios.put(`/projects/${projectKey}/issues/${id}`, { title: movedItem.title, type: movedItem.type, status: getStatusFromCategory(newCategory) }, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      const updatedStatus = status;
+  
+      const newIssues = {
+        ...issues,
+        [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
+        [newCategory]: [...issues[newCategory], { ...movedItem, status: updatedStatus }],
+      };
 
-    const movedItem = issues[originalCategory].find(item => item.id === id); // 원래 카테고리에서 해당 id의 아이템을 찾음
-    const newIssues = {
-      ...issues,
-      [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
-      [newCategory]: [...issues[newCategory], movedItem],
-    }; // 새로운 카테고리에 추가, 이동된 아이템을 제외한 나머지 아이템으로 상태를 업데이트
+      setIssues(newIssues);
+    } catch (error) {
+      console.error('Failed to update task status:', error);
+      setIssues(issues);
+    }
+  };
 
-    setIssues(newIssues); 
+  const getStatusFromCategory = (category) => {
+    switch (category) {
+      case 'todo':
+        return 'DO';
+      case 'doing':
+        return 'PROGRESS';
+      case 'complete':
+        return 'DONE';
+      default:
+        return 'DO';
+    }
   };
 
   const onDragOver = (e) => {
