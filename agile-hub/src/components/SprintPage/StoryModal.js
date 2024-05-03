@@ -23,6 +23,11 @@ console.log(issueId);
   const [content, setContent] = useState(details.result.issue.content.text);
   const [files, setFiles] = useState('');
   const [imageURLInput, setImageURLInput] = useState('');
+//   const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
+// const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
+
+  // const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
+  // const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
   const [startDate, setStartDate] = useState(details.result.issue.startDate);
   const [endDate, setEndDate] = useState(details.result.issue.endDate);
   const [assigneeId, setAssigneeId] = useState('1');
@@ -38,6 +43,7 @@ console.log(issueId);
 
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
+
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -162,14 +168,14 @@ console.log(issueId);
             <input
               type="date"
               className="form-date"
-              value={startDate}
+              defaultValue={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
             <p>~</p>
             <input
               type="date"
               className="form-date"
-              value={endDate}
+              defaultValue={endDate}
               min={startDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
@@ -186,7 +192,7 @@ console.log(issueId);
             <p className="form-label">타입</p>
             <select
               className="form-select-type"
-              value={type}
+              defaultValue={type}
               // onChange={handleTypeChange}
             >
               {/* <option value="STORY">STORY</option>
