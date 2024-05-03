@@ -17,7 +17,8 @@ console.log(issueId);
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
-  const [type, setType] = useState(details.result.issue.type);
+  const type = details.result.issue.type;
+  //const [type, setType] = useState(details.result.issue.type);
   const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent] = useState(details.result.issue.content.text);
   const [files, setFiles] = useState('');
@@ -43,23 +44,23 @@ console.log(issueId);
     setImageURL(''); 
   };
 
-  const handleTypeChange = (e) => {
-    const selectedType = e.target.value;
-    setType(selectedType);
-    switch (selectedType) {
-      case 'EPIC':
-        setColor('#FF7041');
-        break;
-      case 'STORY':
-        setColor('#00FF75');
-        break;
-      case 'TASK':
-        setColor('#FB55B3');
-        break;
-      default:
-        setColor('#95ADF6');
-    }
-  };
+  // const handleTypeChange = (e) => {
+  //   const selectedType = e.target.value;
+  //   setType(selectedType);
+  //   switch (selectedType) {
+  //     case 'EPIC':
+  //       setColor('#FF7041');
+  //       break;
+  //     case 'STORY':
+  //       setColor('#00FF75');
+  //       break;
+  //     case 'TASK':
+  //       setColor('#FB55B3');
+  //       break;
+  //     default:
+  //       setColor('#95ADF6');
+  //   }
+  // };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +90,7 @@ console.log(issueId);
         }
       });
       setIssueTitle('');
-      setType('');
+      //setType('');
       setStatus('');
       setContent('');
       setFiles('');
@@ -186,10 +187,11 @@ console.log(issueId);
             <select
               className="form-select-type"
               value={type}
-              onChange={handleTypeChange}
+              // onChange={handleTypeChange}
             >
-              <option value="STORY">STORY</option>
-              <option value="TASK">TASK</option>
+              {/* <option value="STORY">STORY</option>
+              <option value="TASK">TASK</option> */}
+              <option value={type}>{type}</option>
             </select>
           </div>
           <div className='form-row-10'>
