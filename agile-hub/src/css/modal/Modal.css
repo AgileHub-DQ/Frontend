@@ -253,6 +253,10 @@
 }
 
 .imageContainer img {
-    width: 50%; /* 이미지의 최대 너비를 부모 요소의 100%로 설정하여 부모 요소에 맞춤 */
-    
+    width: 50%;
   }
+
+.form-assignee{
+    margin-left: 20px;
+    white-space: nowrap;
+}
