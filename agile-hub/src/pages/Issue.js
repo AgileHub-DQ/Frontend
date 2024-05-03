@@ -13,7 +13,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
-  const [parentId, setParentId] = useState(null);
+  const [parentId, setParentId] = useState('');
   const [color, setColor] = useState('#00FF75'); 
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
@@ -75,6 +75,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
 
 
       console.log(response.data);
+      alert("이슈가 생성되었습니다.");
       setIssueTitle('');
       setType('');
       setStatus('DO');
