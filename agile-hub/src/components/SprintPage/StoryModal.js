@@ -25,23 +25,7 @@ console.log(details.result.issue.endDate);
   const [files, setFiles] = useState('');
   const [imageURLInput, setImageURLInput] = useState('');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
-const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
-
-  // const [startDate, setStartDate] = useState(details.result.issue.startDate); // 기본값으로 빈 문자열을 사용합니다.
-  // const [endDate, setEndDate] = useState(details.result.issue.endDate); // 기본값으로 빈 문자열을 사용합니다.
-
-  // const [startDate, setStartDate] = useState('');
-  // const [endDate, setEndDate] = useState('');
-
-//   const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
-// const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
-//   const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
-// const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
-
-  // const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
-  // const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
-  // const [startDate, setStartDate] = useState(details.result.issue.startDate);
-  // const [endDate, setEndDate] = useState(details.result.issue.endDate);
+  const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : '');
   const [color, setColor] = useState(() => {
