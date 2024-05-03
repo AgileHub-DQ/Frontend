@@ -18,7 +18,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
   const type = details.result.issue.type;
-  //const [type, setType] = useState(details.result.issue.type);
   const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent] = useState(details.result.issue.content.text);
   const [files, setFiles] = useState('');
@@ -44,24 +43,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
     setFiles(e.target.files);
     setImageURL(''); 
   };
-
-  // const handleTypeChange = (e) => {
-  //   const selectedType = e.target.value;
-  //   setType(selectedType);
-  //   switch (selectedType) {
-  //     case 'EPIC':
-  //       setColor('#FF7041');
-  //       break;
-  //     case 'STORY':
-  //       setColor('#00FF75');
-  //       break;
-  //     case 'TASK':
-  //       setColor('#FB55B3');
-  //       break;
-  //     default:
-  //       setColor('#95ADF6');
-  //   }
-  // };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
@@ -189,10 +170,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
             <select
               className="form-select-type"
               defaultValue={type}
-              // onChange={handleTypeChange}
             >
-              {/* <option value="STORY">STORY</option>
-              <option value="TASK">TASK</option> */}
               <option value={type}>{type}</option>
             </select>
           </div>
