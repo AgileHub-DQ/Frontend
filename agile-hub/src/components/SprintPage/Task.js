@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
 
-function Task({ projectKey, issue, fetchIssues }) {
+function Task({ projectKey, issue, onEdit }) {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -67,7 +67,7 @@ function Task({ projectKey, issue, fetchIssues }) {
           details={storyDetails}
           onClose={() => setIsModalVisible(false)}
           projectKey={projectKey}
-          onEdit={fetchIssues}
+          onEdit={onEdit}
         />
       )}
     </div>

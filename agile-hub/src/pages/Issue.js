@@ -1,24 +1,22 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-// import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Issue.css';
 
 function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState('');
-  const [type, setType] = useState('STORY'); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+  const [type, setType] = useState('STORY'); 
   const [status, setStatus] = useState('DO');
   const [content, setContent] = useState('');
   const [files, setFiles] = useState(''); 
-  const [imageURLInput, setImageURLInput] = useState(''); // 입력된 이미지 URL을 임시 저장할 상태
+  const [imageURLInput, setImageURLInput] = useState(''); 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState(null);
-  const [color, setColor] = useState('#00FF75'); // 초기 색상
+  const [color, setColor] = useState('#00FF75'); 
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
-  const [resizedImage, setResizedImage] = useState(null);
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -49,7 +47,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
 
     const formData = new FormData();
     formData.append('title', issueTitle);
-    formData.append('type', type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+    formData.append('type', type); 
     formData.append('status', status);
     formData.append('content', content);
     formData.append('startDate', startDate);
@@ -57,14 +55,6 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
     formData.append('assigneeId', assigneeId);
     formData.append('parentId', parentId);
     formData.append('sprintId',sprintId);
-
-    // if (files.length > 0) {
-    //   for (let i = 0; i < files.length; i++) {
-    //     resizeImage(files[i], function(resizedBlob){
-    //       formData.append('files', files[i]);
-    //     });
-    //   }
-    // }
 
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
@@ -104,7 +94,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
     }
   };
 
-  const fetchIssues = async () => {
+  const fetchIssues = async () => { // 상위항목 선택박스에서 에픽 목록, 스토리 목록 출력하기 위함
     try {
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
       const epicResponse = await axios.get(`/projects/${projectKey}/epics`, {
@@ -122,8 +112,6 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
       setEpicList(epicResponse.data.result); 
       setStoryList(storyResponse.data.result);
       
-      console.log("epicList: ", epicResponse.data.result);
-      console.log("storyList: ", storyResponse.data.result);
     } catch (error) {
       console.error('API request failed:', error);
     }
@@ -185,7 +173,6 @@ return (
 
 <div className='form-row-4'>
     <p className="form-label">타입</p>
-    {/* 에픽 목록 보여주는 코드로 변경되어야함 */}
     <select
       className="form-select-type"
       value={type}
@@ -228,9 +215,6 @@ return (
     />
     {/* 파일 삭제 코드 있어야 함 */}
 </div>
-{/* <div className='form-row-6'>
-  <button className='addUnderIssue'>하위 이슈 추가</button>
-</div> */}
 
   <div className='form-row-7'>
     <button className="form-button" type="submit">이슈 생성</button>

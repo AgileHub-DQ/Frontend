@@ -6,14 +6,15 @@ import ShowImage from './ShowImage';
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
-console.log(issueId);
+  console.log("선택한 이슈 아이디: "+issueId);
+  console.log("선택한 이슈의 데이터: "+details.result.issue);
 
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
     } else {
-      setImageURL(''); // 이미지 URL이 없는 경우 빈 문자열로 설정
+      setImageURL(''); 
     }
   }, [details]);
 
@@ -27,7 +28,7 @@ console.log(issueId);
   const [startDate, setStartDate] = useState(details.result.issue.startDate);
   const [endDate, setEndDate] = useState(details.result.issue.endDate);
   const [assigneeId, setAssigneeId] = useState('1');
-  const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : null);
+  const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : '');
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
@@ -100,8 +101,8 @@ console.log(issueId);
       setEndDate('');
       setAssigneeId('');
       setParentId('');
-      setIsModalOpen(false);
       onEdit();
+      setIsModalOpen(false);
       onClose();
     } catch (error) {
       console.error('Failed to edit:', error);
