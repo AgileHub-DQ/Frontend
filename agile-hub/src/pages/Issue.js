@@ -18,6 +18,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [color, setColor] = useState('#00FF75'); // 초기 색상
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
+  const [resizedImage, setResizedImage] = useState(null);
 
   // function resizeImage(file, callback) {
   //   var reader = new FileReader();
@@ -41,6 +42,27 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const handleFileChange = (e) => {
     setFiles(e.target.files);
   };
+
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (!file) return;
+
+  //   const reader = new FileReader();
+  //   reader.onload = (e) => {
+  //     const img = new Image();
+  //     img.onload = () => {
+  //       const canvas = document.createElement('canvas');
+  //       const ctx = canvas.getContext('2d');
+  //       canvas.width = 50;
+  //       canvas.height = 50;
+  //       ctx.drawImage(img, 0, 0, 50, 50);
+  //       const resizedDataURL = canvas.toDataURL('image/jpeg');
+  //       setResizedImage(resizedDataURL);
+  //     };
+  //     img.src = e.target.result;
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
   const handleTypeChange = (e) => {
     const selectedType = e.target.value;
@@ -279,7 +301,7 @@ return (
       onChange={(e) => setContent(e.target.value)}
     />
 <div className='form-row-5'>
-    <p className="form-label">이미지 파일</p>
+<p className="form-label">이미지 파일</p>
     <input
       type="file"
       className="form-file"

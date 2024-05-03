@@ -6,6 +6,16 @@ import ShowImage from './ShowImage';
 const Modal = ({ isVisible, details, onClose, projectKey }) => {
   console.log(details.result.issue.content);
   const [imageURL, setImageURL] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowImage = () => {
+    setShowModal(true);
+  };
+
+  // 모달 닫기
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
@@ -249,11 +259,29 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       multiple
       onChange={handleFileChange}
     />
+ {imageURL && (
+        <button onClick={handleShowImage}>show image</button>
+      )}
 
+{showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCloseModal}>&times;</span>
+            <img src={imageURL} alt="Uploaded Image" />
+          </div>
+        </div>
+      )}
 
-{imageURL && (
-  <button onClick={ShowImage}>show image</button>
-)}
+<div>
+      {/* <input type="file" onChange={handleFileChange} /> */}
+      {/* {imageURL && (
+        <img src={imageURL} alt="Resized Image" />
+      )} */}
+    </div>
+
+      {/* {imageURL && (
+        <img src={imageURL} alt="Resized File" />
+      )} */}
 
 {/* 
     {imageURL && (
