@@ -14,7 +14,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('1');
-  const [parentId, setParentId] = useState('');
+  const [parentId, setParentId] = useState(null);
   const [color, setColor] = useState('#00FF75'); // 초기 색상
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);

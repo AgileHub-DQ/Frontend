@@ -110,7 +110,7 @@ export default function DashBoard({ projectKey, sprintId }) {
           key={item.id}
           draggable
           onDragStart={e => onDragStart(e, item, category)} >
-        <Task key={item.id} issue={item} projectKey={projectKey} />
+        <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} />
                 </div>
         ))}
         </div>

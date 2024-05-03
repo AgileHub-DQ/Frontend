@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../css/modal/Modal.css';
 import ShowImage from './ShowImage';
 
-const Modal = ({ isVisible, details, onClose, projectKey }) => {
+const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
 console.log(issueId);
@@ -88,6 +88,7 @@ console.log(issueId);
           'Content-Type': 'multipart/form-data'
         }
       });
+
       setIssueTitle('');
       setType('');
       setStatus('');
@@ -98,6 +99,7 @@ console.log(issueId);
       setAssigneeId('');
       setParentId('');
       setIsModalOpen(false);
+      onEdit();
       onClose();
     } catch (error) {
       console.error('Failed to edit:', error);
