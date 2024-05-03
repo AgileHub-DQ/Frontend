@@ -7,7 +7,6 @@ import Task from './Task.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
-
   useEffect(() => {
     fetchIssues();
   }, []);
@@ -91,11 +90,6 @@ export default function DashBoard({ projectKey, sprintId }) {
     e.preventDefault();
   };
 
-  const onEdit = () => {
-    // 데이터 다시 불러오기
-    fetchIssues();
-  };
-
   return (
     <div className="kanban-board">
       {Object.keys(issues).map(category => (
@@ -116,14 +110,11 @@ export default function DashBoard({ projectKey, sprintId }) {
           key={item.id}
           draggable
           onDragStart={e => onDragStart(e, item, category)} >
-        <Task key={item.id} issue={item} projectKey={projectKey} onEdit={onEdit} />
-        </div>
+        <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} />
+                </div>
         ))}
         </div>
       ))}
     </div>
   );
 }
-
-
-

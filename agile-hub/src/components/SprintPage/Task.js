@@ -3,12 +3,17 @@ import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
 
-function Task({ projectKey, issue, onEdit }) {
+function Task({ projectKey, issue, fetchIssues  }) {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [storyDetails, setStoryDetails] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onEdit = () => {
+    fetchIssues2();
+    fetchIssues();
+  }
 
   const fetchIssues2 = async () => {
     try {
@@ -36,15 +41,12 @@ function Task({ projectKey, issue, onEdit }) {
     }
   };
 
-  // useEffect(() => {
-  //   fetchIssues();
-  // }, [projectKey, issue.id]); 
-
   useEffect(() => {
     if (projectKey && issue.id) {
       fetchIssues2();
     }
   }, [projectKey, issue.id]);
+
 
   if (isLoading) {
     return <div>Loading...</div>;

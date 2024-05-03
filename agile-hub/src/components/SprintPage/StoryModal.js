@@ -3,18 +3,15 @@ import axios from 'axios';
 import '../../css/modal/Modal.css';
 import ShowImage from './ShowImage';
 
-const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
+const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
-  console.log("선택한 이슈 아이디: "+issueId);
-  console.log("선택한 이슈의 데이터: "+details.result.issue);
+console.log(issueId);
 
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
-    } else {
-      setImageURL(''); 
     }
   }, [details]);
 
@@ -91,7 +88,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
           'Content-Type': 'multipart/form-data'
         }
       });
-
       setIssueTitle('');
       setType('');
       setStatus('');
@@ -101,8 +97,8 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
       setEndDate('');
       setAssigneeId('');
       setParentId('');
-      onEdit();
       setIsModalOpen(false);
+      onEdit();
       onClose();
     } catch (error) {
       console.error('Failed to edit:', error);
