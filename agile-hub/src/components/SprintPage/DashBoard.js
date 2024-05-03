@@ -68,22 +68,23 @@ export default function DashBoard({ projectKey, sprintId }) {
     e.dataTransfer.setData("text/plain", itemData);
   };
 
-  const onDrop = (e, newCategory) => {
-    const itemData = e.dataTransfer.getData("text/plain");
+  const onDrop = async (e, newCategory) => {
+  e.preventDefault();
+    const itemData = e.dataTransfer.getData("text/plain"); // 드래그된 아이템의 데이터 -> 이동할 issueId와 기존 카테고리
     const { id, originalCategory } = JSON.parse(itemData);
 
-    if (newCategory === originalCategory) {
+    if (newCategory === originalCategory) { // 같은 카테고리 안에서는 아무것도 처리되지 않음 
       return;
     }
 
-    const movedItem = issues[originalCategory].find(item => item.id === id);
+    const movedItem = issues[originalCategory].find(item => item.id === id); // 원래 카테고리에서 해당 id의 아이템을 찾음
     const newIssues = {
       ...issues,
       [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
       [newCategory]: [...issues[newCategory], movedItem],
-    };
+    }; // 새로운 카테고리에 추가, 이동된 아이템을 제외한 나머지 아이템으로 상태를 업데이트
 
-    setIssues(newIssues);
+    setIssues(newIssues); 
   };
 
   const onDragOver = (e) => {
