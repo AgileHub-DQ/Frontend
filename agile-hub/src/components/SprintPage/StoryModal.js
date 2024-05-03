@@ -7,7 +7,8 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
 console.log(issueId);
-
+console.log(details.result.issue.startDate);
+console.log(details.result.issue.endDate);
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
@@ -23,13 +24,24 @@ console.log(issueId);
   const [content, setContent] = useState(details.result.issue.content.text);
   const [files, setFiles] = useState('');
   const [imageURLInput, setImageURLInput] = useState('');
+  const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
+const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
+
+  // const [startDate, setStartDate] = useState(details.result.issue.startDate); // 기본값으로 빈 문자열을 사용합니다.
+  // const [endDate, setEndDate] = useState(details.result.issue.endDate); // 기본값으로 빈 문자열을 사용합니다.
+
+  // const [startDate, setStartDate] = useState('');
+  // const [endDate, setEndDate] = useState('');
+
+//   const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
+// const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
 //   const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
 // const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
 
   // const [startDate, setStartDate] = useState(details.result.issue.startDate ? details.result.issue.startDate : '');
   // const [endDate, setEndDate] = useState(details.result.issue.endDate ? details.result.issue.endDate : '');
-  const [startDate, setStartDate] = useState(details.result.issue.startDate);
-  const [endDate, setEndDate] = useState(details.result.issue.endDate);
+  // const [startDate, setStartDate] = useState(details.result.issue.startDate);
+  // const [endDate, setEndDate] = useState(details.result.issue.endDate);
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : '');
   const [color, setColor] = useState(() => {
@@ -166,19 +178,19 @@ console.log(issueId);
           <div className='form-row-2'>
             <p className="form-label">기간</p>
             <input
-              type="date"
-              className="form-date"
-              defaultValue={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+  type="date"
+  className="form-date"
+  value={startDate}
+  onChange={(e) => setStartDate(e.target.value)}
+/>
             <p>~</p>
             <input
-              type="date"
-              className="form-date"
-              defaultValue={endDate}
-              min={startDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+  type="date"
+  className="form-date"
+  value={endDate}
+  min={startDate}
+  onChange={(e) => setEndDate(e.target.value)}
+/>
           </div>
           <p className="form-label-tag">단계</p>
           <div className='form-row-3'>
