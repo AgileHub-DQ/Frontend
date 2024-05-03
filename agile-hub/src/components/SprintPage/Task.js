@@ -33,7 +33,6 @@ function Task({ projectKey, issue }) {
     if (response) {
       setStoryDetails(response);  
       setIsModalVisible(true);
-      console.log(storyDetails);
     }
   };
 

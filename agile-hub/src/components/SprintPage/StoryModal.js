@@ -1,10 +1,23 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-import '../../css/modal/Modal.css'; // 모달 스타일을 위한 CSS 파일
+import '../../css/modal/Modal.css'; 
+import ShowImage from './ShowImage';
 
 const Modal = ({ isVisible, details, onClose, projectKey }) => {
+  console.log(details.result.issue.content);
+  const [imageURL, setImageURL] = useState('');
 
+  useEffect(() => {
+    if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
+      setImageURL(details.result.issue.content.imagesURLs[0]);
+      // console.log("imageURL:", details.result.issue.content.imagesURLs[0]);
+      // console.log("imageURL2:", imageURL);
+    }
+  }, [details]);
+
+  // console.log(details);
   const issueId = details.result.issue.issueId;
+  console.log("클릭한 아이디는: "+issueId);
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
@@ -16,7 +29,8 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('');
-  const [parentId, setParentId] = useState(details.result.parentIssue.issueId);
+  const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : null);
+
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
@@ -25,6 +39,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         return '#00FF75'; 
     }
   });
+
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]); 
 
@@ -77,16 +92,14 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
     try {
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
       const endpoint = `/projects/${projectKey}/issues/${issueId}`;
-      console.log("endpoint:"+endpoint);
+      // console.log("endpoint:"+endpoint);
       const response = await axios.put(endpoint, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'multipart/form-data'
         }
       });
-
-
-      console.log(response.data);
+      // console.log(response.data);
       setIssueTitle('');
       setType('');
       setStatus('');
@@ -124,8 +137,8 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       setEpicList(epicResponse.data.result); 
       setStoryList(storyResponse.data.result);
       
-      console.log("epicList: ", epicResponse.data.result);
-      console.log("storyList: ", storyResponse.data.result);
+      // console.log("epicList: ", epicResponse.data.result);
+      // console.log("storyList: ", storyResponse.data.result);
     } catch (error) {
       console.error('API request failed:', error);
     }
@@ -137,6 +150,9 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
 
   if (!isVisible) return null;
+
+
+
 
   return(
 <div className="modalContainer">
@@ -233,6 +249,19 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       multiple
       onChange={handleFileChange}
     />
+
+
+{imageURL && (
+  <button onClick={ShowImage}>show image</button>
+)}
+
+{/* 
+    {imageURL && (
+          <div className="image-container">
+            <button onClick={showImage}>show image </button>
+            <img src={imageURL} alt="Uploaded File" />
+          </div>
+        )} */}
     {/* 파일 삭제 코드 있어야 함 */}
 </div>
 

@@ -19,8 +19,27 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
 
+  // function resizeImage(file, callback) {
+  //   var reader = new FileReader();
+  //   reader.onload = function(event) {
+  //     var img = new Image();
+  //     img.onload = function() {
+  //       var canvas = document.createElement('canvas');
+  //       var ctx = canvas.getContext('2d');
+  //       canvas.width = 100;
+  //       canvas.height = 100;
+  //       ctx.drawImage(img, 0, 0, 100, 100);
+  //       canvas.toBlob(function(blob) {
+  //         callback(blob);
+  //       });
+  //     };
+  //     img.src = event.target.result;
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
+
   const handleFileChange = (e) => {
-    setFiles(e.target.files); 
+    setFiles(e.target.files);
   };
 
   const handleTypeChange = (e) => {
@@ -57,9 +76,17 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
     formData.append('parentId', parentId);
     formData.append('sprintId',sprintId);
 
+    // if (files.length > 0) {
+    //   for (let i = 0; i < files.length; i++) {
+    //     resizeImage(files[i], function(resizedBlob){
+    //       formData.append('files', files[i]);
+    //     });
+    //   }
+    // }
+
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-        formData.append('files', files[i]);
+          formData.append('files', files[i]);
       }
     }
 
