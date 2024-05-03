@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/modal/Modal.css';
-import ShowImage from './ShowImage';
 
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
-console.log(issueId);
-console.log(details.result.issue.startDate);
-console.log(details.result.issue.endDate);
+  console.log(issueId);
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
@@ -16,6 +13,8 @@ console.log(details.result.issue.endDate);
     }
   }, [details]);
 
+  console.log(details.result.issue.content.imagesURLs[0]);
+  
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
   const type = details.result.issue.type;
@@ -101,6 +100,7 @@ console.log(details.result.issue.endDate);
       setAssigneeId('');
       setParentId('');
       setIsModalOpen(false);
+      alert("수정되었습니다.");
       onEdit();
       onClose();
     } catch (error) {
