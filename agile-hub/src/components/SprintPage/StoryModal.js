@@ -3,9 +3,9 @@ import axios from 'axios';
 import '../../css/modal/Modal.css';
 
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
+  console.log(projectKey);
   const issueId = details.result.issue.issueId;
   const [imageURL, setImageURL] = useState('');
-  console.log(issueId);
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
@@ -13,13 +13,12 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
     }
   }, [details]);
 
-  console.log(details.result.issue.content.imagesURLs[0]);
-  
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
   const type = details.result.issue.type;
   const [status, setStatus] = useState(details.result.issue.status);
-  const [content, setContent] = useState(details.result.issue.content.text);
+  const [content, setContent]= useState(details.result.issue.content.text || '');
+  // const [content, setContent] = useState(details.result.issue.content.text);
   const [files, setFiles] = useState('');
   const [imageURLInput, setImageURLInput] = useState('');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
