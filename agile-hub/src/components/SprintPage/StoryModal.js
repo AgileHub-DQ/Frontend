@@ -2,45 +2,29 @@ import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import '../../css/modal/Modal.css'; 
 import ShowImage from './ShowImage';
-
 const Modal = ({ isVisible, details, onClose, projectKey }) => {
-  console.log(details.result.issue.content);
+  const issueId = details.result.issue.issueId;
+  console.log("클릭한 아이디는: "+issueId);
   const [imageURL, setImageURL] = useState('');
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShowImage = () => {
-    setShowModal(true);
-  };
-
-  // 모달 닫기
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  console.log(details.result.issue.content);
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
-      // console.log("imageURL:", details.result.issue.content.imagesURLs[0]);
-      // console.log("imageURL2:", imageURL);
     }
   }, [details]);
 
-  // console.log(details);
-  const issueId = details.result.issue.issueId;
-  console.log("클릭한 아이디는: "+issueId);
-
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
-  const [type, setType] = useState(details.result.issue.type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
-  const [status, setStatus] = useState(details.result.issue.status);
+  const [issueTitle, setIssueTitle] = useState('');
+  const [type, setType] = useState(''); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+  const [status, setStatus] = useState('');
   const [content, setContent] = useState('');
   const [files, setFiles] = useState(''); 
   const [imageURLInput, setImageURLInput] = useState(''); 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('');
-  const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : null);
-
+  const [parentId, setParentId] = useState('');
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
@@ -49,14 +33,12 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         return '#00FF75'; 
     }
   });
-
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]); 
 
-
-
   const handleFileChange = (e) => {
     setFiles(e.target.files); 
+    setImageURL(''); //초기화
   };
 
   const handleTypeChange = (e) => {
@@ -81,10 +63,9 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append('title', issueTitle);
-    formData.append('type', type); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+    formData.append('type', type); 
     formData.append('status', status);
     formData.append('content', content);
     formData.append('startDate', startDate);
@@ -146,9 +127,6 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       });
       setEpicList(epicResponse.data.result); 
       setStoryList(storyResponse.data.result);
-      
-      // console.log("epicList: ", epicResponse.data.result);
-      // console.log("storyList: ", storyResponse.data.result);
     } catch (error) {
       console.error('API request failed:', error);
     }
@@ -158,11 +136,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
     fetchIssues();
   }, []);
 
-
   if (!isVisible) return null;
-
-
-
 
   return(
 <div className="modalContainer">
@@ -174,7 +148,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         type="text"
         className="form-input"
         placeholder="Issue Title"
-        value={issueTitle}
+        defaultValue={details.result.issue.title}
         onChange={(e) => setIssueTitle(e.target.value)}
 
     />
@@ -217,7 +191,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
     {/* 에픽 목록 보여주는 코드로 변경되어야함 */}
     <select
       className="form-select-type"
-      value={type}
+      defaultValue={details.result.issue.type}
       onChange={handleTypeChange}
     >
       <option value="STORY">STORY</option>
@@ -227,7 +201,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
 <div className='form-row-10'>
   <p className="form-label">상위 항목</p>
-  <select className="form-select-type" value={parentId} onChange={(e) => setParentId(e.target.value)}>
+  <select className="form-select-type" defaultValue={details.result.parentIssue.issueId ? details.result.parentIssue.issueId : null} onChange={(e) => setParentId(e.target.value)}>
     {type === 'STORY' ? (
       epicList.map(epic => (
         <option key={epic.id} value={epic.id}>{epic.title}</option>
@@ -259,18 +233,21 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
       multiple
       onChange={handleFileChange}
     />
- {imageURL && (
-        <button onClick={handleShowImage}>show image</button>
-      )}
+    <div className='imageContainer'>
+      {imageURL && (
+        <img src={imageURL} alt="Uploaded Image" />
+       )}
+    </div>
+</div>
 
-{showModal && (
+{/* {showModal && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={handleCloseModal}>&times;</span>
             <img src={imageURL} alt="Uploaded Image" />
           </div>
         </div>
-      )}
+      )} */}
 
 <div>
       {/* <input type="file" onChange={handleFileChange} /> */}
@@ -291,7 +268,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
           </div>
         )} */}
     {/* 파일 삭제 코드 있어야 함 */}
-</div>
+
 
     <div>{details.result.issue.assignee.name}</div>
     <div>...</div>

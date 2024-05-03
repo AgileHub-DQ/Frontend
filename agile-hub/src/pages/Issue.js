@@ -20,49 +20,9 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [storyList, setStoryList] = useState([]);
   const [resizedImage, setResizedImage] = useState(null);
 
-  // function resizeImage(file, callback) {
-  //   var reader = new FileReader();
-  //   reader.onload = function(event) {
-  //     var img = new Image();
-  //     img.onload = function() {
-  //       var canvas = document.createElement('canvas');
-  //       var ctx = canvas.getContext('2d');
-  //       canvas.width = 100;
-  //       canvas.height = 100;
-  //       ctx.drawImage(img, 0, 0, 100, 100);
-  //       canvas.toBlob(function(blob) {
-  //         callback(blob);
-  //       });
-  //     };
-  //     img.src = event.target.result;
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
-
   const handleFileChange = (e) => {
     setFiles(e.target.files);
   };
-
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (!file) return;
-
-  //   const reader = new FileReader();
-  //   reader.onload = (e) => {
-  //     const img = new Image();
-  //     img.onload = () => {
-  //       const canvas = document.createElement('canvas');
-  //       const ctx = canvas.getContext('2d');
-  //       canvas.width = 50;
-  //       canvas.height = 50;
-  //       ctx.drawImage(img, 0, 0, 50, 50);
-  //       const resizedDataURL = canvas.toDataURL('image/jpeg');
-  //       setResizedImage(resizedDataURL);
-  //     };
-  //     img.src = e.target.result;
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
 
   const handleTypeChange = (e) => {
     const selectedType = e.target.value;
@@ -172,48 +132,6 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   useEffect(() => {
     fetchIssues();
   }, []);
-  
-  // const fetchIssues = async () => { // 에픽 목록 출력하기 위한 코드
-  //   try {
-  //     const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
-  //     const response = await axios.get(`/projects/${projectKey}/epics`, {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-  //     setEpicList(response.data.result); 
-      
-  //     console.log("sprint page epicList: "+epicList);
-  //   } catch (error) {
-  //     console.error('API request failed:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchIssues();
-  // }, []);
-
-  // const fetchIssues = async () => { //스토리 목록 출력하기 위한 코드
-  //   try {
-  //     const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
-  //     const response = await axios.get(`/projects/${projectKey}/stories`, {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-  //     setStoryList(response.data.result); 
-      
-  //     console.log("storyList: "+storyList);
-  //   } catch (error) {
-  //     console.error('API request failed:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchIssues();
-  // }, []);
   
 
 return (

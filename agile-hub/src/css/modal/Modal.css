@@ -111,6 +111,7 @@
 }
 .form-label {
     margin-left: 20px; 
+    white-space: nowrap;
 }
 
 .form-label-tag{
@@ -150,11 +151,9 @@
     border-radius: 10px;
 }
 
-.form-file{
-    padding: 8px;
-    border-radius: 10px;
-    margin-left: 10px;
-}
+/* .form-file{
+
+} */
 
 .form-input{
     margin-left: 10px; 
@@ -253,8 +252,7 @@
     line-height: 35px; 
 }
 
-.image-container {
-    max-width: 50%; 
-    max-height: 50%; 
-    overflow: hidden; 
+.imageContainer img {
+    width: 50%; /* 이미지의 최대 너비를 부모 요소의 100%로 설정하여 부모 요소에 맞춤 */
+    
   }
