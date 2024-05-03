@@ -7,11 +7,10 @@ import '../../css/modal/Modal.css';
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(projectKey);
-  const issueId = details.result.issue.issueId;
-  const [imageURL, setImageURL] = useState('');
 
+  const issueId = details.result.issue.issueId || '';
   console.log(issueId);
+  const [imageURL, setImageURL] = useState('');
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
@@ -29,7 +28,9 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');
-  const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : '');
+  const [parentId, setParentId] = useState(details.result.parentIssue ? details.result.parentIssue.issueId || 1 : 1);
+
+
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
