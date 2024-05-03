@@ -12,6 +12,8 @@ console.log(issueId);
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
+    } else {
+      setImageURL(''); // 이미지 URL이 없는 경우 빈 문자열로 설정
     }
   }, [details]);
 
