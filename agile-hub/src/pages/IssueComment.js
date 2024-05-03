@@ -71,6 +71,7 @@ function IssueComment() {
           Authorization: `Bearer ${accessToken}`
         }
       });
+      alert("댓글을 삭제하였습니다.")
       fetchComments(); // 댓글 목록을 다시 불러옴
     } catch (error) {
       console.error('댓글 삭제 실패:', error);
