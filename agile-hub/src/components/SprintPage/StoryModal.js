@@ -238,42 +238,10 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         <img src={imageURL} alt="Uploaded Image" />
        )}
     </div>
+        {/* 파일 삭제 코드 있어야 함 */}
 </div>
-
-{/* {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>&times;</span>
-            <img src={imageURL} alt="Uploaded Image" />
-          </div>
-        </div>
-      )} */}
-
-<div>
-      {/* <input type="file" onChange={handleFileChange} /> */}
-      {/* {imageURL && (
-        <img src={imageURL} alt="Resized Image" />
-      )} */}
-    </div>
-
-      {/* {imageURL && (
-        <img src={imageURL} alt="Resized File" />
-      )} */}
-
-{/* 
-    {imageURL && (
-          <div className="image-container">
-            <button onClick={showImage}>show image </button>
-            <img src={imageURL} alt="Uploaded File" />
-          </div>
-        )} */}
-    {/* 파일 삭제 코드 있어야 함 */}
-
-
     <div>{details.result.issue.assignee.name}</div>
     <div>...</div>
-
-
     <button onClick={onClose}>닫기</button>
     <button onClick={handleEditSubmit}>수정하기</button>
 </div>
