@@ -3,10 +3,10 @@ import axios from 'axios';
 import '../../css/modal/Modal.css'; 
 import ShowImage from './ShowImage';
 const Modal = ({ isVisible, details, onClose, projectKey }) => {
+  console.log(details.result);
   const issueId = details.result.issue.issueId;
-  console.log("클릭한 아이디는: "+issueId);
+  // console.log("클릭한 아이디는: "+issueId);
   const [imageURL, setImageURL] = useState('');
-  console.log(details.result.issue.content);
 
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
@@ -16,7 +16,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState('');
-  const [type, setType] = useState(''); // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
+  const [type, setType] = useState(details.result.issue.type);  // 상위에픽이 무엇인지에 대한 코드로 수정되어야 함
   const [status, setStatus] = useState('');
   const [content, setContent] = useState('');
   const [files, setFiles] = useState(''); 
@@ -24,7 +24,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('');
-  const [parentId, setParentId] = useState('');
+  const [parentId, setParentId] = useState(details.result.parentIssue.issueId ? details.result.parentIssue.issueId : null);
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
@@ -33,6 +33,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         return '#00FF75'; 
     }
   });
+
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]); 
 
@@ -59,7 +60,6 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
         setColor('#95ADF6');
     }
   };
-
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
@@ -201,7 +201,7 @@ const Modal = ({ isVisible, details, onClose, projectKey }) => {
 
 <div className='form-row-10'>
   <p className="form-label">상위 항목</p>
-  <select className="form-select-type" defaultValue={details.result.parentIssue.issueId ? details.result.parentIssue.issueId : null} onChange={(e) => setParentId(e.target.value)}>
+  <select className="form-select-type" value={parentId} onChange={(e) => setParentId(e.target.value)}>
     {type === 'STORY' ? (
       epicList.map(epic => (
         <option key={epic.id} value={epic.id}>{epic.title}</option>
