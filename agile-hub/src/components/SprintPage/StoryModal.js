@@ -43,6 +43,23 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
     setImageURL(''); 
   };
 
+  const handleDelete = async () => { // 이슈 삭제
+    try {
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const endpoint = `/projects/${projectKey}/issues/${issueId}`;
+      await axios.delete(endpoint, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      alert('삭제되었습니다.');
+      onEdit();
+      onClose();
+    } catch (error) {
+      console.error('Failed to delete:', error);
+    }
+  };
+
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -212,6 +229,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
           <div>...</div>
           <button onClick={onClose}>닫기</button>
           <button onClick={handleEditSubmit}>수정하기</button>
+          <button onClick={handleDelete}>삭제하기</button>
         </div>
       </form>
     </div>
