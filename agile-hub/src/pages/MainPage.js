@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from '../components/MainPage/Header'; 
 
 function MainPage() {
   const [responseData, setResponseData] = useState(null);
@@ -28,16 +29,19 @@ function MainPage() {
   }, []);
 
   return (
-    <>
-      <h1>여기는 MainPage입니다.</h1>
-      {error && <p>Error: {error}</p>}
+    // <>
+    //   <h1>여기는 MainPage입니다.</h1>
+    //   {error && <p>Error: {error}</p>}
       
-      {responseData && (
-        <div>
-          <h2>API Response: {responseData}</h2>
-        </div>
-      )}
-    </>
+    //   {responseData && (
+    //     <div>
+    //       <h2>API Response: {responseData}</h2>
+    //     </div>
+    //   )}
+    // </>
+    <div>
+      <Header/>
+    </div>
   );
 }
 
