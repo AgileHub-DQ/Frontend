@@ -64,16 +64,25 @@ export default function DashBoard({ projectKey, sprintId }) {
   };
 
   const onDragStart = (e, item, category) => {
-    const itemData = JSON.stringify({ id: item.id, title: item.title, type: item.type, status: item. status, originalCategory: category });
+    const itemData = JSON.stringify({ 
+      id: item.id, 
+      title: item.title, 
+      type: item.type, 
+      status: item.status, 
+      originalCategory: category,
+      content: item.content,
+      startDate: item.startDate,
+      endDate: item.endDate
+    });
     e.dataTransfer.setData("text/plain", itemData);
-    console.log(itemData);
   };
+  
 
 
   const onDrop = async (e, newCategory) => {
     e.preventDefault();
     const itemData = e.dataTransfer.getData("text/plain");
-    const { id, title, type, status, originalCategory } = JSON.parse(itemData);
+    const { id, title, type, status, originalCategory, content, startDate, endDate } = JSON.parse(itemData);
   
     if (newCategory === originalCategory) {
       return;

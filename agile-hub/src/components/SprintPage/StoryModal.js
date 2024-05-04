@@ -7,11 +7,10 @@ import '../../css/modal/Modal.css';
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(projectKey);
-  const issueId = details.result.issue.issueId;
-  const [imageURL, setImageURL] = useState('');
 
+  const issueId = details.result.issue.issueId || '';
   console.log(issueId);
+  const [imageURL, setImageURL] = useState('');
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
@@ -23,13 +22,14 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const type = details.result.issue.type;
   const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent]= useState(details.result.issue.content.text || '');
-  // const [content, setContent] = useState(details.result.issue.content.text);
   const [files, setFiles] = useState('');
   const [imageURLInput, setImageURLInput] = useState('');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');
   const [parentId, setParentId] = useState(details.result.parentIssue ? details.result.parentIssue.issueId || 1 : 1);
+
+
   const [color, setColor] = useState(() => {
     switch (details.result.issue.type) {
       case 'TASK':
@@ -93,7 +93,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
         }
       });
       setIssueTitle('');
-      //setType('');
       setStatus('');
       setContent('');
       setFiles('');
@@ -168,19 +167,19 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
           <div className='form-row-2'>
             <p className="form-label">기간</p>
             <input
-  type="date"
-  className="form-date"
-  value={startDate}
-  onChange={(e) => setStartDate(e.target.value)}
-/>
+              type="date"
+              className="form-date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
             <p>~</p>
             <input
-  type="date"
-  className="form-date"
-  value={endDate}
-  min={startDate}
-  onChange={(e) => setEndDate(e.target.value)}
-/>
+              type="date"
+              className="form-date"
+              value={endDate}
+              min={startDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
           </div>
           <p className="form-label-tag">단계</p>
           <div className='form-row-3'>
@@ -234,8 +233,14 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
               )}
             </div>
           </div>
-          <div>{details.result.issue.assignee.name}</div>
-          <div>...</div>
+          <div className='form-row-5'>
+          <p className='form-label'>하위 이슈 목록</p>
+          <ul>
+          {details.result.childIssues.map((childIssue, index) => (
+  <li key={index}>{childIssue.title}</li>
+))}
+  </ul>
+          </div>
           <button onClick={onClose}>닫기</button>
           <button onClick={handleEditSubmit}>수정하기</button>
           <button onClick={handleDelete}>삭제하기</button>
