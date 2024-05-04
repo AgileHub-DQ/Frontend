@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/MainPage/Header'; 
 import Footer from '../components/MainPage/Footer';
+import Main1 from '../components/MainPage/Main1';
 
 function MainPage() {
   const [responseData, setResponseData] = useState(null);
@@ -42,6 +43,7 @@ function MainPage() {
     // </>
     <div>
       <Header/>
+      <Main1/>
       <Footer/>
     </div>
   );
