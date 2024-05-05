@@ -175,7 +175,10 @@ const updateIssueStatus = async (id, newStatus) => {
     formData.append('type', type);
     formData.append('status', newStatus);
     formData.append('content', updatedIssueData.content.text);
-    formData.append('imageURL', updatedIssueData.content.imagesURLs[0]);
+    updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
+      formData.append(`content[imagesURLs][${index}]`, imageUrl);
+    });
+    console.log(response.data.result.issue.content.imagesURLs[0]);
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
     formData.append('assigneeId', updatedIssueData.assignee.id);
@@ -241,7 +244,7 @@ const updateIssueStatus = async (id, newStatus) => {
         // 'Content-Type' : 'application/json'
       }
     });
-    console.log('Issue updated:', editResponse.data);
+    console.log('Issue updated:', editResponse);
   } catch (error) {
     console.error('Failed to update issue status:', error);
   }

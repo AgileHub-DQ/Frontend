@@ -23,7 +23,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent]= useState(details.result.issue.content.text || '');
   const [files, setFiles] = useState('');
-  const [imageURLInput, setImageURLInput] = useState('');
+  const [imageURLInput, setImageURLInput] = useState();
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');
