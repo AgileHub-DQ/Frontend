@@ -176,9 +176,11 @@ const updateIssueStatus = async (id, newStatus) => {
     formData.append('type', type);
     formData.append('status', newStatus);
     formData.append('content', updatedIssueData.content.text);
-    updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
-      formData.append(`content[imagesURLs][${index}]`, imageUrl);
-    });
+    if (updatedIssueData.content.imagesURLs) {
+      updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
+        formData.append(`content[imagesURLs][${index}]`, imageUrl);
+      });
+    }
     // console.log(response.data.result.issue.content.imagesURLs[0]);
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
