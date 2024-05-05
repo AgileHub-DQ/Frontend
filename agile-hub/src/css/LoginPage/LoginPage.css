@@ -1,10 +1,9 @@
-/* LoginPage.css */
 .container {
   display: flex; /* 화면에 출력된 컴포넌트 정렬 */
 }
 
-.left-panel{
-  background-color: #D3DEFF; /* 화면 왼쪽만 배경색 설정*/
+.left-panel {
+  background-color: #d3deff; /* 화면 왼쪽만 배경색 설정*/
 }
 
 .left-panel,
