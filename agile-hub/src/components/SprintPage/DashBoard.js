@@ -178,7 +178,7 @@ const updateIssueStatus = async (id, newStatus) => {
     formData.append('content', updatedIssueData.content.text);
     if (updatedIssueData.content.imagesURLs) {
       updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
-        formData.append(`content[imagesURLs][${index}]`, imageUrl);
+        formData.append(`imageURL`, imageUrl);
       });
     }
     // console.log(response.data.result.issue.content.imagesURLs[0]);
@@ -246,7 +246,7 @@ const updateIssueStatus = async (id, newStatus) => {
         'Content-Type': 'multipart/form-data'
       }
     });
-    console.log('Issue updated:', editResponse);
+    // console.log('Issue updated:', editResponse);
   } catch (error) {
     console.error('Failed to update issue status:', error);
   }
