@@ -133,6 +133,8 @@ const updateIssueStatus = async (id, newStatus) => {
       return;
     }
 
+
+
     // console.log("response.data.result.issue"+JSON.stringify(response.data.result));
 
     // let formData = new FormData();
@@ -168,12 +170,74 @@ const updateIssueStatus = async (id, newStatus) => {
       status: newStatus
     };
 
-    console.log("updatedIssueData " + JSON.stringify(updatedIssueData));
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('type', type);
+    formData.append('status', newStatus);
+    formData.append('content', updatedIssueData.content.text);
+    formData.append('startDate', updatedIssueData.startDate);
+    formData.append('endDate', updatedIssueData.endDate);
+    formData.append('assigneeId', updatedIssueData.assignee.id);
+    formData.append('parentId',response.data.result.parentIssue.issueId);
 
-    const editResponse = await axios.put(`/projects/${projectKey}/issues/${id}`, updateIssueStatus, {
+    // const parentIssueData = {
+    //   ...response.data.result.parentIssue
+    // }
+
+    // const childIssueData = {
+    //   ...response.data.result.childIssue
+    // }
+
+    console.log("updatedIssueData " + JSON.stringify(updatedIssueData));
+// console.log("parentIssueData " + JSON.stringify(parentIssueData));
+// console.log("childIssueData " + JSON.stringify(childIssueData));
+
+
+// // FormData 객체 생성
+// let formData = new FormData();
+
+// // 주 이슈 데이터 추가
+
+  
+// // 주 이슈 데이터 추가
+// Object.entries(updatedIssueData).forEach(([key, value]) => {
+//   if (typeof value === 'object' && value !== null) {
+//     formData.append(`issue[${key}]`, JSON.stringify(value));
+//   } else if (key === 'content' && typeof value === 'object') {
+//     // content 필드의 text와 imagesURLs를 개별적으로 추가
+//     formData.append(`issue[content][text]`, value.text);
+//     formData.append(`issue[content][imagesURLs]`, JSON.stringify(value.imagesURLs));
+//   }
+//     else {
+//     formData.append(`issue[${key}]`, value);
+//   }
+// });
+
+// // 부모 이슈 데이터 추가
+// Object.entries(parentIssueData).forEach(([key, value]) => {
+//   if (typeof value === 'object' && value !== null) {
+//     formData.append(`parentIssue[${key}]`, JSON.stringify(value));
+//   } else {
+//     formData.append(`parentIssue[${key}]`, value);
+//   }
+// });
+
+// // 자식 이슈 데이터 추가
+// childIssueData.forEach((child, index) => {
+//   Object.entries(child).forEach(([key, value]) => {
+//     if (typeof value === 'object' && value !== null) {
+//       formData.append(`childIssues[${index}][${key}]`, JSON.stringify(value));
+//     } else {
+//       formData.append(`childIssues[${index}][${key}]`, value);
+//     }
+//   });
+// });
+
+    const editResponse = await axios.put(`/projects/${projectKey}/issues/${id}`, formData, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'multipart/form-data'
+        // 'Content-Type' : 'application/json'
       }
     });
     console.log('Issue updated:', editResponse.data);
@@ -205,6 +269,7 @@ const onDrop = async (e, newCategory) => {
   };
 
   setIssues(newIssues);
+  console.log(newIssues);
 };
 
 
