@@ -7,6 +7,7 @@ import Task from './Task.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
+  
   useEffect(() => {
     fetchIssues();
   }, []);
@@ -161,7 +162,7 @@ const updateIssueStatus = async (id, newStatus) => {
     // }
     
     
-    console.log("기존 데이터의 title, type 있는지 확인: "+title+", "+type); // ok
+    console.log("기존 데이터의 title, type 있는지 확인: "+title+", "+type+ ", " +newStatus); // ok
 
     console.log("responseData " + JSON.stringify(response.data.result.issue));
 
@@ -178,7 +179,7 @@ const updateIssueStatus = async (id, newStatus) => {
     updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
       formData.append(`content[imagesURLs][${index}]`, imageUrl);
     });
-    console.log(response.data.result.issue.content.imagesURLs[0]);
+    // console.log(response.data.result.issue.content.imagesURLs[0]);
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
     formData.append('assigneeId', updatedIssueData.assignee.id);
@@ -192,7 +193,7 @@ const updateIssueStatus = async (id, newStatus) => {
     //   ...response.data.result.childIssue
     // }
 
-    console.log("updatedIssueData " + JSON.stringify(updatedIssueData));
+    // console.log("updatedIssueData " + JSON.stringify(updatedIssueData));
 // console.log("parentIssueData " + JSON.stringify(parentIssueData));
 // console.log("childIssueData " + JSON.stringify(childIssueData));
 
@@ -241,7 +242,6 @@ const updateIssueStatus = async (id, newStatus) => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'multipart/form-data'
-        // 'Content-Type' : 'application/json'
       }
     });
     console.log('Issue updated:', editResponse);
