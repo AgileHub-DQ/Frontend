@@ -159,7 +159,7 @@ const updateIssueStatus = async (id, newStatus) => {
     
     
     console.log("기존 데이터의 title, type 있는지 확인: "+title+", "+type+ ", " +newStatus); // ok
-
+    console.log("response.data.result.issue: "+JSON.stringify(response.data.result.issue));
     // console.log("responseData " + JSON.stringify(response.data.result.issue));
 
     const updatedIssueData = { // 기존 데이터 + 변경된 status 로 수정된 데이터 updatedIssueData
@@ -177,19 +177,26 @@ const updateIssueStatus = async (id, newStatus) => {
     
     // console.log("dashboard: "+updatedIssueData.content.imagesURLs[0]);
 
-    if (updatedIssueData.content.imagesURLs) {
-      updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
-        setImagesURLs(imageUrl);
-        formData.append('imagesURLs', imagesURLs);
-        console.log("updatedIssueData's imageURL: "+imageUrl, index);
-      });
-    }
+    // if (updatedIssueData.content.imagesURLs) {
+    //   updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
+    //     setImagesURLs(imageUrl);
+    //     formData.append('files', imageUrl);
+    //     // console.log("form에 들어가는 imageUrl: "+imagesURLs); // ''
+    //     console.log("form에 들어가는 files: "+imageUrl); 
+    //   });
+    // }
 
-    if (updatedIssueData.files) {
-      updatedIssueData.files.forEach(file => {
-        formData.append('files', file);
-      });
-    }
+
+    const files = e.target.files; // 선택된 파일들을 가져옵니다.
+
+  // 선택된 파일들을 FormData에 추가합니다.
+  for (let i = 0; i < files.length; i++) {
+    formData.append('files', files[i]);
+  }
+
+
+
+
     
 
 
@@ -198,60 +205,7 @@ const updateIssueStatus = async (id, newStatus) => {
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
     formData.append('assigneeId', updatedIssueData.assignee.id);
-    formData.append('parentId',response.data.result.parentIssue.issueId);
-
-    // const parentIssueData = {
-    //   ...response.data.result.parentIssue
-    // }
-
-    // const childIssueData = {
-    //   ...response.data.result.childIssue
-    // }
-
-    // console.log("updatedIssueData " + JSON.stringify(updatedIssueData));
-// console.log("parentIssueData " + JSON.stringify(parentIssueData));
-// console.log("childIssueData " + JSON.stringify(childIssueData));
-
-
-// // FormData 객체 생성
-// let formData = new FormData();
-
-// // 주 이슈 데이터 추가
-
-  
-// // 주 이슈 데이터 추가
-// Object.entries(updatedIssueData).forEach(([key, value]) => {
-//   if (typeof value === 'object' && value !== null) {
-//     formData.append(`issue[${key}]`, JSON.stringify(value));
-//   } else if (key === 'content' && typeof value === 'object') {
-//     // content 필드의 text와 imagesURLs를 개별적으로 추가
-//     formData.append(`issue[content][text]`, value.text);
-//     formData.append(`issue[content][imagesURLs]`, JSON.stringify(value.imagesURLs));
-//   }
-//     else {
-//     formData.append(`issue[${key}]`, value);
-//   }
-// });
-
-// // 부모 이슈 데이터 추가
-// Object.entries(parentIssueData).forEach(([key, value]) => {
-//   if (typeof value === 'object' && value !== null) {
-//     formData.append(`parentIssue[${key}]`, JSON.stringify(value));
-//   } else {
-//     formData.append(`parentIssue[${key}]`, value);
-//   }
-// });
-
-// // 자식 이슈 데이터 추가
-// childIssueData.forEach((child, index) => {
-//   Object.entries(child).forEach(([key, value]) => {
-//     if (typeof value === 'object' && value !== null) {
-//       formData.append(`childIssues[${index}][${key}]`, JSON.stringify(value));
-//     } else {
-//       formData.append(`childIssues[${index}][${key}]`, value);
-//     }
-//   });
-// });
+    formData.append('parentId',response.data.result.parentIssue.issueId)
 
     const editResponse = await axios.put(`/projects/${projectKey}/issues/${id}`, formData, {
       headers: {

@@ -27,6 +27,7 @@ function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
         }
       });
       setResponse(response.data); // 모든 데이터 
+      console.log("task 에서 response data 출력: "+JSON.stringify(response.result));
       setIsLoading(false);
     } catch (error) {
       console.error('API request failed:', error);

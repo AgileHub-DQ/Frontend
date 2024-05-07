@@ -13,15 +13,24 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) 
   const issueId = details.result.issue.issueId || '';
   console.log(issueId);
   // console.log("storyModal에서 imagesURLS[0]"+details.result.issue.content.imagesURLs[0])
-  // const [imageURL, setImageURL] = useState(details.result.issue.content.imagesURLs[0]);
-  const [imageURL, setImageURL] = useState(imagesURLs);
-  console.log(imageURL);
+  const [imageURL, setImageURL] = useState(details.result.issue.content.imagesURLs[0]);
+  // const [imageURL, setImageURL] = useState(imagesURLs);
+
+  // useEffect(() => {
+  //   if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
+  //     setImageURL(details.result.issue.content.imagesURLs[0]);
+  //   } else setImageURL(imageURL);
+  //   console.log("imagesURL: "+JSON.stringify(details.result.issue.content.imagesURLs[0]));
+  // }, [details]);
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
-    } else setImageURL(imageURL);
-    console.log("imagesURL: "+JSON.stringify(details.result.issue.content.imagesURLs[0]));
-  }, [details]);
+      console.log("if문"+imageURL);
+    } else {
+      setImageURL(imagesURLs || '');
+      console.log("else문"+imageURL);
+    }
+  }, [details, imagesURLs]); // imagesURLs를 의존성 배열에 추가
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
@@ -52,7 +61,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) 
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
-    // setImageURL(''); 
+    setImageURL(''); 
   };
 
   const handleDelete = async () => { // 이슈 삭제
