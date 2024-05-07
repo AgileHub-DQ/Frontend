@@ -4,17 +4,23 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/modal/Modal.css';
 
 
-const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
+const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+
+
   const issueId = details.result.issue.issueId || '';
   console.log(issueId);
-  const [imageURL, setImageURL] = useState('');
+  // console.log("storyModal에서 imagesURLS[0]"+details.result.issue.content.imagesURLs[0])
+  // const [imageURL, setImageURL] = useState(details.result.issue.content.imagesURLs[0]);
+  const [imageURL, setImageURL] = useState(imagesURLs);
+  console.log(imageURL);
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
-    }
+    } else setImageURL(imageURL);
+    console.log("imagesURL: "+JSON.stringify(details.result.issue.content.imagesURLs[0]));
   }, [details]);
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -23,7 +29,8 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent]= useState(details.result.issue.content.text || '');
   const [files, setFiles] = useState('');
-  const [imageURLInput, setImageURLInput] = useState(details.result.issue.content.imageURLs || '');
+  const [imageURLInput, setImageURLInput] = useState(details.result.issue.content.imagesURLs || '');
+  // const [imageURLInput, setImageURLInput] = useState(details.result.issue.content.imageURLs || '');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');

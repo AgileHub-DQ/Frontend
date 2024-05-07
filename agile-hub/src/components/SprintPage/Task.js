@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
 
-function Task({ projectKey, issue, fetchIssues  }) {
+function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ function Task({ projectKey, issue, fetchIssues  }) {
           'Content-Type': 'application/json'
         }
       });
-      setResponse(response.data); 
+      setResponse(response.data); // 모든 데이터 
       setIsLoading(false);
     } catch (error) {
       console.error('API request failed:', error);
@@ -36,8 +36,10 @@ function Task({ projectKey, issue, fetchIssues  }) {
 
   const handleIssueTitleClick = () => {
     if (response) {
-      setStoryDetails(response);  
+      setStoryDetails(response);
       setIsModalVisible(true);
+      console.log("setStoryDetails: "+JSON.stringify(storyDetails)) //imagesURL exist
+     
     }
   };
 
@@ -70,6 +72,7 @@ function Task({ projectKey, issue, fetchIssues  }) {
           onClose={() => setIsModalVisible(false)}
           projectKey={projectKey}
           onEdit={onEdit}
+          imagesURLs={imagesURLs}
         />
       )}
     </div>

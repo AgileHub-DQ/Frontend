@@ -6,6 +6,7 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
+  const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
   
   useEffect(() => {
@@ -111,15 +112,10 @@ export default function DashBoard({ projectKey, sprintId }) {
     console.log(itemData);
   };
 
-  //api 통신, 이미지 url, 날짜 초기화 되는 현상 수정해야함
-  //드래그앤드랍 시 기존 데이터 유지
-  //status말고 새로고침해도 저장되도록
-// 이슈 상태를 업데이트하는 함수
 const updateIssueStatus = async (id, newStatus) => {
   const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
 
   try {
-    // First, get the current issue data
     const response = await axios.get(`/projects/${projectKey}/issues/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -164,23 +160,40 @@ const updateIssueStatus = async (id, newStatus) => {
     
     console.log("기존 데이터의 title, type 있는지 확인: "+title+", "+type+ ", " +newStatus); // ok
 
-    console.log("responseData " + JSON.stringify(response.data.result.issue));
+    // console.log("responseData " + JSON.stringify(response.data.result.issue));
 
     const updatedIssueData = { // 기존 데이터 + 변경된 status 로 수정된 데이터 updatedIssueData
       ...response.data.result.issue,
       status: newStatus
     };
 
+    console.log("updatedIssueData: "+JSON.stringify(updatedIssueData));
+
     const formData = new FormData();
     formData.append('title', title);
     formData.append('type', type);
     formData.append('status', newStatus);
     formData.append('content', updatedIssueData.content.text);
+    
+    // console.log("dashboard: "+updatedIssueData.content.imagesURLs[0]);
+
     if (updatedIssueData.content.imagesURLs) {
       updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
-        formData.append(`imageURL`, imageUrl);
+        setImagesURLs(imageUrl);
+        formData.append('imagesURLs', imagesURLs);
+        console.log("updatedIssueData's imageURL: "+imageUrl, index);
       });
     }
+
+    if (updatedIssueData.files) {
+      updatedIssueData.files.forEach(file => {
+        formData.append('files', file);
+      });
+    }
+    
+
+
+
     // console.log(response.data.result.issue.content.imagesURLs[0]);
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
@@ -246,7 +259,6 @@ const updateIssueStatus = async (id, newStatus) => {
         'Content-Type': 'multipart/form-data'
       }
     });
-    // console.log('Issue updated:', editResponse);
   } catch (error) {
     console.error('Failed to update issue status:', error);
   }
@@ -275,7 +287,6 @@ const onDrop = async (e, newCategory) => {
   };
 
   setIssues(newIssues);
-  console.log(newIssues);
 };
 
 
@@ -316,7 +327,7 @@ const onDrop = async (e, newCategory) => {
           key={item.id}
           draggable
           onDragStart={e => onDragStart(e, item, category)} >
-        <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} />
+        <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} imagesURLs={imagesURLs} />
                 </div>
         ))}
         </div>
