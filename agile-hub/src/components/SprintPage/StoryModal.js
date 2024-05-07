@@ -52,7 +52,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) 
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
-    setImageURL(''); 
+    // setImageURL(''); 
   };
 
   const handleDelete = async () => { // 이슈 삭제

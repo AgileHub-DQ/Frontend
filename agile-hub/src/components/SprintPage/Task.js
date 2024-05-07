@@ -4,6 +4,7 @@ import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
 
 function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
+  console.log("task's imagesURLs: "+ imagesURLs);
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
