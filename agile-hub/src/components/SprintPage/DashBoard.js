@@ -65,54 +65,13 @@ export default function DashBoard({ projectKey, sprintId }) {
     }
   };
 
-  // const fetchIssues = async () => {
-  //   const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
-  //   const endpoints = [
-  //     `/projects/${projectKey}/stories`,
-  //     `/projects/${projectKey}/tasks`
-  //   ];
-  
-  //   try {
-  //     const results = await Promise.all(endpoints.map(endpoint =>
-  //       axios.get(endpoint, {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           'Content-Type': 'application/json'
-  //         }
-  //       })
-  //     ));
-  
-  //     const newIssues = { todo: [], doing: [], complete: [] };
-  
-  //     results.flatMap(response => response.data.result).forEach(issue => {
-  //       switch (issue.status) {
-  //         case 'DO':
-  //           newIssues.todo.push(issue);
-  //           break;
-  //         case 'PROGRESS':
-  //           newIssues.doing.push(issue);
-  //           break;
-  //         case 'DONE':
-  //           newIssues.complete.push(issue);
-  //           break;
-  //         default:
-  //           console.error(`Unknown issue status: ${issue.status}`);
-  //       }
-  //     });
-  
-  //     setIssues(newIssues);
-  //   } catch (error) {
-  //     console.error('Failed to fetch issues:', error);
-  //   }
-  // };
-
   const onDragStart = (e, item, category) => {
     const itemData = JSON.stringify({ id: item.id, originalCategory: category });
     e.dataTransfer.setData("text/plain", itemData);
     console.log(itemData);
   };
 
-const updateIssueStatus = async (id, newStatus) => {
+const updateIssueStatus = async (id, newStatus, files) => {
   const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
 
   try {
@@ -130,78 +89,23 @@ const updateIssueStatus = async (id, newStatus) => {
       return;
     }
 
-
-
-    // console.log("response.data.result.issue"+JSON.stringify(response.data.result));
-
-    // let formData = new FormData();
-    // Object.entries(response.data.result.issue).forEach(([key, value]) => {
-    //   if (key === 'status') {
-    //     // status 필드만 새로운 값으로 업데이트합니다.
-    //     formData.append('status', newStatus);
-    //     console.log(newStatus);
-    //   } else if (key === 'content'){
-    //     formData.append('content', response.data.result.issue.content.text);
-    //   } else {
-    //     formData.append(key, value);
-    //     console.log(key, value);
-    //   }
-    // });
-
-    // formData.append('content', response.data.result.issue.content.text);
-
-    // if (response.data.result.parentIssue && response.data.result.parentIssue.issueId) {
-    //   console.log("parentId:"+ response.data.result.parentIssue.issueId);
-    //   formData.append('parentIssueId', response.data.result.parentIssue.issueId);
-    //   formData.append('parentIssueKey', response.data.result.parentIssue.key);
-    //   // 추가적인 parentIssue 필드도 이와 같은 방식으로 추가 가능
-    // }
-    
-    
-    console.log("기존 데이터의 title, type 있는지 확인: "+title+", "+type+ ", " +newStatus); // ok
-    console.log("response.data.result.issue: "+JSON.stringify(response.data.result.issue));
-    // console.log("responseData " + JSON.stringify(response.data.result.issue));
-
     const updatedIssueData = { // 기존 데이터 + 변경된 status 로 수정된 데이터 updatedIssueData
       ...response.data.result.issue,
       status: newStatus
     };
 
-    console.log("updatedIssueData: "+JSON.stringify(updatedIssueData));
+    console.log("updatedIssueData: "+JSON.stringify(updatedIssueData)); // status 변경 + 기존 데이터와 합쳐진 데이터 
 
     const formData = new FormData();
     formData.append('title', title);
     formData.append('type', type);
     formData.append('status', newStatus);
     formData.append('content', updatedIssueData.content.text);
-    
-    // console.log("dashboard: "+updatedIssueData.content.imagesURLs[0]);
 
-    // if (updatedIssueData.content.imagesURLs) {
-    //   updatedIssueData.content.imagesURLs.forEach((imageUrl, index) => {
-    //     setImagesURLs(imageUrl);
-    //     formData.append('files', imageUrl);
-    //     // console.log("form에 들어가는 imageUrl: "+imagesURLs); // ''
-    //     console.log("form에 들어가는 files: "+imageUrl); 
-    //   });
-    // }
+    for (let i = 0; i < files.length; i++) { // 선택된 이슈의 파일을 그대로 append
+      formData.append('files', files[i]);
+    }
 
-
-    const files = e.target.files; // 선택된 파일들을 가져옵니다.
-
-  // 선택된 파일들을 FormData에 추가합니다.
-  for (let i = 0; i < files.length; i++) {
-    formData.append('files', files[i]);
-  }
-
-
-
-
-    
-
-
-
-    // console.log(response.data.result.issue.content.imagesURLs[0]);
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
     formData.append('assigneeId', updatedIssueData.assignee.id);
@@ -225,12 +129,12 @@ const updateIssueStatus = async (id, newStatus) => {
 const onDrop = async (e, newCategory) => {
   e.preventDefault();
   const itemData = e.dataTransfer.getData("text/plain");
-  const { id, originalCategory } = JSON.parse(itemData);
+  const { id, originalCategory, files } = JSON.parse(itemData);
 
   if (newCategory === originalCategory) return; // 같은 카테고리에 드롭된 경우 업데이트 없음
 
   const newStatus = getStatusFromCategory(newCategory); // 새 카테고리에 맞는 상태 코드를 가져옵니다
-  await updateIssueStatus(id, newStatus); // 서버에 상태 업데이트 요청
+  await updateIssueStatus(id, newStatus, files); // 서버에 상태 업데이트 요청
 
   // 로컬 상태 업데이트
   const movedItem = issues[originalCategory].find(item => item.id === id);
