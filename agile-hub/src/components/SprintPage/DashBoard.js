@@ -84,7 +84,7 @@ const updateIssueStatus = async (id, newStatus, files) => {
 
     const { title, type } = response.data.result.issue;
 
-    if (!title || !type) {
+    if (!title || !type ) {
       console.error("title과 type은 필수항목입니다.");
       return;
     }
@@ -99,12 +99,24 @@ const updateIssueStatus = async (id, newStatus, files) => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('type', type);
-    formData.append('status', newStatus);
+    formData.append('status', newStatus); // ok
     formData.append('content', updatedIssueData.content.text);
 
-    for (let i = 0; i < files.length; i++) { // 선택된 이슈의 파일을 그대로 append
+    // if (files && files.length) {
+    //   files.forEach((file, index) => {
+    //     formData.append(`file${index}`, file);
+    //   });
+    // }
+
+    if (files && files.length) {
+    for (let i = 0; i < files.length; i++) { // 이렇게 하면 status 변경이 안 됨
       formData.append('files', files[i]);
     }
+  }
+
+  // for (let i = 0; i < files.length; i++) { // 이렇게 하면 이미지는 잘 나옴
+  //   formData.append('files', files[i]);
+  // }
 
     formData.append('startDate', updatedIssueData.startDate);
     formData.append('endDate', updatedIssueData.endDate);
@@ -134,6 +146,7 @@ const onDrop = async (e, newCategory) => {
   if (newCategory === originalCategory) return; // 같은 카테고리에 드롭된 경우 업데이트 없음
 
   const newStatus = getStatusFromCategory(newCategory); 
+  // console.log("newStatus: "+newStatus);
   await updateIssueStatus(id, newStatus, files); 
 
   // 로컬 상태 업데이트
