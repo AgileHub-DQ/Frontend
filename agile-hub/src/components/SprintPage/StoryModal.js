@@ -7,21 +7,10 @@ import '../../css/modal/Modal.css';
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) => {
   const location = useLocation();
   const navigate = useNavigate();
-
-
-
   const issueId = details.result.issue.issueId || '';
   console.log(issueId);
-  // console.log("storyModal에서 imagesURLS[0]"+details.result.issue.content.imagesURLs[0])
   const [imageURL, setImageURL] = useState(details.result.issue.content.imagesURLs[0]);
-  // const [imageURL, setImageURL] = useState(imagesURLs);
 
-  // useEffect(() => {
-  //   if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
-  //     setImageURL(details.result.issue.content.imagesURLs[0]);
-  //   } else setImageURL(imageURL);
-  //   console.log("imagesURL: "+JSON.stringify(details.result.issue.content.imagesURLs[0]));
-  // }, [details]);
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
@@ -30,7 +19,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) 
       setImageURL(imagesURLs || '');
       console.log("else문"+imageURL);
     }
-  }, [details, imagesURLs]); // imagesURLs를 의존성 배열에 추가
+  }, [details, imagesURLs]); 
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
@@ -39,7 +28,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) 
   const [content, setContent]= useState(details.result.issue.content.text || '');
   const [files, setFiles] = useState('');
   const [imageURLInput, setImageURLInput] = useState(details.result.issue.content.imagesURLs || '');
-  // const [imageURLInput, setImageURLInput] = useState(details.result.issue.content.imageURLs || '');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');

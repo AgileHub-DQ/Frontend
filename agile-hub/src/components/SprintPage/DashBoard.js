@@ -133,8 +133,8 @@ const onDrop = async (e, newCategory) => {
 
   if (newCategory === originalCategory) return; // 같은 카테고리에 드롭된 경우 업데이트 없음
 
-  const newStatus = getStatusFromCategory(newCategory); // 새 카테고리에 맞는 상태 코드를 가져옵니다
-  await updateIssueStatus(id, newStatus, files); // 서버에 상태 업데이트 요청
+  const newStatus = getStatusFromCategory(newCategory); 
+  await updateIssueStatus(id, newStatus, files); 
 
   // 로컬 상태 업데이트
   const movedItem = issues[originalCategory].find(item => item.id === id);
