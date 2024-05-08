@@ -209,8 +209,6 @@ import '../../../css/modal/EpicModal.css';
 
 function EpicModal({ onClose, onSubmit, projectKey }) {
 
-    console.log("EpicModal: "+projectKey);
-
     const [issueTitle, setIssueTitle] = useState('');
     const [type, setType] = useState('EPIC'); 
     const [status, setStatus] = useState('DO');
@@ -302,6 +300,8 @@ function EpicModal({ onClose, onSubmit, projectKey }) {
     const handleCloseModal = () => {
         onClose(); // onClose prop으로 전달된 함수를 호출하여 모달 닫기
     };
+
+    console.log("EpicModal: "+projectKey);
 
     return (
         <div className="modal-content">

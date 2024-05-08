@@ -32,7 +32,7 @@ function ShowEpic({epicData, projectKey}) {
     return (
         <div className='showEpic' style={{ border: '1px solid black', padding: '10px' }}>
             <p>에픽: {epicTitle}</p>
-            <CreateStoryButton/>
+            <CreateStoryButton projectKey={projectKey}/>
         </div>
     );
 }

@@ -113,8 +113,8 @@ function ProjectsList() {
                 <div>생성일: {project.createdAt}</div>
                 <button onClick={() => editProject(project)}>수정하기</button>
                 <button onClick={deleteProject}>삭제하기</button>
-                {/* <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
-                <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button> */}
+                <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
+                <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button>
                 <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
                 <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</button>
                 <button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러가기</button>
