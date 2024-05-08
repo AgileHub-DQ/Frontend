@@ -19,8 +19,10 @@ function Header() {
             <img src={LogoImage} alt="AgileHub Logo" style={{ maxWidth: '150px' }} />
             <button 
                 style={{ padding: '0.5rem 1rem', backgroundColor: 'blue', color: 'white', borderRadius: '20px' }}
-                onClick={() => navigate('/login')}  
-            />
+                onClick={() => navigate('/login')}  // 이 부분에 클릭 이벤트 추가
+            >
+                Sign In
+            </button>
         </div>
     );
 }
