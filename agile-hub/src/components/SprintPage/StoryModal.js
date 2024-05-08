@@ -4,18 +4,22 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/modal/Modal.css';
 
 
-const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
+const Modal = ({ isVisible, details, onClose, projectKey, onEdit, imagesURLs }) => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const issueId = details.result.issue.issueId || '';
   console.log(issueId);
-  const [imageURL, setImageURL] = useState('');
+  const [imageURL, setImageURL] = useState(details.result.issue.content.imagesURLs[0]);
+
   useEffect(() => {
     if (details.result.issue.content.imagesURLs && details.result.issue.content.imagesURLs.length > 0) {
       setImageURL(details.result.issue.content.imagesURLs[0]);
+      console.log("if문"+imageURL);
+    } else {
+      setImageURL(imagesURLs || '');
+      console.log("else문"+imageURL);
     }
-  }, [details]);
+  }, [details, imagesURLs]); 
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState(details.result.issue.title);
@@ -23,7 +27,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit  }) => {
   const [status, setStatus] = useState(details.result.issue.status);
   const [content, setContent]= useState(details.result.issue.content.text || '');
   const [files, setFiles] = useState('');
-  const [imageURLInput, setImageURLInput] = useState('');
+  const [imageURLInput, setImageURLInput] = useState(details.result.issue.content.imagesURLs || '');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
   const [assigneeId, setAssigneeId] = useState('1');
