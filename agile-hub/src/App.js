@@ -15,6 +15,7 @@ import IssueComment from './pages/IssueComment.js';
 import SingleIssue from './pages/SingleIssue.js'; 
 import DraggableList from './pages/DraggableList.js';
 import SprintAllList from './components/SprintPage/SprintAllList.js';
+import UserMainPage from './components/MainPage/userMainPage.js'; 
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/issueComment" element={<IssueComment />} />
           <Route path="/singleIssue" element={<SingleIssue />} />
           <Route path="/sprintAllList" element={<SprintAllList />} />
+          <Route path="/userMainPage" element={<UserMainPage />} />
         </Routes>
       </Router>
     </div>
