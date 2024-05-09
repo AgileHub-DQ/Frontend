@@ -1,115 +1,198 @@
-.projectName{
-    color: #000;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 243px;
-    gap: 10px;
-    
-    position: absolute;
-    left: 29.41%;
-    right: 29.68%;
-    top: 42.55%;
-    bottom: 47.91%;
-    
-    border: 3px solid #003AF6;
-    border-radius: 10px;
+/* .projectName,
+.projectKey {
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 243px;
+  gap: 10px;
+
+  border: 3px solid #003af6;
+  border-radius: 10px;
 }
 
-.projectKey{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 243px;
-    gap: 10px;
-
-    position: absolute;
-    left: 29.54%;
-    right: 29.68%;
-    top: 58.05%;
-    bottom: 32.42%;
-
-    border: 3px solid #003AF6;
-    border-radius: 10px;
+.projectName {
+  position: absolute;
+  left: 29.41%;
+  right: 29.68%;
+  top: 42.55%;
+  bottom: 47.91%;
 }
 
-.button{
-    position: absolute;
-    width: 199px;
-    left: calc(50% - 199px/2);
-    top: 73.42%;
-    bottom: 18.24%;
-
-    cursor: pointer;
-    transition: all .2s;
-    padding: 10px 20px;
-    border-radius: 100px;
-
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    font-size: 15px;
+.projectKey {
+  position: absolute;
+  left: 29.54%;
+  right: 29.68%;
+  top: 58.05%;
+  bottom: 32.42%;
 }
 
-button:hover {
-    background: #003AF6;
-    color: white;
+.button {
+  position: absolute;
+  width: 199px;
+  left: calc(50% - 199px / 2);
+  top: 73.42%;
+  bottom: 18.24%;
+
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 10px 20px;
+  border-radius: 100px;
+
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
 }
 
-button > svg {
-width: 34px;
-margin-left: 10px;
-transition: transform .3s ease-in-out;
+.button:hover {
+  background: #003af6;
+  color: white;
 }
 
-button:hover svg {
-transform: translateX(15px);
+.button:hover svg {
+  transform: translateX(15px);
 }
 
-button:active {
-transform: scale(0.95);
+.button:active {
+  transform: scale(0.95);
 }
 
-.blue-text{
-    color: blue;
+.blue-text {
+  color: blue;
 }
 
-.grey-text{
-    color: grey;
+.grey-text {
+  color: grey;
 }
 
-.text1{
-position: absolute;
-height: 24px;
-left: 542px;
-top: 154px;
+.text1,
+.text2 {
+  position: absolute;
+  height: 24px;
 
-font-family: 'Abhaya Libre ExtraBold';
-font-style: normal;
-font-weight: 800;
-font-size: 30px;
-line-height: 35px;
+  font-family: 'Abhaya Libre ExtraBold';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 35px;
 }
 
-.text2{
-position: absolute;
-height: 24px;
-left: 782px;
-top: 154px;
-
-font-family: 'Abhaya Libre ExtraBold';
-font-style: normal;
-font-weight: 800;
-font-size: 30px;
-line-height: 35px;
+.text1 {
+  left: 542px;
+  top: 154px;
 }
 
-.error{
-    color: red;
-    display: flex;
-    position: absolute;
-    left: calc(50% - 601px/2 + 0.5px);
-    top: calc(50% - 44px/2 - 80px);
+.text2 {
+  left: 782px;
+  top: 154px;
+}
+
+.error {
+  color: red;
+  display: flex;
+  position: absolute;
+  left: calc(50% - 601px / 2 + 0.5px);
+  top: calc(50% - 44px / 2 - 80px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.main-container {
+  /* background: pink; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.sub-container {
+  /* background: red; */
+  display: flex;
+}
+
+.form-container {
+  /* background: grey; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.text1,
+.text2 {
+  color: var(--kakao-logo, #000);
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-family: 'Abhaya Libre ExtraBold';
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.text1 {
+  margin-right: 14rem;
+}
+
+.blue-text {
+  color: blue !important;
+}
+
+.grey-text {
+  color: grey !important;
+}
+
+.projectName,
+.projectKey {
+  width: 37.5rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  border-radius: 0.3125rem;
+  border: 3px solid #003af6;
+  color: rgba(0, 0, 0, 0.5);
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-family: 'Abhaya Libre Medium';
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.projectKey {
+  margin-top: 1rem;
+}
+
+.button {
+  width: 37.5rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  border-radius: 0.625rem;
+  background: #003af6;
+  color: #fff;
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-family: 'Abhaya Libre ExtraBold';
+  font-size: 1.5625rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-top: 5rem;
 }
