@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import Menubar from '../components/Menubar';
+import Header from '../components/MyPage/Header';
 
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
@@ -88,6 +90,11 @@ function ProjectsList() {
 
   return (
     <div className="container">
+      <Menubar/>
+      <div style={{width:'100%', height:'100%'}}>
+      <Header/>
+      <div style={{background: "lightyellow", paddingLeft: '5%'}}>
+      <p>임시div</p>
       <h1>프로젝트 목록</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
@@ -114,7 +121,7 @@ function ProjectsList() {
                 <button onClick={() => editProject(project)}>수정하기</button>
                 <button onClick={deleteProject}>삭제하기</button>
                 <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
-                <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button>
+                {/* <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button> */}
                 <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
                 <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</button>
                 <button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러가기</button>
@@ -123,6 +130,8 @@ function ProjectsList() {
           </li>
         ))}
       </ul>
+      </div>
+      </div>
     </div>
   );
 }
