@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
 import Menubar from '../components/Menubar';
 import Header from '../components/MyPage/Header';
+import Button from '../components/MyPage/Button';
 
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
@@ -93,8 +94,7 @@ function ProjectsList() {
       <Menubar/>
       <div style={{width:'100%', height:'100%'}}>
       <Header/>
-      <div style={{background: "lightyellow", paddingLeft: '5%'}}>
-      <p>임시div</p>
+      <div style={{background: "lightyellow",paddingLeft: '5%'}}>
       <h1>프로젝트 목록</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
@@ -118,13 +118,12 @@ function ProjectsList() {
               <>
                 <strong>{project.name}</strong> ({project.key})
                 <div>생성일: {project.createdAt}</div>
-                <button onClick={() => editProject(project)}>수정하기</button>
-                <button onClick={deleteProject}>삭제하기</button>
-                <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
-                {/* <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button> */}
-                <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
-                <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</button>
-                <button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러가기</button>
+                <Button onClick={() => editProject(project)}>수정하기</Button>
+                <Button onClick={() => deleteProject}>삭제하기</Button>
+                <Button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</Button>
+                <Button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</Button>
+                <Button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</Button>
+                <Button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러가기</Button>
               </>
             )}
           </li>
