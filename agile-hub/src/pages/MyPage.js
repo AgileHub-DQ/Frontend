@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Menubar from '../components/Menubar';
 import Header from '../components/MyPage/Header';
 import Button from '../components/MyPage/Button';
 
 function ProjectsList() {
+  const navigate = useNavigate(); 
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
-  const [editingProjectId, setEditingProjectId] = useState(null); // 현재 수정 중인 프로젝트의 ID, 현재 사용자가 편집하고자 하는 특정 프로젝트를 구별하기 위함. 
+  const [editingProjectId, setEditingProjectId] = useState(null); 
   const [editedName, setEditedName] = useState(''); // 수정된 프로젝트 이름
   const [editedKey, setEditedKey] = useState(''); // 수정된 프로젝트 키
-  const [isEditing, setIsEditing] = useState(false);
-  const navigate = useNavigate(); 
 
   const fetchProjects = async () => {
     try {
@@ -24,9 +23,9 @@ function ProjectsList() {
         }
       });
 
-      console.log("API Response:", response.data);  // API 응답 전체를 로그로 출력
+      console.log("API Response:", response.data);  
       
-      setProjects(response.data.result);  // 안전하게 데이터 설정
+      setProjects(response.data.result);  
     } catch (error) {
       console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
       setError('프로젝트 정보를 가져오는 데 실패했습니다.');
@@ -89,17 +88,29 @@ function ProjectsList() {
     navigate(`/sprintAllList`, { state: { key: projectKey } }); 
   }
 
+  const projectItem = {
+    marginTop: '2rem',
+    background: '#D3E7FA',
+    borderRadius: '20px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    padding: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between', 
+    width:'80%'
+  }
+
   return (
     <div className="container">
       <Menubar/>
       <div style={{width:'100%', height:'100%'}}>
       <Header/>
-      <div style={{background: "lightyellow",paddingLeft: '5%'}}>
+      <div style={{background: "lightyellow",paddingLeft: '5%', width:'100%'}}>
       <h1>프로젝트 목록</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
+      <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
         {projects.map(project => (
-          <li key={project.id}>
+          <li key={project.id} style={projectItem}>
             {editingProjectId === project.id ? (
               <>
                 <input
@@ -116,8 +127,10 @@ function ProjectsList() {
               </>
             ) : (
               <>
-                <strong>{project.name}</strong> ({project.key})
-                <div>생성일: {project.createdAt}</div>
+                <div>
+                  <div>프로젝트명: {project.name}</div> 
+                  <div>생성일: {project.createdAt}</div>
+                </div>
                 <Button onClick={() => editProject(project)}>수정하기</Button>
                 <Button onClick={() => deleteProject}>삭제하기</Button>
                 <Button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</Button>
