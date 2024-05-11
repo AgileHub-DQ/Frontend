@@ -1,0 +1,15 @@
+.sectionStyle {
+  width: 30%;
+  margin: 0 10px;
+  text-align: left;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s; /* 부드러운 색 변화 효과 */
+  border-radius: 30px;
+}
+
+.sectionStyle:hover {
+  background-color: #f7f0df; /* 마우스 오버 시 배경색 */
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}

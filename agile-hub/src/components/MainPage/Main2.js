@@ -1,4 +1,5 @@
 import React from "react";
+import "../../css/MainPage/Main2.css"
 
 function Main2() {
     const containerStyle = {
@@ -7,7 +8,7 @@ function Main2() {
         alignItems: 'center',       
         padding: '10%',
         backgroundColor: '#f0f0f0',
-        height: '30vh', 
+        height: '35vh', 
     };
 
     const headerStyle = {
@@ -29,8 +30,9 @@ function Main2() {
 
     const sectionStyle = {
         width: '30%',             
-        margin: '0 10px',          
-        textAlign: 'left'         
+        margin: '0 20px',          
+        textAlign: 'left', 
+        padding: '30px'      
     };
 
     const titleStyle = {
@@ -48,7 +50,7 @@ function Main2() {
         <div style={containerStyle}>
             <div style={headerStyle}>애자일 프로젝트 관리를 위해<br/>AgileHub를 사용해야 하는 이유</div>
             <div style={horizontalContainerStyle}>
-                <div style={sectionStyle}>
+                <div className="sectionStyle" style={sectionStyle}>
                     <div style={titleStyle}>어떤 환경에서든 AgileHub와 함께!</div>
                     <div style={bodyStyle}>
                     AgileHub는 단순한 프로젝트 관리 도구이며 여러분의 작업 방식을 혁신적으로 변화시킵니다.<br/>
@@ -57,7 +59,7 @@ function Main2() {
                     지금 AgileHub를 사용해보세요, 그리고 어디서든 Agile의 진정한 힘을 경험하세요!<br/>
                     </div>
                 </div>
-                <div style={sectionStyle}>
+                <div className="sectionStyle" style={sectionStyle}>
                     <div style={titleStyle}>애자일을 원하는 모든 이를 위한 최적의 선택!</div>
                     <div style={bodyStyle}>
                     AgileHub는 애자일 프로젝트 관리의 복잡함을 해소합니다.<br/>
@@ -66,7 +68,7 @@ function Main2() {
                     AgileHub는 프로젝트 관리를 더욱 효율적이고 생산적으로 만들어, 여러분의 작업 방식을 혁신적으로 변화시킵니다.<br/>
                     </div>
                 </div>
-                <div style={sectionStyle}>
+                <div className="sectionStyle" style={sectionStyle}>
                     <div style={titleStyle}>프로젝트 관리의 혁신, 간편하고 명확하게!</div>
                     <div style={bodyStyle}>
                     AgileHub를 통해 프로젝트 관리의 복잡함을 해결하고, 파편화된 정보를 한눈에 명확하게 정리하세요.<br/>

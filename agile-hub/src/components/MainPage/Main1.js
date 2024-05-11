@@ -26,12 +26,12 @@ function Main1() {
         fontSize: '3.5rem',
         fontWeight: isHighlighted ? '900' : 'bold',
         marginBottom: '20px',
-        color: isHighlighted ? '#1F2CFF' : '#000',  // 강조 색상 추가
+        color: isHighlighted ? '#1F2CFF' : '#000',  
     };
 
     const bodyStyle = {
         fontSize: '2rem',
-        fontWeight: isHighlighted ? 'bold' : 'normal', // 본문 굵기 변경
+        fontWeight: isHighlighted ? 'bold' : 'normal', 
     };
 
     const imagePlaceholderStyle = {
@@ -48,7 +48,7 @@ function Main1() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 100) {  // 스크롤 위치에 따라 강조 여부 결정
+            if (window.scrollY > 100) {  
                 setIsHighlighted(true);
             } else {
                 setIsHighlighted(false);
