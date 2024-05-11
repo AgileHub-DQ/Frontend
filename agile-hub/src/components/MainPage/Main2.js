@@ -6,8 +6,9 @@ function Main2() {
         flexDirection: 'column',    // 전체 컨테이너를 세로로 배치
         alignItems: 'center',       // 센터 정렬
         padding: '20px',
-        backgroundColor: '#f0f0f0',
-        height: '100%'
+        // backgroundColor: '#f0f0f0',
+        height: '100%', 
+        backgroundColor: 'orange',
     };
 
     const headerStyle = {

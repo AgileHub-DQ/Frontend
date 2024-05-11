@@ -6,10 +6,11 @@ function Main1() {
         justifyContent: 'space-between',
         padding: '30px',
         height: '30vh',
-        backgroundColor: '#f0f0f0',
+        // backgroundColor: '#f0f0f0',
         fontSize: '16px', 
         color: '#333', 
-        alignItems: 'center'
+        alignItems: 'center', 
+        backgroundColor: 'red',
     };
 
     const textStyle = {

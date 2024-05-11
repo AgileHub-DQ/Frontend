@@ -8,7 +8,7 @@ import FeedbackArrow from "../../assets/FeedbackArrow.png";
 
 function Main4() {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'green' }}>
             <div className='leftContain' style={{ width: '50%' }}>
                 <img src={AgileCircle} alt="Agile cycle with planning, design, development, testing, and feedback"/>
             </div>

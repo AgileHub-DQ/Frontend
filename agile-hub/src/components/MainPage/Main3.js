@@ -6,8 +6,9 @@ function Main3() {
         flexDirection: 'column',    // 세로 방향으로 요소들을 정렬
         alignItems: 'center',       // 센터 정렬
         padding: '20px',
-        backgroundColor: '#f0f0f0',
-        height: '100%'
+        // backgroundColor: '#f0f0f0',
+        height: '100%', 
+        backgroundColor: 'yellow',
     };
 
     const descriptionStyle = {

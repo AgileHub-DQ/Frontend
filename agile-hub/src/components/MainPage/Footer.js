@@ -3,18 +3,18 @@ import LogoImage from "../../assets/logo.png";
 
 function Footer() {
     const footerStyle = {
-        display: 'flex',             // Flexbox layout 사용
-        justifyContent: 'space-between', // 양쪽에 자식 요소 배치
-        alignItems: 'center',        // 가로 선상에 요소들을 중앙 정렬
-        padding: '1rem 2rem',        // 상하 1rem, 좌우 2rem 패딩
-        backgroundColor: '#EEF5FF',  // 배경색
-        border: 'solid 1px #ccc',    // 테두리
-        height: '5rem'               // 높이 설정
+        display: 'flex',             
+        justifyContent: 'space-between',
+        alignItems: 'center',       
+        padding: '1rem 2rem',       
+        backgroundColor: '#FFFFFF', 
+        border: 'solid 1px #ccc',   
+        height: '10rem'   
     }
 
     const logoStyle = {
-        maxWidth: '150px',           // 로고 최대 너비 제한
-        height: 'auto'               // 높이 자동 조절
+        width: '300px',         
+        height: 'auto'              
     }
 
     const LogoTextStyle = {
@@ -22,9 +22,9 @@ function Footer() {
         fontFamily: 'Abril Fatface', 
         fontSize: '3.125rem',
         fontStyle: 'normal',
-        fontWeight: '400',
+        fontWeight: '800',
         lineHeight: 'normal',
-        marginRight: '0.5rem'       // 오른쪽 마진 추가
+        marginRight: '0.5rem'       
     }
 
     const nameTextStyle = { 
