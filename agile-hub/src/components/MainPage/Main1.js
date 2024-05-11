@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "../../css/MainPage/Main1.css"
 
 function Main1() {
     const containerStyle = {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '30px',
-        height: '30vh',
-        // backgroundColor: '#f0f0f0',
+        height: '100vh',
         fontSize: '16px', 
         color: '#333', 
         alignItems: 'center', 
-        backgroundColor: 'red',
     };
 
     const textStyle = {
@@ -21,14 +20,18 @@ function Main1() {
         padding: '20px'
     };
 
+    const [isHighlighted, setIsHighlighted] = useState(false);
+
     const titleStyle = {
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        marginBottom: '20px' // 제목과 본문 사이의 간격
+        fontSize: '3.5rem',
+        fontWeight: isHighlighted ? '900' : 'bold',
+        marginBottom: '20px',
+        color: isHighlighted ? '#1F2CFF' : '#000',  // 강조 색상 추가
     };
 
     const bodyStyle = {
-        fontSize: '1rem' // 본문 폰트 사이즈
+        fontSize: '2rem',
+        fontWeight: isHighlighted ? 'bold' : 'normal', // 본문 굵기 변경
     };
 
     const imagePlaceholderStyle = {
@@ -43,11 +46,29 @@ function Main1() {
         borderRadius: '8px'
     };
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) {  // 스크롤 위치에 따라 강조 여부 결정
+                setIsHighlighted(true);
+            } else {
+                setIsHighlighted(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
         <div style={containerStyle}>
             <div style={textStyle}>
-                <div style={titleStyle}>
+                <div style={titleStyle} className="typing1">
                     AgileHub와 함께하면 어떤 변화도 문제가 되지 않아요<br/>
+                </div>
+                <div style={titleStyle} className="typing2">
                     유연한 프로젝트 관리를 직접 경험해보세요!
                 </div>
                 <div style={bodyStyle}>
