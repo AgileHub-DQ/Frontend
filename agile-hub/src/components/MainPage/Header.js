@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import LogoImage from "../../assets/logo.png";
+import Button from "../MyPage/Button"; 
 
 function Header() {
     const navigate = useNavigate();
@@ -17,8 +18,8 @@ function Header() {
     return (
         <div style={headerStyle}>
             <img src={LogoImage} alt="AgileHub Logo" style={{ width: '300px' }} />
-            <button style={{ padding: '0.5rem 1rem', backgroundColor: 'blue', color: 'white', borderRadius: '20px' }}
-            onClick={() => navigate('/login')}>Sign In</button>
+            <Button style={{ padding: '0.5rem 1rem', backgroundColor: 'blue', color: 'white', borderRadius: '20px' }}
+            onClick={() => navigate('/login')}>Sign In</Button>
         </div>
     );
 }
