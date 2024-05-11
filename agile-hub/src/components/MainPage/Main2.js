@@ -3,46 +3,45 @@ import React from "react";
 function Main2() {
     const containerStyle = {
         display: 'flex',
-        flexDirection: 'column',    // 전체 컨테이너를 세로로 배치
-        alignItems: 'center',       // 센터 정렬
-        padding: '20px',
-        // backgroundColor: '#f0f0f0',
-        height: '100%', 
-        backgroundColor: 'orange',
+        flexDirection: 'column',    
+        alignItems: 'center',       
+        padding: '10%',
+        backgroundColor: '#f0f0f0',
+        height: '30vh', 
     };
 
     const headerStyle = {
-        width: '100%',             // 헤더의 너비를 전체로 설정
-        textAlign: 'center',       // 중앙 정렬
-        fontSize: '3rem',          // 폰트 크기
-        fontWeight: 'bold',        // 굵은 글씨체
-        marginBottom: '40px'       // 하단 섹션과의 간격
+        width: '100%',             
+        textAlign: 'center',     
+        fontSize: '3rem',       
+        fontWeight: 'bold',        
+        marginBottom: '40px'       
     };
 
     const horizontalContainerStyle = {
         display: 'flex',
-        flexDirection: 'row',      // 가로 방향으로 섹션들을 배치
-        justifyContent: 'center',  // 중앙 정렬
-        alignItems: 'flex-start',  // 아이템들을 상단 정렬
-        overflowX: 'auto',         // 가로 스크롤
-        width: '100%'              // 너비 전체 사용
+        flexDirection: 'row',     
+        justifyContent: 'center',  
+        alignItems: 'flex-start',  
+        overflowX: 'auto',        
+        width: '100%'             
     };
 
     const sectionStyle = {
-        width: '30%',              // 섹션 너비
-        margin: '0 10px',          // 좌우 마진
-        textAlign: 'left'          // 텍스트 왼쪽 정렬
+        width: '30%',             
+        margin: '0 10px',          
+        textAlign: 'left'         
     };
 
     const titleStyle = {
-        fontSize: '2rem',        // 제목 폰트 사이즈
-        fontWeight: 'bold',        // 폰트 굵기
-        marginBottom: '20px'       // 제목과 본문 사이 간격
+        fontSize: '2rem',      
+        fontWeight: 'bold',        
+        marginBottom: '20px'     
     };
 
     const bodyStyle = {
-        fontSize: '0.8rem',        // 본문 폰트 사이즈
-        lineHeight: '1.6'          // 줄 간격
+        fontSize: '0.8rem',       
+        lineHeight: '1.6'         
     };
 
     return (
