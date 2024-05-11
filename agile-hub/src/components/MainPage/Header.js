@@ -16,7 +16,7 @@ function Header() {
 
     return (
         <div style={headerStyle}>
-            <img src={LogoImage} alt="AgileHub Logo" style={{ maxWidth: '150px' }} />
+            <img src={LogoImage} alt="AgileHub Logo" style={{ width: '300px' }} />
             <button style={{ padding: '0.5rem 1rem', backgroundColor: 'blue', color: 'white', borderRadius: '20px' }}
             onClick={() => navigate('/login')}>Sign In</button>
         </div>
