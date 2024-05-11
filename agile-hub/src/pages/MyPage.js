@@ -90,7 +90,7 @@ function ProjectsList() {
 
   const projectItem = {
     marginTop: '2rem',
-    background: '#D3E7FA',
+    background: '#F2F1F7',
     borderRadius: '20px',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     padding: '20px',
@@ -100,36 +100,69 @@ function ProjectsList() {
     width:'80%'
   }
 
+  const projectName = { 
+    fontFamily: "Mona Sans", 
+    fontSize: "24px", 
+    fontWeight: "600", 
+    color: "black"
+  }
+
+  const projectKey = { 
+    fontFamily: "Mona Sans", 
+    fontSize: "18px", 
+    fontWeight: "400", 
+    color: "black"
+  }
+
+  const projectCreatedAt = { 
+    fontFamily: "Mona Sans", 
+    fontSize: "18px", 
+    fontWeight: "800", 
+    color: "gray"
+  }
+
+  const inputStyle = { 
+    borderRadius: '5px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    border: 'none',
+    padding: '10px 20px',
+  }
+
   return (
     <div className="container">
       <Menubar/>
       <div style={{width:'100%', height:'100%'}}>
       <Header/>
-      <div style={{background: "lightyellow",paddingLeft: '5%', width:'100%'}}>
-      <h1>프로젝트 목록</h1>
+      <div style={{paddingLeft: '5%', width:'100%'}}>
+      <h1>나의 프로젝트 목록</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
         {projects.map(project => (
           <li key={project.id} style={projectItem}>
             {editingProjectId === project.id ? (
+              // 스타일 수정
               <>
                 <input
                   type="text"
                   value={editedName}
                   onChange={(e) => setEditedName(e.target.value)}
+                  style={inputStyle}
                 />
                 <input
                   type="text"
                   value={editedKey}
                   onChange={(e) => setEditedKey(e.target.value)}
+                  style={inputStyle}
                 />
-                <button onClick={() => saveProject(project)}>저장하기</button>
+                <Button onClick={() => saveProject(project)}>저장하기</Button>
               </>
             ) : (
               <>
                 <div>
-                  <div>프로젝트명: {project.name}</div> 
-                  <div>생성일: {project.createdAt}</div>
+                  <div style={projectName}>{project.name}</div> 
+                  <div style={projectKey}>{project.key}</div> 
+                  <div style={projectCreatedAt}>{project.createdAt}</div>
                 </div>
                 <Button onClick={() => editProject(project)}>수정하기</Button>
                 <Button onClick={() => deleteProject}>삭제하기</Button>

@@ -1,6 +1,5 @@
 import React from 'react';
 
-// 버튼 스타일을 정의하는 객체
 const buttonStyle = {
   backgroundColor: 'blue',
   color: 'white',
