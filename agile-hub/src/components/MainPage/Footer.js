@@ -7,7 +7,7 @@ function Footer() {
         justifyContent: 'space-between',
         alignItems: 'center',       
         padding: '1rem 2rem',       
-        backgroundColor: '#FFFFFF', 
+        backgroundColor: '#EEF5FF', 
         border: 'solid 1px #ccc',   
         height: '10rem'   
     }
