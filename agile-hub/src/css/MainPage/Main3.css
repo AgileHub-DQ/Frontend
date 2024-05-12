@@ -1,0 +1,22 @@
+.cardHoverEffect {
+  width: 30%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flexdirection: 'column';
+  alignitems: 'center';
+  transition: background-color 0.3s ease; /* 배경색 변화에 부드러운 전환 효과 적용 */
+
+  /* width: '30%', 
+  backgroundColor: '#fff', 
+  boxShadow: '0 4px 8px rgba(0,0,0,0.1)', 
+  padding: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center' */
+}
+
+.cardHoverEffect:hover {
+  background-color: red; /* 마우스 오버 시 배경색을 빨간색으로 변경 */
+}
