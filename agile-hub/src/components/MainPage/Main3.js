@@ -1,5 +1,4 @@
 import React from "react";
-import "../../css/MainPage/Main3.css"; 
 
 function Main3() {
     const containerStyle = {
