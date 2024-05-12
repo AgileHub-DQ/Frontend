@@ -7,8 +7,15 @@ import TestArrow from "../../assets/TestArrow.png";
 import FeedbackArrow from "../../assets/FeedbackArrow.png"; 
 
 function Main4() {
+    const container = { 
+        display: 'flex',
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        background: 'green'
+    }
+
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'green' }}>
+        <div style={container}>
             <div className='leftContain' style={{ width: '50%' }}>
                 <img src={AgileCircle} alt="Agile cycle with planning, design, development, testing, and feedback"/>
             </div>
