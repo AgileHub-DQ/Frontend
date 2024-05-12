@@ -11,15 +11,29 @@ function Main4() {
         display: 'flex',
         justifyContent: 'center', 
         alignItems: 'center', 
-        background: 'green'
+        background: '#F0F0F0', 
+        height: '80vh'
+    }
+
+    const leftContain = { 
+        width: '50%', 
+        display: 'flex',
+        justifyContent: 'center', 
+        alignItems: 'center', 
+    }
+
+    const rightContain = { 
+        width: '50%', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
     }
 
     return (
         <div style={container}>
-            <div className='leftContain' style={{ width: '50%' }}>
+            <div className='leftContain' style={leftContain}>
                 <img src={AgileCircle} alt="Agile cycle with planning, design, development, testing, and feedback"/>
             </div>
-            <div className='rightContain' style={{ width: '50%' }}>
+            <div className='rightContain' style={rightContain}>
                 <div>
                     <img src={PlanArrow} alt="Planning stage of the agile cycle, essential for defining project scope and objectives"/>
                     <p>프로젝트의 범위와 목표 설정이 명확하며 AgileHub를 통하여 목표달성을 촉진시키며, 목표한 계획을 세울 수 있게 도와줍니다.</p>

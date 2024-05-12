@@ -8,7 +8,7 @@ function Main2() {
         alignItems: 'center',       
         padding: '10%',
         backgroundColor: '#f0f0f0',
-        height: '35vh', 
+        height: '45vh', 
     };
 
     const headerStyle = {
