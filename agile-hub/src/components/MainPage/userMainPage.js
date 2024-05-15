@@ -62,13 +62,14 @@ function UserMainPage() {
   const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey;
 
-
   useEffect(() => {
     // 로그인 상태 확인
     if (!authToken) {
       navigate('/login');
     }
   }, [authToken, navigate]);
+
+  console.log("오늘은 석가탄신일~! 여기는 UserMainPage~~~~~~~"); 
 
   return (
     <div className='sprint_container'>

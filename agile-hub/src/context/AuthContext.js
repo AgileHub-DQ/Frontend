@@ -38,6 +38,8 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('token') || null);
 
+  
+
   const login = (token) => {
     localStorage.setItem('token', token);
     setAuthToken(token);

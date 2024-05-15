@@ -198,6 +198,8 @@ function ProjectsList() {
   const [editedName, setEditedName] = useState(''); 
   const [editedKey, setEditedKey] = useState('');
 
+  console.log("오늘은 석가탄신일~! 여기는 MainPage~~~~~~~"); 
+
   const fetchProjects = async () => {
     if (!authToken) {
       setError('인증 토큰이 없습니다. 로그인이 필요합니다.');

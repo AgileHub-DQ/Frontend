@@ -12,6 +12,8 @@ function LoginPage() {
 
   console.log(isLoggedIn); 
 
+  console.log("오늘은 석가탄신일~! 여기는 LoginPage~~~~~~~"); 
+
   return (
     <div className="container">
       <div className="left-panel">

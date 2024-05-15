@@ -78,16 +78,21 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   console.log("오늘은 석가탄신일~"); 
-  
+
   useEffect(() => {
     if (authToken) {
       console.log('로그인 성공');
       setIsLoggedIn(true);
     } else {
+      console.log('로그인 실패 개갓이실패 ~~~~~~~~~!!!!!!!!!!!!!!!!!!!!!!!');
       setIsLoggedIn(false);
+      // console('로그인 정보: 실패? 성공?' + setIsLoggedIn); 
+      console.log(isLoggedIn); 
     }
   }, [authToken]);
 
+  console.log("authToken" + authToken); 
+  
   return (
     <div>
       <Router>
