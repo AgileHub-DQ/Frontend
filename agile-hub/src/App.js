@@ -16,6 +16,7 @@ import SingleIssue from './pages/SingleIssue.js';
 import DraggableList from './pages/DraggableList.js';
 import SprintAllList from './components/SprintPage/SprintAllList.js';
 import UserMainPage from './components/MainPage/userMainPage.js'; 
+import AuthSuccess from './components/LoginPage/AuthSuccess.js'; 
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/backlog" element={<BacklogPage />} />
           <Route path="/createProject" element={<CreateProject />} />
           <Route path="/myPage" element={<MyPage />} />
+          <Route path="/auth/success" element={<AuthSuccess />} />
           <Route path="/issue" element={<IssuePage />} />
           <Route path="/checkIssue" element={<CheckIssue />} />
           <Route path="/sprint" element={<SprintPage />} />
