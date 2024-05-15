@@ -23,7 +23,7 @@
 
 // export default AuthSuccess;
 import React, { useEffect } from 'react';
-import { useAuth } from "../../context/AuthContext"; // 경로는 실제 경로에 맞게 조정해주세요.
+import { useAuth } from "../../context/AuthContext"; 
 
 const AuthSuccess = () => {
   const { login } = useAuth();

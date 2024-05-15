@@ -12,12 +12,14 @@
 // };
 // export default KakaoLoginButton;
 import React from 'react';
+
 import '../../css/LoginPage/KakaoLoginButton.css';
 
 const KakaoLoginButton = () => {
   const handleLogin = () => {
     window.location.href = 'https://api.agilehub.store/oauth2/authorization/kakao';
   };
+
 
   return (
     <div className="kakao-login-button" onClick={handleLogin}>

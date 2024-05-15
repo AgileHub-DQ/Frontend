@@ -1,30 +1,99 @@
+// // App.js
+// import React, { useState } from 'react';
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import './App.css';
+// import MainPage from './pages/MainPage.js'; 
+// import LoginPage from './pages/LoginPage.js'; 
+// import BacklogPage from './pages/BacklogPage.js'; 
+// import CreateProject from './pages/CreateProject.js'; 
+// import MyPage from './pages/MyPage.js'; 
+// import IssuePage from './pages/Issue.js';
+// import CheckIssue from './pages/CheckIssue.js'; 
+// import TimelinePage from "./pages/TimelinePage.js"; 
+// import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.js";
+// import SprintPage from './pages/SprintPage.js'; 
+// import IssueComment from './pages/IssueComment.js';
+// import SingleIssue from './pages/SingleIssue.js'; 
+// import DraggableList from './pages/DraggableList.js';
+// import SprintAllList from './components/SprintPage/SprintAllList.js';
+// import UserMainPage from './components/MainPage/userMainPage.js'; 
+// import AuthSuccess from './components/LoginPage/AuthSuccess.js'; 
+
+// function App() {
+//   // 로그인 상태를 관리하기 위한 상태 변수 (예시로 useState 사용)
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+//   return (
+//     <div>
+//       <Router>
+//         <Routes>
+//           <Route path="/" element={isLoggedIn ? <UserMainPage /> : <MainPage />} />
+//           <Route path="/draggablelist" element={<DraggableList />} />
+//           <Route path="/login" element={<LoginPage />} />
+//           <Route path="/backlog" element={<BacklogPage />} />
+//           <Route path="/createProject" element={<CreateProject />} />
+//           <Route path="/myPage" element={<MyPage />} />
+//           <Route path="/auth/success" element={<AuthSuccess />} />
+//           <Route path="/issue" element={<IssuePage />} />
+//           <Route path="/checkIssue" element={<CheckIssue />} />
+//           <Route path="/sprint" element={<SprintPage />} />
+//           <Route path="/timeline" element={<TimelinePage />} />
+//           <Route path="/createSprintModal" element={<CreateSprintModal />} />
+//           <Route path="/issueComment" element={<IssueComment />} />
+//           <Route path="/singleIssue" element={<SingleIssue />} />
+//           <Route path="/sprintAllList" element={<SprintAllList />} />
+//           <Route path="/userMainPage" element={<UserMainPage />} />
+//         </Routes>
+//       </Router>
+//     </div>
+//   );
+// }
+
+// export default App;
 // App.js
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// src/App.js
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import MainPage from './pages/MainPage.js'; // 메인 페이지 컴포넌트
-import LoginPage from './pages/LoginPage.js'; // 로그인 페이지 컴포넌트
-import BacklogPage from './pages/BacklogPage.js'; // 백로그 페이지 컴포넌트
-import CreateProject from './pages/CreateProject.js'; // 프로젝트 생성 페이지 
-import MyPage from './pages/MyPage.js'; //마이페이지 
-import IssuePage from './pages/Issue.js'; //이슈페이지
-import CheckIssue from './pages/CheckIssue.js'; 
-import TimelinePage from "./pages/TimelinePage.js"; 
-import CreateSprintModal from "./components/BacklogPage/modal/CreateSprintModal.js";
-import SprintPage from './pages/SprintPage.js'; //스프린트 페이지
+import MainPage from './pages/MainPage.js';
+import LoginPage from './pages/LoginPage.js';
+import BacklogPage from './pages/BacklogPage.js';
+import CreateProject from './pages/CreateProject.js';
+import MyPage from './pages/MyPage.js';
+import IssuePage from './pages/Issue.js';
+import CheckIssue from './pages/CheckIssue.js';
+import TimelinePage from './pages/TimelinePage.js';
+import CreateSprintModal from './components/BacklogPage/modal/CreateSprintModal.js';
+import SprintPage from './pages/SprintPage.js';
 import IssueComment from './pages/IssueComment.js';
-import SingleIssue from './pages/SingleIssue.js'; 
+import SingleIssue from './pages/SingleIssue.js';
 import DraggableList from './pages/DraggableList.js';
 import SprintAllList from './components/SprintPage/SprintAllList.js';
-import UserMainPage from './components/MainPage/userMainPage.js'; 
-import AuthSuccess from './components/LoginPage/AuthSuccess.js'; 
+import UserMainPage from './components/MainPage/userMainPage.js';
+import AuthSuccess from './components/LoginPage/AuthSuccess.js';
+import { useAuth } from './context/AuthContext';
 
 function App() {
+  const { authToken } = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  console.log("오늘은 석가탄신일~"); 
+  
+  useEffect(() => {
+    if (authToken) {
+      console.log('로그인 성공');
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [authToken]);
+
   return (
     <div>
       <Router>
         <Routes>
-        <Route path="/draggablelist" element={<DraggableList />} />
-          <Route path="/" element={<MainPage />} />
+          <Route path="/draggablelist" element={<DraggableList />} />
+          <Route path="/" element={isLoggedIn ? <UserMainPage /> : <MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/backlog" element={<BacklogPage />} />
           <Route path="/createProject" element={<CreateProject />} />
@@ -43,7 +112,6 @@ function App() {
       </Router>
     </div>
   );
-  
 }
 
 export default App;
