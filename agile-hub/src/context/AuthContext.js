@@ -27,31 +27,26 @@
 // src/context/AuthContext.js
 // src/context/AuthContext.js
 // src/context/AuthContext.js
-import React, { createContext, useContext, useState } from 'react';
+// AuthContext.js
+// AuthContext.js
+// AuthContext.js
+// AuthContext.js
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext({
-  authToken: null,
-  login: () => {},
-  logout: () => {}
-});
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(localStorage.getItem('token') || null);
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
 
-  
-
-  const login = (token) => {
-    localStorage.setItem('token', token);
-    setAuthToken(token);
-  };
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setAuthToken(null);
-  };
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setAuthToken(token);
+    }
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ authToken, login, logout }}>
+    <AuthContext.Provider value={{ authToken, setAuthToken }}>
       {children}
     </AuthContext.Provider>
   );
