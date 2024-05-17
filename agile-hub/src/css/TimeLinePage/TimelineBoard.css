@@ -1,4 +1,4 @@
-.timeline-container{
+/* .timeline-container{
     display: flex;
     flex-direction: row;
 }
@@ -10,4 +10,77 @@
 .table{
     width: 200px;
     height: 15px;
+} */
+.timeline-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.timeline-issue {
+  width: 300px;
+  background-color: #f4f4f4;
+}
+
+.timeline-issue table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.timeline-issue th,
+.timeline-issue td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.timeline-issue .status-text {
+  color: #43a047;
+  font-weight: bold;
+}
+
+.timeline-board {
+  flex: 1;
+  position: relative;
+  padding-left: 20px;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.timeline-months {
+  display: flex;
+  position: relative;
+  height: 30px;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.timeline-month {
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  width: 60px; /* adjust based on the dayWidth */
+}
+
+.timeline-grid {
+  position: relative;
+  height: 100%;
+}
+
+.timeline-bar {
+  position: absolute;
+  height: 20px; /* 막대 높이 */
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #6495ed; /* 통일된 색상 */
+  margin-top: 20px; /* 막대 사이의 간격 조정 */
+}
+
+.timeline-deadline {
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  background-color: red;
+  z-index: 1;
 }
