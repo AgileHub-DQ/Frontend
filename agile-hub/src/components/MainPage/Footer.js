@@ -35,13 +35,17 @@ function Footer() {
         fontWeight: '600',
         lineHeight: 'normal'
     }
+    
+    const boldStyle = { 
+        fontWeight: '800'
+    }
 
     return (
         <div style={footerStyle}>
             <img src={LogoImage} alt="AgileHub Logo" style={logoStyle}/>
             <div style={{ display: 'flex', alignItems: 'center' }}> 
-                <span style={LogoTextStyle}>Dynamic-QD</span>
-                <span style={nameTextStyle}>김민상 최재영 신승혜 주원희</span>
+                {/* <span style={LogoTextStyle}>Dynamic-QD</span> */}
+                <span style={nameTextStyle}><span style={boldStyle}>문의 : agilehubdq@gmail.com</span><br/>©️ 2024 All rights reserved</span>
             </div>
         </div>
     );

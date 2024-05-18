@@ -59,7 +59,7 @@ function Menubar() {
           <img src={projectIcon} alt="Projects" style={imageStyle}/>
           <span style={textStyle}>프로젝트</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/login')} >
+        <div style={menuItemStyle} onClick={() => navigate('/memberManage')} >
           <img src={membersIcon} alt="Members" style={imageStyle}/>
           <span style={textStyle}>멤버</span>
         </div>

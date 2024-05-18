@@ -1,7 +1,6 @@
 // LoginPage.js
 import '../css/LoginPage/LoginPage.css';
 import React, { useEffect, useState } from 'react';
-
 import Slider from '../components/LoginPage/Slider.js';
 import KakaoLoginButton from '../components/LoginPage/KakaoLoginButton.js';
 import Logo from '../components/LoginPage/Logo.js';
@@ -12,7 +11,7 @@ function LoginPage() {
 
   console.log(isLoggedIn); 
 
-  console.log("오늘은 석가탄신일~! 여기는 LoginPage~~~~~~~"); 
+  console.log("여기는 LoginPage입니다."); 
 
   return (
     <div className="container">
