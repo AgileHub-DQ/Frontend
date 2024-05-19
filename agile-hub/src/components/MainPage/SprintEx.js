@@ -5,9 +5,14 @@ function SprintEx() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [description, setDescription] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     const handleStart = () => {
-        console.log('Sprint Started', { title, startDate, endDate, description });
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -89,7 +94,7 @@ function SprintEx() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button 
-                    onClick={() => { console.log('Canceled'); }} 
+                    onClick={handleCloseModal} 
                     style={{
                         padding: '10px 20px',
                         marginRight: '10px',
@@ -115,6 +120,45 @@ function SprintEx() {
                     시작
                 </button>
             </div>
+
+            {showModal && (
+                <div style={{
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        padding: '20px',
+                        borderRadius: '4px',
+                        textAlign: 'center',
+                        maxWidth: '400px',
+                        width: '80%',
+                    }}>
+                        <p>테스트용입니다! 프로젝트 생성 먼저 해주세요.</p>
+                        <button
+                            onClick={handleCloseModal}
+                            style={{
+                                backgroundColor: '#007bff',
+                                color: 'white',
+                                padding: '10px 20px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                marginTop: '10px'
+                            }}
+                        >
+                            닫기
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

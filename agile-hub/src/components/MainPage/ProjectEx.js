@@ -7,11 +7,21 @@ const ProjectEx = () => {
   const [isProjectNameEntered, setIsProjectNameEntered] = useState(false);
   const [isProjectKeyEntered, setIsProjectKeyEntered] = useState(false);
   const [error, setError] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setIsProjectNameEntered(projectName.length > 0);
     setIsProjectKeyEntered(projectKey.length > 0);
   }, [projectName, projectKey]);
+
+  const handleButtonClick = (e) => {
+    e.preventDefault(); // Prevent form submission
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className="main-container">
@@ -41,8 +51,47 @@ const ProjectEx = () => {
           />
         </div>
         {error && <p className="error">{error}</p>}
-        <button className="button">프로젝트 생성</button>
+        <button className="button" onClick={handleButtonClick}>프로젝트 생성</button>
       </form>
+
+      {showModal && (
+        <div style={{
+          position: 'fixed',
+          top: '0',
+          left: '0',
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            padding: '20px',
+            borderRadius: '4px',
+            textAlign: 'center',
+            maxWidth: '400px',
+            width: '80%',
+          }}>
+            <p>테스트용입니다! 프로젝트 생성 먼저 해주세요.</p>
+            <button
+              onClick={handleCloseModal}
+              style={{
+                backgroundColor: '#007bff',
+                color: 'white',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                marginTop: '10px'
+              }}
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -279,7 +279,7 @@ function UserMainPage() {
             position: relative;
             max-width: 800px; /* 최대 너비 조정 */
             width: 70%;
-            height: 90%; /* 높이 조정 */
+            height: 70%; /* 높이 조정 */
             overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
             z-index: 1001;
           }

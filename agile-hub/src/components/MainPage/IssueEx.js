@@ -120,6 +120,45 @@ function IssueEx() {
             >
                 이슈 생성
             </button>
+
+            {showModal && (
+                <div style={{
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        padding: '20px',
+                        borderRadius: '4px',
+                        textAlign: 'center',
+                        maxWidth: '400px',
+                        width: '80%',
+                    }}>
+                        <p>테스트용입니다! 프로젝트 생성 먼저 해주세요.</p>
+                        <button
+                            onClick={handleCloseModal}
+                            style={{
+                                backgroundColor: '#007bff',
+                                color: 'white',
+                                padding: '10px 20px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                marginTop: '10px'
+                            }}
+                        >
+                            닫기
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
