@@ -63,6 +63,10 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Menubar from '../Menubar.js';
 import { useAuth } from '../../context/AuthContext';
+import IssueEx from "../../components/MainPage/IssueEx.js"; 
+import ProjectEx from "../../components/MainPage/ProjectEx.js"; 
+import TimeLineEx from "../../components/MainPage/TimeLineEx.js"; 
+import SprintEx from "../../components/MainPage/SprintEx.js"; 
 
 function UserMainPage() {  
   const navigate = useNavigate();
@@ -115,17 +119,17 @@ function UserMainPage() {
           Agilehub을 미리 사용해보세요!
         </div>
         <div className='projectContainer'>
-          <button className='projectItem' style={{ backgroundColor: '#FCB9AA' }} onClick={() => openModal('이슈 생성해보기')}>이슈 생성해보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#A2E1DB' }} onClick={() => openModal('프로젝트 생성해보기')}>프로젝트 생성해보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#F6EAC2' }} onClick={() => openModal('타임라인 미리보기')}>타임라인 미리보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#CBAACB' }} onClick={() => openModal('스프린트 생성해보기')}>스프린트 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#FCB9AA' }} onClick={() => openModal(<IssueEx/>)}>이슈 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#A2E1DB' }} onClick={() => openModal(<ProjectEx/>)}>프로젝트 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#F6EAC2' }} onClick={() => openModal(<TimeLineEx/>)}>타임라인 미리보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#CBAACB' }} onClick={() => openModal(<SprintEx/>)}>스프린트 생성해보기</button>
         </div>
       </div>
       {modalContent && (
         <div className='modal'>
           <div className='modalContent'>
             <span className='closeButton' onClick={closeModal}>&times;</span>
-            <div>{modalContent}</div> {/* 모달 내용 표시 */}
+            <div>{modalContent}</div> 
           </div>
         </div>
       )}
