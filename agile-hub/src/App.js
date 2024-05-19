@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/singleIssue" element={<SingleIssue />} />
         <Route path="/sprintAllList" element={<SprintAllList />} />
         <Route path="/userMainPage" element={<UserMainPage />} />
-        <Route path="/memberManage" element={<MemberManage />} />
+        <Route path="/emberManage" element={<UserMainPage />} />
       </Routes>
     </Router>
   );
