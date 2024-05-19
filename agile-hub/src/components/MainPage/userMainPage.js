@@ -79,12 +79,18 @@ function UserMainPage() {
 
   console.log("여기는 UserMainPage(로그인 시 유저메인페이지)"); 
 
+  const waveText = "Agilehub는 쉽고 빠르게 프로젝트를 생성할 수 있는 템플릿을 제공합니다!";
+
   return (
     <div className='sprint_container'>
       <Menubar/>
       <div className='mainContent'>
         <div className='banner'>
-          <p>우리 Agilehub는 쉽고 빠르게 프로젝트를 생성할 수 있는 템플릿을 제공합니다</p>
+          {waveText.split("").map((char, index) => (
+            <span key={index} className='waveChar' style={{ animationDelay: `${index * 0.1}s` }}>
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
         </div>
         <div className='projectCard'>
           <div className='projectDate'>{formattedDate}</div>
@@ -94,11 +100,14 @@ function UserMainPage() {
             </span>
           </button>
         </div>
+        <div className='highlightText'>
+          Agilehub을 미리 사용해보세요!
+        </div>
         <div className='projectContainer'>
-          <div className='projectItem' style={{ backgroundColor: '#f1c40f' }}>Project 1</div>
-          <div className='projectItem' style={{ backgroundColor: '#e74c3c' }}>Project 2</div>
-          <div className='projectItem' style={{ backgroundColor: '#2ecc71' }}>Project 3</div>
-          <div className='projectItem' style={{ backgroundColor: '#3498db' }}>Project 4</div>
+          <button className='projectItem' style={{ backgroundColor: '#FCB9AA' }}>이슈 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#A2E1DB' }}>프로젝트 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#F6EAC2' }}>타임라인 미리보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#CBAACB' }}>스프린트 생성해보기</button>
         </div>
       </div>
       <style>
@@ -119,17 +128,23 @@ function UserMainPage() {
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            animation: slideIn 1s ease-in-out;
+            font-size: 40px;
+            overflow: hidden;
+            white-space: nowrap;
           }
 
-          @keyframes slideIn {
-            from {
-              opacity: 0;
-              transform: translateX(-100%);
+          .waveChar {
+            display: inline-block;
+            animation: wave 1s infinite;
+            transition: transform 0.2s;
+          }
+
+          @keyframes wave {
+            0%, 100% {
+              transform: translateY(0);
             }
-            to {
-              opacity: 1;
-              transform: translateX(0);
+            50% {
+              transform: translateY(-10px);
             }
           }
 
@@ -170,24 +185,53 @@ function UserMainPage() {
             background-color: #0071e2;
           }
 
+          .highlightText {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin: 20px 0;
+            animation: fadeIn 1s ease-in-out;
+          }
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+
           .projectContainer {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 100px 5px; /* 행 간격을 줄이고 열 간격을 늘림 */
+            gap: 10px;
             justify-items: center;
             margin-top: 20px;
           }
 
           .projectItem {
-            width: 800px;
+            width: 600px;
             height: 400px;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 20px;
+            color: #333;
+            font-size: 30px;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+          }
+
+          .projectItem:hover {
+            transform: scale(1.05);
+            background-color: #333; /* 원하는 색상으로 변경 가능 */
+            color: #fff;
           }
         `}
       </style>
