@@ -125,7 +125,7 @@ function UserMainPage() {
         <div className='modal'>
           <div className='modalContent'>
             <span className='closeButton' onClick={closeModal}>&times;</span>
-            <p>{modalContent}</p>
+            <div>{modalContent}</div> {/* 모달 내용 표시 */}
           </div>
         </div>
       )}
@@ -256,7 +256,7 @@ function UserMainPage() {
           /* 모달 스타일 */
           .modal {
             display: flex;
-            justify-content: center;
+            justify-content: center; /* 가운데 정렬 */
             align-items: center;
             position: fixed;
             top: 0;
@@ -264,6 +264,7 @@ function UserMainPage() {
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
           }
 
           .modalContent {
@@ -272,8 +273,11 @@ function UserMainPage() {
             border-radius: 10px;
             text-align: center;
             position: relative;
-            max-width: 500px;
-            width: 80%;
+            max-width: 800px; /* 최대 너비 조정 */
+            width: 70%;
+            height: 90%; /* 높이 조정 */
+            overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+            z-index: 1001;
           }
 
           .closeButton {
