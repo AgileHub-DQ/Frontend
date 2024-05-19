@@ -275,7 +275,7 @@ function UserMainPage() {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
+            // text-align: center;
             position: relative;
             max-width: 800px; /* 최대 너비 조정 */
             width: 70%;
