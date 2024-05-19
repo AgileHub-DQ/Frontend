@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function IssueEx() {
+    const [selectedStage, setSelectedStage] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleStageClick = (stage) => {
+        setSelectedStage(stage);
+    };
+
+    const handleButtonClick = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '500px', margin: '0 auto' }}>
             <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
@@ -32,19 +47,24 @@ function IssueEx() {
 
             <div style={{ display: 'flex', marginBottom: '20px' }}>
                 {['기획', '디자인', '개발', '테스트', '피드백'].map((stage, index) => (
-                    <div key={index} style={{
-                        flex: 1,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        padding: '10px 0',
-                        margin: '0 5px',
-                        borderRadius: '4px',
-                        background: ['#E97373', '#945EB5', '#3FA976', '#FFBF43', '#95ADF6'][index],
-                        color: 'white',
-                        height: '50px',
-                    }}>
+                    <div
+                        key={index}
+                        onClick={() => handleStageClick(stage)}
+                        style={{
+                            flex: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            padding: '10px 0',
+                            margin: '0 5px',
+                            borderRadius: '4px',
+                            background: ['#E97373', '#945EB5', '#3FA976', '#FFBF43', '#95ADF6'][index],
+                            color: 'white',
+                            height: '50px',
+                            cursor: 'pointer',
+                            border: selectedStage === stage ? '3px solid blue' : 'none'
+                        }}>
                         {stage}
                     </div>
                 ))}
@@ -73,7 +93,8 @@ function IssueEx() {
                         height: '100px',
                         padding: '10px',
                         border: '1px solid #ccc',
-                        borderRadius: '4px'
+                        borderRadius: '4px',
+                        resize: 'none'
                     }}
                 />
             </div>
@@ -84,16 +105,19 @@ function IssueEx() {
                 <span style={{ marginLeft: '10px' }}>선택된 파일 없음</span>
             </div>
 
-            <button style={{
-                backgroundColor: '#007bff',
-                color: 'white',
-                padding: '10px 20px',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                display: 'block',
-                margin: '0 auto'
-            }}>
+            <button
+                onClick={handleButtonClick}
+                style={{
+                    backgroundColor: '#007bff',
+                    color: 'white',
+                    padding: '10px 20px',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    display: 'block',
+                    margin: '0 auto'
+                }}
+            >
                 이슈 생성
             </button>
         </div>
