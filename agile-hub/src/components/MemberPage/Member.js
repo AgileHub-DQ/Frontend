@@ -78,12 +78,10 @@ function Modal({ isOpen, onClose }) {
           <h2>멤버 초대</h2>
           <button style={closeButtonStyle} onClick={onClose}>&times;</button>
         </div>
-        {/* <p>남은 시트 수: ?</p> */}
         <div style={inputContainerStyle}>
           <input type="email" placeholder="이메일을 입력하세요." style={inputStyle} />
           <select style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}>
             <option>회원</option>
-            {/* Add other options as needed */}
           </select>
         </div>
         <button style={submitButtonStyle}>멤버 초대</button>
@@ -107,10 +105,44 @@ function Member() {
     alignItems: 'center',
   };
 
-  const container = { 
+  const containerStyle = { 
     marginRight: '10%', 
     marginLeft: '23%', 
-    background: 'skyblue'
+  };
+
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginTop: '1rem'
+  };
+
+  const thStyle = {
+    borderBottom: '1px solid #ddd',
+    padding: '0.75rem',
+    textAlign: 'left',
+    fontSize: '1.3rem' // 글씨 크기 조정
+  };
+
+  const tdStyle = {
+    borderBottom: '1px solid #ddd',
+    padding: '0.75rem',
+    textAlign: 'left',
+    verticalAlign: 'middle',
+    fontSize: '1.3rem' // 글씨 크기 조정
+  };
+
+  const profileContainerStyle = {
+    display: 'flex',
+    alignItems: 'center'
+  };
+
+  const profileStyle = {
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    backgroundColor: '#ccc',
+    display: 'inline-block',
+    marginRight: '0.75rem'
   };
 
   const handleOpenModal = () => {
@@ -121,8 +153,37 @@ function Member() {
     setModalOpen(false);
   };
 
+  // 더미 데이터
+  const members = [
+    {
+      name: '김유신',
+      email: 'ymsu7176@naver.com',
+      role: '회원'
+    },
+    {
+      name: 'Edu팀 담당자',
+      email: 'edu@miridish.com',
+      role: '관리자'
+    },
+    {
+      name: 'MRIDU_MIRICANVAS',
+      email: 'syyang@miridish.com',
+      role: '회원'
+    },
+    {
+      name: 'MiriCanvas Help Center',
+      email: 'ymkim@miridish.com',
+      role: '관리자'
+    },
+    {
+      name: 'Wekie Liang',
+      email: 'wekieliang@miridish.com',
+      role: '회원'
+    }
+  ];
+
   return (
-    <div style={container}>
+    <div style={containerStyle}>
       <div style={headerStyle}>
         <div style={titleStyle}>
           <h1>멤버</h1>
@@ -133,6 +194,29 @@ function Member() {
         </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <table style={tableStyle}>
+        <thead>
+          <tr>
+            <th style={thStyle}>이름</th>
+            <th style={thStyle}>이메일</th>
+            <th style={thStyle}>역할</th>
+          </tr>
+        </thead>
+        <tbody>
+          {members.map((member, index) => (
+            <tr key={index}>
+              <td style={tdStyle}>
+                <div style={profileContainerStyle}>
+                  <div style={profileStyle}></div>
+                  <span>{member.name}</span>
+                </div>
+              </td>
+              <td style={tdStyle}>{member.email}</td>
+              <td style={tdStyle}>{member.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
