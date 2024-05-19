@@ -282,6 +282,7 @@ function UserMainPage() {
             height: 70%; /* 높이 조정 */
             overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
             z-index: 1001;
+            
           }
 
           .closeButton {
