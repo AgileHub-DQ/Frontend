@@ -59,7 +59,7 @@
 // export default UserMainPage;
 
 //여기는 로그인로직x, 위에 로그인 로직 o 
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Menubar from '../Menubar.js';
 import { useAuth } from '../../context/AuthContext';
@@ -80,6 +80,17 @@ function UserMainPage() {
   console.log("여기는 UserMainPage(로그인 시 유저메인페이지)"); 
 
   const waveText = "Agilehub는 쉽고 빠르게 프로젝트를 생성할 수 있는 템플릿을 제공합니다!";
+
+  // 모달 상태 관리
+  const [modalContent, setModalContent] = useState(null);
+
+  const openModal = (content) => {
+    setModalContent(content);
+  };
+
+  const closeModal = () => {
+    setModalContent(null);
+  };
 
   return (
     <div className='sprint_container'>
@@ -104,12 +115,20 @@ function UserMainPage() {
           Agilehub을 미리 사용해보세요!
         </div>
         <div className='projectContainer'>
-          <button className='projectItem' style={{ backgroundColor: '#FCB9AA' }}>이슈 생성해보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#A2E1DB' }}>프로젝트 생성해보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#F6EAC2' }}>타임라인 미리보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#CBAACB' }}>스프린트 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#FCB9AA' }} onClick={() => openModal('이슈 생성해보기')}>이슈 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#A2E1DB' }} onClick={() => openModal('프로젝트 생성해보기')}>프로젝트 생성해보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#F6EAC2' }} onClick={() => openModal('타임라인 미리보기')}>타임라인 미리보기</button>
+          <button className='projectItem' style={{ backgroundColor: '#CBAACB' }} onClick={() => openModal('스프린트 생성해보기')}>스프린트 생성해보기</button>
         </div>
       </div>
+      {modalContent && (
+        <div className='modal'>
+          <div className='modalContent'>
+            <span className='closeButton' onClick={closeModal}>&times;</span>
+            <p>{modalContent}</p>
+          </div>
+        </div>
+      )}
       <style>
         {`
           .sprint_container {
@@ -232,6 +251,37 @@ function UserMainPage() {
             transform: scale(1.05);
             background-color: #333; 
             color: #fff;
+          }
+
+          /* 모달 스타일 */
+          .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+          }
+
+          .modalContent {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            max-width: 500px;
+            width: 80%;
+          }
+
+          .closeButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
           }
         `}
       </style>
