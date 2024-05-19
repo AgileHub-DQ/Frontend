@@ -152,26 +152,26 @@ function UserMainPage() {
             display: inline-block;
             border: 1px solid #ddd;
             border-radius: 10px;
-            padding: 20px;
+            padding: 60px; /* 패딩을 늘려 크기를 키움 */
             text-align: center;
             background-color: #f9f9f9;
-            width: 300px;
+            width: 700px; /* 너비를 늘려 크기를 키움 */
             margin-bottom: 20px;
           }
 
           .projectDate {
-            font-size: 18px;
+            font-size: 28px; /* 폰트 크기를 늘려 가독성을 높임 */
             color: #0071e2;
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* 간격을 넓힘 */
           }
 
           .createProjectButton {
             border: 2px solid #24b4fb;
             background-color: #24b4fb;
             border-radius: 0.9em;
-            padding: 0.8em 1.2em;
+            padding: 30px 40px; /* 패딩을 늘려 크기를 키움 */
             transition: all ease-in-out 0.2s;
-            font-size: 20px;
+            font-size: 28px; /* 폰트 크기를 늘려 가독성을 높임 */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -215,7 +215,7 @@ function UserMainPage() {
 
           .projectItem {
             width: 600px;
-            height: 400px;
+            height: 300px;
             border-radius: 10px;
             display: flex;
             justify-content: center;
@@ -230,7 +230,7 @@ function UserMainPage() {
 
           .projectItem:hover {
             transform: scale(1.05);
-            background-color: #333; /* 원하는 색상으로 변경 가능 */
+            background-color: #333; 
             color: #fff;
           }
         `}
