@@ -92,6 +92,7 @@ function Modal({ isOpen, onClose }) {
 
 function Member() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [sortOrder, setSortOrder] = useState('asc');
 
   const headerStyle = {
     display: 'flex',
@@ -120,7 +121,9 @@ function Member() {
     borderBottom: '1px solid #ddd',
     padding: '0.75rem',
     textAlign: 'left',
-    fontSize: '1.3rem' // 글씨 크기 조정
+    fontSize: '1.3rem',
+    cursor: 'pointer', // 글씨 크기 조정
+    userSelect: 'none'
   };
 
   const tdStyle = {
@@ -153,6 +156,10 @@ function Member() {
     setModalOpen(false);
   };
 
+  const handleSort = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
   // 더미 데이터
   const members = [
     {
@@ -182,12 +189,20 @@ function Member() {
     }
   ];
 
+  const sortedMembers = [...members].sort((a, b) => {
+    if (sortOrder === 'asc') {
+      return a.name.localeCompare(b.name);
+    } else {
+      return b.name.localeCompare(a.name);
+    }
+  });
+
   return (
     <div style={containerStyle}>
       <div style={headerStyle}>
         <div style={titleStyle}>
           <h1>멤버</h1>
-          <p style={{ marginLeft: '1rem', color: '#888' }}>프로젝트 멤버 수</p>
+          <p style={{ marginLeft: '1rem', color: '#888' }}>프로젝트 멤버 수: {members.length}</p>
         </div>
         <div>
           <Button onClick={handleOpenModal}>멤버 초대</Button>
@@ -197,13 +212,15 @@ function Member() {
       <table style={tableStyle}>
         <thead>
           <tr>
-            <th style={thStyle}>이름</th>
+            <th style={thStyle} onClick={handleSort}>
+              이름 {sortOrder === 'asc' ? '⬆️' : '⬇️'}
+            </th>
             <th style={thStyle}>이메일</th>
             <th style={thStyle}>역할</th>
           </tr>
         </thead>
         <tbody>
-          {members.map((member, index) => (
+          {sortedMembers.map((member, index) => (
             <tr key={index}>
               <td style={tdStyle}>
                 <div style={profileContainerStyle}>
