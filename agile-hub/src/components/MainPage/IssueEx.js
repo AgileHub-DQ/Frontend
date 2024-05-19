@@ -17,7 +17,7 @@ function IssueEx() {
     };
 
     return (
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '500px', margin: '0 auto' }}>
+        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '500px', margin: '0 auto', marginTop: '100px' }}>
             <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
                 <div style={{ width: '40px', height: '40px', backgroundColor: '#00FF00', marginRight: '10px' }}></div>
                 <input
