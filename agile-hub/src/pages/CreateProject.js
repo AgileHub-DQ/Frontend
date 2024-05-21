@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/CreateProject.css';
+import { useAuth } from '../context/AuthContext';
 
 function CreateProject() {
   const [projectName, setProjectName] = useState('');
@@ -8,6 +9,7 @@ function CreateProject() {
   const [error, setError] = useState('');
   const [isProjectNameEntered, setIsProjectNameEntered] = useState(false);
   const [isProjectKeyEntered, setIsProjectKeyEntered] = useState(false);
+  const { authToken } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,12 +18,12 @@ function CreateProject() {
       return;
     }
     setError('');
-    const accessToken = 'your-access-token-here'; // Use actual token
+    // const accessToken = 'your-access-token-here'; // Use actual token
     try {
-      const response = await axios.post('/projects', { name: projectName, key: projectKey }, {
+      const response = await axios.post('https://www.agilehub.store/projects', { name: projectName, key: projectKey }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
+          'Authorization': `Bearer ${authToken}`
         }
       });
       console.log("API Response:", response.data);
