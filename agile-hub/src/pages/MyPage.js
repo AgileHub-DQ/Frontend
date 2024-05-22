@@ -163,7 +163,9 @@ import { useAuth } from "../../src/context/AuthContext";
 
 function ProjectsList() {
   const navigate = useNavigate(); 
-  const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
+  // const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
+  
+const  authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTYyODM2NzEsImV4cCI6MTcxNzQ5MzI3MX0.m2XJAD1x8R5GsVAf0rw4YFUxROtWVoU1f5E1BswL7EkBhkS4XXnBfptTcobf4CQzfuekXW84xxDHqs5U7kANGg'
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
   const [editingProjectId, setEditingProjectId] = useState(null); 
@@ -255,7 +257,7 @@ function ProjectsList() {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between', 
-    width: '80%'
+    width: '100%'
   }
 
   return (
@@ -285,12 +287,12 @@ function ProjectsList() {
                   </>
                 ) : (
                   <>
-                    <div>
-                      <div>{project.name}</div>
-                      <div>{project.key}</div>
-                      <div>{project.createdAt}</div>
+                    <div style={{width:'15rem'}}>
+                      <div>프로젝트 이름: {project.name}</div>
+                      <div>프로젝트 키: {project.key}</div>
+                      <div>프로젝트 생성일: {project.createdAt}</div>
                     </div>
-                    <Button onClick={() => editProject(project)}>수정하기</Button>
+                    <Button style={{width:'100%'}}onClick={() => editProject(project)}>수정하기</Button>
                     <Button onClick={() => deleteProject(project)}>삭제하기</Button>
                     <Button onClick={() => navigateToIssue(project.key)}>이슈 생성</Button>
                     <Button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성</Button>

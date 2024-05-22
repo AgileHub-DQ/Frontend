@@ -34,7 +34,6 @@ const buttonStyle = {
   fontWeight: 'bold',
   whiteSpace: 'nowrap', 
   display: 'inline-block',  // Prevent text from breaking into multiple lines
-  width:'100%', 
   margin: '0 5px',  // Add margin to left and right
   ':hover': {
     backgroundColor: 'darkblue'
