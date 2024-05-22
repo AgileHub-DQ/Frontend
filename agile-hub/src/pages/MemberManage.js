@@ -155,15 +155,12 @@
 
 
 
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
 import Menubar from '../components/Menubar';
 import Member from '../components/MemberPage/Member'; 
 
-
 function MemberManage() {
-    
+        
     return (
         <div>
             <Menubar />
