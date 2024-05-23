@@ -3,14 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 
-function PlanSprint() {
-  const projectKey = 'p1';
+function PlanSprint({projectKey, sprintId}) {
+  // const projectKey = 'p1';
   const [issues, setIssues] = useState([]);
   const [count, setCount] = useState('');
   const navigate = useNavigate();
 
   const handleCreateSprint = () => {
-    navigate('/sprint', { state: { projectKey } });
+    navigate('/sprint', { state: { projectKey, sprintId } });
   };
 
   useEffect(() => {

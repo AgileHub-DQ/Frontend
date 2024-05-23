@@ -8,21 +8,28 @@ import PlanSprint from '../components/BacklogPage/PlanSprint.js';
 import AddBacklog from '../components/BacklogPage/AddBacklog.js';
 
 function BacklogPage() {
-  const location = useLocation();
-  const [projectKey, setProjectKey] = useState('');
+  // const location = useLocation();
+  // const [projectKey, setProjectKey] = useState('');
+  // const [sprintId, setSprintId] = useState('');
 
-  useEffect(() => {
-    // location.state에서 projectKey 가져오기
-    const projectKey = location.state?.key;
-    setProjectKey(projectKey);
-    console.log('projectKey:', projectKey);
-}, [location.state]);
+//   useEffect(() => {
+//     // location.state에서 projectKey 가져오기
+//     const projectKey = location.state?.key;
+//     const sprintId = location.state?.sprintId;
+//     setProjectKey(projectKey);
+//     setSprintId(sprintId);
+//     console.log('projectKey:', projectKey);
+//     console.log('sprintId:', sprintId);
+// }, [location.state]);
+
+const projectKey = 'P1';
+const sprintId = 83;
 
   return (
     <div className='backlog_container'>
       <Menubar/>
-      <PlanSprint projectKey={projectKey}/>
-      <AddBacklog projectKey={projectKey}/>
+      <PlanSprint projectKey={projectKey} sprintId={sprintId}/>
+      <AddBacklog projectKey={projectKey} sprintId={sprintId}/>
     </div>
   );
 }

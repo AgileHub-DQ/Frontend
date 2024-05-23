@@ -4,7 +4,7 @@ import '../../../css/BacklogPage/ShowStory.css';
 import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 
-function ShowStory({ projectKey, issueId }) {
+function ShowStory({ projectKey, issueId,sprintId }) {
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
     const [sprintAssignments, setSprintAssignments] = useState({});
@@ -73,7 +73,8 @@ function ShowStory({ projectKey, issueId }) {
     // };
 
     const assignToSprint = async (storyId) => {
-        const sprintId = 82;
+
+
         try {
             const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.post(`/projects/${projectKey}/sprints/${sprintId}/issue`, {
@@ -98,7 +99,7 @@ function ShowStory({ projectKey, issueId }) {
     };
 
     const removeFromSprint = async (storyId) => {
-        const sprintId = 77;
+  
         try {
             const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.delete(`/projects/${projectKey}/sprints/${sprintId}/issue`, {
@@ -251,7 +252,7 @@ function ShowStory({ projectKey, issueId }) {
                                         </div>
                                         <div className='taskcontainer'>
                                             {tasks[story.id] && tasks[story.id].length > 0 && (
-                                                <ShowTask projectKey={projectKey} tasks={tasks[story.id]} storyId={story.id} onDeleteTask={onDeleteTask} />
+                                                <ShowTask projectKey={projectKey} tasks={tasks[story.id]} storyId={story.id} onDeleteTask={onDeleteTask} sprintId={sprintId} />
                                             )}
                                         </div>
 

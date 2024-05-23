@@ -54,8 +54,8 @@ import CreateEpicButton from './button/CreateEpicButton.js'; // 경로 확인 �
 // import ShowStory from './show/ShowStory.js';
 // import ShowTask from './show/ShowTask.js';
 
-function AddBacklog() {
-    const projectKey = 'P1';
+function AddBacklog({projectKey, sprintId}) {
+    // const projectKey = 'P1';
     const [epics, setEpics] = useState([]);
 
 
@@ -89,7 +89,7 @@ function AddBacklog() {
             ) : (
                 epics.map(epic => (
                     <div key={epic.id} className='epic-section'>
-                        <ShowEpic epicData={epic} projectKey={projectKey} onEpicDeleted={onEpicDeleted} />
+                        <ShowEpic epicData={epic} projectKey={projectKey} sprintId={sprintId} onEpicDeleted={onEpicDeleted} />
                         <CreateEpicButton projectKey={projectKey} onEpicSubmit={epicIssue} />
                     </div>
                 ))

@@ -71,6 +71,10 @@ function Menubar() {
           <img src={sprintIcon} alt="Sprint" style={imageStyle}/>
           <span style={textStyle}>스프린트</span>
         </div>
+        <div style={menuItemStyle} onClick={() => navigate('/timeline')} >
+          {/* <img src={timelineIcon} alt="Timeline" style={imageStyle}/> */}
+          <span style={textStyle}>타임라인</span>
+        </div>
         <div style={menuItemStyle} onClick={() => navigate('/myPage')} >
           <img src={myPageIcon} alt="My Page" style={imageStyle}/>
           <span style={textStyle}>마이페이지</span>

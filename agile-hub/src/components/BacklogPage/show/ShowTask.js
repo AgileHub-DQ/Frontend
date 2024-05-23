@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import '../../../css/BacklogPage/ShowTask.css';
 
-function ShowTask({ projectKey, tasks }) {
+function ShowTask({ projectKey, tasks, sprintId }) {
     const alignToSprint = async (issueId) => {
         try {
-            const sprintId = 80;
+            // const sprintId = 80;
             const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             const response = await axios.post(`/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 issueId: issueId
@@ -23,9 +23,9 @@ function ShowTask({ projectKey, tasks }) {
     };
 
     const removeFromSprint = async (issueId) => {
-        const sprintId = 77; 
+        // const sprintId = 77; 
         try {
-            const accessToken = 'your-access-token-here';
+            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             const response = await axios.delete(`/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 data: {
                     issueId: issueId
@@ -51,7 +51,7 @@ function ShowTask({ projectKey, tasks }) {
         console.log("deleteTask id: " + issueId);
         const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
         if (isConfirmed) {
-            const accessToken = 'your-access-token-here';
+            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             try {
                 await axios.delete(`/projects/${projectKey}/issues/${issueId}`, {
                     headers: {

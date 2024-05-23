@@ -4,7 +4,7 @@ import CreateStoryButton from '../button/CreateStoryButton'; // CreateStoryButto
 import ShowStory from './ShowStory';
 import '../../../css/BacklogPage/ShowEpic.css';
 
-function ShowEpic({epicData, projectKey, onEpicDeleted}) {
+function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId}) {
     const issueId = epicData.id;
     const [epicTitle, setEpicTitle] = useState('');
     const [stories, setStories] = useState([]);
@@ -115,7 +115,7 @@ function ShowEpic({epicData, projectKey, onEpicDeleted}) {
                     transition: 'all 0.15s ease'
                 }} onClick={() => deleteIssue(issueId)}>삭제하기</button>
             </div>
-            <ShowStory projectKey={projectKey} issueId={issueId} />
+            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId} />
             <CreateStoryButton projectKey={projectKey} />
         </div>
     );

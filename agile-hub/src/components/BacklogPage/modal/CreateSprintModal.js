@@ -42,8 +42,6 @@ function CreateSprintModal(authToken) {
     }, [authToken]); // authToken이 변경되면 fetchProjects를 다시 호출
 
 
-
-
     
     useEffect(() => {
         // location.state에서 projectKey 가져오기
