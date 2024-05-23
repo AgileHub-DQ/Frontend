@@ -13,9 +13,22 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [assigneeId, setAssigneeId] = useState('1');
-    const [parentId, setParentId] = useState('1');
+    const [parentId, setParentId] = useState('');
+    console.log(parentId);
     const [color, setColor] = useState('#00FF75'); 
     const [epicList, setEpicList] = useState([]);
+    const [label, setLabel] = useState(''); // label
+
+    const handleBoxClick = (selectedLabel) => {
+      setLabel(selectedLabel); // 선택된 라벨 상태 업데이트
+    };
+  
+    const getBoxStyle = (boxLabel) => ({
+      cursor: 'pointer',
+      padding: '3px',
+      borderRadius: '5px',
+      border: label === boxLabel ? '2px solid blue' : 'none' 
+    });
         
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,6 +42,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
         formData.append('endDate', endDate);
         formData.append('assigneeId', assigneeId);
         formData.append('parentId', parentId);
+        formData.append('label', label);
         // formData.append('sprintId',sprintId);
 
         if (files.length > 0) {
@@ -38,7 +52,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
           }
         
           try {
-            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             const endpoint = `/projects/${projectKey}/issues`;
             console.log("endpoint:"+endpoint);
             const response = await axios.post(endpoint, formData, {
@@ -90,7 +104,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
 
     const fetchIssues = async () => { //에픽 목록 출력하기 위한 코드
         try {
-          const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
+          const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
           const response = await axios.get(`/projects/${projectKey}/epics`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -162,11 +176,11 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
 </div>
     <p className="form-label-tag">단계</p>
 <div className='form-row-3'>
-    <div className='box1'>계획</div>
-    <div className='box2'>디자인</div>
-    <div className='box3'>개발</div>
-    <div className='box4'>테스트</div>
-    <div className='box5'>피드백</div>
+<div className="box1" style={getBoxStyle('PLAN')} onClick={() => handleBoxClick('PLAN')}>계획</div>
+        <div className="box2" style={getBoxStyle('DESIGN')} onClick={() => handleBoxClick('DESIGN')}>디자인</div>
+        <div className="box3" style={getBoxStyle('DEVELOP')} onClick={() => handleBoxClick('DEVELOP')}>개발</div>
+        <div className="box4" style={getBoxStyle('TEST')} onClick={() => handleBoxClick('TEST')}>테스트</div>
+        <div className="box5" style={getBoxStyle('FEEDBACK')} onClick={() => handleBoxClick('FEEDBACK')}>피드백</div>
 </div>
 <div className='form-row-4'>
     <p className="form-label">타입</p>
@@ -181,12 +195,42 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
     </select>
 </div>
 <div className='form-row-10'>
-    <p className="form-label">상위 항목</p>
+
+{/* <p className="form-label">상위 항목</p>
+                        <select 
+                            className="form-select-type"
+                            value={parentId}
+                            onChange={(e) => setParentId(e.target.value)}
+                        >
+                            {Array.isArray(epicList) && epicList.map(epic => (
+                                <option key={epic.id} >{epic.title}</option>
+                            ))}
+                        </select> */}
+
+
+
+
+
+                        <p className="form-label">상위 항목</p>
+            <select className="form-select-type2" value={parentId} onChange={(e) => setParentId(e.target.value)}>
+
+                {Array.isArray(epicList) && epicList.map(epic => (
+    <option key={epic.id} value={epic.id} >{epic.title}</option>
+))}
+
+            </select>
+
+
+
+
+
+
+    {/* <p className="form-label">상위 항목</p>
     <select className="form-select-type">
     {Array.isArray(epicList) && epicList.map(epic => (
     <option key={epic.id}>{epic.title}</option>
 ))}
-    </select>
+    </select> */}
 </div>
 
 
@@ -209,7 +253,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
 </div>
 
   <div className='form-row-7'>
-    <button className="form-button" type="submit">이슈 생성</button>
+    <button className="createIssueButton" type="submit">이슈 생성</button>
   </div> 
                 </form>
 

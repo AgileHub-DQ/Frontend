@@ -3,13 +3,36 @@ import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
 
-function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
-  console.log("task's imagesURLs: "+ imagesURLs);
-  const [response, setResponse] = useState(null);
+function Task({ projectKey, issue, fetchIssues}) {
+  const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [storyDetails, setStoryDetails] = useState(null);
+  const [error, setError] = useState('');
+  const [storyDetails, setStoryDetails] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const label = issue.label;
+  console.log(label);
+
+  const getBoxStyle = (label) => {
+    switch (label) {
+      case 'PLAN':
+        return { background: '#E97373' };
+      case 'DESIGN':
+        return { background: '#945EB5' };
+      case 'DEVELOP':
+        return { background: '#3FA976' };
+      case 'TEST':
+        return { background: '#FFBF43' };
+      case 'FEEDBACK':
+        return { background: '#95ADF6' };
+      default:
+        return {};
+    }
+  };
+
+  const handleBoxClick = (type) => {
+    const color = getBoxStyle(type).background;
+    // 이제 선택한 색상을 이용하여 작업을 수행할 수 있습니다.
+  };
 
   const onEdit = () => {
     fetchIssues2();
@@ -19,7 +42,7 @@ function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
   const fetchIssues2 = async () => {
     try {
       const issueId = issue.id;
-      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
       const response = await axios.get(`/projects/${projectKey}/issues/${issueId}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -27,7 +50,7 @@ function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
         }
       });
       setResponse(response.data); // 모든 데이터 
-      console.log("task 에서 response data 출력: "+JSON.stringify(response.result));
+      console.log(response);
       setIsLoading(false);
     } catch (error) {
       console.error('API request failed:', error);
@@ -40,8 +63,6 @@ function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
     if (response) {
       setStoryDetails(response);
       setIsModalVisible(true);
-      console.log("setStoryDetails: "+JSON.stringify(storyDetails)) //imagesURL exist
-     
     }
   };
 
@@ -60,12 +81,19 @@ function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
     return <div>Error: 이슈를 불러올 수 없습니다.</div>;
   }
 
+  
+
   return (
     <div className="task">
-      <div className='typecolor'></div>
+       <div className='typecolor' style={getBoxStyle(issue.label)}></div>
       <div className='issueTitle' onClick={handleIssueTitleClick}>{issue.title}</div>
       <div className='issueType'>{issue.type}</div>
-      <div className='issueAssigneeName'> 담당자: {issue.assignee.name} </div>
+      <div className='issueAssignee'>
+      <div className='issueAssigneeImage'>
+          <img src={issue.assignee.profileImageURL} alt="Assignee's Profile" />
+        </div>
+        <div className='issueAssigneeName'> 담당자: {issue.assignee.name} </div>
+      </div>
 
       {isModalVisible && (
         <Modal
@@ -74,7 +102,6 @@ function Task({ projectKey, issue, fetchIssues, imagesURLs  }) {
           onClose={() => setIsModalVisible(false)}
           projectKey={projectKey}
           onEdit={onEdit}
-          imagesURLs={imagesURLs}
         />
       )}
     </div>

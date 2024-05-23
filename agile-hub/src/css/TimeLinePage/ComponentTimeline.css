@@ -1,10 +1,10 @@
-.bar {
+.barentirecontainer {
   position: relative;
   width: calc(100% - 20%);
   height: 127px;
   background: #f3efef;
   top: 0;
-  left: 20%;
+  left: 20.5%;
 }
 
 .search {

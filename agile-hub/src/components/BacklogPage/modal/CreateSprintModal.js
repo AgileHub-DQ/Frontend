@@ -1,10 +1,11 @@
 // CreateSprintModal.js
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { useAuth } from '../../../context/AuthContext'; 
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../../../css/BacklogPage/CreateSprintModal.css';
 
-function CreateSprintModal() {
+function CreateSprintModal(authToken) {
     const location = useLocation();
     const [projectKey, setProjectKey] = useState('');
     const [error, setError] = useState('');
@@ -14,6 +15,36 @@ function CreateSprintModal() {
     const [description, setDescription] = useState('description');
     const navigate = useNavigate(); 
 
+    
+    const fetchProjects = async () => {
+      if (!authToken) {
+        setError('인증 토큰이 없습니다. 로그인이 필요합니다.');
+        return;
+      }
+      try {
+        const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+  
+        const response = await axios.get("/createSprintModal", {
+          headers: {
+            Authorization: `Bearer ${authToken}`  
+          }
+        });
+  
+        console.log("createsprintmodal authToken: ", authToken);  
+      } catch (error) {
+        console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
+       
+      }
+    };
+  
+    useEffect(() => {
+      fetchProjects();
+    }, [authToken]); // authToken이 변경되면 fetchProjects를 다시 호출
+
+
+
+
+    
     useEffect(() => {
         // location.state에서 projectKey 가져오기
         const key = location.state?.key;
@@ -31,7 +62,7 @@ function CreateSprintModal() {
         formData.append('endDate', endDate);
         formData.append('description', description);
 
-        const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg'; 
+        const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; 
     
         try {
           const endpoint = `/projects/${projectKey}/sprints`;

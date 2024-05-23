@@ -16,7 +16,7 @@ function Component({sprintData}) {
                     <div className='dateBar'/>
                     <div>{sprintData.endDate}</div>
                   </div>
-                  <button className='sprint_finish'>스프린트 완료</button>
+                  {/* <button className='sprint_finish'>스프린트 완료</button> */}
                 </div>
             )}
     </div>

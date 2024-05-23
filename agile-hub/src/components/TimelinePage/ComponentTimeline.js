@@ -18,7 +18,7 @@ function ComponentTimeline() {
 
 
   return (
-    <div className='bar'> 
+    <div className='barentirecontainer'> 
     <div className='barcontainer'>
       <div className='project'>프로젝트/[프로젝트 이름]</div>
       <div className='timeline_text'>타임라인</div>

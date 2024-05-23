@@ -13,9 +13,11 @@
     border: none;
     border-radius: 10px;
     background: #001762;
+    /* background: #424c74; */
     color: white;
     font-size: 16px;
     cursor: pointer;
+
 }
 
 .epic_button:hover {
@@ -29,4 +31,5 @@
     padding: 10px; 
     box-sizing: border-box;
     text-align: center;
+    font-weight: 800;
 }

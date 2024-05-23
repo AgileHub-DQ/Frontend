@@ -1,125 +1,178 @@
-// // import React, { useEffect, useRef } from 'react';
-// import '../../css/TimeLinePage/TimelineBoard.css';
-
-// function TimelineBoard() {
-//     // 샘플 데이터
-//     const data = [
-//         { task: "AT-5 요구사항 설계", status: "완료", startDate: "2022-01-10", endDate: "2022-01-12" },
-//         { task: "AT-18 1차 디자인", status: "완료", startDate: "2022-01-15", endDate: "2022-01-18" },
-//         { task: "AT-24 2차 디자인", status: "완료", startDate: "2022-01-20", endDate: "2022-01-23" },
-//         { task: "AT-27 개발전에 필요한 작업들 준비", status: "완료", startDate: "2022-01-25", endDate: "2022-01-28" },
-//         { task: "AT-36 api 명세서 작성", status: "완료", startDate: "2022-01-30", endDate: "2022-02-02" },
-//         ];
-
-//         return (
-//             <div className='timeline-container'>
-//                 <div className="timeline-issue">
-//                     <table>
-//                         <thead>
-//                             <tr>
-//                                 <th>Issue</th>
-//                             </tr>
-//                         </thead>
-//                         <tbody>
-//                             {data.map((item, index) => (
-//                                 <tr key={index} style={{ backgroundColor: index % 2 === 0 ? "gray" : "white" }}>
-//                                     <td style={{ width: "200px", height: "53px" }}>{item.task}</td>
-//                                 </tr>
-//                             ))}
-//                         </tbody>
-//                     </table>
-//                 </div>
-//                 <div className='timeline-board'>
-//                     {/* 작업 위치를 여기에 추가합니다. */}
-//                 </div>
-//             </div>
-//         );
-//     }     
-    
-//     export default TimelineBoard;import React from 'react';
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
 import '../../css/TimeLinePage/TimelineBoard.css';
 
 function TimelineBoard() {
-    const data = [
-        { task: "AT-5 요구사항 설계", status: "완료됨", startDate: "2022-01-10", endDate: "2022-01-20" },
-        { task: "AT-18 1차 디자인", status: "완료됨", startDate: "2022-01-15", endDate: "2022-01-25" },
-        { task: "AT-24 2차 디자인", status: "완료됨", startDate: "2022-01-20", endDate: "2022-02-05" },
-        { task: "AT-27 개발전에 필요한 작업들 준비", status: "완료됨", startDate: "2022-01-25", endDate: "2022-02-10" },
-        { task: "AT-36 api 명세서 작성", status: "완료됨", startDate: "2022-02-01", endDate: "2022-02-15" },
-        { task: "AT-44 깃허브 레포", status: "완료됨", startDate: "2022-02-10", endDate: "2022-02-20" },
-        { task: "AT-47 인프라 아키텍처 설계", status: "완료됨", startDate: "2022-02-15", endDate: "2022-02-28" },
-        { task: "AT-50 3차 디자인", status: "완료됨", startDate: "2022-03-01", endDate: "2022-03-10" },
-        { task: "AT-59 ppt", status: "완료됨", startDate: "2022-03-05", endDate: "2022-03-15" },
-        { task: "AT-66 인프라 구축", status: "완료됨", startDate: "2022-03-10", endDate: "2022-03-25" },
-        { task: "AT-73 CI/CD 파이프라인 구축", status: "완료됨", startDate: "2022-03-15", endDate: "2022-04-01" },
-        { task: "AT-90 테스트", status: "완료됨", startDate: "2022-03-20", endDate: "2022-04-10" }
-    ];
+    const [timelineTitle, setTimelineTitle] = useState([]);
+    const [timelineStartDate, setTimelineStartDate] = useState([]);
+    const [timelineEndDate, setTimelineEndDate] = useState([]);
+    const [statistics, setStatistics] = useState([]);
+    const [timelineStatus, setTimelineStatus] = useState([]);
 
-    const getBarStyle = (startDate, endDate, index) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const today = new Date('2022-01-01');
-        const dayWidth = 20; // 하루를 20px로 계산
-        const offset = (start - today) / (1000 * 60 * 60 * 24) * dayWidth;
-        const width = (end - start) / (1000 * 60 * 60 * 24) * dayWidth;
+    const timelineRef = useRef(null);
+    const issueRef = useRef(null);
 
-        return {
-            marginLeft: `${offset}px`,
-            width: `${width}px`,
-            top: `${index * 53}px`,
-            backgroundColor: '#6495ED', // 통일된 색상
+    useEffect(() => {
+        timeline();
+    }, []);
+
+    useEffect(() => {
+        if (timelineStartDate.length > 0) {
+            scrollToCurrentMonth();
+        }
+    }, [timelineStartDate]);
+
+    const scrollToCurrentMonth = () => {
+        if (timelineRef.current) {
+            const currentMonth = new Date().getMonth();
+            const monthWidth = timelineRef.current.querySelector(".month-header").offsetWidth;
+            const targetScrollLeft = currentMonth * monthWidth;
+            animateScroll(0, targetScrollLeft, 1000); // 1월부터 현재 월까지 스크롤, 1초 애니메이션
+        }
+    };
+
+    const animateScroll = (start, end, duration) => {
+        const startTime = performance.now();
+
+        const scroll = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const scrollPosition = start + (end - start) * progress;
+            timelineRef.current.scrollLeft = scrollPosition;
+
+            if (progress < 1) {
+                requestAnimationFrame(scroll);
+            }
         };
+
+        requestAnimationFrame(scroll);
     };
 
-    const renderMonthLabels = () => {
-        const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
-        const today = new Date('2022-01-01');
-        return months.map((month, index) => {
-            const offset = (new Date(`2022-${index + 1}-01`) - today) / (1000 * 60 * 60 * 24) * 20 - 30;
-            return <div key={index} className='timeline-month' style={{ left: `${offset}px` }}>{month}</div>;
-        });
+    const timeline = async () => {
+        try {
+            const projectKey = 'p1';
+            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+            const response = await axios.get(`/projects/${projectKey}/epics/stats`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = response.data.result || [];
+            const statuses = result.map(item => item.issue?.status || '')
+            const statistics = result.map(item => item.statistic || {});
+            const titles = result.map(item => item.issue?.title || 'No Title');
+            const startDates = result.map(item => item.issue?.startDate || '');
+            const endDates = result.map(item => item.issue?.endDate || '');
+
+            setTimelineStatus(statuses);
+            setStatistics(statistics);
+            setTimelineTitle(titles);
+            setTimelineStartDate(startDates);
+            setTimelineEndDate(endDates);
+            
+        } catch (error) {
+            console.error('API 요청 실패:', error);
+        }
     };
 
-    const renderDeadlineLine = () => {
-        const today = new Date('2022-01-01');
-        const deadline = new Date('2022-02-15'); // 현재 날짜인 5월 중순으로 설정
-        const offset = (deadline - today) / (1000 * 60 * 60 * 24) * 20;
-        return <div className='timeline-deadline' style={{ left: `${offset}px` }}></div>;
+    const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+
+    const getDayPosition = (date) => {
+        if (!date) return 0;
+        const day = new Date(date).getDate();
+        const month = new Date(date).getMonth();
+        return (month * 100) + ((day / 31) * 100);
+    };
+
+    const syncScroll = (sourceRef, targetRef) => {
+        if (!sourceRef.current || !targetRef.current) return;
+        const { scrollTop } = sourceRef.current;
+        targetRef.current.scrollTop = scrollTop;
     };
 
     return (
-        <div className='timeline-container'>
-            <div className="timeline-issue">
-                <table>
+        <div className="timeline-container">
+            <div className="issue-column" ref={issueRef} onScroll={() => syncScroll(issueRef, timelineRef)}>
+                <table className="fixed-table">
                     <thead>
                         <tr>
-                            <th>Issue</th>
+                        <th className="th-issue">issue</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
-                            <tr key={index} style={{ backgroundColor: index % 2 === 0 ? "white" : "#f4f4f4" }}>
-                                <td style={{ width: "200px", height: "53px" }}>
-                                    <div>{item.task}</div>
-                                    <div className='status-text'>{item.status}</div>
+                        {timelineTitle.map((title, index) => (
+                            <tr key={index} className={index % 2 === 0 ? 'gray-row' : 'white-row'}>
+                                <td>
+                                    <div className="boxandtitle">
+                                        <div className="color-box"></div>
+                                        <div className="issueTitles">{title}</div>
+                                        {timelineStatus[index] === 'DONE' && <span className="status-badge">완료됨</span>}
+                                    </div>
+                                    <div className='progressbaranddone'>
+                                        <div className="progress-box">
+                                            <div
+                                                className="progress-bar-done"
+                                                style={{
+                                                    width: `${(statistics[index]?.statusDone / statistics[index]?.storiesCount) * 100}%`,
+                                                    left: '0%',
+                                                }}
+                                            ></div>
+                                            <div
+                                                className="progress-bar-progress"
+                                                style={{
+                                                    width: `${(statistics[index]?.statusProgress / statistics[index]?.storiesCount) * 100}%`,
+                                                    left: `${(statistics[index]?.statusDone / statistics[index]?.storiesCount) * 100}%`,
+                                                }}
+                                            ></div>
+                                            <div
+                                                className="progress-bar"
+                                                style={{
+                                                    width: `${(statistics[index]?.statusDo / statistics[index]?.storiesCount) * 100}%`,
+                                                    left: `${((statistics[index]?.statusDone + statistics[index]?.statusProgress) / statistics[index]?.storiesCount) * 100}%`,
+                                                }}
+                                            ></div>
+                                        </div>
+                                    </div>
+
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-            <div className='timeline-board'>
-                <div className='timeline-months'>
-                    {renderMonthLabels()}
-                </div>
-                <div className='timeline-grid'>
-                    {renderDeadlineLine()}
-                    {data.map((item, index) => (
-                        <div key={index} className='timeline-bar' style={getBarStyle(item.startDate, item.endDate, index)}></div>
-                    ))}
-                </div>
+            <div className="timeline-board" ref={timelineRef} onScroll={() => syncScroll(timelineRef, issueRef)}>
+                <table className="fixed-table">
+                    <thead>
+                        <tr>
+                            {months.map((month, index) => (
+                                <th key={index} className="month-header">{month}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {timelineTitle.map((title, index) => (
+                            <tr key={index} className={index % 2 === 0 ? 'gray-row' : 'white-row'}>
+                                {months.map((month, monthIndex) => (
+                                    <td key={monthIndex} className="timeline-cell">
+                                        {timelineStartDate[index] && timelineEndDate[index] && getDayPosition(timelineStartDate[index]) >= (monthIndex * 100) && getDayPosition(timelineStartDate[index]) < ((monthIndex + 1) * 100) &&
+                                            <div
+                                                className="task-bar"
+                                                style={{
+                                                    left: `${(getDayPosition(timelineStartDate[index]) % 100)}%`,
+                                                    width: `${(getDayPosition(timelineEndDate[index]) - getDayPosition(timelineStartDate[index])) % 100}%`
+                                                }}
+                                            ></div>
+                                        }
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
+
         </div>
     );
 }

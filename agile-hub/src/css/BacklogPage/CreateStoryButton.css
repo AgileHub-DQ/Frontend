@@ -13,6 +13,7 @@
     flex-shrink: 0;
     border: none;
     border-radius: 10px;
+    /* background: #4e72e8; */
     background: #003AF6;
     color: white;
     font-size: 16px;
@@ -30,4 +31,5 @@
     padding: 10px; 
     box-sizing: border-box;
     text-align: center;
+    font-weight: 800;
 }

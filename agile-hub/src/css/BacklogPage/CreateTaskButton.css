@@ -13,11 +13,11 @@
     flex-shrink: 0;
     border: none;
     border-radius: 10px;
-    background: white;
+    /* background: rgb(220, 220, 220); */
+    background: rgb(222, 222, 222);
     color: black;
     font-size: 16px;
     cursor: pointer;
-    border: 1px solid black;
 }
 
 .task_button:hover {
@@ -28,7 +28,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 10px; 
     box-sizing: border-box;
     text-align: center;
+    font-weight: 800;
 }
