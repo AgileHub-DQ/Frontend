@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import { useAuth } from '../context/AuthContext';
 import '../css/CreateProject.css';
+import { useAuth } from '../context/AuthContext';
 
 function CreateProject() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function CreateProject() {
   const [error, setError] = useState('');
   const [isProjectNameEntered, setIsProjectNameEntered] = useState(false);
   const [isProjectKeyEntered, setIsProjectKeyEntered] = useState(false);
+  const { authToken } = useAuth();
 
 
   
@@ -25,14 +27,14 @@ function CreateProject() {
       return;
     }
     setError('');
-    //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
+
+    // const accessToken = 'your-access-token-here'; // Use actual token
     try {
-      console.log("CreateProject authToken: "+ accessToken);
-      const response = await axios.post('/projects', { name: projectName, key: projectKey }, {
+      const response = await axios.post('https://www.agilehub.store/projects', { name: projectName, key: projectKey }, {
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': `Bearer ${authToken}`
-          'Authorization': `Bearer ${accessToken}`
+          'Authorization': `Bearer ${authToken}`
+
         }
       });
       console.log("API Response:", response.data);
