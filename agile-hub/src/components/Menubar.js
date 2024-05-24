@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 import logoIcon from "../assets/logoWhite.png";
 import projectIcon from "../assets/ProjectIcon.png";
 import membersIcon from "../assets/MembersIcon.png";
@@ -7,9 +7,10 @@ import backlogIcon from "../assets/BacklogIcon.png";
 import sprintIcon from "../assets/SprintIcon.png";
 import myPageIcon from "../assets/MyPageIcon.png";
 
-function Menubar({ sprintData, projectKey, sprintId }) {
-  console.log("Menubar projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
+function Menubar({ projectKey, sprintId, sprintData }) {
   const navigate = useNavigate();
+  
+  console.log("Menubar projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
 
   const menubarStyle = {
     display: 'flex',

@@ -56,6 +56,7 @@ import { useAuth } from '../../context/AuthContext.js';
 // import ShowTask from './show/ShowTask.js';
 
 function AddBacklog({projectKey, sprintId}) {
+    console.log("AddBacklog projectKey and sprintId check:", projectKey, sprintId);
     const { authToken } = useAuth(); 
     // const projectKey = 'P1';
     const [epics, setEpics] = useState([]);
