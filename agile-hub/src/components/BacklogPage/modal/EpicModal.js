@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../../css/modal/EpicModal.css'; 
-import { useAuth } from '../../../context/AuthContext'; 
+import { useAuth } from '../../../context/AuthContext.js'; 
 
 function EpicModal({ onClose, onSubmit, projectKey }) {
   const { authToken } = useAuth(); 

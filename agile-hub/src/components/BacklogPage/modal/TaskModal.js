@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../context/AuthContext.js'; 
+import { useAuth } from '../../../context/AuthContext.js'; 
 
 function TaskModal({ onClose, onSubmit, projectKey }) {
     const { authToken } = useAuth(); 
