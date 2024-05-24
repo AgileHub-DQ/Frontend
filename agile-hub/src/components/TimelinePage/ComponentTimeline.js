@@ -1,61 +1,123 @@
-// Component.js
-// import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../../css/TimeLinePage/ComponentTimeline.css';
 import { FaSearch } from 'react-icons/fa';
-function ComponentTimeline() {
-  // const [showOptions, setShowOptions] = useState(false); 
 
+function ComponentTimeline({ onTitleClick }) {
+  const projectKey = 'P1';
 
-  // const toggleOptions = () => {
-  //   setShowOptions(!showOptions);
-  // };
+  const [timelineTitle, setTimelineTitle] = useState([]);
+  const [filteredTitles, setFilteredTitles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statistics, setStatistics] = useState([]);
+  const [timelineStatus, setTimelineStatus] = useState([]);
 
+  useEffect(() => {
+    searchBox();
+  }, []);
 
-  // const handleOptionChange = (e) => {
+  useEffect(() => {
+    filterTitles(searchTerm);
+  }, [searchTerm, timelineTitle]);
 
-  //   console.log('Checkbox changed:', e.target.name, e.target.checked);
-  // };
+  const searchBox = async () => {
+    try {
+      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+      const response = await axios.get(`/projects/${projectKey}/epics/stats`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
+      const result = response.data.result || [];
+      const statuses = result.map((item) => item.issue?.status || '');
+      const statistics = result.map((item) => item.statistic || {});
+      const titles = result.map((item) => item.issue?.title || 'No Title');
+
+      setTimelineStatus(statuses);
+      setStatistics(statistics);
+      setTimelineTitle(titles);
+
+      console.log('statuses:' + JSON.stringify(statuses));
+      console.log('statistics:' + JSON.stringify(statistics));
+      console.log('titles:' + JSON.stringify(titles));
+    } catch (error) {
+      console.error('API 요청 실패:', error);
+    }
+  };
+
+  const filterTitles = (searchTerm) => {
+    if (!searchTerm) {
+      setFilteredTitles([]);
+    } else {
+      const filtered = timelineTitle.filter((title) =>
+        title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredTitles(filtered);
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
-    <div className='barentirecontainer'> 
-    <div className='barcontainer'>
-      <div className='project'>프로젝트/[프로젝트 이름]</div>
-      <div className='timeline_text'>타임라인</div>
-    </div>
-      <div className='bar2container'>    
+    <div className="barentirecontainer">
+      <div className="barcontainer">
+        <div className="project">프로젝트/[프로젝트 이름]</div>
+        <div className="timeline_text">타임라인</div>
+      </div>
+      <div className="bar2container">
         <div className="search-container">
-          <input type="text" id="search" className="search" placeholder="검색..." />
+          <input
+            type="text"
+            id="search"
+            className="search"
+            placeholder="검색..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
           <FaSearch className="search-icon" />
         </div>
-        <div className='status-container'>
-        <div className="status-label">상태 범주</div>
-          {/* {showOptions && (
-            <fieldset className='fieldset' onClick={handleOptionChange}>
-              <div>
-                <input type="checkbox" id="preparing" name="preparing"/>
-                <label htmlFor="preparing">Preparing</label>
-              </div>
-              <div>
-                <input type="checkbox" id="in-progress" name="in-progress" />
-                <label htmlFor="in-progress">In Progress</label>
-              </div>
-              <div>
-                <input type="checkbox" id="complete" name="complete" />
-                <label htmlFor="complete">Complete</label>
-              </div>
-            </fieldset> */}
+        <div className="status-container">
+          <div className="status-label">상태 범주</div>
+          {/* 상태 필터링 로직 추가 가능 */}
         </div>
-      <div className="type-label">에픽</div>
-    {/* <select id="type" className='type'>
-    <option value="default">타입</option>
-        <option value="epic">Epic</option>
-        <option value="story">Story</option>
-        <option value="task">Task</option>
-    </select> */}
-    </div>
+        <div className="type-label">에픽</div>
+        {/* 에픽 필터링 로직 추가 가능 */}
+      </div>
+      {searchTerm && (
+        <div style={styles.resultsContainer}>
+          {filteredTitles.map((title, index) => (
+            <div key={index} style={styles.resultItem} onClick={() => onTitleClick(title)}>
+              {title}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
+const styles = {
+  resultsContainer: {
+    position: 'absolute',
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    borderRadius: '4px',
+    width: '350px',
+    marginTop: '100px',
+    marginLeft: '10px',
+    zIndex: 1000,
+    border: '1px solid #ddd',
+    padding: '10px'
+  },
+  resultItem: {
+    padding: '10px',
+    cursor: 'pointer',
+    borderBottom: '1px solid #ddd'
+  }
+};
 
 export default ComponentTimeline;
