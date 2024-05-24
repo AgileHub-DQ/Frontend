@@ -7,21 +7,24 @@ import Menubar from '../components/Menubar.js';
 import PlanSprint from '../components/BacklogPage/PlanSprint.js';
 import AddBacklog from '../components/BacklogPage/AddBacklog.js';
 
-function BacklogPage({projectKey, sprintId, sprintData}) {
-  console.log("BacklogPage projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
-  // const location = useLocation();
-  // const [projectKey, setProjectKey] = useState('');
-  // const [sprintId, setSprintId] = useState('');
+function BacklogPage({}) {
 
-//   useEffect(() => {
-//     // location.state에서 projectKey 가져오기
-//     const projectKey = location.state?.key;
-//     const sprintId = location.state?.sprintId;
-//     setProjectKey(projectKey);
-//     setSprintId(sprintId);
-//     console.log('projectKey:', projectKey);
-//     console.log('sprintId:', sprintId);
-// }, [location.state]);
+
+  const location = useLocation();
+  const [projectKey, setProjectKey] = useState('');
+  const [sprintId, setSprintId] = useState('');
+  
+
+  useEffect(() => {
+    // location.state에서 projectKey 가져오기
+    const projectKey = location.state?.key;
+    const sprintId = location.state?.sprintId;
+    setProjectKey(projectKey);
+    setSprintId(sprintId);
+    console.log('projectKey:', projectKey);
+    console.log('sprintId:', sprintId);
+    console.log("BacklogPage projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
+}, [location.state]);
 
 // const projectKey = 'P1';
 // const sprintId = 83;
