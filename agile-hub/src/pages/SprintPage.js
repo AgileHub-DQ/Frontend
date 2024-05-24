@@ -11,10 +11,12 @@ function SprintPage() {
   const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey; // projectKey 가져오기
 
+  console.log(JSON.stringify(sprintData) + sprintId + projectKey);
+
 
   return (
     <div className='sprint_container'>
-      <Menubar/>
+      <Menubar sprintData={sprintData} projectKey={projectKey} sprintId={sprintId} />
       <Component sprintData={sprintData} />
       <DashBoard projectKey={projectKey} sprintId={sprintId}/>
     </div>

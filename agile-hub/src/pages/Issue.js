@@ -1,8 +1,13 @@
+// assigneeId 수정해야 함
+
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import '../css/Issue.css';
+import { useAuth } from '../context/AuthContext.js';
 
 function Issue({projectKey, sprintId, onIssuesUpdated}) {
+  const { authToken } = useAuth();
+
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [issueTitle, setIssueTitle] = useState('');
   const [type, setType] = useState('STORY'); 
@@ -12,7 +17,9 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [imageURLInput, setImageURLInput] = useState(''); 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+
   const [assigneeId, setAssigneeId] = useState('1');
+
   const [parentId, setParentId] = useState('');
   const [color, setColor] = useState('#00FF75'); 
   const [epicList, setEpicList] = useState([]);
@@ -63,12 +70,12 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
     }
 
     try {
-      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
-      const endpoint = `/projects/${projectKey}/issues`;
+      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';
+      const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues`;
       console.log("endpoint:"+endpoint);
       const response = await axios.post(endpoint, formData, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authToken}`,
           'Content-Type': 'multipart/form-data'
         }
       });
@@ -83,7 +90,9 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
       setFiles('');
       setStartDate('');
       setEndDate('');
+
       setAssigneeId('2');
+
       setParentId('');
       setIsModalOpen(false); 
       onIssuesUpdated();
@@ -98,15 +107,15 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const fetchIssues = async () => { // 상위항목 선택박스에서 에픽 목록, 스토리 목록 출력하기 위함
     try {
       const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTQyODMzNTYsImV4cCI6MTcxNTQ5Mjk1Nn0.PGInkoWYOAY_GsY_vO462E0dOcn-yHvlqPaa6P4SSttUtj7fW48q9DvkjSuT1I-VUxmZ04knuVK6JIZffVzyXg';  // 액세스 토큰
-      const epicResponse = await axios.get(`/projects/${projectKey}/epics`, {
+      const epicResponse = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authToken}`,
           'Content-Type': 'application/json'
         }
       });
-      const storyResponse = await axios.get(`/projects/${projectKey}/stories`, {
+      const storyResponse = await axios.get(`https://api.agilehub.store/projects/${projectKey}/stories`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authToken}`,
           'Content-Type': 'application/json'
         }
       });
