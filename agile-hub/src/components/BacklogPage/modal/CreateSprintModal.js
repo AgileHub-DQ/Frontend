@@ -5,7 +5,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../../../css/BacklogPage/CreateSprintModal.css';
 
-function CreateSprintModal(authToken) {
+function CreateSprintModal() {
     const location = useLocation();
     const [projectKey, setProjectKey] = useState('');
     const [error, setError] = useState('');
@@ -15,31 +15,34 @@ function CreateSprintModal(authToken) {
     const [description, setDescription] = useState('description');
     const navigate = useNavigate(); 
 
-    
+    const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
+    console.log("createSprintModal authToken: "+authToken);
+
     const fetchProjects = async () => {
       if (!authToken) {
         setError('인증 토큰이 없습니다. 로그인이 필요합니다.');
         return;
       }
-      try {
-        const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+      // try {
+        
+      //   //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
   
-        const response = await axios.get("/createSprintModal", {
-          headers: {
-            Authorization: `Bearer ${authToken}`  
-          }
-        });
+      //   const response = await axios.get(`https://api.agilehub.store/createSprintModal`, {
+      //     headers: {
+      //       Authorization: `Bearer ${authToken}`  
+      //     }
+      //   });
   
-        console.log("createsprintmodal authToken: ", authToken);  
-      } catch (error) {
-        console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
+      //   console.log("createsprintmodal authToken: !!!", authToken);  
+      // } catch (error) {
+      //   console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
        
-      }
+      // }
     };
   
-    useEffect(() => {
-      fetchProjects();
-    }, [authToken]); // authToken이 변경되면 fetchProjects를 다시 호출
+    // useEffect(() => {
+    //   fetchProjects();
+    // }, [authToken]); // authToken이 변경되면 fetchProjects를 다시 호출
 
 
     
@@ -60,14 +63,15 @@ function CreateSprintModal(authToken) {
         formData.append('endDate', endDate);
         formData.append('description', description);
 
-        const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; 
+        //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; 
     
         try {
-          const endpoint = `/projects/${projectKey}/sprints`;
+          const projectKey = 'P1';
+          const endpoint = `https://api.agilehub.store/projects/${projectKey}/sprints`;
           const response = await axios.post(endpoint, formData, {
             headers: {
                 'Content-Type': 'application/json', 
-                'Authorization': `Bearer ${accessToken}`
+                'Authorization': `Bearer ${authToken}`
             }
           });
           console.log(response.data.result);

@@ -172,7 +172,7 @@ const  authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiI
   const [editedName, setEditedName] = useState(''); 
   const [editedKey, setEditedKey] = useState('');
 
-  console.log("MyPage입니다. "); 
+  console.log("MyPage입니다. !!!!!!!!"); 
 
   const fetchProjects = async () => {
     if (!authToken) {

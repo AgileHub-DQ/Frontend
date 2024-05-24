@@ -28,7 +28,7 @@ function CreateProject() {
     setError('');
 
     try {
-      const response = await axios.post('https://www.agilehub.store/projects', { name: projectName, key: projectKey }, {
+      const response = await axios.post('https://43.201.245.129/projects', { name: projectName, key: projectKey }, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${authToken}`
