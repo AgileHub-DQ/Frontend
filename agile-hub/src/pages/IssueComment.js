@@ -28,7 +28,7 @@ function IssueComment() {
       const response = await axios.get(`https://api.agilehub.store/projects/${key}/issues/${issueId}/comments`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json'  
+            
         }
       });
 
@@ -57,7 +57,8 @@ function IssueComment() {
         content: commentText
       }, {
         headers: {
-          Authorization: `Bearer ${authToken}`  
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'application/json'  
         }
       });
       fetchComments();
@@ -97,7 +98,8 @@ function IssueComment() {
         content: commentText
       }, {
         headers: {
-          Authorization: `Bearer ${authToken}`  
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'application/json'   
         }
       });
       fetchComments();
