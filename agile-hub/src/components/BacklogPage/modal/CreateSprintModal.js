@@ -77,7 +77,7 @@ function CreateSprintModal() {
           console.log(response.data.result);
           const sprintData = response.data.result;
           const sprintId = response.data.result.sprintId;
-          navigate('/sprint', { state: { sprintData, projectKey, sprintId} });
+          navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey, sprintId: sprintId } });
         } catch (error) {
           console.error('create sprint error!!', error);
           setError('입력되지 않은 빈칸이 존재합니다.');

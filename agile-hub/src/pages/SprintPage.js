@@ -5,12 +5,12 @@ import Menubar from '../components/Menubar.js';
 import DashBoard from '../components/SprintPage/DashBoard.js';
 import Component from '../components/SprintPage/Component.js';
 
-function SprintPage({sprintData, sprintId }) {
-  
-  // const location = useLocation();
-  // const sprintData = location.state?.sprintData;
-  // const sprintId = sprintData?.sprintId;
-  // const projectKey = location.state?.projectKey; 
+function SprintPage({ }) {
+
+  const location = useLocation();
+  const sprintData = location.state?.sprintData;
+  const sprintId = sprintData?.sprintId;
+  const projectKey = location.state?.projectKey; 
 
   console.log("SprintPage projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
   // console.log(JSON.stringify(sprintData) + sprintId + projectKey);
