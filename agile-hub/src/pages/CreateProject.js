@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import { useAuth } from '../context/AuthContext';
 import '../css/CreateProject.css';
 import { useAuth } from '../context/AuthContext';
 
 function CreateProject() {
+  // const authToken = location.state?.authToken;
+
   const location = useLocation();
   const navigate = useNavigate();
   // const { accessToken } = location.state || {};
-  // const { authToken } = useAuth(); 
+  const { authToken } = useAuth(); 
   const [projectName, setProjectName] = useState('');
   const [projectKey, setProjectKey] = useState('');
   const [error, setError] = useState('');
   const [isProjectNameEntered, setIsProjectNameEntered] = useState(false);
   const [isProjectKeyEntered, setIsProjectKeyEntered] = useState(false);
   // const { authToken } = useAuth();
-  const authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTY0ODg2NzUsImV4cCI6MTcxNzY5ODI3NX0.ckwcMpT6futttdiPBOeuVaAgXqUZa691rVdO6uUwMWqZ_D_uP1SAv4pD8GoPt7H3H1YM5zJN_aKBbwa0wchq1A'
+  //const authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTY0ODg2NzUsImV4cCI6MTcxNzY5ODI3NX0.ckwcMpT6futttdiPBOeuVaAgXqUZa691rVdO6uUwMWqZ_D_uP1SAv4pD8GoPt7H3H1YM5zJN_aKBbwa0wchq1A'
   console.log("createProject: "+ authToken);
   
   const handleSubmit = async (event) => {
@@ -28,7 +29,7 @@ function CreateProject() {
     setError('');
 
     try {
-      const response = await axios.post('https://43.201.245.129/projects', { name: projectName, key: projectKey }, {
+      const response = await axios.post('https://api.agilehub.store/projects', { name: projectName, key: projectKey }, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${authToken}`
