@@ -2,16 +2,40 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
+import { useAuth } from '../../../context/AuthContext'; 
 
-function PlanSprint({projectKey, sprintId}) {
+function PlanSprint({projectKey, sprintId, sprintData}) {
   // const projectKey = 'p1';
+  const { authToken } = useAuth(); 
+
+
+
+  // 마지막에 생성한 스프린트에 관련된 값들이 설정
+  // const [issues, setIssues] = useState([]);
+  // const [count, setCount] = useState('');
+  // const navigate = useNavigate();
+
+  // 생성한 스프린트에 관련된 값들이 설정
   const [issues, setIssues] = useState([]);
   const [count, setCount] = useState('');
   const navigate = useNavigate();
 
+
+
+
+
+
+  // const handleCreateSprint = () => {
+  //   navigate('/sprint', { state: { projectKey, sprintId } });
+  // };
+
+
   const handleCreateSprint = () => {
-    navigate('/sprint', { state: { projectKey, sprintId } });
+    navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey } });
   };
+  
+
+
 
   useEffect(() => {
     test();
@@ -19,10 +43,10 @@ function PlanSprint({projectKey, sprintId}) {
 
   const test = async () => {
     try {
-      const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      const response = await axios.get(`/projects/${projectKey}/sprints`, {
+      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+      const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${authToken}`,
           'Content-Type': 'application/json'
         }
       });
@@ -35,14 +59,24 @@ function PlanSprint({projectKey, sprintId}) {
         return;
       }
 
-      const latestSprint = sprints[sprints.length - 1];
-      const latestSprintIssues = latestSprint.issues;
+      // const latestSprint = sprints[sprints.length - 1];
+      // const latestSprintIssues = latestSprint.issues;
+      // const issueCount = latestSprint.issueCount;
+      // console.log("latestSprint:", latestSprint);
+      // console.log("issueCount:", issueCount);
+      // console.log("latestSprintIssues:", latestSprintIssues);
+
+      const latestSprint = sprintId;
+      const sprintIssues = latestSprint.issues;
       const issueCount = latestSprint.issueCount;
       console.log("latestSprint:", latestSprint);
       console.log("issueCount:", issueCount);
-      console.log("latestSprintIssues:", latestSprintIssues);
+      console.log("sprintIssues:", sprintIssues);
 
-      setIssues(latestSprintIssues);
+      // setIssues(latestSprintIssues);
+      // setCount(issueCount);
+
+      setIssues(sprintIssues);
       setCount(issueCount);
 
     } catch (error) {

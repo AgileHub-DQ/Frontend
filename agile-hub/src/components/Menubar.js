@@ -7,7 +7,8 @@ import backlogIcon from "../assets/BacklogIcon.png";
 import sprintIcon from "../assets/SprintIcon.png";
 import myPageIcon from "../assets/MyPageIcon.png";
 
-function Menubar() {
+function Menubar({ sprintData, projectKey, sprintId }) {
+  console.log("Menubar projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
   const navigate = useNavigate();
 
   const menubarStyle = {
@@ -63,7 +64,7 @@ function Menubar() {
           <img src={membersIcon} alt="Members" style={imageStyle}/>
           <span style={textStyle}>멤버</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/backlog')} >
+        <div style={menuItemStyle} onClick={() => navigate('/backlog', { state: { projectKey, sprintData, sprintId } })}>
           <img src={backlogIcon} alt="Backlog" style={imageStyle}/>
           <span style={textStyle}>백로그</span>
         </div>

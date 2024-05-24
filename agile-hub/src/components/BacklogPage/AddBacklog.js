@@ -49,23 +49,25 @@ import axios from 'axios';
 import '../../css/BacklogPage/AddBacklog.css';
 import ShowEpic from './show/ShowEpic.js'; // 경로 확인 필요
 import CreateEpicButton from './button/CreateEpicButton.js'; // 경로 확인 필요
+import { useAuth } from '../../../context/AuthContext'; 
 // import CreateStoryButton from './button/CreateStoryButton.js'; 
 // import CreateTaskButton from './button/CreateTaskButton.js'; 
 // import ShowStory from './show/ShowStory.js';
 // import ShowTask from './show/ShowTask.js';
 
 function AddBacklog({projectKey, sprintId}) {
+    const { authToken } = useAuth(); 
     // const projectKey = 'P1';
     const [epics, setEpics] = useState([]);
 
 
     const epicIssue = async () => {
         try {
-            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-            const endpoint = `/projects/${projectKey}/epics`;
+            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+            const endpoint = `https://api.agilehub.store/projects/${projectKey}/epics`;
             console.log("endpoint: "+endpoint);
             const response = await axios.get(endpoint, {
-                headers: { Authorization: `Bearer ${accessToken}` }
+                headers: { Authorization: `Bearer ${authToken}` }
             });
             console.log(response.data.result);
             setEpics(response.data.result || []);  // 서버 응답 확인 후 적절히 조정

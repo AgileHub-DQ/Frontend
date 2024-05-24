@@ -24,6 +24,18 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
   const [color, setColor] = useState('#00FF75'); 
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
+  const [label, setLabel] = useState(''); // label
+
+  const handleBoxClick = (selectedLabel) => {
+    setLabel(selectedLabel); // 선택된 라벨 상태 업데이트
+  };
+
+  const getBoxStyle = (boxLabel) => ({
+    cursor: 'pointer',
+    padding: '3px',
+    borderRadius: '5px',
+    border: label === boxLabel ? '2px solid blue' : 'none' 
+  });
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);

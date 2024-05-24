@@ -1,13 +1,14 @@
 // BacklogPage.js
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, json } from 'react-router-dom';
 import '../css/BacklogPage/BacklogPage.css';
 import Menubar from '../components/Menubar.js';
 import PlanSprint from '../components/BacklogPage/PlanSprint.js';
 import AddBacklog from '../components/BacklogPage/AddBacklog.js';
 
-function BacklogPage() {
+function BacklogPage({projectKey, sprintId, sprintData}) {
+  console.log("BacklogPage projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
   // const location = useLocation();
   // const [projectKey, setProjectKey] = useState('');
   // const [sprintId, setSprintId] = useState('');
@@ -22,13 +23,13 @@ function BacklogPage() {
 //     console.log('sprintId:', sprintId);
 // }, [location.state]);
 
-const projectKey = 'P1';
-const sprintId = 83;
+// const projectKey = 'P1';
+// const sprintId = 83;
 
   return (
     <div className='backlog_container'>
       <Menubar/>
-      <PlanSprint projectKey={projectKey} sprintId={sprintId}/>
+      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData}/>
       <AddBacklog projectKey={projectKey} sprintId={sprintId}/>
     </div>
   );

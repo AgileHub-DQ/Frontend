@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../../css/modal/EpicModal.css'; 
+import { useAuth } from '../../../context/AuthContext'; 
 
 function EpicModal({ onClose, onSubmit, projectKey }) {
+  const { authToken } = useAuth(); 
 
     const [issueTitle, setIssueTitle] = useState('');
     const [type, setType] = useState('EPIC'); 
@@ -12,7 +14,9 @@ function EpicModal({ onClose, onSubmit, projectKey }) {
     const [files, setFiles] = useState(''); 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+
     const [assigneeId, setAssigneeId] = useState('1');
+
     // const [parentId, setParentId] = useState('1');
     const [color, setColor] = useState('#FF7041'); 
     const [label, setLabel] = useState(''); // label
@@ -51,12 +55,12 @@ function EpicModal({ onClose, onSubmit, projectKey }) {
         
           try {
             // const projectKey = 'P1';
-            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-            const endpoint = `/projects/${projectKey}/issues`;
+            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+            const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues`;
             console.log("endpoint:"+endpoint);
             const response = await axios.post(endpoint, formData, {
               headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${authToken}`,
                 'Content-Type': 'multipart/form-data'
               }
             });
