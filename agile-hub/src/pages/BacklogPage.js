@@ -28,7 +28,7 @@ function BacklogPage({projectKey, sprintId, sprintData}) {
 
   return (
     <div className='backlog_container'>
-      <Menubar/>
+      <Menubar projectKey={projectKey} sprintId={sprintId} sprintData={sprintData}/>
       <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData}/>
       <AddBacklog projectKey={projectKey} sprintId={sprintId}/>
     </div>

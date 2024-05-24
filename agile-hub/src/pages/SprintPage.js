@@ -5,13 +5,14 @@ import Menubar from '../components/Menubar.js';
 import DashBoard from '../components/SprintPage/DashBoard.js';
 import Component from '../components/SprintPage/Component.js';
 
-function SprintPage() {
+function SprintPage({sprintData, sprintId, projectKey}) {
   const location = useLocation();
-  const sprintData = location.state?.sprintData;
-  const sprintId = sprintData?.sprintId;
-  const projectKey = location.state?.projectKey; // projectKey 가져오기
+  // const sprintData = location.state?.sprintData;
+  // const sprintId = sprintData?.sprintId;
+  // const projectKey = location.state?.projectKey; 
 
-  console.log(JSON.stringify(sprintData) + sprintId + projectKey);
+  console.log("SprintPage projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
+  // console.log(JSON.stringify(sprintData) + sprintId + projectKey);
 
 
   return (

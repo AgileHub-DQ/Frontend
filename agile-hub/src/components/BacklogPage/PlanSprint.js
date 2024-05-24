@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
-import { useAuth } from '../../../context/AuthContext'; 
+import { useAuth } from '../../context/AuthContext.js'; 
 
 function PlanSprint({projectKey, sprintId, sprintData}) {
   // const projectKey = 'p1';
@@ -31,7 +31,7 @@ function PlanSprint({projectKey, sprintId, sprintData}) {
 
 
   const handleCreateSprint = () => {
-    navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey } });
+    navigate('/sprint', { state: { sprintData, projectKey } });
   };
   
 

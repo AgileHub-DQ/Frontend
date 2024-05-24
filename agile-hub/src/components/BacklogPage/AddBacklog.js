@@ -49,7 +49,7 @@ import axios from 'axios';
 import '../../css/BacklogPage/AddBacklog.css';
 import ShowEpic from './show/ShowEpic.js'; // 경로 확인 필요
 import CreateEpicButton from './button/CreateEpicButton.js'; // 경로 확인 필요
-import { useAuth } from '../../../context/AuthContext'; 
+import { useAuth } from '../../context/AuthContext.js'; 
 // import CreateStoryButton from './button/CreateStoryButton.js'; 
 // import CreateTaskButton from './button/CreateTaskButton.js'; 
 // import ShowStory from './show/ShowStory.js';
