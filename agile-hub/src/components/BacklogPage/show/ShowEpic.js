@@ -3,7 +3,7 @@ import axios from 'axios';
 import CreateStoryButton from '../button/CreateStoryButton'; // CreateStoryButton 컴포넌트의 경로에 맞게 수정
 import ShowStory from './ShowStory';
 import '../../../css/BacklogPage/ShowEpic.css';
-import { useAuth } from '../../../context/AuthContext'; 
+import { useAuth } from '../../../context/AuthContext.js'; 
 
 function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId}) {
     const { authToken } = useAuth(); 

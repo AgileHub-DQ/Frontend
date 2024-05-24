@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext.js'; 
 
 function TaskModal({ onClose, onSubmit, projectKey }) {
+    const { authToken } = useAuth(); 
+
     const [issueTitle, setIssueTitle] = useState('');
     const [type, setType] = useState('TASK'); 
     const [status, setStatus] = useState('DO');
@@ -9,7 +12,9 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
     const [files, setFiles] = useState([]); 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+
     const [assigneeId, setAssigneeId] = useState('1');
+    
     const [parentId, setParentId] = useState('');
     const [color, setColor] = useState('#FB55B3'); 
     const [storyList, setStoryList] = useState([]);
@@ -46,12 +51,12 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
         }
         
         try {
-            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-            const endpoint = `/projects/${projectKey}/issues`;
+            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+            const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues`;
             console.log("endpoint:" + endpoint);
             const response = await axios.post(endpoint, formData, {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });
@@ -96,10 +101,10 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
 
     const fetchIssues = async () => { // 스토리 목록 출력하기 위한 코드
         try {
-            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
-            const response = await axios.get(`/projects/${projectKey}/stories`, {
+            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
+            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/stories`, {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`,
+                    Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'
                 }
             });

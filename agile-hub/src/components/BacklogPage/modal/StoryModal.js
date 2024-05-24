@@ -1,8 +1,10 @@
 // StoryModal.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext.js'; 
 
 function StoryModal({ onClose, onSubmit, projectKey }) {
+  const { authToken } = useAuth(); 
     const [response, setResponse] = useState(null);
     const [issueTitle, setIssueTitle] = useState('');
     const [type, setType] = useState('STORY'); 
@@ -12,7 +14,9 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
     const [imageURLInput, setImageURLInput] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+
     const [assigneeId, setAssigneeId] = useState('1');
+
     const [parentId, setParentId] = useState('');
     console.log(parentId);
     const [color, setColor] = useState('#00FF75'); 
@@ -52,12 +56,12 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
           }
         
           try {
-            const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-            const endpoint = `/projects/${projectKey}/issues`;
+            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+            const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues`;
             console.log("endpoint:"+endpoint);
             const response = await axios.post(endpoint, formData, {
               headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${authToken}`,
                 'Content-Type': 'multipart/form-data'
               }
             });
@@ -104,10 +108,10 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
 
     const fetchIssues = async () => { //에픽 목록 출력하기 위한 코드
         try {
-          const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
-          const response = await axios.get(`/projects/${projectKey}/epics`, {
+          //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
+          const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics`, {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${authToken}`,
               'Content-Type': 'application/json'
             }
           });
