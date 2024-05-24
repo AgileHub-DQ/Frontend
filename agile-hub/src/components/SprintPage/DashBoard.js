@@ -4,7 +4,7 @@ import '../../css/SprintPage/DashBoard.css';
 import '../../css/Issue.css';
 import PlusBox from './PlusBox.js';
 import Task from './Task.js';
-import { useAuth } from '../context/AuthContext.js';
+import { useAuth } from '../../context/AuthContext.js';
 
 export default function DashBoard({ projectKey, sprintId }) {
   const { authToken } = useAuth();

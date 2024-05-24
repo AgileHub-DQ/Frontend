@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
-import { useAuth } from '../context/AuthContext.js';
+import { useAuth } from '../../context/AuthContext.js';
 
 function Task({ projectKey, issue, fetchIssues}) {
   const { authToken } = useAuth();

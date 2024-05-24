@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/modal/Modal.css';
-import { useAuth } from '../context/AuthContext.js';
+import { useAuth } from '../../context/AuthContext.js';
 
 const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
   const { authToken } = useAuth();
@@ -24,7 +24,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
 
   const [assigneeId, setAssigneeId] = useState('4'); // 5 image error 
-  
+
   const [parentId, setParentId] = useState(details.result.parentIssue ? details.result.parentIssue.issueId || 1 : 1);
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);

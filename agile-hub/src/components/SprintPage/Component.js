@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/SprintPage/Component.css';
-import { useAuth } from '../context/AuthContext.js';
+import { useAuth } from '../../context/AuthContext.js';
 
 function Component({ sprintData }) {
 

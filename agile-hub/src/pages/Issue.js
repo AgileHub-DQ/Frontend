@@ -172,14 +172,14 @@ return (
       onChange={(e) => setEndDate(e.target.value)}
     />
 </div>
-    <p className="form-label-tag">단계</p>
-<div className='form-row-3'>
-    <div className='box1'>계획</div>
-    <div className='box2'>디자인</div>
-    <div className='box3'>개발</div>
-    <div className='box4'>테스트</div>
-    <div className='box5'>피드백</div>
-</div>
+<p className="form-label-tag">단계</p>
+          <div className='form-row-3'>
+          <div className="box1" style={getBoxStyle('PLAN')} onClick={() => handleBoxClick('PLAN')}>계획</div>
+          <div className="box2" style={getBoxStyle('DESIGN')} onClick={() => handleBoxClick('DESIGN')}>디자인</div>
+          <div className="box3" style={getBoxStyle('DEVELOP')} onClick={() => handleBoxClick('DEVELOP')}>개발</div>
+          <div className="box4" style={getBoxStyle('TEST')} onClick={() => handleBoxClick('TEST')}>테스트</div>
+          <div className="box5" style={getBoxStyle('FEEDBACK')} onClick={() => handleBoxClick('FEEDBACK')}>피드백</div>
+        </div>
 
 <div className='form-row-4'>
     <p className="form-label">타입</p>
