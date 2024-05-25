@@ -20,7 +20,7 @@ function SprintPage() {
 
   return (
     <div className='sprint_container'>
-      <Menubar sprintData={sprintData} projectKey={projectKey} sprintId={sprintId} projectName={projectName}/>
+      <Menubar sprintData={sprintData} projectKey={projectKey} sprintId={sprintId} projectName={projectName} issues={issues} />
       <Component sprintData={sprintData} />
       <DashBoard projectKey={projectKey} sprintId={sprintId} issues={issues}/>
     </div>

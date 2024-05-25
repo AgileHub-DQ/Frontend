@@ -18,6 +18,7 @@ function BacklogPage() {
       setProjectKey(projectKey || '');
       setSprintId(sprintId || '');
       setSprintData(sprintData || {});
+      
       console.log('projectKey:', projectKey);
       console.log('sprintId:', sprintId);
       console.log('sprintData:', JSON.stringify(sprintData));

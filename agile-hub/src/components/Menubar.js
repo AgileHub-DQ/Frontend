@@ -15,6 +15,7 @@ function Menubar() {
   const [sprintId, setSprintId] = useState('');
   const [sprintData, setSprintData] = useState({});
   const [projectName, setProjectName] = useState('');
+  const [issues, setIssues] = useState([]);
 
   useEffect(() => {
     // localStorage에서 저장된 값을 불러오기
@@ -22,6 +23,7 @@ function Menubar() {
     const savedSprintId = localStorage.getItem('sprintId');
     const savedSprintData = localStorage.getItem('sprintData');
     const savedProjectName = localStorage.getItem('projectName');
+    const savedIssues = localStorage.getItem('sprintIssues');
 
     if (savedProjectKey && savedSprintId && savedSprintData && savedProjectName) {
       setProjectKey(savedProjectKey);
@@ -30,18 +32,24 @@ function Menubar() {
       setProjectName(savedProjectName);
     }
 
+    if (savedIssues) {
+      setIssues(JSON.parse(savedIssues));
+    }
+
     if (location.state) {
-      const { projectKey, sprintId, sprintData, projectName } = location.state;
+      const { projectKey, sprintId, sprintData, projectName, issues } = location.state;
       setProjectKey(projectKey || savedProjectKey || '');
       setSprintId(sprintId || savedSprintId || '');
       setSprintData(sprintData || JSON.parse(savedSprintData) || {});
       setProjectName(projectName || savedProjectName || '');
+      setIssues(issues || JSON.parse(savedIssues) || []);
 
       // localStorage에 상태 저장
       if (projectKey) localStorage.setItem('projectKey', projectKey);
       if (sprintId) localStorage.setItem('sprintId', sprintId);
       if (sprintData) localStorage.setItem('sprintData', JSON.stringify(sprintData));
       if (projectName) localStorage.setItem('projectName', projectName);
+      if (issues) localStorage.setItem('sprintIssues', JSON.stringify(issues));
 
       console.log('projectKey:', projectKey);
       console.log('sprintId:', sprintId);
@@ -110,11 +118,11 @@ function Menubar() {
           <img src={backlogIcon} alt="Backlog" style={imageStyle} />
           <span style={textStyle}>백로그</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/sprint', { state: { projectKey, sprintData, sprintId } })}>
+        <div style={menuItemStyle} onClick={() => navigate('/sprint', { state: { projectKey, sprintData, sprintId , issues} })}>
           <img src={sprintIcon} alt="Sprint" style={imageStyle} />
           <span style={textStyle}>스프린트</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey, sprintData, sprintId, projectName } })}>
+        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey, sprintData, sprintId, projectName, issues } })}>
           <img src={timelineIcon} alt="Timeline" style={imageStyle} />
           <span style={textStyle}>타임라인</span>
         </div>

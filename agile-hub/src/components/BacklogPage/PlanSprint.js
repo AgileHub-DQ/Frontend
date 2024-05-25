@@ -115,6 +115,7 @@ function PlanSprint({}) {
       console.log("issues:", issues);
       setCount(issueCount);
 
+      localStorage.setItem('sprintIssues', JSON.stringify(sprintIssues)); 
 
 
     } catch (error) {

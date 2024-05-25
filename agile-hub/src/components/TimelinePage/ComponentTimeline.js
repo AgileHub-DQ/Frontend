@@ -68,7 +68,7 @@ function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
   return (
     <div className="barentirecontainer">
       <div className="barcontainer">
-        <div className="project">프로젝트/[{projectName}]</div>
+      <div className="project">프로젝트/<span style={{ color: 'black' }}>[{projectName}]</span></div>
         <div className="timeline_text">타임라인</div>
       </div>
       <div className="bar2container">
