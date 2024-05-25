@@ -109,6 +109,7 @@ function PlanSprint() {
       // setCount(issueCount);
 
       setIssues(sprintIssues);
+      console.log("issues:", issues);
       setCount(issueCount);
 
     } catch (error) {
