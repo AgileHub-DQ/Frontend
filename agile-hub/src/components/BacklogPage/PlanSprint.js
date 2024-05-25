@@ -5,6 +5,7 @@ import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js'; 
 
 function PlanSprint() {
+  console.log("여기는 plansprint 입니다.");
 
   const location = useLocation();
   const [projectKey, setProjectKey] = useState('');
