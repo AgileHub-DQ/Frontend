@@ -6,11 +6,12 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-export default function DashBoard({ projectKey, sprintId, issues: backlogIssue, update }) {
+export default function DashBoard({ projectKey, sprintId, issues: initialBacklogIssue }) {
   const { authToken } = useAuth();
 
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
+  const [backlogIssue, setBacklogIssue] = useState(initialBacklogIssue);
   
   // useEffect(() => {
   //   fetchIssues();
@@ -21,13 +22,54 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue, 
   }, [backlogIssue]);
 
 
-  const onRendering = () => {
-    update();
-    console.log("update()");
+  const onRendering = async () => {
+    await test();
     fetchIssues();
     console.log("fetchIssues()");
-  }
+  };
 
+  const test = async () => {
+    try {
+      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
+      const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log("API response:", response.data); // API 응답 확인
+
+      const sprints = response.data.result;
+      if (sprints.length === 0) {
+        console.error('No sprints found');
+        return;
+      }
+
+      // const latestSprint = sprints[sprints.length - 1];
+      // const latestSprintIssues = latestSprint.issues;
+      // const issueCount = latestSprint.issueCount;
+      // console.log("latestSprint:", latestSprint);
+      // console.log("issueCount:", issueCount);
+      // console.log("latestSprintIssues:", latestSprintIssues);
+
+      const latestSprint = sprints[sprints.length - 1];
+      const sprintIssues = latestSprint.issues;
+
+      console.log("latestSprint:", latestSprint);
+      console.log("latestSprintJSON:", JSON.stringify(latestSprint));
+      console.log("sprintIssues:", sprintIssues);
+
+      // setIssues(latestSprintIssues);
+      // setCount(issueCount);
+
+      setBacklogIssue(sprintIssues);
+      console.log("backlogIssue:", backlogIssue);
+
+    } catch (error) {
+      console.error('API request failed:', error);
+    }
+  };
   // const fetchIssues = async () => {
   //   try {
   //     //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; // 실제 액세스 토큰으로 대체해야 함
@@ -94,6 +136,7 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue, 
       backlogIssue.forEach(backlog => {
    
         const issue = allIssues.find(item => item.id === backlog.issueId); // item.issuId -> id
+
 
         if (issue) {
           console.log(JSON.stringify(issue));

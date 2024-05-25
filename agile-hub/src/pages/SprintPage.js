@@ -5,7 +5,7 @@ import Menubar from '../components/Menubar.js';
 import DashBoard from '../components/SprintPage/DashBoard.js';
 import Component from '../components/SprintPage/Component.js';
 
-function SprintPage(update) {
+function SprintPage() {
 
   const location = useLocation();
   const sprintData = location.state?.sprintData;
@@ -22,7 +22,7 @@ function SprintPage(update) {
     <div className='sprint_container'>
       <Menubar sprintData={sprintData} projectKey={projectKey} sprintId={sprintId} projectName={projectName}/>
       <Component sprintData={sprintData} />
-      <DashBoard projectKey={projectKey} sprintId={sprintId} issues={issues} update={update}/>
+      <DashBoard projectKey={projectKey} sprintId={sprintId} issues={issues}/>
     </div>
   );
 }
