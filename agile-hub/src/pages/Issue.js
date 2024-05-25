@@ -123,6 +123,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
             }));
 
             alert("할당되었습니다.")
+            // alert 지워도 됨
             onRendering()
             console.log('Assigned to sprint:', response2);
 
