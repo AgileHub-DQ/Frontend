@@ -94,7 +94,7 @@ function IssueComment() {
   const saveEditedComment = async (commentId) => {
     try {
       //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      await axios.put(`https://api.agilehub.store/projects/${projectKey}/issues/comments/${commentId}`, {
+      await axios.put(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}/comments/${commentId}`, {
         content: commentText
       }, {
         headers: {

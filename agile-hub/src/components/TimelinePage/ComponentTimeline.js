@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext.js';
 
 function ComponentTimeline({ onTitleClick,  projectKey}) {
   // const projectKey = 'P1';
+  const { authToken } = useAuth(); 
 
   const [timelineTitle, setTimelineTitle] = useState([]);
   const [filteredTitles, setFilteredTitles] = useState([]);
