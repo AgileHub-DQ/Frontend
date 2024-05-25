@@ -83,8 +83,12 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  
 
       const newIssues = { todo: [], doing: [], complete: [] };
 
+      //확인해야함
+      
       backlogIssue.forEach(backlog => {
+   
         const issue = allIssues.find(item => item.issueId === backlog.issueId);
+        console.log(issue.issueId);
         if (issue) {
           console.log(JSON.stringify(issue));
           const status = issue.status;
