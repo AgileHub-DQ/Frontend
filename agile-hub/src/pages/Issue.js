@@ -6,6 +6,12 @@ import '../css/Issue.css';
 import { useAuth } from '../context/AuthContext.js';
 
 function Issue({projectKey, sprintId, onIssuesUpdated}) {
+  const [sprintAssignments, setSprintAssignments] = useState({});
+
+
+
+
+  
   const { authToken } = useAuth();
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -93,7 +99,36 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
       });
 
 
+      
       console.log(response.data);
+
+
+
+
+
+      console.log(response.data.resulst); // 생성한 이슈 id
+      //const sprintEndpoint = `https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`;
+      const response2 = await axios.post(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
+                issueId: response.data.result
+            }, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            setSprintAssignments(prev => ({
+                ...prev,
+                [response.data.result]: true
+            }));
+
+            alert("할당되었습니다.")
+            console.log('Assigned to sprint:', response2);
+
+
+
+
+
       alert("이슈가 생성되었습니다.");
       setIssueTitle('');
       setType('');
