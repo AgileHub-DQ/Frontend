@@ -3,7 +3,7 @@ import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
 import { Sphere, Box, Icosahedron, Cylinder, Cone, MeshDistortMaterial } from '@react-three/drei';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import helvetiker from 'three/examples/fonts/helvetiker_regular.typeface.json';
+import titanOneFont from '../../fonts/Titan One_Regular.json';
 
 extend({ TextGeometry });
 
@@ -13,13 +13,13 @@ const AnimatedObject = ({ type, position, color, args, speedFactor }) => {
   const speed = Math.random() * 0.1 + speedFactor;
 
   useFrame(() => {
-    const maxX = 1.5; // x축 최대 이동 범위를 1.5로 더 줄임
-    const maxY = 1; // y축 최대 이동 범위 유지
-    const minX = -3; // x축 최소 이동 범위 유지
-    const minY = -3; // y축 최소 이동 범위 유지
+    const maxX = 0.5; // x축 최대 이동 범위를 1.5로 더 줄임
+    const maxY = 0.5; // y축 최대 이동 범위 유지
+    const minX = -2; // x축 최소 이동 범위 유지
+    const minY = -2; // y축 최소 이동 범위 유지
 
-    const targetX = (mouse.x * 5 - meshRef.current.position.x) * 0.05;
-    const targetY = (-mouse.y * 5 - meshRef.current.position.y) * 0.05;
+    const targetX = (mouse.x * 2 - meshRef.current.position.x) * 0.02; // 5에서 2로 줄임
+    const targetY = (-mouse.y * 2 - meshRef.current.position.y) * 0.02; // 5에서 2로 줄임
 
     meshRef.current.rotation.x += 0.01;
     meshRef.current.position.x = Math.max(minX, Math.min(maxX, meshRef.current.position.x + targetX));
@@ -59,16 +59,16 @@ const Text3D = ({ text, position, color, fontSize }) => {
   const { mouse } = useThree();
 
   const fontLoader = new FontLoader();
-  const font = fontLoader.parse(helvetiker);
+  const font = fontLoader.parse(titanOneFont);
 
   const textOptions = {
     font: font,
     size: fontSize,
-    height: 0.2,
+    height: 0.01, // 글씨의 깊이를 더 줄임
     curveSegments: 12,
     bevelEnabled: true,
-    bevelThickness: 0.03,
-    bevelSize: 0.08,
+    bevelThickness: 0.2, // 경사의 두께를 더 줄임
+    bevelSize: 0.01, // 경사의 크기를 더 줄임
     bevelOffset: 0,
     bevelSegments: 5,
   };
