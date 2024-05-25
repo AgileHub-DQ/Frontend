@@ -6,9 +6,27 @@ import membersIcon from "../assets/MembersIcon.png";
 import backlogIcon from "../assets/BacklogIcon.png";
 import sprintIcon from "../assets/SprintIcon.png";
 import myPageIcon from "../assets/MyPageIcon.png";
+import timelineIcon from "../assets/TimelineIcon.png";
 
 function Menubar({ projectKey, sprintId, sprintData }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [projectKey, setProjectKey] = useState('');
+  const [sprintId, setSprintId] = useState('');
+  const [sprintData, setSprintData] = useState({});
+
+  useEffect(() => {
+    if (location.state) {
+      const { projectKey, sprintId, sprintData } = location.state;
+      setProjectKey(projectKey || '');
+      setSprintId(sprintId || '');
+      setSprintData(sprintData || {});
+      console.log('projectKey:', projectKey);
+      console.log('sprintId:', sprintId);
+      console.log('sprintData:', JSON.stringify(sprintData));
+      console.log("Menubar projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
+    }
+  }, [location.state]);
   
   console.log("Menubar projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
 
@@ -57,11 +75,11 @@ function Menubar({ projectKey, sprintId, sprintData }) {
     <div style={menubarStyle}>
       <img src={logoIcon} alt="Logo" style={logoStyle}/>
       <div>
-        <div style={menuItemStyle} onClick={() => navigate('/myPage')} >
+        <div style={menuItemStyle} onClick={() => navigate('/myPage', { state: { projectKey, sprintData, sprintId } })}>
           <img src={projectIcon} alt="Projects" style={imageStyle}/>
           <span style={textStyle}>프로젝트</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/memberManage')} >
+        <div style={menuItemStyle} onClick={() => navigate('/memberManage', { state: { projectKey, sprintData, sprintId } })}>
           <img src={membersIcon} alt="Members" style={imageStyle}/>
           <span style={textStyle}>멤버</span>
         </div>
@@ -73,11 +91,11 @@ function Menubar({ projectKey, sprintId, sprintData }) {
           <img src={sprintIcon} alt="Sprint" style={imageStyle}/>
           <span style={textStyle}>스프린트</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey } })}>
-          {/* <img src={timelineIcon} alt="Timeline" style={imageStyle}/> */}
+        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey, sprintData, sprintId } })}>
+          <img src={timelineIcon} alt="Timeline" style={imageStyle}/>
           <span style={textStyle}>타임라인</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/myPage')} >
+        <div style={menuItemStyle} onClick={() => navigate('/myPage', { state: { projectKey, sprintData, sprintId } })}>
           <img src={myPageIcon} alt="My Page" style={imageStyle}/>
           <span style={textStyle}>마이페이지</span>
         </div>

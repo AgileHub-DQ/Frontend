@@ -50,12 +50,31 @@ import '../../css/BacklogPage/AddBacklog.css';
 import ShowEpic from './show/ShowEpic.js'; // 경로 확인 필요
 import CreateEpicButton from './button/CreateEpicButton.js'; // 경로 확인 필요
 import { useAuth } from '../../context/AuthContext.js'; 
+import { useNavigate, useLocation } from 'react-router-dom';
 // import CreateStoryButton from './button/CreateStoryButton.js'; 
 // import CreateTaskButton from './button/CreateTaskButton.js'; 
 // import ShowStory from './show/ShowStory.js';
 // import ShowTask from './show/ShowTask.js';
 
-function AddBacklog({projectKey, sprintId}) {
+function AddBacklog() {
+    const location = useLocation();
+    const [projectKey, setProjectKey] = useState('');
+    const [sprintId, setSprintId] = useState('');
+    const [sprintData, setSprintData] = useState({});
+
+    useEffect(() => {
+        if (location.state) {
+          const { projectKey, sprintId, sprintData } = location.state;
+          setProjectKey(projectKey || '');
+          setSprintId(sprintId || '');
+          setSprintData(sprintData || {});
+          console.log('projectKey:', projectKey);
+          console.log('sprintId:', sprintId);
+          console.log('sprintData:', JSON.stringify(sprintData));
+          console.log("AddBacklog projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
+        }
+      }, [location.state]);
+
     console.log("AddBacklog projectKey and sprintId check:", projectKey, sprintId);
     const { authToken } = useAuth(); 
     // const projectKey = 'P1';
