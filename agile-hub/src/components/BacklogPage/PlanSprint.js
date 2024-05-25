@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js'; 
 
-function PlanSprint(onUpdateSprintId) {
+function PlanSprint({}) {
   console.log("여기는 plansprint 입니다.");
 
   const location = useLocation();
@@ -21,7 +21,7 @@ function PlanSprint(onUpdateSprintId) {
         console.log('projectKey:', projectKey);
         console.log('sprintId:', sprintId);
         console.log('sprintData:', JSON.stringify(sprintData));
-        console.log("PlanSprint projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
+        console.log("PlanSprint projectKey and sprintId and sprintData check:", projectKey + "sprintId: " + sprintId, JSON.stringify(sprintData));
       }
     }, [location.state]);
 
@@ -115,7 +115,7 @@ function PlanSprint(onUpdateSprintId) {
       console.log("issues:", issues);
       setCount(issueCount);
 
-      onUpdateSprintId(latestSprint.sprintId);
+
 
     } catch (error) {
       console.error('API request failed:', error);
