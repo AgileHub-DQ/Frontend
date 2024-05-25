@@ -18,18 +18,21 @@ function CreateProject() {
       return;
     }
     setError('');
-    // const accessToken = 'your-access-token-here'; // Use actual token
     try {
-      const response = await axios.post('https://www.agilehub.store/projects', { name: projectName, key: projectKey }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
-        }
-      });
-      console.log("API Response:", response.data);
+      const response = await axios.post(
+        'https://www.agilehub.store/projects',
+        { name: projectName, key: projectKey },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+        },
+      );
+      console.log('API Response:', response.data);
     } catch (error) {
-        console.error('프로젝트 생성 실패:', error);
-        setError('프로젝트 생성 실패: ' + (error.response?.data?.message || error.message));
+      console.error('프로젝트 생성 실패:', error);
+      setError('프로젝트 생성 실패: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -53,8 +56,8 @@ function CreateProject() {
             id="projectName"
             type="text"
             value={projectName}
-            placeholder='프로젝트 이름'
-            className='projectName'
+            placeholder="프로젝트 이름"
+            className="projectName"
             onChange={(e) => setProjectName(e.target.value)}
           />
         </div>
@@ -63,13 +66,15 @@ function CreateProject() {
             id="projectKey"
             type="text"
             value={projectKey}
-            placeholder='프로젝트 키'
-            className='projectKey'
+            placeholder="프로젝트 키"
+            className="projectKey"
             onChange={(e) => setProjectKey(e.target.value)}
           />
         </div>
-        {error && <p className='error'>{error}</p>}
-        <button type='submit' className='button'>프로젝트 생성</button>
+        {error && <p className="error">{error}</p>}
+        <button type="submit" className="button">
+          프로젝트 생성
+        </button>
       </form>
     </div>
   );
