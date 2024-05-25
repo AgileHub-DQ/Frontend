@@ -122,10 +122,10 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
                 [response.data.result]: true
             }));
 
-            alert("할당되었습니다.")
-            // alert 지워도 됨
+            localStorage.setItem('sprintIssues', JSON.stringify(response2.data.result.issue)); 
+            console.log('sprintIssues:', JSON.stringify(response2.data.result.issue));
             onRendering()
-            console.log('Assigned to sprint:', response2);
+  
 
 
 
