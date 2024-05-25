@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js'; 
 
-function PlanSprint() {
+function PlanSprint(onUpdateSprintId) {
   console.log("여기는 plansprint 입니다.");
 
   const location = useLocation();
@@ -101,6 +101,9 @@ function PlanSprint() {
       const sprintIssues = latestSprint.issues;
       const issueCount = latestSprint.issueCount;
       console.log("latestSprint:", latestSprint);
+
+      console.log("sprintId값: "+latestSprint.sprintId);
+
       console.log("latestSprintJSON:", JSON.stringify(latestSprint));
       console.log("issueCount:", issueCount);
       console.log("sprintIssues:", sprintIssues);
@@ -111,6 +114,8 @@ function PlanSprint() {
       setIssues(sprintIssues);
       console.log("issues:", issues);
       setCount(issueCount);
+
+      onUpdateSprintId(latestSprint.sprintId);
 
     } catch (error) {
       console.error('API request failed:', error);

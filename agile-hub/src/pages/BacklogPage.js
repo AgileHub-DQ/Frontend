@@ -25,10 +25,17 @@ function BacklogPage() {
     }
   }, [location.state]);
 
+  const onUpdateSprintId = (newSprintId) => {
+    setSprintId(newSprintId);
+    console.log('Updated sprintId:', newSprintId);
+  };
+
+
+
   return (
     <div className='backlog_container'>
       <Menubar projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
-      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
+      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} onUpdateSprintId={onUpdateSprintId}  />
       <AddBacklog projectKey={projectKey} sprintId={sprintId} />
     </div>
   );
