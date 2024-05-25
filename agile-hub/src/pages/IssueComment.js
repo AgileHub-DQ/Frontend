@@ -7,25 +7,25 @@ import { useAuth } from "../../src/context/AuthContext";
 function IssueComment() {
   const { authToken } = useAuth(); 
   const location = useLocation();
-  const { projectKey: key, issueId } = location.state;
+  const { projectKey: projectKey, issueId } = location.state;
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [editingCommentId, setEditingCommentId] = useState(null); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!key || !issueId) {
+    if (!projectKey || !issueId) {
       console.error('프로젝트 키 또는 이슈 ID가 제공되지 않았습니다.');
       setLoading(false);
       return;
     }
     fetchComments();
-  }, [key, issueId]);
+  }, [projectKey, issueId]);
 
   const fetchComments = async () => {
     try {
       //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      const response = await axios.get(`https://api.agilehub.store/projects/${key}/issues/${issueId}/comments`, {
+      const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}/comments`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
             
@@ -53,7 +53,7 @@ function IssueComment() {
     }
     try {
       //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      await axios.post(`https://api.agilehub.store/projects/${key}/issues/${issueId}/comments`, {
+      await axios.post(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}/comments`, {
         content: commentText
       }, {
         headers: {
@@ -71,7 +71,7 @@ function IssueComment() {
   const deleteComment = async (commentId) => {
     try {
       //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      await axios.delete(`https://api.agilehub.store/projects/${key}/issues/${issueId}/comments/${commentId}`, {
+      await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}/comments/${commentId}`, {
         headers: {
           Authorization: `Bearer ${authToken}`  
         }
@@ -94,7 +94,7 @@ function IssueComment() {
   const saveEditedComment = async (commentId) => {
     try {
       //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      await axios.put(`https://api.agilehub.store/projects/${key}/issues/${commentId}`, {
+      await axios.put(`https://api.agilehub.store/projects/${projectKey}/issues/comments/${commentId}`, {
         content: commentText
       }, {
         headers: {
