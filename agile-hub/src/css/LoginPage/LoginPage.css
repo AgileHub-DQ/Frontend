@@ -1,13 +1,17 @@
 .container {
   display: flex; /* 화면에 출력된 컴포넌트 정렬 */
-}
-
-.left-panel {
-  background-color: #d3deff; /* 화면 왼쪽만 배경색 설정*/
+  background: linear-gradient(45deg, #b5fffc 30%, #ffdee9 90%);
 }
 
 .left-panel,
 .right-panel {
-  width: 50%;
   height: 100vh;
+}
+
+.left-panel {
+  width: 50%;
+}
+
+.right-panel {
+  width: 50%;
 }

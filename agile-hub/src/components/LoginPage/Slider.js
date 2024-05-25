@@ -5,7 +5,6 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import helvetiker from 'three/examples/fonts/helvetiker_regular.typeface.json';
 
-// Extend will make the TextGeometry available as a JSX element
 extend({ TextGeometry });
 
 const AnimatedObject = ({ type, position, color, args, speedFactor }) => {
@@ -90,7 +89,13 @@ const Text3D = ({ text, position, color, fontSize }) => {
 
 const Slider = () => {
   return (
-    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #FFDEE9 30%, #B5FFFC 90%)' }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        float: 'left',
+      }}
+    >
       <Canvas>
         <ambientLight intensity={0.9} />
         <pointLight position={[0, 0, 10]} color="#ffffff" intensity={1.5} />
