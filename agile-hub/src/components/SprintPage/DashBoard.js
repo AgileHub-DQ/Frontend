@@ -6,7 +6,7 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-export default function DashBoard({ projectKey, sprintId, sprintIssues }) {
+export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  }) {
   const { authToken } = useAuth();
 
   const [imagesURLs, setImagesURLs] = useState('');
@@ -31,7 +31,9 @@ export default function DashBoard({ projectKey, sprintId, sprintIssues }) {
 
       const newIssues = { todo: [], doing: [], complete: [] };
   
-      sprintIssues.forEach(issue => {
+      backlogIssue.forEach(issue => {
+        console.log(JSON.stringify(issue));
+        console.log(issue.id);
         const status = issue.status;
         if (status === 'DO') {
             newIssues.todo.push(issue);
