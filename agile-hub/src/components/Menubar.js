@@ -73,7 +73,7 @@ function Menubar({ projectKey, sprintId, sprintData }) {
           <img src={sprintIcon} alt="Sprint" style={imageStyle}/>
           <span style={textStyle}>스프린트</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/timeline')} >
+        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey } })}>
           {/* <img src={timelineIcon} alt="Timeline" style={imageStyle}/> */}
           <span style={textStyle}>타임라인</span>
         </div>

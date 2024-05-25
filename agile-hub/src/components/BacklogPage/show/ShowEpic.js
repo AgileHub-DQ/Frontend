@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/AuthContext.js';
 
 function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId}) {
     const { authToken } = useAuth(); 
-
+    console.log("ShowEpic projectKey and sprintId and epicData check:", projectKey, sprintId, JSON.stringify(epicData));
     const issueId = epicData.id;
     const [epicTitle, setEpicTitle] = useState('');
     const [stories, setStories] = useState([]);
