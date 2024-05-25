@@ -14,7 +14,7 @@ function SprintPage({ }) {
   const projectName = location.state?.projectName; 
   const issues = location.state?.issues;
 
-  console.log("SprintPage projectKey and sprintId and sprintData and projectName and issues check: "+ projectKey + sprintId + JSON.stringify(sprintData) + projectName + JSON.stringify(issues[0]));
+  console.log("SprintPage projectKey and sprintId and sprintData and projectName and  check: "+ projectKey + sprintId + JSON.stringify(sprintData) + projectName);
   // console.log(JSON.stringify(sprintData) + sprintId + projectKey);
 
 
