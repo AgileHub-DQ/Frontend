@@ -18,7 +18,6 @@ import SprintAllList from './components/SprintPage/SprintAllList.js';
 import UserMainPage from './components/MainPage/userMainPage.js';
 import MemberManage from './pages/MemberManage.js';
 import InviteMember from './pages/InviteMember.js'; 
-import Test from './pages/Test.js';
 import { useAuth } from './context/AuthContext';
 
 const App = () => {
@@ -42,7 +41,7 @@ const App = () => {
         <Route path="/userMainPage" element={<UserMainPage />} />
         <Route path="/memberManage" element={<MemberManage />} />
         <Route path="/inviteMember" element={<InviteMember />} />
-        <Route path="/test" element={<Test />} />
+
       </Routes>
     </Router>
   );

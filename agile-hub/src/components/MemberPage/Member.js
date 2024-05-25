@@ -186,7 +186,7 @@ function Member() {
         return;
       }
       try {
-        const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/members`, {
+        const response = await axios.get(`https://api.agilehub.store/projects/P1/members`, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
