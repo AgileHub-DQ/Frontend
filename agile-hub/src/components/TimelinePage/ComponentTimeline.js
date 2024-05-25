@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext.js'; 
 
 function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
+  console.log("componentTimeline projectName: "+ projectName);
   // const projectKey = 'P1';
   const { authToken } = useAuth(); 
 
