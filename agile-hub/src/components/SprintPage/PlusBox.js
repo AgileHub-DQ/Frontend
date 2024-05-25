@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../css/SprintPage/PlusBox.css';
 import Issue from '../../pages/Issue.js';
 
-function PlusBox({ projectKey, sprintId, fetchIssues }) {
+function PlusBox({ projectKey, sprintId, fetchIssues, onRendering }) {
   const [addIssue, setAddIssue] = useState(false); 
 
   const handleAddIssue = () => {
@@ -10,9 +10,10 @@ function PlusBox({ projectKey, sprintId, fetchIssues }) {
   };
 
 
+
   return (
     <div>
-        {addIssue && <Issue projectKey={projectKey} sprintId={sprintId} onIssuesUpdated={fetchIssues} />} 
+        {addIssue && <Issue projectKey={projectKey} sprintId={sprintId} onIssuesUpdated={fetchIssues} onRendering={onRendering} />} 
         <div className="plusbox" onClick={handleAddIssue}>
           <div className="rectangle33"></div>
           <div className="image62"></div>

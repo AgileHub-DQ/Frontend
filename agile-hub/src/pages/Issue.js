@@ -5,13 +5,13 @@ import axios from 'axios';
 import '../css/Issue.css';
 import { useAuth } from '../context/AuthContext.js';
 
-function Issue({projectKey, sprintId, onIssuesUpdated}) {
+function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
   const [sprintAssignments, setSprintAssignments] = useState({});
 
 
 
 
-  
+
   const { authToken } = useAuth();
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -123,6 +123,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated}) {
             }));
 
             alert("할당되었습니다.")
+            onRendering()
             console.log('Assigned to sprint:', response2);
 
 

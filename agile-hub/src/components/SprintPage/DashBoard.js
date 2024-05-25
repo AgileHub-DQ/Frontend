@@ -21,6 +21,9 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  
   }, [backlogIssue]);
 
 
+  const onRendering = () => {
+    fetchIssues();
+  }
 
   // const fetchIssues = async () => {
   //   try {
@@ -211,7 +214,7 @@ const onDrop = async (e, newCategory) => {
             <div className={`status-indicator ${category}`} ></div>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           </div>
-          <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} />
+          <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} onRendering={onRendering}/>
           {issues[category].map((item) => (
           <div 
           key={item.id}
