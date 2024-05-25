@@ -144,7 +144,7 @@ function ShowStory({ projectKey, issueId, sprintId }) {
 
             try {
                 await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues`,  {
-                    issueId: issueId
+                    "issueId": issueId
             },{
                 headers: {
                     Authorization: `Bearer ${authToken}`,
