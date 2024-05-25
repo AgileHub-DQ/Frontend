@@ -8,6 +8,7 @@ import '../../../css/BacklogPage/CreateSprintModal.css';
 function CreateSprintModal() {
     const location = useLocation();
     const [projectKey, setProjectKey] = useState('');
+    const [projectName, setProjectName] = useState('');
     const [error, setError] = useState('');
     const [title, setTitle] = useState('title');
     const [startDate, setStartDate] = useState('');
@@ -50,7 +51,10 @@ function CreateSprintModal() {
         // location.state에서 projectKey 가져오기
         const key = location.state?.key;
         setProjectKey(key);
+        const projectName = location.state?.projectName;
+        setProjectName(projectName);
         console.log('projectKey:', key);
+        console.log('projectName:', projectName);
     }, [location.state]);
 
 
@@ -77,7 +81,7 @@ function CreateSprintModal() {
           console.log(response.data.result);
           const sprintData = response.data.result;
           const sprintId = response.data.result.sprintId;
-          navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey, sprintId: sprintId } });
+          navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey, sprintId: sprintId, projectName: projectName } });
         } catch (error) {
           console.error('create sprint error!!', error);
           setError('입력되지 않은 빈칸이 존재합니다.');

@@ -4,7 +4,7 @@ import '../../css/TimeLinePage/ComponentTimeline.css';
 import { FaSearch } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext.js'; 
 
-function ComponentTimeline({ onTitleClick,  projectKey}) {
+function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
   // const projectKey = 'P1';
   const { authToken } = useAuth(); 
 
@@ -67,7 +67,7 @@ function ComponentTimeline({ onTitleClick,  projectKey}) {
   return (
     <div className="barentirecontainer">
       <div className="barcontainer">
-        <div className="project">프로젝트/[프로젝트 이름]</div>
+        <div className="project">프로젝트/[{projectName}]</div>
         <div className="timeline_text">타임라인</div>
       </div>
       <div className="bar2container">

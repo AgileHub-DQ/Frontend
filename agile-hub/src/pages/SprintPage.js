@@ -11,14 +11,15 @@ function SprintPage({ }) {
   const sprintData = location.state?.sprintData;
   const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey; 
+  const projectName = location.state?.projectName; 
 
-  console.log("SprintPage projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
+  console.log("SprintPage projectKey and sprintId and sprintData and projectName check: "+ projectKey + sprintId + JSON.stringify(sprintData) + projectName);
   // console.log(JSON.stringify(sprintData) + sprintId + projectKey);
 
 
   return (
     <div className='sprint_container'>
-      <Menubar sprintData={sprintData} projectKey={projectKey} sprintId={sprintId} />
+      <Menubar sprintData={sprintData} projectKey={projectKey} sprintId={sprintId} projectName={projectName}/>
       <Component sprintData={sprintData} />
       <DashBoard projectKey={projectKey} sprintId={sprintId}/>
     </div>

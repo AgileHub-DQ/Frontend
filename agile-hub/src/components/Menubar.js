@@ -14,21 +14,24 @@ function Menubar() {
   const [projectKey, setProjectKey] = useState('');
   const [sprintId, setSprintId] = useState('');
   const [sprintData, setSprintData] = useState({});
+  const [projectName, setProjectName] = useState('');
 
   useEffect(() => {
     if (location.state) {
-      const { projectKey, sprintId, sprintData } = location.state;
+      const { projectKey, sprintId, sprintData, projectName } = location.state;
       setProjectKey(projectKey || '');
       setSprintId(sprintId || '');
       setSprintData(sprintData || {});
+      setProjectName(projectName || '');
       console.log('projectKey:', projectKey);
       console.log('sprintId:', sprintId);
       console.log('sprintData:', JSON.stringify(sprintData));
-      console.log("Menubar projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
+      console.log('projectName:', projectName);
+      console.log("Menubar projectKey and sprintId and sprintData and projectName check:", projectKey, sprintId, JSON.stringify(sprintData), projectName);
     }
   }, [location.state]);
   
-  console.log("Menubar projectKey and sprintId and sprintData check: "+ projectKey + sprintId + JSON.stringify(sprintData));
+  console.log("Menubar projectKey and sprintId and sprintData and projectName check: "+ projectKey + sprintId + JSON.stringify(sprintData) + projectName );
 
   const menubarStyle = {
     display: 'flex',
@@ -91,7 +94,7 @@ function Menubar() {
           <img src={sprintIcon} alt="Sprint" style={imageStyle}/>
           <span style={textStyle}>스프린트</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey, sprintData, sprintId } })}>
+        <div style={menuItemStyle} onClick={() => navigate('/timeline', { state: { projectKey, sprintData, sprintId , projectName} })}>
           <img src={timelineIcon} alt="Timeline" style={imageStyle}/>
           <span style={textStyle}>타임라인</span>
         </div>

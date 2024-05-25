@@ -163,9 +163,9 @@ import { useAuth } from "../../src/context/AuthContext";
 
 function ProjectsList() {
   const navigate = useNavigate(); 
-  // const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
+  const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
   
-const  authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTYyODM2NzEsImV4cCI6MTcxNzQ5MzI3MX0.m2XJAD1x8R5GsVAf0rw4YFUxROtWVoU1f5E1BswL7EkBhkS4XXnBfptTcobf4CQzfuekXW84xxDHqs5U7kANGg'
+//const  authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTYyODM2NzEsImV4cCI6MTcxNzQ5MzI3MX0.m2XJAD1x8R5GsVAf0rw4YFUxROtWVoU1f5E1BswL7EkBhkS4XXnBfptTcobf4CQzfuekXW84xxDHqs5U7kANGg'
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
   const [editingProjectId, setEditingProjectId] = useState(null); 
@@ -236,8 +236,8 @@ const  authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiI
     navigate(`/checkIssue`, { state: { key: projectKey } }); 
   }
 
-  const navigateToCreateSprintModal = (projectKey) => { 
-    navigate(`/createSprintModal`, { state: { key: projectKey } }); 
+  const navigateToCreateSprintModal = (projectKey, projectName) => { 
+    navigate(`/createSprintModal`, { state: { key: projectKey, projectName: projectName} }); 
   }
 
   const navigateToBacklog = (projectKey) => { 
@@ -295,7 +295,7 @@ const  authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiI
                     <Button style={{width:'100%'}}onClick={() => editProject(project)}>수정하기</Button>
                     <Button onClick={() => deleteProject(project)}>삭제하기</Button>
                     <Button onClick={() => navigateToIssue(project.key)}>이슈 생성</Button>
-                    <Button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성</Button>
+                    <Button onClick={() => navigateToCreateSprintModal(project.key, project.name)}>스프린트 생성</Button>
                     <Button onClick={() => navigateToBacklog(project.key)}>백로그 페이지</Button>
                     <Button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회</Button>
                   </>

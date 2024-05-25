@@ -7,13 +7,14 @@ import TimelineBoard from '../components/TimelinePage/TimelineBoard.js';
 function TimelinePage() {
   const location = useLocation();
   const projectKey = location.state?.projectKey;
-  console.log("timelinepage projectKey check: "+ projectKey);
+  const projectName = location.state?.projectName;
+  console.log("timelinepage projectKey and projectNamecheck: "+ projectKey +projectName);
 
   const [selectedTitle, setSelectedTitle] = useState('');
   return (
     <div>
-        <Menubar />
-        <ComponentTimeline onTitleClick={setSelectedTitle}  projectKey={projectKey} />
+        <Menubar projectKey={projectKey}  />
+        <ComponentTimeline onTitleClick={setSelectedTitle}  projectKey={projectKey} projectName={projectName}/>
       <TimelineBoard moveToTimelineTitle={selectedTitle} projectKey={projectKey} />
     </div>
   );
