@@ -12,9 +12,15 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
   
+  // useEffect(() => {
+  //   fetchIssues();
+  // }, []);
+
   useEffect(() => {
     fetchIssues();
-  }, []);
+  }, [backlogIssue]);
+
+
 
   // const fetchIssues = async () => {
   //   try {
@@ -73,33 +79,52 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  
         }
       });
 
+      const allIssues = [...response1.data.result, ...response2.data.result];
+
       const newIssues = { todo: [], doing: [], complete: [] };
+
+      backlogIssue.forEach(backlog => {
+        const issue = allIssues.find(item => item.issueId === backlog.issueId);
+        if (issue) {
+          console.log(JSON.stringify(issue));
+          const status = issue.status;
+          if (status === 'DO') {
+            newIssues.todo.push(issue);
+          } else if (status === 'PROGRESS') {
+            newIssues.doing.push(issue);
+          } else if (status === 'DONE') {
+            newIssues.complete.push(issue);
+          } else {
+            newIssues.todo.push(issue); 
+          }
+        }
+      });
   
-      response1.data.result.forEach(issue => {
-        const status = issue.status;
-        if (status === 'DO') {
-            newIssues.todo.push(issue);
-        } else if (status === 'PROGRESS') {
-            newIssues.doing.push(issue);
-        } else if (status === 'DONE') {
-            newIssues.complete.push(issue);
-        } else {
-            newIssues.todo.push(issue); 
-        }
-    });
+    //   response1.data.result.forEach(issue => {
+    //     const status = issue.status;
+    //     if (status === 'DO') {
+    //         newIssues.todo.push(issue);
+    //     } else if (status === 'PROGRESS') {
+    //         newIssues.doing.push(issue);
+    //     } else if (status === 'DONE') {
+    //         newIssues.complete.push(issue);
+    //     } else {
+    //         newIssues.todo.push(issue); 
+    //     }
+    // });
     
-    response2.data.result.forEach(issue => {
-        const status = issue.status;
-        if (status === 'DO') {
-            newIssues.todo.push(issue);
-        } else if (status === 'PROGRESS') {
-            newIssues.doing.push(issue);
-        } else if (status === 'DONE') {
-            newIssues.complete.push(issue);
-        } else {
-            newIssues.todo.push(issue); 
-        }
-    });
+    // response2.data.result.forEach(issue => {
+    //     const status = issue.status;
+    //     if (status === 'DO') {
+    //         newIssues.todo.push(issue);
+    //     } else if (status === 'PROGRESS') {
+    //         newIssues.doing.push(issue);
+    //     } else if (status === 'DONE') {
+    //         newIssues.complete.push(issue);
+    //     } else {
+    //         newIssues.todo.push(issue); 
+    //     }
+    // });
   
       setIssues(newIssues);
     } catch (error) {
