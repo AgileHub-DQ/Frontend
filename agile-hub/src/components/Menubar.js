@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate , useLocation} from "react-router-dom";
 import logoIcon from "../assets/logoWhite.png";
 import projectIcon from "../assets/ProjectIcon.png";
@@ -8,7 +8,7 @@ import sprintIcon from "../assets/SprintIcon.png";
 import myPageIcon from "../assets/MyPageIcon.png";
 import timelineIcon from "../assets/TimelineIcon.png";
 
-function Menubar({ projectKey, sprintId, sprintData }) {
+function Menubar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [projectKey, setProjectKey] = useState('');

@@ -99,8 +99,10 @@ function AddBacklog() {
     };
 
     useEffect(() => {
-        epicIssue();
-    }, []);
+        if (projectKey) {
+            epicIssue(); // 타이밍 문제로 projectkey 가 들어가지 않는 문제 해결
+        }
+    }, [projectKey]);
 
     const onEpicDeleted = () => {
         epicIssue();  // 에픽 삭제 후 에픽 목록 다시 가져오기

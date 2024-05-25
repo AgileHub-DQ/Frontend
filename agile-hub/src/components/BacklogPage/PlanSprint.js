@@ -4,7 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js'; 
 
-function PlanSprint({projectKey, sprintId, sprintData}) {
+function PlanSprint() {
+
+  const location = useLocation();
+  const [projectKey, setProjectKey] = useState('');
+  const [sprintId, setSprintId] = useState('');
+  const [sprintData, setSprintData] = useState({});
+
+  useEffect(() => {
+      if (location.state) {
+        const { projectKey, sprintId, sprintData } = location.state;
+        setProjectKey(projectKey || '');
+        setSprintId(sprintId || '');
+        setSprintData(sprintData || {});
+        console.log('projectKey:', projectKey);
+        console.log('sprintId:', sprintId);
+        console.log('sprintData:', JSON.stringify(sprintData));
+        console.log("PlanSprint projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
+      }
+    }, [location.state]);
+
+
   // const projectKey = 'p1';
   const { authToken } = useAuth(); 
 
@@ -37,9 +57,19 @@ function PlanSprint({projectKey, sprintId, sprintData}) {
 
 
 
+  // useEffect(() => {
+  //   test();
+  // }, []);
+
+
+
   useEffect(() => {
-    test();
-  }, []);
+    if (projectKey) {
+      test(); // 타이밍 문제로 projectkey 가 들어가지 않는 문제 해결
+    }
+}, [projectKey]);
+
+
 
   const test = async () => {
     try {
