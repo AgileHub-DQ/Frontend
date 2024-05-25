@@ -1,6 +1,6 @@
 .container {
   display: flex; /* 화면에 출력된 컴포넌트 정렬 */
-  background: linear-gradient(45deg, #b5fffc 30%, #ffdee9 90%);
+  background: linear-gradient(45deg, #b5fffc 10%, #ffdee9 80%);
 }
 
 .left-panel,
