@@ -102,6 +102,10 @@ function Menubar() {
           <img src={myPageIcon} alt="My Page" style={imageStyle}/>
           <span style={textStyle}>마이페이지</span>
         </div>
+        <div style={menuItemStyle} onClick={() => navigate('/test', { state: { projectKey, sprintData, sprintId } })}>
+          {/* <img src={myPageIcon} alt="My Page" style={imageStyle}/> */}
+          <span style={textStyle}>test</span>
+        </div>
       </div>
     </div>
   );

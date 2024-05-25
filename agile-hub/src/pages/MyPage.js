@@ -248,6 +248,10 @@ function ProjectsList() {
     navigate(`/sprintAllList`, { state: { key: projectKey } }); 
   }
 
+  const navigateToTest = (projectKey) => { 
+    navigate(`/test`, { state: { key: projectKey } }); 
+  }
+
   const projectItemStyle = {
     margin: '2rem 0',  // Add margin to top and bottom
     background: '#F2F1F7',
@@ -298,6 +302,7 @@ function ProjectsList() {
                     <Button onClick={() => navigateToCreateSprintModal(project.key, project.name)}>스프린트 생성</Button>
                     <Button onClick={() => navigateToBacklog(project.key)}>백로그 페이지</Button>
                     <Button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회</Button>
+                    <Button onClick={() => navigateToTest(project.key)}>test</Button>
                   </>
                 )}
               </li>
