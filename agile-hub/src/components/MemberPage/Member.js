@@ -1,6 +1,7 @@
 import Button from '../MyPage/Button';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../../src/context/AuthContext';
 
 function Modal({ isOpen, onClose }) {
@@ -95,6 +96,9 @@ function Modal({ isOpen, onClose }) {
 }
 
 function Member() {
+  const location = useLocation();
+  const projectKey = location.state || '';
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState('asc');
   const [members, setMembers] = useState([]);
@@ -182,7 +186,7 @@ function Member() {
         return;
       }
       try {
-        const response = await axios.get('https://api.agilehub.store/projects/P1/members', {
+        const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/members`, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
