@@ -52,7 +52,7 @@ function PlanSprint() {
 
 
   const handleCreateSprint = () => {
-    navigate('/sprint', { state: { sprintData, projectKey } });
+    navigate('/sprint', { state: { sprintData, projectKey, sprintIssues } });
   };
   
 
