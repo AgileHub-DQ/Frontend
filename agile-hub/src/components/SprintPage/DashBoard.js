@@ -33,7 +33,7 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  
   
       backlogIssue.forEach(issue => {
         console.log(JSON.stringify(issue));
-        console.log(issue.id);
+        console.log(issue.issueId);
         const status = issue.status;
         if (status === 'DO') {
             newIssues.todo.push(issue);
