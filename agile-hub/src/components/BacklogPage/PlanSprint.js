@@ -97,7 +97,7 @@ function PlanSprint() {
       // console.log("issueCount:", issueCount);
       // console.log("latestSprintIssues:", latestSprintIssues);
 
-      const latestSprint = sprints[sprintId];
+      const latestSprint = sprints[sprints.length - 1];
       const sprintIssues = latestSprint.issues;
       const issueCount = latestSprint.issueCount;
       console.log("latestSprint:", latestSprint);
