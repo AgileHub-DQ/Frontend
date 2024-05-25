@@ -19,14 +19,14 @@ export default function DashBoard({ projectKey, sprintId }) {
   const fetchIssues = async () => {
     try {
       //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; // 실제 액세스 토큰으로 대체해야 함
-      const endpoint = `https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`;
+      const endpoint = `https://api.agilehub.store/projects/${projectKey}/sprints`;
       const response = await axios.get(endpoint, {
         headers: {
           Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json'
         }
       });
 
+      console.log("!!!!"+response);
       const newIssues = { todo: [], doing: [], complete: [] };
   
       response.data.result.forEach(issue => {
