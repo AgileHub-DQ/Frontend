@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js'; 
 
@@ -96,10 +96,11 @@ function PlanSprint() {
       // console.log("issueCount:", issueCount);
       // console.log("latestSprintIssues:", latestSprintIssues);
 
-      const latestSprint = sprintId;
+      const latestSprint = sprints[sprintId];
       const sprintIssues = latestSprint.issues;
       const issueCount = latestSprint.issueCount;
       console.log("latestSprint:", latestSprint);
+      console.log("latestSprintJSON:", JSON.stringify(latestSprint));
       console.log("issueCount:", issueCount);
       console.log("sprintIssues:", sprintIssues);
 
