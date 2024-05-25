@@ -52,11 +52,13 @@ function PlanSprint() {
 
 
   const handleCreateSprint = () => {
-    navigate('/sprint', { state: { sprintData, projectKey, issues } });
+    navigate('/sprint', { state: { sprintData, projectKey, issues, update } });
   };
   
 
-
+const update = () => {
+  test();
+};
 
   // useEffect(() => {
   //   test();

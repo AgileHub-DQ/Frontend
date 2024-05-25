@@ -6,7 +6,7 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  }) {
+export default function DashBoard({ projectKey, sprintId, issues: backlogIssue, update }) {
   const { authToken } = useAuth();
 
   const [imagesURLs, setImagesURLs] = useState('');
@@ -22,7 +22,10 @@ export default function DashBoard({ projectKey, sprintId, issues: backlogIssue  
 
 
   const onRendering = () => {
+    update();
+    console.log("update()");
     fetchIssues();
+    console.log("fetchIssues()");
   }
 
   // const fetchIssues = async () => {
