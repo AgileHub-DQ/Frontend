@@ -5,7 +5,7 @@ import ShowStory from './ShowStory';
 import '../../../css/BacklogPage/ShowEpic.css';
 import { useAuth } from '../../../context/AuthContext.js'; 
 
-function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId}) {
+function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId, loginId}) {
     const { authToken } = useAuth(); 
     console.log("ShowEpic projectKey and sprintId and epicData check:", projectKey, sprintId, JSON.stringify(epicData));
     const issueId = epicData.id;
