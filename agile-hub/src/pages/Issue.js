@@ -136,8 +136,8 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
             // sprintIssues.push(response3.data.result.issue); // 어차피 assignee 변수명 달라서 못 씀
             // localStorage.setItem('sprintIssues', JSON.stringify(sprintIssues));
 
-            localStorage.setItem('sprintIssues', JSON.stringify(response2.data.result.issue)); 
-            console.log('sprintIssues:', JSON.stringify(response2.data.result.issue));
+            // localStorage.setItem('sprintIssues', JSON.stringify(response2.data.result.issue)); 
+            // console.log('sprintIssues:', JSON.stringify(response2.data.result.issue));
             onRendering()
   
 
