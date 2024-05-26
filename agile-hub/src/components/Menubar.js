@@ -8,6 +8,7 @@ import sprintIcon from "../assets/SprintIcon.png";
 import myPageIcon from "../assets/MyPageIcon.png";
 import timelineIcon from "../assets/TimelineIcon.png";
 import { useAuth } from '../context/AuthContext.js'; 
+import axios from 'axios';
 
 function Menubar() {
   const { authToken } = useAuth(); 
