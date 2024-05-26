@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../../css/modal/EpicModal.css'; 
 import { useAuth } from '../../../context/AuthContext.js'; 
 
-function EpicModal({ onClose, onSubmit, projectKey }) {
+function EpicModal({ onClose, onSubmit, projectKey, loginId }) {
   const { authToken } = useAuth(); 
 
     const [issueTitle, setIssueTitle] = useState('');
@@ -15,7 +15,7 @@ function EpicModal({ onClose, onSubmit, projectKey }) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const [assigneeId, setAssigneeId] = useState('1');
+    const [assigneeId, setAssigneeId] = useState(loginId);
 
     // const [parentId, setParentId] = useState('1');
     const [color, setColor] = useState('#FF7041'); 

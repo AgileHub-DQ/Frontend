@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext.js'; 
 
-function StoryModal({ onClose, onSubmit, projectKey }) {
+function StoryModal({ onClose, onSubmit, projectKey ,loginId}) {
   const { authToken } = useAuth(); 
     const [response, setResponse] = useState(null);
     const [issueTitle, setIssueTitle] = useState('');
@@ -15,7 +15,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const [assigneeId, setAssigneeId] = useState('1');
+    const [assigneeId, setAssigneeId] = useState(loginId);
 
     const [parentId, setParentId] = useState('');
     console.log(parentId);

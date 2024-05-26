@@ -1,3 +1,5 @@
+// mypage.js 디자인 하면 될 듯
+// 카카오 마이페이지처럼 디자인
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext.js'; 
@@ -5,7 +7,7 @@ import { useAuth } from '../context/AuthContext.js';
 function User() {
 
     const { authToken } = useAuth(); 
-    const [id, setId] = useState('');
+    const [loginId, setId] = useState('');
     const [name, setName] = useState('');
     const [imageUrl, setImageUrl] = useState('');
 

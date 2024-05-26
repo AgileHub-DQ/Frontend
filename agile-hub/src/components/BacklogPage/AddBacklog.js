@@ -61,13 +61,18 @@ function AddBacklog() {
     const [projectKey, setProjectKey] = useState('');
     const [sprintId, setSprintId] = useState('');
     const [sprintData, setSprintData] = useState({});
+    const [loginId, setLoginId] = useState('');
 
     useEffect(() => {
         if (location.state) {
           const { projectKey, sprintId, sprintData } = location.state;
+          const loginId = location.state?.loginId;
+          console.log("addbacklog loginId: "+ loginId);
+
           setProjectKey(projectKey || '');
           setSprintId(sprintId || '');
           setSprintData(sprintData || {});
+          setLoginId(loginId || '');
           console.log('projectKey:', projectKey);
           console.log('sprintId:', sprintId);
           console.log('sprintData:', JSON.stringify(sprintData));
@@ -115,8 +120,8 @@ function AddBacklog() {
             ) : (
                 epics.map(epic => (
                     <div key={epic.id} className='epic-section'>
-                        <ShowEpic epicData={epic} projectKey={projectKey} sprintId={sprintId} onEpicDeleted={onEpicDeleted} />
-                        <CreateEpicButton projectKey={projectKey} onEpicSubmit={epicIssue} />
+                        <ShowEpic epicData={epic} projectKey={projectKey} sprintId={sprintId} onEpicDeleted={onEpicDeleted} loginId={loginId}/>
+                        <CreateEpicButton projectKey={projectKey} onEpicSubmit={epicIssue} loginId={loginId}/>
                     </div>
                 ))
             )}

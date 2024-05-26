@@ -3,7 +3,7 @@ import '../../../css/BacklogPage/CreateStoryButton.css';
 import StoryModal from '../modal/StoryModal.js';
 import ShowStory from '../show/ShowStory.js';
 
-function CreateStoryButton({projectKey}) {
+function CreateStoryButton({projectKey,loginId}) {
     const [showModal, setShowModal] = useState(false);
     const [storyList, setStoryList] = useState([]);
 
@@ -19,9 +19,9 @@ function CreateStoryButton({projectKey}) {
 
     return (
         <div className='addStory'>
-            {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} projectKey={projectKey} />} 
+            {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} projectKey={projectKey} loginId={loginId}/>} 
             {storyList.map((storyData, index) => (
-                <ShowStory key={index} storyData={storyData} projectKey={projectKey} />
+                <ShowStory key={index} storyData={storyData} projectKey={projectKey} loginId={loginId}/>
             ))}
             <div className='story_button_container'>
                 <button className="story_button" onClick={handleToggleModal}>
