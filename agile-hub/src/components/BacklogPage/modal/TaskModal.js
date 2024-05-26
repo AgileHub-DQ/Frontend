@@ -13,8 +13,15 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const [assigneeId, setAssigneeId] = useState('1');
+    const [assigneeId, setAssigneeId] = useState('');
     
+    useEffect(() => {
+        const savedLoginId = localStorage.getItem('loginId');
+        if (savedLoginId) {
+          setAssigneeId(savedLoginId);
+        }
+      }, []);
+      
     const [parentId, setParentId] = useState('');
     const [color, setColor] = useState('#FB55B3'); 
     const [storyList, setStoryList] = useState([]);

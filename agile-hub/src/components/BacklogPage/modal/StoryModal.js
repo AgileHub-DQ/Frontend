@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext.js'; 
 
 function StoryModal({ onClose, onSubmit, projectKey ,loginId}) {
+  console.log("storymodal loginId: "+ loginId);
+
   const { authToken } = useAuth(); 
     const [response, setResponse] = useState(null);
     const [issueTitle, setIssueTitle] = useState('');
@@ -15,7 +17,8 @@ function StoryModal({ onClose, onSubmit, projectKey ,loginId}) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const [assigneeId, setAssigneeId] = useState(loginId);
+    const [assigneeId, setAssigneeId] = useState('');
+    // const [assigneeId, setAssigneeId] = useState(loginId);
 
     const [parentId, setParentId] = useState('');
     console.log(parentId);
@@ -23,6 +26,13 @@ function StoryModal({ onClose, onSubmit, projectKey ,loginId}) {
     const [epicList, setEpicList] = useState([]);
     const [label, setLabel] = useState(''); // label
 
+    useEffect(() => {
+      const savedLoginId = localStorage.getItem('loginId');
+      if (savedLoginId) {
+        setAssigneeId(savedLoginId);
+      }
+    }, []);
+    
     const handleBoxClick = (selectedLabel) => {
       setLabel(selectedLabel); // 선택된 라벨 상태 업데이트
     };

@@ -24,7 +24,13 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  const [assigneeId, setAssigneeId] = useState('1');
+  const [assigneeId, setAssigneeId] = useState('');
+  useEffect(() => {
+    const savedLoginId = localStorage.getItem('loginId');
+    if (savedLoginId) {
+      setAssigneeId(savedLoginId);
+    }
+  }, []);
 
   const [parentId, setParentId] = useState('');
   const [color, setColor] = useState('#00FF75'); 
@@ -136,7 +142,7 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
       setStartDate('');
       setEndDate('');
 
-      setAssigneeId('2');
+      setAssigneeId('');
 
       setParentId('');
       setIsModalOpen(false); 

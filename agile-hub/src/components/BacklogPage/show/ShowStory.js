@@ -139,7 +139,8 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
 
     const deleteIssue = async (storyId) => {
 
-
+        const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
+        if (isConfirmed) {
             //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
 
             try {
@@ -155,6 +156,7 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
                 console.error('이슈 삭제에 실패했습니다:', error);
 
             }
+        }
         
     };
 
@@ -283,7 +285,7 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
                                 </div> */}
                         </div>
                     </div>
-                    <CreateTaskButton projectKey={projectKey} storyId={story.id} onTaskCreated={() => fetchTasks(story.id)} />
+                    <CreateTaskButton loginId={loginId} projectKey={projectKey} storyId={story.id} onTaskCreated={() => fetchTasks(story.id)} />
                 </div>
             ))}
         </div>

@@ -3,7 +3,7 @@ import '../../../css/BacklogPage/CreateTaskButton.css';
 import TaskModal from '../modal/TaskModal.js';
 import ShowTask from '../show/ShowTask.js';
 
-function CreateTaskButton({projectKey}) {
+function CreateTaskButton({projectKey, loginId}) {
     const [showModal, setShowModal] = useState(false);
     const [taskList, setTaskList] = useState([]);
 
@@ -21,7 +21,7 @@ function CreateTaskButton({projectKey}) {
 
     return (
         <div className='addTask'>
-            {showModal && <TaskModal onClose={handleToggleModal} onSubmit={handleTaskSubmit} projectKey={projectKey}/>}
+            {showModal && <TaskModal onClose={handleToggleModal} onSubmit={handleTaskSubmit} projectKey={projectKey} loginId = {loginId}/>}
             {taskList.map((taskData, index) => (
                 <ShowTask key={index} taskData={taskData} projectKey={projectKey} />
             ))}

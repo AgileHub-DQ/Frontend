@@ -6,23 +6,22 @@ import CreateEpicButton from './button/CreateEpicButton.js'; // 경로 확인 �
 import { useAuth } from '../../context/AuthContext.js'; 
 import { useNavigate, useLocation } from 'react-router-dom';
 
-function AddBacklog() {
+function AddBacklog({ loginId }) {
     const location = useLocation();
     const [projectKey, setProjectKey] = useState('');
     const [sprintId, setSprintId] = useState('');
     const [sprintData, setSprintData] = useState({});
-    const [loginId, setLoginId] = useState('');
+
 
     useEffect(() => {
         if (location.state) {
           const { projectKey, sprintId, sprintData } = location.state;
-          const loginId = location.state?.loginId;
-          console.log("addbacklog loginId: "+ loginId);
+
 
           setProjectKey(projectKey || '');
           setSprintId(sprintId || '');
           setSprintData(sprintData || {});
-          setLoginId(loginId || '');
+
           console.log('projectKey:', projectKey);
           console.log('sprintId:', sprintId);
           console.log('sprintData:', JSON.stringify(sprintData));
@@ -66,7 +65,7 @@ function AddBacklog() {
     return (
         <div className='addBacklog'>
             {epics.length === 0 ? (
-                <CreateEpicButton projectKey={projectKey} onEpicSubmit={epicIssue} />
+                <CreateEpicButton projectKey={projectKey} onEpicSubmit={epicIssue} loginId={loginId}/>
             ) : (
                 epics.map(epic => (
                     <div key={epic.id} className='epic-section'>
