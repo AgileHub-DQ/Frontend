@@ -15,6 +15,39 @@ function UserMainPage() {
   const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey;
 
+  const [loginId, setId] = useState('');
+  const [name, setName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  useEffect(() => {
+    getUserId();
+  }, []);
+
+  const getUserId = async () => {
+      try {
+          //const authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
+          const response = await axios.get(`https://api.agilehub.store/member/profile`, {
+              headers: {
+                  Authorization: `Bearer ${authToken}`
+              }
+          });
+          console.log(response.data.result);
+          console.log(response.data.result.id);
+          console.log(response.data.result.name);
+          console.log(response.data.result.profileImageUrl);
+          setId(response.data.result.id);
+          setName(response.data.result.name);
+          setImageUrl(response.data.result.profileImageUrl);
+
+          localStorage.setItem('userId', userId);
+          
+      } catch (error) {
+          console.error('API request failed:', error);
+      }
+  };
+
+
+
   useEffect(() => {
     // 로그인 상태 확인
     if (!authToken) {

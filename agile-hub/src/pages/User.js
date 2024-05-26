@@ -30,6 +30,9 @@ function User() {
             setId(response.data.result.id);
             setName(response.data.result.name);
             setImageUrl(response.data.result.profileImageUrl);
+
+            localStorage.setItem('userId', userId);
+            
         } catch (error) {
             console.error('API request failed:', error);
         }
