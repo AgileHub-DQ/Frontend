@@ -8,9 +8,9 @@ import sprintIcon from "../assets/SprintIcon.png";
 import myPageIcon from "../assets/MyPageIcon.png";
 import timelineIcon from "../assets/TimelineIcon.png";
 import { useAuth } from '../context/AuthContext.js'; 
-import axios from 'axios';
 
-function Menubar() {
+
+function Menubar({loginId}) {
   const { authToken } = useAuth(); 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,35 +19,6 @@ function Menubar() {
   const [sprintData, setSprintData] = useState({});
   const [projectName, setProjectName] = useState('');
   const [issues, setIssues] = useState([]);
-
-  const [loginId, setId] = useState('');
-  const [name, setName] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-
-  useEffect(() => {
-      test();
-  }, []);
-
-  const login = async () => {
-      try {
-          //const authToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
-          const response = await axios.get(`https://api.agilehub.store/member/profile`, {
-              headers: {
-                  Authorization: `Bearer ${authToken}`
-              }
-          });
-          console.log(response.data.result);
-          console.log(response.data.result.id);
-          console.log(response.data.result.name);
-          console.log(response.data.result.profileImageUrl);
-          setId(response.data.result.id);
-          setName(response.data.result.name);
-          setImageUrl(response.data.result.profileImageUrl);
-
-      } catch (error) {
-          console.error('API request failed:', error);
-      }
-  };
 
 
 
@@ -148,7 +119,7 @@ function Menubar() {
           <img src={membersIcon} alt="Members" style={imageStyle} />
           <span style={textStyle}>멤버</span>
         </div>
-        <div style={menuItemStyle} onClick={() => navigate('/backlog', { state: { projectKey, sprintData, sprintId, loginId } })}>
+        <div style={menuItemStyle} onClick={() => navigate('/backlog', { state: { projectKey, sprintData, sprintId ,loginId } })}>
           <img src={backlogIcon} alt="Backlog" style={imageStyle} />
           <span style={textStyle}>백로그</span>
         </div>
