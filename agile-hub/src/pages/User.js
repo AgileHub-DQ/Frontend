@@ -1,10 +1,13 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext.js'; 
 
 function User() {
 
     const { authToken } = useAuth(); 
+    const [id, setId] = useState('');
+    const [name, setName] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
         test();
@@ -18,18 +21,50 @@ function User() {
                     Authorization: `Bearer ${authToken}`
                 }
             });
-            console.log(response);
-            console.log(response.result);
+            console.log(response.data.result);
+            console.log(response.data.result.id);
+            console.log(response.data.result.name);
+            console.log(response.data.result.profileImageUrl);
+            setId(response.data.result.id);
+            setName(response.data.result.name);
+            setImageUrl(response.data.result.profileImageUrl);
         } catch (error) {
             console.error('API request failed:', error);
         }
     };
 
-  return (
-    <div>
-     hi hello?
-    </div>
-  );
+    return (
+        <div style={containerStyle}>
+            <img src={imageUrl} alt={name} style={imageStyle} />
+            <h2 style={nameStyle}>{name}</h2>
+        </div>
+    );
 }
+
+const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    maxWidth: '300px',
+    margin: 'auto',
+    backgroundColor: '#fff',
+};
+
+const imageStyle = {
+    width: '100px',
+    height: '100px',
+    borderRadius: '50%',
+    marginBottom: '20px',
+};
+
+const nameStyle = {
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+    color: '#333',
+};
 
 export default User;
