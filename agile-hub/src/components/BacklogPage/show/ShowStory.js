@@ -3,11 +3,11 @@ import axios from 'axios';
 import '../../../css/BacklogPage/ShowStory.css';
 import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
-import { useAuth } from '../../../context/AuthContext.js';
+import { useAuth } from '../../../context/AuthContext.js'; 
 
 function ShowStory({ projectKey, issueId, sprintId }) {
     console.log(issueId);
-    const { authToken } = useAuth();
+    const { authToken } = useAuth(); 
 
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
@@ -104,7 +104,7 @@ function ShowStory({ projectKey, issueId, sprintId }) {
     };
 
     const removeFromSprint = async (storyId) => {
-
+  
         try {
             //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.delete(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
@@ -137,18 +137,25 @@ function ShowStory({ projectKey, issueId, sprintId }) {
         fetchTasks();
     }
 
-    const deleteIssue = async (storyId) => {
-        try {
-            console.log("storyId: "+ storyId);
-            await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${storyId}`, {
+    const deleteIssue = async () => {
+
+
+            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
+
+            try {
+                await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`, {
                 headers: {
-                    Authorization: `Bearer ${authToken}`
+                    Authorization: `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
                 }
             });
-            fetchStories();
-        } catch (error) {
-            console.error('이슈 삭제에 실패했습니다:', error);
-        }
+                fetchStories();
+
+            } catch (error) {
+                console.error('이슈 삭제에 실패했습니다:', error);
+
+            }
+        
     };
 
 
