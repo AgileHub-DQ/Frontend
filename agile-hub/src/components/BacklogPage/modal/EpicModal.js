@@ -1,10 +1,12 @@
 // EpicModal.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../../css/modal/EpicModal.css'; 
 import { useAuth } from '../../../context/AuthContext.js'; 
 
 function EpicModal({ onClose, onSubmit, projectKey, loginId }) {
+  console.log("epicModal loginId: "+ loginId);
+
   const { authToken } = useAuth(); 
 
     const [issueTitle, setIssueTitle] = useState('');
@@ -15,12 +17,21 @@ function EpicModal({ onClose, onSubmit, projectKey, loginId }) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const [assigneeId, setAssigneeId] = useState(loginId);
+    const [assigneeId, setAssigneeId] = useState('');
+    console.log("assigneeId"+ assigneeId);
 
     // const [parentId, setParentId] = useState('1');
     const [color, setColor] = useState('#FF7041'); 
     const [label, setLabel] = useState(''); // label
 
+    useEffect(() => {
+      const savedLoginId = localStorage.getItem('loginId');
+      if (savedLoginId) {
+        setAssigneeId(savedLoginId);
+      }
+    }, []);
+
+    
     const handleBoxClick = (selectedLabel) => {
       setLabel(selectedLabel); // 선택된 라벨 상태 업데이트
     };
