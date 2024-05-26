@@ -5,13 +5,12 @@ import Slider from '../components/LoginPage/Slider.js';
 import KakaoLoginButton from '../components/LoginPage/KakaoLoginButton.js';
 import Logo from '../components/LoginPage/Logo.js';
 
-
 function LoginPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  console.log(isLoggedIn); 
+  console.log(isLoggedIn);
 
-  console.log("여기는 LoginPage입니다."); 
+  console.log('여기는 LoginPage입니다.');
 
   return (
     <div className="container">

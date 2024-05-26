@@ -1,74 +1,13 @@
-// import React, { useEffect } from 'react';
-// import { useLocation, useNavigate } from 'react-router-dom';
-// import Menubar from '../Menubar.js';
-// import { useAuth } from '../../context/AuthContext';
-
-// function UserMainPage() {  
-//   const navigate = useNavigate();
-//   const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
-//   const location = useLocation();
-//   const sprintData = location.state?.sprintData;
-//   const sprintId = sprintData?.sprintId;
-//   const projectKey = location.state?.projectKey;
-
-//   useEffect(() => {
-//     // 로그인 상태 확인
-//     if (!authToken) {
-//       navigate('/login');
-//     }
-//   }, [authToken, navigate]);
-
-//   console.log("여기는 UserMainPage(로그인 시 유저메인페이지)"); 
-
-//   return (
-//     <div className='sprint_container'>
-//       <Menubar/>
-//       <button className="createProjectButton" onClick={() => navigate('/createProject')}>
-//         <span>
-//           프로젝트 생성하러 가기
-//         </span>
-//       </button>
-//       <style>
-//         {`
-//           .createProjectButton {
-//             border: 2px solid #24b4fb;
-//             background-color: #24b4fb;
-//             border-radius: 0.9em;
-//             padding: 0.8em 1.2em;
-//             transition: all ease-in-out 0.2s;
-//             font-size: 30px;
-//             display: flex;
-//             justify-content: center;
-//             align-items: center;
-//             color: #fff;
-//             font-weight: 600;
-//             cursor: pointer;
-//             width: 30rem;
-//             height: 5rem;
-//           }
-
-//           .createProjectButton:hover {
-//             background-color: #0071e2;
-//           }
-//         `}
-//       </style>
-//     </div>
-//   );
-// }
-
-// export default UserMainPage;
-
-//여기는 로그인로직x, 위에 로그인 로직 o 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Menubar from '../Menubar.js';
 import { useAuth } from '../../context/AuthContext';
-import IssueEx from "../../components/MainPage/IssueEx.js"; 
-import ProjectEx from "../../components/MainPage/ProjectEx.js"; 
-import TimeLineEx from "../../components/MainPage/TimeLineEx.js"; 
-import SprintEx from "../../components/MainPage/SprintEx.js"; 
+import IssueEx from '../../components/MainPage/IssueEx.js';
+import ProjectEx from '../../components/MainPage/ProjectEx.js';
+import TimeLineEx from '../../components/MainPage/TimeLineEx.js';
+import SprintEx from '../../components/MainPage/SprintEx.js';
 
-function UserMainPage() {  
+function UserMainPage() {
   const navigate = useNavigate();
   const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
   const location = useLocation();
@@ -76,14 +15,21 @@ function UserMainPage() {
   const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey;
 
+  useEffect(() => {
+    // 로그인 상태 확인
+    if (!authToken) {
+      navigate('/login');
+    }
+  }, [authToken, navigate]);
+
   // 오늘 날짜를 가져오기 위한 코드
   const today = new Date();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = today.toLocaleDateString('en-US', options);
 
-  console.log("여기는 UserMainPage(로그인 시 유저메인페이지)"); 
+  console.log('여기는 UserMainPage(로그인 시 유저메인페이지)');
 
-  const waveText = "Agilehub는 쉽고 빠르게 프로젝트를 생성할 수 있는 템플릿을 제공합니다!";
+  const waveText = 'Agilehub는 쉽고 빠르게 프로젝트를 생성할 수 있는 템플릿을 제공합니다!';
 
   // 모달 상태 관리
   const [modalContent, setModalContent] = useState(null);
@@ -97,39 +43,57 @@ function UserMainPage() {
   };
 
   return (
-    <div className='sprint_container'>
-      <Menubar/>
-      <div className='mainContent'>
-        <div className='banner'>
-          {waveText.split("").map((char, index) => (
-            <span key={index} className='waveChar' style={{ animationDelay: `${index * 0.1}s` }}>
-              {char === " " ? "\u00A0" : char}
+    <div className="sprint_container">
+      <Menubar />
+      <div className="mainContent">
+        <div className="banner">
+          {waveText.split('').map((char, index) => (
+            <span key={index} className="waveChar" style={{ animationDelay: `${index * 0.1}s` }}>
+              {char === ' ' ? '\u00A0' : char}
             </span>
           ))}
         </div>
-        <div className='projectCard'>
-          <div className='projectDate'>{formattedDate}</div>
+        <div className="projectCard">
+          <div className="projectDate">{formattedDate}</div>
           <button className="createProjectButton" onClick={() => navigate('/createProject')}>
-            <span>
-              프로젝트 생성하러 가기
-            </span>
+            <span>프로젝트 생성하러 가기</span>
           </button>
         </div>
-        <div className='highlightText'>
-          Agilehub을 미리 사용해보세요!
-        </div>
-        <div className='projectContainer'>
-          <button className='projectItem' style={{ backgroundColor: '#FCB9AA' }} onClick={() => openModal(<IssueEx/>)}>이슈 생성해보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#A2E1DB' }} onClick={() => openModal(<ProjectEx/>)}>프로젝트 생성해보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#F6EAC2' }} onClick={() => openModal(<TimeLineEx/>)}>타임라인 미리보기</button>
-          <button className='projectItem' style={{ backgroundColor: '#CBAACB' }} onClick={() => openModal(<SprintEx/>)}>스프린트 생성해보기</button>
+        <div className="highlightText">Agilehub을 미리 사용해보세요!</div>
+        <div className="projectContainer">
+          <button className="projectItem" style={{ backgroundColor: '#FCB9AA' }} onClick={() => openModal(<IssueEx />)}>
+            이슈 생성해보기
+          </button>
+          <button
+            className="projectItem"
+            style={{ backgroundColor: '#A2E1DB' }}
+            onClick={() => openModal(<ProjectEx />)}
+          >
+            프로젝트 생성해보기
+          </button>
+          <button
+            className="projectItem"
+            style={{ backgroundColor: '#F6EAC2' }}
+            onClick={() => openModal(<TimeLineEx />)}
+          >
+            타임라인 미리보기
+          </button>
+          <button
+            className="projectItem"
+            style={{ backgroundColor: '#CBAACB' }}
+            onClick={() => openModal(<SprintEx />)}
+          >
+            스프린트 생성해보기
+          </button>
         </div>
       </div>
       {modalContent && (
-        <div className='modal'>
-          <div className='modalContent'>
-            <span className='closeButton' onClick={closeModal}>&times;</span>
-            <div>{modalContent}</div> 
+        <div className="modal">
+          <div className="modalContent">
+            <span className="closeButton" onClick={closeModal}>
+              &times;
+            </span>
+            <div>{modalContent}</div>
           </div>
         </div>
       )}
@@ -229,7 +193,7 @@ function UserMainPage() {
           }
 
           .projectContainer {
-            display: grid;
+            display: inline-grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             justify-items: center;

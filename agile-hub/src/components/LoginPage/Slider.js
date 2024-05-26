@@ -1,29 +1,51 @@
 import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, TorusKnot, Icosahedron, MeshDistortMaterial, Box } from '@react-three/drei';
+import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
+import { Sphere, Box, Icosahedron, Cylinder, Cone, MeshDistortMaterial } from '@react-three/drei';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import titanOneFont from '../../fonts/Titan One_Regular.json';
 
-// 애니메이션 구체
-const AnimatedObject = ({ type, position, color, args, speedFactor, orbitRadius}) => {
+extend({ TextGeometry });
+
+const AnimatedObject = ({ type, position, color, args, speedFactor }) => {
   const meshRef = useRef();
+  const { mouse, clock } = useThree();
   const speed = Math.random() * 0.1 + speedFactor;
-  
-  useFrame(({ clock }) => {
+
+  useFrame(() => {
+    const maxX = 0.5; // x축 최대 이동 범위를 1.5로 더 줄임
+    const maxY = 0.5; // y축 최대 이동 범위 유지
+    const minX = -2; // x축 최소 이동 범위 유지
+    const minY = -2; // y축 최소 이동 범위 유지
+
+    const targetX = (mouse.x * 2 - meshRef.current.position.x) * 0.02; // 5에서 2로 줄임
+    const targetY = (-mouse.y * 2 - meshRef.current.position.y) * 0.02; // 5에서 2로 줄임
+
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.position.x = Math.max(minX, Math.min(maxX, meshRef.current.position.x + targetX));
+    meshRef.current.position.y = Math.max(minY, Math.min(maxY, meshRef.current.position.y + targetY));
+
+    // 도형 추가
     const t = clock.getElapsedTime();
-    // 각 객체의 이동 경로를 수정하여 서로 겹치지 않도록 합니다.
-    meshRef.current.position.x = Math.sin(t * speed) * orbitRadius;
-    meshRef.current.position.y = Math.cos(t * speed) * orbitRadius;
-    meshRef.current.rotation.x = t * speed;
-    meshRef.current.rotation.y = t * speed;
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.position.x = position[0] + Math.sin(t * speed) * 2; // 시간에 따라 X 위치 조정
+    meshRef.current.position.y = position[1] + Math.cos(t * speed) * 2; // 시간에 따라 Y 위치 조정
   });
 
   const components = {
     Sphere: Sphere,
-    TorusKnot: TorusKnot,
     Icosahedron: Icosahedron,
-    Box: Box
+    Box: Box,
+    Cylinder: Cylinder,
+    Cone: Cone,
   };
-  
+
   const Geometry = components[type];
+
+  if (!Geometry) {
+    console.error(`Unknown type: ${type}`);
+    return null;
+  }
 
   return (
     <Geometry ref={meshRef} args={args} position={position}>
@@ -32,21 +54,58 @@ const AnimatedObject = ({ type, position, color, args, speedFactor, orbitRadius}
   );
 };
 
+const Text3D = ({ text, position, color, fontSize }) => {
+  const meshRef = useRef();
+  const { mouse } = useThree();
+
+  const fontLoader = new FontLoader();
+  const font = fontLoader.parse(titanOneFont);
+
+  const textOptions = {
+    font: font,
+    size: fontSize,
+    height: 0.01, // 글씨의 깊이를 더 줄임
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.2, // 경사의 두께를 더 줄임
+    bevelSize: 0.01, // 경사의 크기를 더 줄임
+    bevelOffset: 0,
+    bevelSegments: 5,
+  };
+
+  useFrame(() => {
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.position.x += (mouse.x * 5 - meshRef.current.position.x) * 0.05;
+    meshRef.current.position.y += (-mouse.y * 5 - meshRef.current.position.y) * 0.05;
+  });
+
+  return (
+    <mesh ref={meshRef} position={position}>
+      <textGeometry args={[text, textOptions]} />
+      <meshStandardMaterial metalness={0.9} roughness={0.1} emissive={color} />
+    </mesh>
+  );
+};
+
 const Slider = () => {
   return (
-    <div style={{ width: '100%', height: '100%', background: '#E0F2F1' }}>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        float: 'left',
+      }}
+    >
       <Canvas>
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} color="#FFFFFF" intensity={1} />
-        <pointLight position={[-10, -10, -10]} color="#FFFFFF" intensity={1} />
-        <AnimatedObject type="Sphere" position={[0, 0, 0]} color="#B2EBF2" args={[1, 32, 32]} speedFactor={0.05} orbitRadius={5} />
-        {/* <AnimatedObject type="TorusKnot" position={[0, 0, 0]} color="#FFCDD2" args={[1, 0.4, 100, 16]} speedFactor={0.04} orbitRadius={4} /> */}
-        <AnimatedObject type="Icosahedron" position={[0, 0, 0]} color="#4DD0E1" args={[1, 0]} speedFactor={0.06} orbitRadius={3} />
+        <ambientLight intensity={0.9} />
+        <pointLight position={[0, 0, 10]} color="#ffffff" intensity={1.5} />
+        <pointLight position={[0, 10, 0]} color="#ffffff" intensity={0.7} />
+        <Text3D text="Agile Hub" position={[0, -2, 0]} color="#FF1493" fontSize={1} metalness={0.1} roughness={0.5} />
+        <directionalLight position={[0, 0, 10]} color="#ffffff" intensity={1.5} />
+        <spotLight position={[10, 10, 10]} angle={0.3} penumbra={0.1} intensity={2} color="#ffffff" />
       </Canvas>
     </div>
   );
 };
- 
 
 export default Slider;
-     

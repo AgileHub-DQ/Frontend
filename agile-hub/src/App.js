@@ -17,8 +17,7 @@ import DraggableList from './pages/DraggableList.js';
 import SprintAllList from './components/SprintPage/SprintAllList.js';
 import UserMainPage from './components/MainPage/userMainPage.js';
 import MemberManage from './pages/MemberManage.js';
-import InviteMember from './pages/InviteMember.js'; 
-
+import InviteMember from './pages/InviteMember.js';
 import { useAuth } from './context/AuthContext';
 
 const App = () => {
@@ -42,7 +41,6 @@ const App = () => {
         <Route path="/userMainPage" element={<UserMainPage />} />
         <Route path="/memberManage" element={<MemberManage />} />
         <Route path="/inviteMember" element={<InviteMember />} />
-
       </Routes>
     </Router>
   );
@@ -55,12 +53,12 @@ const RootPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // URL에서 accessToken을 추출합니다.
+    // URL에서 accessToken을 추출
     const token = new URLSearchParams(location.search).get('accessToken');
     if (token) {
       localStorage.setItem('authToken', token);
       setAuthToken(token);
-      navigate('/'); // URL 정리
+      navigate('/');
     }
   }, [location.search, setAuthToken, navigate]);
 
@@ -77,9 +75,7 @@ const RootPage = () => {
 
   console.log('현재 authToken:', authToken);
 
-  return (
-    isLoggedIn ? <UserMainPage /> : <MainPage />
-  );
+  return isLoggedIn ? <UserMainPage /> : <MainPage />;
 };
 
 export default App;
