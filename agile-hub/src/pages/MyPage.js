@@ -160,7 +160,7 @@ import Header from '../components/MyPage/Header';
 import Button from '../components/MyPage/Button';
 import { useAuth } from "../../src/context/AuthContext";
 
-function ProjectsList() {
+function Mypage() {
   const navigate = useNavigate();
   const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
   const [projects, setProjects] = useState([]);
@@ -304,3 +304,5 @@ function ProjectsList() {
     </div>
   );
 }
+
+export default Mypage;
