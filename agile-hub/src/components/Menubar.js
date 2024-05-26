@@ -120,7 +120,10 @@ function Menubar({ loginId }) {
     <div style={menubarStyle}>
       <img src={logoIcon} alt="Logo" style={logoStyle} />
       <div>
-        <div style={menuItemStyle} onClick={() => navigate('/myPage', { state: { projectKey, sprintData, sprintId } })}>
+        <div
+          style={menuItemStyle}
+          onClick={() => navigate('/createProject', { state: { projectKey, sprintData, sprintId } })}
+        >
           <img src={projectIcon} alt="Projects" style={imageStyle} />
           <span style={textStyle}>프로젝트</span>
         </div>
