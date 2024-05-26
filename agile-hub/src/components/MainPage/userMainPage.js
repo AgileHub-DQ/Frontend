@@ -6,6 +6,7 @@ import IssueEx from '../../components/MainPage/IssueEx.js';
 import ProjectEx from '../../components/MainPage/ProjectEx.js';
 import TimeLineEx from '../../components/MainPage/TimeLineEx.js';
 import SprintEx from '../../components/MainPage/SprintEx.js';
+import axios from 'axios';
 
 function UserMainPage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function UserMainPage() {
   const sprintId = sprintData?.sprintId;
   const projectKey = location.state?.projectKey;
 
-  const [loginId, setId] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [name, setName] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
@@ -35,11 +36,11 @@ function UserMainPage() {
           console.log(response.data.result.id);
           console.log(response.data.result.name);
           console.log(response.data.result.profileImageUrl);
-          setId(response.data.result.id);
+          setLoginId(response.data.result.id);
           setName(response.data.result.name);
           setImageUrl(response.data.result.profileImageUrl);
 
-          localStorage.setItem('userId', userId);
+          localStorage.setItem('loginId', loginId);
           
       } catch (error) {
           console.error('API request failed:', error);
