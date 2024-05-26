@@ -3,7 +3,7 @@ import '../../../css/BacklogPage/CreateEpicButton.css';
 import EpicModal from '../modal/EpicModal.js';
 import ShowEpic from '../show/ShowEpic.js';
 
-function CreateEpicButton({projectKey, onEpicSubmit}) {
+function CreateEpicButton({projectKey, onEpicSubmit, loginId}) {
     const [showModal, setShowModal] = useState(false);
     const [epicList, setEpicList] = useState([]);
     console.log("새로 생성한 에픽 들어오는지 확인하는 배열: "+JSON.stringify(epicList)); // epicList 변경됨 
@@ -21,7 +21,7 @@ function CreateEpicButton({projectKey, onEpicSubmit}) {
 
     return (
         <div className='addEpic'>
-            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} projectKey={projectKey} />}
+            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} projectKey={projectKey} loginId={loginId}/>}
             <div className='epic_button_container'>
                 <button className="epic_button" onClick={handleToggleModal}>
                     <span className="epic_button__text">에픽 생성하기</span>

@@ -5,7 +5,8 @@ import Menubar from '../components/Menubar.js';
 import DashBoard from '../components/SprintPage/DashBoard.js';
 import Component from '../components/SprintPage/Component.js';
 
-function SprintPage() {
+function SprintPage(loginId) {
+  console.log("sprint page loginId: "+ loginId);
 
   const location = useLocation();
   const sprintData = location.state?.sprintData;
