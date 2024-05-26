@@ -121,21 +121,23 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
             }));
 
 
-            const response3 = await axios.get(`https://api.agilehub.store/projects/${projectKey}/issues/${id}`, {
-                      headers: {
-                          Authorization: `Bearer ${authToken}`,
-                          'Content-Type': 'application/json'
-                      }
-                  });
-                  console.log("response3: "+JSON.stringify(response3)); // 해당 이슈의 상세 조회
+            // const response3 = await axios.get(`https://api.agilehub.store/projects/${projectKey}/issues/${id}`, {
+            //           headers: {
+            //               Authorization: `Bearer ${authToken}`,
+            //               'Content-Type': 'application/json'
+            //           }
+            //       });
+            //       console.log("response3: "+JSON.stringify(response3)); // 해당 이슈의 상세 조회
                   
               
 
 
-            const sprintIssues = JSON.parse(localStorage.getItem('sprintIssues')) || [];
-            sprintIssues.push(response3.data.result);
-            localStorage.setItem('sprintIssues', JSON.stringify(sprintIssues));
+            // const sprintIssues = JSON.parse(localStorage.getItem('sprintIssues')) || [];
+            // sprintIssues.push(response3.data.result.issue); // 어차피 assignee 변수명 달라서 못 씀
+            // localStorage.setItem('sprintIssues', JSON.stringify(sprintIssues));
 
+            localStorage.setItem('sprintIssues', JSON.stringify(response2.data.result.issue)); 
+            console.log('sprintIssues:', JSON.stringify(response2.data.result.issue));
             onRendering()
   
 
