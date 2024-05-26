@@ -15,7 +15,12 @@ function ProjectsList() {
   const [editedName, setEditedName] = useState('');
   const [editedKey, setEditedKey] = useState('');
 
-  console.log('MyPage입니다. ');
+  // 사용자 정보 상태 추가
+  const [loginId, setLoginId] = useState('');
+  const [name, setName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  console.log('MyPage입니다.');
 
   const fetchProjects = async () => {
     if (!authToken) {
@@ -39,7 +44,26 @@ function ProjectsList() {
 
   useEffect(() => {
     fetchProjects();
+    fetchUserProfile();
   }, [authToken]); // authToken이 변경되면 fetchProjects를 다시 호출
+
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get(`https://api.agilehub.store/member/profile`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      console.log(response.data.result);
+      setLoginId(response.data.result.id);
+      setName(response.data.result.name);
+      setImageUrl(response.data.result.profileImageUrl);
+
+      localStorage.setItem('loginId', response.data.result.id);
+    } catch (error) {
+      console.error('API request failed:', error);
+    }
+  };
 
   const editProject = async (project) => {
     setEditingProjectId(project.id);
@@ -91,12 +115,42 @@ function ProjectsList() {
     width: '60rem',
   };
 
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    maxWidth: '300px',
+    // margin: 'auto',
+    backgroundColor: '#fff',
+  };
+
+  const imageStyle = {
+    width: '100px',
+    height: '100px',
+    borderRadius: '50%',
+    marginBottom: '20px',
+  };
+
+  const nameStyle = {
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+    color: '#333',
+  };
+
   return (
     <div className="frame" style={{ display: 'flex' }}>
       <Menubar />
       <div style={{ width: '100%', height: '100%' }}>
         <Header />
         <div style={{ paddingLeft: '5%' }}>
+          <div style={containerStyle}>
+            <img src={imageUrl} alt={name} style={imageStyle} />
+            <h2 style={nameStyle}>{name}</h2>
+          </div>
           <h1>나의 프로젝트 목록</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <ul style={{ listStyleType: 'none', padding: 0 }}>
