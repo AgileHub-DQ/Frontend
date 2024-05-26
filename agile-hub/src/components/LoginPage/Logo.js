@@ -5,7 +5,7 @@ import '../../css/LoginPage/Logo.css';
 const Logo = () => {
   return (
     <div className="logo">
-     <img src="/assets/images/AgileHub.png" alt="agilehub" />
+      <img src="/assets/images/AgileHub.png" alt="agilehub" />
     </div>
   );
 };
