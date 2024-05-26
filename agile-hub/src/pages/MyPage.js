@@ -158,7 +158,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Menubar from '../components/Menubar';
 import Header from '../components/MyPage/Header';
-import Button from '../components/MyPage/Button';
 import { useAuth } from '../../src/context/AuthContext';
 
 function ProjectsList() {
@@ -266,35 +265,31 @@ function ProjectsList() {
   return (
     <div className="container">
       <Menubar />
-      <div>
+      <div style={{ width: '100%', height: '100%' }}>
         <Header />
-        <div style={{ paddingLeft: '5%' }}>
-          <h1>나의 프로젝트 목록</h1>
+        <div style={{ background: 'lightyellow', paddingLeft: '5%' }}>
+          <p>임시div</p>
+          <h1>프로젝트 목록</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+          <ul>
             {projects.map((project) => (
-              <li key={project.id} style={projectItemStyle}>
+              <li key={project.id}>
                 {editingProjectId === project.id ? (
                   <>
                     <input type="text" value={editedName} onChange={(e) => setEditedName(e.target.value)} />
                     <input type="text" value={editedKey} onChange={(e) => setEditedKey(e.target.value)} />
-                    <Button onClick={() => saveProject(project)}>저장하기</Button>
+                    <button onClick={() => saveProject(project)}>저장하기</button>
                   </>
                 ) : (
                   <>
-                    <div style={{ width: '15rem' }}>
-                      <div>프로젝트 이름: {project.name}</div>
-                      <div>프로젝트 키: {project.key}</div>
-                      <div>프로젝트 생성일: {project.createdAt}</div>
-                    </div>
-                    <Button style={{ width: '100%' }} onClick={() => editProject(project)}>
-                      수정하기
-                    </Button>
-                    <Button onClick={() => deleteProject(project)}>삭제하기</Button>
-                    <Button onClick={() => navigateToIssue(project.key)}>이슈 생성</Button>
-                    <Button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성</Button>
-                    <Button onClick={() => navigateToBacklog(project.key)}>백로그 페이지</Button>
-                    <Button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회</Button>
+                    <strong>{project.name}</strong> ({project.key})<div>생성일: {project.createdAt}</div>
+                    <button onClick={() => editProject(project)}>수정하기</button>
+                    <button onClick={deleteProject}>삭제하기</button>
+                    <button onClick={() => navigateToIssue(project.key)}>이슈 생성하러가기</button>
+                    {/* <button onClick={() => navigateToCheckIssue(project.key)}>이슈 전체 조회하러가기</button> */}
+                    <button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</button>
+                    <button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로가기</button>
+                    <button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러가기</button>
                   </>
                 )}
               </li>
