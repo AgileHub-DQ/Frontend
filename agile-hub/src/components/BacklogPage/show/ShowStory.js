@@ -137,9 +137,10 @@ function ShowStory({ projectKey, issueId, sprintId }) {
         fetchTasks();
     }
 
-    const deleteIssue = async () => {
+    const deleteIssue = async (storyId) => {
         try {
-            await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`, {
+            console.log("storyId: "+ storyId);
+            await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${storyId}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`
                 }
