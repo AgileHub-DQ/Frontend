@@ -99,14 +99,12 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
       });
 
 
-      
-      console.log(response.data);
 
 
 
+      const id = response.data.result;
+      console.log(response.data.result); // 생성한 이슈 id
 
-
-      console.log(response.data.resulst); // 생성한 이슈 id
       //const sprintEndpoint = `https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`;
       const response2 = await axios.post(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 issueId: response.data.result
@@ -122,8 +120,22 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
                 [response.data.result]: true
             }));
 
-            localStorage.setItem('sprintIssues', JSON.stringify(response2.data.result.issue)); 
-            console.log('sprintIssues:', JSON.stringify(response2.data.result.issue));
+
+            const response3 = await axios.get(`https://api.agilehub.store/projects/${projectKey}/issues/${id}`, {
+                      headers: {
+                          Authorization: `Bearer ${authToken}`,
+                          'Content-Type': 'application/json'
+                      }
+                  });
+                  console.log("response3: "+JSON.stringify(response3)); // 해당 이슈의 상세 조회
+                  
+              
+
+
+            const sprintIssues = JSON.parse(localStorage.getItem('sprintIssues')) || [];
+            sprintIssues.push(response3.data.result);
+            localStorage.setItem('sprintIssues', JSON.stringify(sprintIssues));
+
             onRendering()
   
 

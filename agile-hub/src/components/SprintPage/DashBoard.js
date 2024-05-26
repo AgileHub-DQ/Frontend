@@ -12,105 +12,26 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
   const [backlogIssue, setBacklogIssue] = useState(initialBacklogIssue);
-  
-  // useEffect(() => {
-  //   fetchIssues();
-  // }, []);
+
+  // 페이지 로드 시 로컬 스토리지에서 데이터 불러오기
+  useEffect(() => {
+    const storedSprintIssues = JSON.parse(localStorage.getItem('sprintIssues')) || [];
+    setBacklogIssue(storedSprintIssues);
+  }, []);
 
   useEffect(() => {
     fetchIssues();
   }, [backlogIssue]);
 
-
   const onRendering = async () => {
-    await test();
+    const storedSprintIssues = JSON.parse(localStorage.getItem('sprintIssues')) || [];
+    setBacklogIssue(storedSprintIssues);
     fetchIssues();
     console.log("fetchIssues()");
   };
 
-  const test = async () => {
-    try {
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
-      const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json'
-        }
-      });
-
-      console.log("API response:", response.data); // API 응답 확인
-
-      const sprints = response.data.result;
-      if (sprints.length === 0) {
-        console.error('No sprints found');
-        return;
-      }
-
-      // const latestSprint = sprints[sprints.length - 1];
-      // const latestSprintIssues = latestSprint.issues;
-      // const issueCount = latestSprint.issueCount;
-      // console.log("latestSprint:", latestSprint);
-      // console.log("issueCount:", issueCount);
-      // console.log("latestSprintIssues:", latestSprintIssues);
-
-      const latestSprint = sprints[sprints.length - 1];
-      const sprintIssues = latestSprint.issues;
-
-      console.log("latestSprint:", latestSprint);
-      console.log("latestSprintJSON:", JSON.stringify(latestSprint));
-      console.log("sprintIssues:", sprintIssues);
-
-      // setIssues(latestSprintIssues);
-      // setCount(issueCount);
-
-      setBacklogIssue(sprintIssues);
-      console.log("backlogIssue:", backlogIssue);
-
-    } catch (error) {
-      console.error('API request failed:', error);
-    }
-  };
-  // const fetchIssues = async () => {
-  //   try {
-  //     //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; // 실제 액세스 토큰으로 대체해야 함
-  //     // const endpoint = `https://api.agilehub.store/projects/${projectKey}/sprints`;
-  //     // const response = await axios.get(endpoint, {
-  //     //   headers: {
-  //     //     Authorization: `Bearer ${authToken}`,
-  //     //   }
-  //     // });
-
-  //     // console.log("!!!!"+response);
-
-
-  //     const newIssues = { todo: [], doing: [], complete: [] };
-  
-  //     backlogIssue.forEach(issue => {
-  //       console.log(JSON.stringify(issue));
-  //       console.log(issue.issueId);
-  //       const status = issue.status;
-  //       if (status === 'DO') {
-  //           newIssues.todo.push(issue);
-  //       } else if (status === 'PROGRESS') {
-  //           newIssues.doing.push(issue);
-  //       } else if (status === 'DONE') {
-  //           newIssues.complete.push(issue);
-  //       } else {
-  //           newIssues.todo.push(issue); 
-  //       }
-  //   });
-  
-  
-  //     setIssues(newIssues);
-  //   } catch (error) {
-  //     console.error('Failed to fetch issues:', error);
-  //   }
-  // };
-
   const fetchIssues = async () => {
-    try { 
-      // 코드 되돌림
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; // 실제 액세스 토큰으로 대체해야 함
+    try {
       const endpoint1 = `https://api.agilehub.store/projects/${projectKey}/stories`;
       const endpoint2 = `https://api.agilehub.store/projects/${projectKey}/tasks`;
       const response1 = await axios.get(endpoint1, {
@@ -128,15 +49,12 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
       });
 
       const allIssues = [...response1.data.result, ...response2.data.result];
-
       const newIssues = { todo: [], doing: [], complete: [] };
 
-      //확인해야함
-      
-      backlogIssue.forEach(backlog => {
-   
-        const issue = allIssues.find(item => item.id === backlog.issueId); // item.issuId -> id
+      const storedSprintIssues = JSON.parse(localStorage.getItem('sprintIssues')) || [];
 
+      storedSprintIssues.forEach(backlog => {
+        const issue = allIssues.find(item => item.id === backlog.issueId);
 
         if (issue) {
           console.log(JSON.stringify(issue));
@@ -148,37 +66,11 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
           } else if (status === 'DONE') {
             newIssues.complete.push(issue);
           } else {
-            newIssues.todo.push(issue); 
+            newIssues.todo.push(issue);
           }
         }
       });
-  
-    //   response1.data.result.forEach(issue => {
-    //     const status = issue.status;
-    //     if (status === 'DO') {
-    //         newIssues.todo.push(issue);
-    //     } else if (status === 'PROGRESS') {
-    //         newIssues.doing.push(issue);
-    //     } else if (status === 'DONE') {
-    //         newIssues.complete.push(issue);
-    //     } else {
-    //         newIssues.todo.push(issue); 
-    //     }
-    // });
-    
-    // response2.data.result.forEach(issue => {
-    //     const status = issue.status;
-    //     if (status === 'DO') {
-    //         newIssues.todo.push(issue);
-    //     } else if (status === 'PROGRESS') {
-    //         newIssues.doing.push(issue);
-    //     } else if (status === 'DONE') {
-    //         newIssues.complete.push(issue);
-    //     } else {
-    //         newIssues.todo.push(issue); 
-    //     }
-    // });
-  
+
       setIssues(newIssues);
     } catch (error) {
       console.error('Failed to fetch issues:', error);
@@ -191,12 +83,10 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
   };
 
   const updateIssue = async (id, newStatus) => {
-    //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw';
     try {
-      const response = await axios.put(`https://api.agilehub.store/projects/${projectKey}/issues/${id}/status`, {
+      await axios.put(`https://api.agilehub.store/projects/${projectKey}/issues/${id}/status`, {
         status: newStatus
-         },
-        {
+      }, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         }
@@ -205,29 +95,26 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
       console.error('Failed to update issue status:', error);
     }
   };
-  
-// 드롭 이벤트 핸들러
-const onDrop = async (e, newCategory) => {
-  e.preventDefault();
-  const itemData = e.dataTransfer.getData("text/plain");
-  console.log(itemData);
-  const { id, originalCategory, files} = JSON.parse(itemData);
 
-  if (newCategory === originalCategory) return; // 같은 카테고리에 드롭된 경우 업데이트 없음
+  const onDrop = async (e, newCategory) => {
+    e.preventDefault();
+    const itemData = e.dataTransfer.getData("text/plain");
+    const { id, originalCategory } = JSON.parse(itemData);
 
-  const newStatus = getStatusFromCategory(newCategory); 
-  await updateIssue(id, newStatus); 
+    if (newCategory === originalCategory) return;
 
-  // 로컬 상태 업데이트
-  const movedItem = issues[originalCategory].find(item => item.id === id);
-  const newIssues = {
-    ...issues,
-    [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
-    [newCategory]: [...issues[newCategory], movedItem],
+    const newStatus = getStatusFromCategory(newCategory);
+    await updateIssue(id, newStatus);
+
+    const movedItem = issues[originalCategory].find(item => item.id === id);
+    const newIssues = {
+      ...issues,
+      [originalCategory]: issues[originalCategory].filter(item => item.id !== id),
+      [newCategory]: [...issues[newCategory], movedItem],
+    };
+
+    setIssues(newIssues);
   };
-
-  setIssues(newIssues);
-};
 
   const getStatusFromCategory = (category) => {
     switch (category) {
@@ -260,15 +147,16 @@ const onDrop = async (e, newCategory) => {
             <div className={`status-indicator ${category}`} ></div>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           </div>
-          <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} onRendering={onRendering}/>
+          <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} onRendering={onRendering} />
           {issues[category].map((item) => (
-          <div 
-          key={item.id}
-          draggable
-          onDragStart={e => onDragStart(e, item, category)} >
-        <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} />
-                </div>
-        ))}
+            <div
+              key={item.id}
+              draggable
+              onDragStart={e => onDragStart(e, item, category)}
+            >
+              <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} />
+            </div>
+          ))}
         </div>
       ))}
     </div>
