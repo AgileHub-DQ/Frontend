@@ -1,10 +1,55 @@
-import Button from '../MyPage/Button';
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../src/context/AuthContext';
+import axios from 'axios';
 
 function Modal({ isOpen, onClose }) {
+  const navigate = useNavigate();
+  const { authToken } = useAuth();
+  const [email, setEmail] = useState('');
+  const [inviteStatus, setInviteStatus] = useState(null);
+  const [projects, setProjects] = useState([]);
+  const [error, setError] = useState(null);
+
+  //수정 (임의 프로젝트 지정)
+  const projectId = 1;
+
+  const handleInvite = async () => {
+    if (!authToken) {
+      setError('인증 토큰이 없습니다. 로그인이 필요합니다.');
+      return;
+    }
+
+    if (!email) {
+      alert('이메일을 입력해주세요.');
+      return;
+    }
+
+    const requestBody = {
+      email: email,
+      projectId: projectId, //수정 (임의 프로젝트 지정)
+    };
+
+    try {
+      const response = await axios.post('https://api.agilehub.store/projects/invite/send', requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        setInviteStatus({ success: true, message: '초대 이메일이 성공적으로 발송되었습니다.' });
+      } else {
+        setInviteStatus({ success: false, message: response.data.message || '초대 이메일 발송에 실패했습니다.' });
+      }
+    } catch (error) {
+      console.error('Error inviting member:', error);
+      setInviteStatus({ success: false, message: '서버 오류로 인해 초대 이메일을 발송할 수 없습니다.' });
+    }
+  };
+
   if (!isOpen) {
     return null;
   }
@@ -84,12 +129,22 @@ function Modal({ isOpen, onClose }) {
           </button>
         </div>
         <div style={inputContainerStyle}>
-          <input type="email" placeholder="이메일을 입력하세요." style={inputStyle} />
+          <input
+            type="email"
+            placeholder="이메일을 입력하세요."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={inputStyle}
+          />
           <select style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}>
             <option>회원</option>
           </select>
         </div>
-        <button style={submitButtonStyle}>멤버 초대</button>
+        <button style={submitButtonStyle} onClick={handleInvite}>
+          멤버 초대
+        </button>
+        {inviteStatus && <div style={{ color: inviteStatus.success ? 'green' : 'red' }}>{inviteStatus.message}</div>}
+        {error && <div style={{ color: 'red' }}>{error}</div>}
       </div>
     </div>
   );
@@ -161,6 +216,7 @@ function Member() {
 
   const handleOpenModal = () => {
     setModalOpen(true);
+    console.log('멤버초대 버튼이 눌렸습니다.');
   };
 
   const handleCloseModal = () => {
@@ -187,12 +243,13 @@ function Member() {
       }
       try {
         const response = await axios.get(`https://api.agilehub.store/projects/P1/members`, {
+          //수정 (임의 프로젝트 지정)
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
         });
         console.log(authToken);
-        console.log(response.data); // 응답 데이터 콘솔에 출력
+        console.log(response.data);
         if (response.data.isSuccess) {
           setMembers(response.data.result.members);
           console.log('Members set successfully:', response.data.result.members);
@@ -217,7 +274,24 @@ function Member() {
           <p style={{ marginLeft: '1rem', color: '#888' }}>프로젝트 멤버 수: {members.length}</p>
         </div>
         <div>
-          <Button onClick={handleOpenModal}>멤버 초대</Button>
+          <button
+            style={{
+              backgroundColor: 'blue',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              ':hover': {
+                backgroundColor: 'darkblue',
+              },
+            }}
+            onClick={handleOpenModal}
+          >
+            멤버 초대
+          </button>
         </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
