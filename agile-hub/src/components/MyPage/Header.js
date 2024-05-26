@@ -6,7 +6,6 @@ function Header() {
     height: '100px',
     display: 'flex', // flexbox를 사용하여 요소들을 가로로 정렬합니다.
     alignItems: 'center', // 수직 중앙 정렬
-    background: 'red',
     width: '100%', // 전체 너비 사용
     height: '100px', // 컨테이너 높이 설정
     color: 'var(--kakao-logo, #000)',

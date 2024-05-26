@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/CreateProject.css';
 import { useAuth } from '../context/AuthContext';
 
 function CreateProject() {
-  const location = useLocation();
   const navigate = useNavigate();
   const { authToken } = useAuth();
   const [projectName, setProjectName] = useState('');
