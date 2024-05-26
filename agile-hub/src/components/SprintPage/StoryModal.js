@@ -23,7 +23,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
 
-  const [assigneeId, setAssigneeId] = useState(''); // 5 image error 
+  const [assigneeId, setAssigneeId] = useState(''); 
 
   useEffect(() => {
     const savedLoginId = localStorage.getItem('loginId');
@@ -31,7 +31,7 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
       setAssigneeId(savedLoginId);
     }
   }, []);
-  
+
   const [parentId, setParentId] = useState(details.result.parentIssue ? details.result.parentIssue.issueId || 1 : 1);
   const [epicList, setEpicList] = useState([]);
   const [storyList, setStoryList] = useState([]);
