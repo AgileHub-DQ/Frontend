@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js'; 
 
-function PlanSprint({}) {
+function PlanSprint(setParentIssues) {
   console.log("여기는 plansprint 입니다.");
 
   const location = useLocation();
@@ -25,6 +25,10 @@ function PlanSprint({}) {
       }
     }, [location.state]);
 
+
+    useEffect(() => {
+      setParentIssues(issues); // issues가 변경될 때 상위 컴포넌트로 전달
+    }, [issues, setParentIssues]);
 
   // const projectKey = 'p1';
   const { authToken } = useAuth(); 

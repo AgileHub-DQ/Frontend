@@ -12,6 +12,8 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
   const [backlogIssue, setBacklogIssue] = useState(initialBacklogIssue);
+
+  // const [sprintAssignments, setSprintAssignments] = useState({});
   
   // useEffect(() => {
   //   fetchIssues();
@@ -126,6 +128,9 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
           'Content-Type': 'application/json'
         }
       });
+
+
+
 
       const allIssues = [...response1.data.result, ...response2.data.result];
 

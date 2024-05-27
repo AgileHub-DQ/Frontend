@@ -126,6 +126,11 @@ function Issue({projectKey, sprintId, onIssuesUpdated, onRendering}) {
                 [response.data.result]: true
             }));
 
+            
+
+            // localStorage.setItem('sprintAssignments', JSON.stringify(sprintAssignments));
+
+
             onRendering()
   
 
