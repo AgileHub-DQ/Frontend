@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Menubar from '../components/Menubar';
 import Header from '../components/MyPage/Header';
+import { useAuth } from '../../src/context/AuthContext';
 import Button from '../components/MyPage/Button';
-import { useAuth } from "../../src/context/AuthContext";
 
-function Mypage() {
+function ProjectsList() {
   const navigate = useNavigate();
   const { authToken } = useAuth(); // AuthContext에서 토큰 가져오기
   const [projects, setProjects] = useState([]);
@@ -15,7 +15,12 @@ function Mypage() {
   const [editedName, setEditedName] = useState('');
   const [editedKey, setEditedKey] = useState('');
 
-  console.log("MyPage입니다. ");
+  // 사용자 정보 상태 추가
+  const [loginId, setLoginId] = useState('');
+  const [name, setName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  console.log('MyPage입니다.');
 
   const fetchProjects = async () => {
     if (!authToken) {
@@ -25,11 +30,11 @@ function Mypage() {
     try {
       const response = await axios.get(`https://api.agilehub.store/projects`, {
         headers: {
-          Authorization: `Bearer ${authToken}`
-        }
+          Authorization: `Bearer ${authToken}`,
+        },
       });
 
-      console.log("API Response:", response.data);
+      console.log('API Response:', response.data);
       setProjects(response.data.result);
     } catch (error) {
       console.error('프로젝트 정보를 가져오는 데 실패했습니다:', error);
@@ -39,7 +44,26 @@ function Mypage() {
 
   useEffect(() => {
     fetchProjects();
+    fetchUserProfile();
   }, [authToken]); // authToken이 변경되면 fetchProjects를 다시 호출
+
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get(`https://api.agilehub.store/member/profile`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      console.log(response.data.result);
+      setLoginId(response.data.result.id);
+      setName(response.data.result.name);
+      setImageUrl(response.data.result.profileImageUrl);
+
+      localStorage.setItem('loginId', response.data.result.id);
+    } catch (error) {
+      console.error('API request failed:', error);
+    }
+  };
 
   const editProject = async (project) => {
     setEditingProjectId(project.id);
@@ -50,14 +74,18 @@ function Mypage() {
   const saveProject = async (project) => {
     console.log(project.key);
     try {
-      await axios.put(`https://api.agilehub.store/projects/${project.key}`, {
-        name: editedName,
-        key: editedKey
-      }, {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      });
+      await axios.put(
+        `https://api.agilehub.store/projects/${project.key}`,
+        {
+          name: editedName,
+          key: editedKey,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        },
+      );
 
       setEditingProjectId(null);
       fetchProjects();
@@ -68,78 +96,86 @@ function Mypage() {
   };
 
   const deleteProject = (project) => {
-    console.log("삭제하기 버튼 클릭");
-  }
-
-  const navigateToIssue = (projectKey) => {
-    navigate(`/issue`, { state: { key: projectKey } });
+    console.log('삭제하기 버튼 클릭');
   };
 
-  const navigateToCheckIssue = (projectKey) => {
-    navigate(`/checkIssue`, { state: { key: projectKey } });
-  }
-  const navigateToCreateSprintModal = (projectKey, projectName) => { 
-    navigate(`/createSprintModal`, { state: { key: projectKey, projectName: projectName} }); 
-  }
-
-  const navigateToBacklog = (projectKey) => {
-    navigate(`/backlog`, { state: { key: projectKey } });
-  }
-
-  const navigateToSprintAllList = (projectKey) => {
-    navigate(`/sprintAllList`, { state: { key: projectKey } });
-  }
+  const navigateToCreateSprintModal = (projectKey, projectName) => {
+    navigate(`/createSprintModal`, { state: { key: projectKey, projectName: projectName } });
+  };
 
   const projectItemStyle = {
-    marginTop: '2rem',
+    margin: '2rem 0',
     background: '#F2F1F7',
     borderRadius: '20px',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     padding: '20px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '80%'
-  }
+    justifyContent: 'space-around',
+    width: '60rem',
+  };
+
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    maxWidth: '300px',
+    // margin: 'auto',
+    backgroundColor: '#fff',
+  };
+
+  const imageStyle = {
+    width: '100px',
+    height: '100px',
+    borderRadius: '50%',
+    marginBottom: '20px',
+  };
+
+  const nameStyle = {
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+    color: '#333',
+  };
 
   return (
-    <div className="container">
-      <Menubar/>
-      <div>
-        <Header/>
+    <div className="frame" style={{ display: 'flex' }}>
+      <Menubar />
+      <div style={{ width: '100%', height: '100%' }}>
+        <Header />
         <div style={{ paddingLeft: '5%' }}>
+          <div style={containerStyle}>
+            <img src={imageUrl} alt={name} style={imageStyle} />
+            <h2 style={nameStyle}>{name}</h2>
+          </div>
           <h1>나의 프로젝트 목록</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
-            {projects.map(project => (
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+            {projects.map((project) => (
               <li key={project.id} style={projectItemStyle}>
                 {editingProjectId === project.id ? (
                   <>
-                    <input
-                      type="text"
-                      value={editedName}
-                      onChange={(e) => setEditedName(e.target.value)}
-                    />
-                    <input
-                      type="text"
-                      value={editedKey}
-                      onChange={(e) => setEditedKey(e.target.value)}
-                    />
-                    <Button onClick={() => saveProject(project)}>저장하기</Button>
+                    <input type="text" value={editedName} onChange={(e) => setEditedName(e.target.value)} />
+                    <input type="text" value={editedKey} onChange={(e) => setEditedKey(e.target.value)} />
+                    <button onClick={() => saveProject(project)}>저장하기</button>
                   </>
                 ) : (
                   <>
-                    <div>
-                      <div>{project.name}</div>
-                      <div>{project.key}</div>
-                      <div>{project.createdAt}</div>
+                    <div style={{ width: '15rem' }}>
+                      <div>프로젝트 이름: {project.name}</div>
+                      <div>프로젝트 키: {project.key}</div>
+                      <div>프로젝트 생성일: {project.createdAt}</div>
                     </div>
-                    <Button onClick={() => editProject(project)}>수정하기</Button>
+                    <Button style={{ width: '100%' }} onClick={() => editProject(project)}>
+                      수정하기
+                    </Button>
                     <Button onClick={() => deleteProject(project)}>삭제하기</Button>
-                    <Button onClick={() => navigateToIssue(project.key)}>이슈 생성하러 가기</Button>
-                    <Button onClick={() => navigateToCreateSprintModal(project.key)}>스프린트 생성하러 가기</Button>
-                    <Button onClick={() => navigateToBacklog(project.key)}>백로그 페이지 바로 가기</Button>
-                    <Button onClick={() => navigateToSprintAllList(project.key)}>스프린트 전체 조회하러 가기</Button>
+                    <Button onClick={() => navigateToCreateSprintModal(project.key, project.name)}>
+                      스프린트 생성
+                    </Button>
                   </>
                 )}
               </li>
@@ -151,4 +187,4 @@ function Mypage() {
   );
 }
 
-export default Mypage;
+export default ProjectsList;
