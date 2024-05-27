@@ -41,8 +41,8 @@ const App = () => {
         <Route path="/sprintAllList" element={<SprintAllList />} />
         <Route path="/userMainPage" element={<UserMainPage />} />
         <Route path="/memberManage" element={<MemberManage />} />
-        <Route path="/inviteMember" element={<InviteMember />} />
-        <Route path="/user" element={<User/>} />
+        <Route path="/projects/invite" element={<InviteMember />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </Router>
   );

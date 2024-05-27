@@ -235,6 +235,7 @@ function InviteMember() {
     // URL에서 초대 코드를 추출
     const queryParams = new URLSearchParams(location.search);
     const code = queryParams.get('inviteCode');
+    console.log('Extracted inviteCode: ', code); // Debugging
     if (code) {
       setInviteCode(code);
     }
@@ -273,7 +274,7 @@ function InviteMember() {
         </span>
         <img src="/assets/images/AgileHub.png" alt="Agile Hub" className="modal-image" />
         <div className="modal-section">
-          관리자가 <strong>[핑핑이네]</strong>에 초대했습니다.
+          관리자가 <strong>[핑핑이네]</strong>에 초대했습니다. {/* 수정해야 함 */}
         </div>
         <div className="modal-section">
           관리자 및 팀과 함께 이슈 추적을 시작하세요! <br />
@@ -285,6 +286,7 @@ function InviteMember() {
             placeholder="초대 코드를 입력하세요"
             value={inviteCode}
             onChange={(e) => setInviteCode(e.target.value)}
+            style={{ textAlign: 'center' }}
             disabled
           />
         </div>
