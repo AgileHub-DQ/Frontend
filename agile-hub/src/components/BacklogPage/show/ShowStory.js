@@ -8,8 +8,8 @@ import { useAuth } from '../../../context/AuthContext.js';
 //코드 대폭 수정
 function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
-
-    console.log("새로 생성한 스토리 id: "+ storyList.result);
+    // storyList가 정의되어 있는지 확인 후 콘솔 로그 출력
+    console.log("새로 생성한 스토리 id: ", storyList ? storyList.result : 'No storyList');
 
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
@@ -21,8 +21,15 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
     }, [issueId, storyList]);
 
     const fetchStories = async () => {
+        // issueId나 storyList.result 둘 중 하나가 존재하는지 확인
+        const idToUse = issueId || (storyList && storyList.result);
+        if (!idToUse) {
+            console.error('No valid issueId or storyList.result available');
+            return;
+        }
+
         try {
-            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId || storyList.result}/stories`, {
+            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${idToUse}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'
@@ -72,7 +79,7 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                 [storyId]: true
             }));
 
-            alert("할당되었습니다.")
+            alert("할당되었습니다.");
             console.log('Assigned to sprint:', response);
         } catch (error) {
             console.error('Assigning to sprint failed:', error);
@@ -96,23 +103,14 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                 [storyId]: false
             }));
 
-            alert("삭제되었습니다.")
+            alert("삭제되었습니다.");
             console.log('Removed from sprint:', response);
         } catch (error) {
             console.error('Removing from sprint failed:', error);
         }
     };
 
-    if (stories.length === 0) {
-        return null;
-    }
-
-    const onDeleteTask = () => {
-        fetchTasks();
-    }
-
     const deleteIssue = async (storyId) => {
-
         const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
         if (isConfirmed) {
             try {
@@ -123,13 +121,18 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                     }
                 });
                 fetchStories();
-
             } catch (error) {
                 console.error('이슈 삭제에 실패했습니다:', error);
-
             }
         }
+    };
 
+    if (stories.length === 0) {
+        return null;
+    }
+
+    const onDeleteTask = () => {
+        fetchTasks();
     };
 
     return (
@@ -146,9 +149,7 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                     <div className='storyContainer'>
                         <div>
                             <div className='storytitle' style={{ marginLeft: '10px', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', marginBottom: '10px' }}>
-
                                 <div>
-
                                     <div style={{
                                         border: '1px solid #ddd',
                                         borderRadius: '10px',
@@ -160,17 +161,12 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                                             display: 'flex',
                                             padding: '15px',
                                             borderRadius: '8px',
-                                            backgroundColor: '#fff',
-                                            borderRadius: '10px',
-
+                                            backgroundColor: '#fff'
                                         }}>
-
                                             <div style={{ flex: 1 }}>
                                                 <strong>{story.title}</strong>
                                             </div>
-
                                             <div style={{ flex: 1 }}>
-
                                                 <span className="storyType" style={{ marginLeft: '80px' }}>
                                                     {story.type}
                                                 </span>
@@ -212,7 +208,6 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                                                     transition: 'all 0.15s ease'
                                                 }} onClick={() => deleteIssue(story.id)}>삭제하기</button>
                                             </div>
-
                                         </div>
                                         <div className='taskcontainer'>
                                             {tasks[story.id] && tasks[story.id].length > 0 && (
