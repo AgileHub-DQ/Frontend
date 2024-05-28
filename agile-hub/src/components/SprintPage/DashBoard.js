@@ -6,12 +6,12 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-export default function DashBoard({ projectKey, sprintId}) {
+export default function DashBoard({ projectKey, sprintId, issues}) {
   const { authToken } = useAuth();
 
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
-  const [sprintIssues, setSprintIssues] = useState([]);
+  const [sprintIssues, setSprintIssues] = useState(issues);
 
   // const [sprintAssignments, setSprintAssignments] = useState({});
   
@@ -27,7 +27,7 @@ export default function DashBoard({ projectKey, sprintId}) {
   const onRendering = async () => {
     console.log("onRendering 함수가 호출되었습니다!!!!!");
     await test();
-    console.log("sprintIssue JSON check: "+JSON.stringify(sprintIssues));
+    console.log("sprintIssue JSON check: "+JSON.stringify(setSprintIssues));
     fetchIssues();
     console.log("fetchIssues()");
   };
@@ -146,7 +146,7 @@ export default function DashBoard({ projectKey, sprintId}) {
 
 
         if (issue) {
-          console.log(JSON.stringify(issue));
+          console.log("issue json check: "+JSON.stringify(issue));
           const status = issue.status;
           if (status === 'DO') {
             newIssues.todo.push(issue);
