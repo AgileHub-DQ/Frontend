@@ -6,7 +6,19 @@ import ShowStory from '../show/ShowStory.js';
 function CreateStoryButton({projectKey}) {
     const [showModal, setShowModal] = useState(false);
     const [storyList, setStoryList] = useState([]);
-    console.log("createStorybutton storylist: "+ storyList);
+    console.log("createStorybutton storylist: "+ storyList.forEach((story, index) => {
+        console.log(`showstory storyList[${index}]: `, story);
+    }));
+
+
+
+    // storyList.forEach((story, index) => {
+    //     console.log(`showstory storyList[${index}]: `, story);
+    // });
+
+
+
+    
     
     const handleToggleModal = () => {
         setShowModal(!showModal);

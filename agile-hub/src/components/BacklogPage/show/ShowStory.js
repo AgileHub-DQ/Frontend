@@ -10,6 +10,8 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
     const [storyResult, setStoryResult] = useState(''); // 새로 생성한 스토리 아이디 값 setter
 
+    console.log("storyResult: "+storyResult);
+
     // storyList가 배열인지 확인하고 각 요소를 콘솔에 출력 및 storyResult 설정
     useEffect(() => {
         if (Array.isArray(storyList)) {
@@ -28,6 +30,7 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
     const [sprintAssignments, setSprintAssignments] = useState({});
 
     useEffect(() => {
+        console.log("fetchStories() ");
         fetchStories();
     }, [issueId, storyResult]);
 
