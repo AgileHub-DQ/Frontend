@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../../css/BacklogPage/CreateEpicButton.css';
 import EpicModal from '../modal/EpicModal.js';
 
-function CreateEpicButton({projectKey, onEpicSubmit, loginId}) {
+function CreateEpicButton({projectKey, onEpicSubmit}) {
     const [showModal, setShowModal] = useState(false);
     const [epicList, setEpicList] = useState([]);
 
@@ -18,7 +18,7 @@ function CreateEpicButton({projectKey, onEpicSubmit, loginId}) {
 
     return (
         <div className='addEpic'>
-            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} projectKey={projectKey} loginId={loginId}/>}
+            {showModal && <EpicModal onClose={handleToggleModal} onSubmit={handleEpicSubmit} projectKey={projectKey}/>}
             <div className='epic_button_container'>
                 <button className="epic_button" onClick={handleToggleModal}>
                     <span className="epic_button__text">에픽 생성하기</span>

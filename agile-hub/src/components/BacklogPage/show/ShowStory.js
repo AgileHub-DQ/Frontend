@@ -5,7 +5,7 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowStory({ projectKey, issueId, sprintId, loginId }) {
+function ShowStory({ projectKey, issueId, sprintId }) {
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
@@ -223,7 +223,7 @@ function ShowStory({ projectKey, issueId, sprintId, loginId }) {
                             </div>
                         </div>
                     </div>
-                    <CreateTaskButton loginId={loginId} projectKey={projectKey} storyId={story.id} onTaskCreated={() => fetchTasks(story.id)} />
+                    <CreateTaskButton projectKey={projectKey} storyId={story.id} onTaskCreated={() => fetchTasks(story.id)} />
                 </div>
             ))}
         </div>

@@ -11,7 +11,6 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
     const [files, setFiles] = useState([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-
     const [assigneeId, setAssigneeId] = useState('');
 
     useEffect(() => {

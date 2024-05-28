@@ -4,7 +4,7 @@ import ShowStory from './ShowStory';
 import '../../../css/BacklogPage/ShowEpic.css';
 import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId, loginId }) {
+function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
     const { authToken } = useAuth();
     const issueId = epicData.id;
     const [epicTitle, setEpicTitle] = useState('');
@@ -110,8 +110,8 @@ function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId, loginId }) {
                     transition: 'all 0.15s ease'
                 }} onClick={() => deleteIssue(issueId)}>삭제하기</button>
             </div>
-            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId} loginId={loginId} />
-            <CreateStoryButton projectKey={projectKey} loginId={loginId} />
+            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId}  />
+            <CreateStoryButton projectKey={projectKey}  />
         </div>
     );
 }
