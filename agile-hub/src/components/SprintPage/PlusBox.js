@@ -9,8 +9,6 @@ function PlusBox({ projectKey, sprintId, fetchIssues, onRendering }) {
     setAddIssue(!addIssue); 
   };
 
-
-
   return (
     <div>
         {addIssue && <Issue projectKey={projectKey} sprintId={sprintId} onIssuesUpdated={fetchIssues} onRendering={onRendering} />} 

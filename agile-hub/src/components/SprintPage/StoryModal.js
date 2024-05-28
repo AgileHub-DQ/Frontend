@@ -74,7 +74,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
 
   const handleDelete = async () => { // 이슈 삭제
     try {
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw';
       const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`;
       await axios.delete(endpoint, {
         headers: {
@@ -109,7 +108,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
     }
 
     try {
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw';
       const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`;
       const response = await axios.put(endpoint, formData, {
         headers: {
@@ -129,7 +127,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
 
   const fetchIssues = async () => { // 상위항목 -> 에픽, 스토리 목록 출력
     try {
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw';
       const epicResponse = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics`, {
         headers: {
           Authorization: `Bearer ${authToken}`,

@@ -1,7 +1,5 @@
 import React from 'react';
 import '../../css/SprintPage/Component.css';
-// import { useAuth } from '../../context/AuthContext.js';
-// import { json } from 'react-router-dom';
 
 function Component({ sprintData }) {
 

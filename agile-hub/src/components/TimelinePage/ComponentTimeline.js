@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../css/TimeLinePage/ComponentTimeline.css';
 import { FaSearch } from 'react-icons/fa';
-import { useAuth } from '../../context/AuthContext.js'; 
+import { useAuth } from '../../context/AuthContext.js';
 
-function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
-  console.log("componentTimeline projectName: "+ projectName);
-  // const projectKey = 'P1';
-  const { authToken } = useAuth(); 
+function ComponentTimeline({ onTitleClick, projectKey, projectName }) {
+  console.log("componentTimeline projectName: " + projectName);
+  const { authToken } = useAuth();
 
   const [timelineTitle, setTimelineTitle] = useState([]);
   const [filteredTitles, setFilteredTitles] = useState([]);
@@ -25,7 +24,6 @@ function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
 
   const searchBox = async () => {
     try {
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
       const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/stats`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -68,7 +66,7 @@ function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
   return (
     <div className="barentirecontainer">
       <div className="barcontainer">
-      <div className="project">프로젝트/[<span style={{ color: 'black' }}>{projectName}</span>]</div>
+        <div className="project">프로젝트/[<span style={{ color: 'black' }}>{projectName}</span>]</div>
         <div className="timeline_text">타임라인</div>
       </div>
       <div className="bar2container">
@@ -83,12 +81,12 @@ function ComponentTimeline({ onTitleClick,  projectKey, projectName}) {
           />
           <FaSearch className="search-icon" />
         </div>
-        <div className="status-container">
+        {/* <div className="status-container">
           <div className="status-label">상태 범주</div>
-          {/* 상태 필터링 로직 추가 가능 */}
+
         </div>
-        <div className="type-label">에픽</div>
-        {/* 에픽 필터링 로직 추가 가능 */}
+        <div className="type-label">에픽</div> */}
+
       </div>
       {searchTerm && (
         <div style={styles.resultsContainer}>
