@@ -32,9 +32,9 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
     }, [issueId, storyResult]);
 
     const fetchStories = async () => {
-        const idToUse = issueId || (storyList && storyList.result);
+        const idToUse = issueId || (storyList && story.result);
         if (!idToUse) {
-            console.error('No valid issueId or storyList.result available');
+            console.error('No valid issueId or story.result available');
             return;
         }
         
