@@ -8,31 +8,13 @@ import CreateStoryButton from '../button/CreateStoryButton.js';
 function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
     const { authToken } = useAuth();
     const issueId = epicData.id;
-    // const [epicTitle, setEpicTitle] = useState('');
     const [stories, setStories] = useState([]);
-    // const title = epicTitle || epicData?.title;
     const title = epicData.title;
 
     useEffect(() => {
         fetchIssues2(); // 스토리 출력
     }, []);
     
-    // const fetchIssues = async () => { // 생성한 에픽 title 값 가져오는 로직 
-    //     try {
-    //         const issueId = epicData.result; // issueId
-    //         const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${authToken}`,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-    //         setEpicTitle(response.data.result.issue.title);
-
-    //     } catch (error) {
-    //         console.error('API request failed:', error);
-    //     }
-    // };
-
     const fetchIssues2 = async () => { // 에픽의 아이디를 모두 가져와서 스토리 목록 출력
         try {
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {

@@ -8,7 +8,6 @@ import { useAuth } from '../../../context/AuthContext.js';
 //코드 대폭 수정
 function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
-    console.log("showstory storylist check: "+ JSON.stringify(storyList));
     console.log("showstory storylist check: "+ storyList);
 
     const { authToken } = useAuth();
@@ -22,7 +21,7 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
     const fetchStories = async () => {
         try {
-            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
+            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${storyList.result}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'

@@ -4,13 +4,15 @@ import '../../css/BacklogPage/AddBacklog.css';
 import ShowEpic from './show/ShowEpic.js';
 import CreateEpicButton from './button/CreateEpicButton.js';
 import { useAuth } from '../../context/AuthContext.js';
-import { useNavigate, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
 
 function AddBacklog() {
+    const { authToken } = useAuth();
     const location = useLocation();
     const [projectKey, setProjectKey] = useState('');
     const [sprintId, setSprintId] = useState('');
     const [sprintData, setSprintData] = useState({});
+    const [epics, setEpics] = useState([]);
 
     useEffect(() => {
         if (location.state) {
@@ -21,10 +23,6 @@ function AddBacklog() {
             setSprintData(sprintData || {});
         }
     }, [location.state]);
-
-    const { authToken } = useAuth();
-    const [epics, setEpics] = useState([]);
-
 
     const epicIssue = async () => {
         try {
