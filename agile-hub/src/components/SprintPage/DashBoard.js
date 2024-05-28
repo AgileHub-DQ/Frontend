@@ -6,12 +6,12 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-export default function DashBoard({ projectKey, sprintId, issues: initialBacklogIssue }) {
+export default function DashBoard({ projectKey, sprintId}) {
   const { authToken } = useAuth();
 
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
-  const [backlogIssue, setBacklogIssue] = useState(initialBacklogIssue);
+  const [sprintIssues, setSprintIssues] = useState([]);
 
   // const [sprintAssignments, setSprintAssignments] = useState({});
   
@@ -21,11 +21,13 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
 
   useEffect(() => {
     fetchIssues();
-  }, [backlogIssue]);
+  }, []);
 
 
   const onRendering = async () => {
+    console.log("onRendering 함수가 호출되었습니다!!!!!");
     await test();
+    console.log("sprintIssue JSON check: "+JSON.stringify(sprintIssues));
     fetchIssues();
     console.log("fetchIssues()");
   };
@@ -65,8 +67,8 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
       // setIssues(latestSprintIssues);
       // setCount(issueCount);
 
-      setBacklogIssue(sprintIssues);
-      console.log("backlogIssue:", backlogIssue);
+      setSprintIssues(sprintIssues);
+      console.log("setSprintIssues:", sprintIssues);
 
     } catch (error) {
       console.error('API request failed:', error);
@@ -138,9 +140,9 @@ export default function DashBoard({ projectKey, sprintId, issues: initialBacklog
 
       //확인해야함
       
-      backlogIssue.forEach(backlog => {
+      sprintIssues.forEach(sprint => {
    
-        const issue = allIssues.find(item => item.id === backlog.issueId); // item.issuId -> id
+        const issue = allIssues.find(item => item.id === sprint.issueId); // item.issuId -> id
 
 
         if (issue) {
