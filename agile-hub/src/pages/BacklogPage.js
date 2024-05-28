@@ -15,13 +15,6 @@ function BacklogPage() {
   const [sprintData, setSprintData] = useState({});
   const [loginId, setLoginId] = useState('');
 
-  // const [issues, setIssues] = useState([]); 
-
-  // useEffect(() => {
-  //   if (location.state) {
-  //     const { projectKey, sprintId, sprintData, issues } = location.state;
-
-
   useEffect(() => {
     if (location.state) {
       const { projectKey, sprintId, sprintData } = location.state;
@@ -34,23 +27,13 @@ function BacklogPage() {
       setSprintId(sprintId || '');
       setSprintData(sprintData || {});
       setLoginId(loginId || '');
-      // setIssues(issues || []);
-
       
       console.log('projectKey:', projectKey);
       console.log('sprintId:', sprintId);
       console.log('sprintData:', JSON.stringify(sprintData));
       console.log("BacklogPage projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
-      // console.log('issues:', JSON.stringify(issues));
     }
   }, [location.state]);
-
-  // const onUpdateSprintId = (newSprintId) => {
-  //   setSprintId(newSprintId);
-  //   console.log('Updated sprintId:', newSprintId);
-  // };
-
-
 
   return (
     <div className='backlog_container'>

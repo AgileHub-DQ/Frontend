@@ -18,8 +18,6 @@ function PlanSprint({ projectKey, sprintId, sprintData,  }) {
     }
   }, [projectKey]);
 
-
-
   const test = async () => {
     try {
       const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {

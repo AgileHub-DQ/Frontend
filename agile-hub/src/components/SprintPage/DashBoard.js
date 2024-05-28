@@ -13,28 +13,17 @@ export default function DashBoard({ projectKey, sprintId, issues:backlogIssues})
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
   const [sprintIssues, setSprintIssues] = useState(backlogIssues);
 
-  // const [sprintAssignments, setSprintAssignments] = useState({});
-  
-  // useEffect(() => {
-  //   fetchIssues();
-  // }, []);
-
   useEffect(() => {
     test();
   }, []);
 
 
   const onRendering = async () => {
-    console.log("onRendering 함수가 호출되었습니다!!!!!");
-    // await test();
-    // console.log("sprintIssue JSON check: "+JSON.stringify(sprintIssues));
     test();
-    console.log("test()");
   };
 
   const test = async () => {
     try {
-      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
       const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -50,31 +39,11 @@ export default function DashBoard({ projectKey, sprintId, issues:backlogIssues})
         return;
       }
 
-      // const latestSprint = sprints[sprints.length - 1];
-      // const latestSprintIssues = latestSprint.issues;
-      // const issueCount = latestSprint.issueCount;
-      // console.log("latestSprint:", latestSprint);
-      // console.log("issueCount:", issueCount);
-      // console.log("latestSprintIssues:", latestSprintIssues);
 
       const latestSprint = sprints[sprints.length - 1];
       const sprintIssues = latestSprint.issues;
-
-      console.log("latestSprint:", latestSprint);
-      console.log("latestSprintJSON:", JSON.stringify(latestSprint));
-      console.log("sprintIssues:", sprintIssues);
-
-      // setIssues(latestSprintIssues);
-      // setCount(issueCount);
-
-      setSprintIssues(sprintIssues); // 이게 안 되는 듯?
+      setSprintIssues(sprintIssues); 
       console.log("setSprintIssues:", sprintIssues);
-
-
-
-
-
-
 
       const endpoint1 = `https://api.agilehub.store/projects/${projectKey}/stories`;
       const endpoint2 = `https://api.agilehub.store/projects/${projectKey}/tasks`;
@@ -131,95 +100,12 @@ export default function DashBoard({ projectKey, sprintId, issues:backlogIssues})
     }
   };
 
-
-  // const fetchIssues = async () => {
-  //   try { 
-  //     // 코드 되돌림
-  //     //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw'; // 실제 액세스 토큰으로 대체해야 함
-  //     const endpoint1 = `https://api.agilehub.store/projects/${projectKey}/stories`;
-  //     const endpoint2 = `https://api.agilehub.store/projects/${projectKey}/tasks`;
-  //     const response1 = await axios.get(endpoint1, {
-  //       headers: {
-  //         Authorization: `Bearer ${authToken}`,
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-
-  //     const response2 = await axios.get(endpoint2, {
-  //       headers: {
-  //         Authorization: `Bearer ${authToken}`,
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
-
-
-
-
-  //     const allIssues = [...response1.data.result, ...response2.data.result];
-
-  //     const newIssues = { todo: [], doing: [], complete: [] };
-
-  //     //확인해야함
-      
-  //     sprintIssues.forEach(sprint => {
-   
-  //       const issue = allIssues.find(item => item.id === sprint.issueId); // item.issuId -> id
-
-
-  //       if (issue) {
-  //         console.log("issue json check: "+JSON.stringify(issue));
-  //         const status = issue.status;
-  //         if (status === 'DO') {
-  //           newIssues.todo.push(issue);
-  //         } else if (status === 'PROGRESS') {
-  //           newIssues.doing.push(issue);
-  //         } else if (status === 'DONE') {
-  //           newIssues.complete.push(issue);
-  //         } else {
-  //           newIssues.todo.push(issue); 
-  //         }
-  //       }
-  //     });
-  
-  //   //   response1.data.result.forEach(issue => {
-  //   //     const status = issue.status;
-  //   //     if (status === 'DO') {
-  //   //         newIssues.todo.push(issue);
-  //   //     } else if (status === 'PROGRESS') {
-  //   //         newIssues.doing.push(issue);
-  //   //     } else if (status === 'DONE') {
-  //   //         newIssues.complete.push(issue);
-  //   //     } else {
-  //   //         newIssues.todo.push(issue); 
-  //   //     }
-  //   // });
-    
-  //   // response2.data.result.forEach(issue => {
-  //   //     const status = issue.status;
-  //   //     if (status === 'DO') {
-  //   //         newIssues.todo.push(issue);
-  //   //     } else if (status === 'PROGRESS') {
-  //   //         newIssues.doing.push(issue);
-  //   //     } else if (status === 'DONE') {
-  //   //         newIssues.complete.push(issue);
-  //   //     } else {
-  //   //         newIssues.todo.push(issue); 
-  //   //     }
-  //   // });
-  
-  //     setIssues(newIssues);
-  //   } catch (error) {
-  //     console.error('Failed to fetch issues:', error);
-  //   }
-  // };
-
   const onDragStart = (e, item, category) => {
     const itemData = JSON.stringify({ id: item.id, originalCategory: category });
     e.dataTransfer.setData("text/plain", itemData);
   };
 
   const updateIssue = async (id, newStatus) => {
-    //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyjvOybkO2drCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTc4MDQ1MjUiLCJpYXQiOjE3MTU1MjM2MjcsImV4cCI6MTcxNjczMzIyN30.7W2ZV5RmSGhf_GjV-xTeYtC7ZPF-QcIpIj5QksTTfxXt8U5NdpWM-WejbW6Exl8u-qU2jGrotz0oTtty51etYw';
     try {
       const response = await axios.put(`https://api.agilehub.store/projects/${projectKey}/issues/${id}/status`, {
         status: newStatus
