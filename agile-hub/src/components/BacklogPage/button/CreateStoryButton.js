@@ -20,7 +20,7 @@ function CreateStoryButton({projectKey}) {
         <div className='addStory'>
             {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} projectKey={projectKey} />} 
             {storyList.map((storyData, index) => (
-                <ShowStory key={index} storyData={storyData} projectKey={projectKey}/>
+                <ShowStory key={index} storyData={storyData} projectKey={projectKey} storyList={storyList} />
             ))}
             <div className='story_button_container'>
                 <button className="story_button" onClick={handleToggleModal}>

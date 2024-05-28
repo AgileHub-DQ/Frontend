@@ -5,7 +5,11 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowStory({ projectKey, issueId, sprintId }) {
+function ShowStory({ projectKey, issueId, sprintId, storyList }) {
+
+    console.log("showstory storylist check: "+ JSON.stringify(storyList));
+    console.log("showstory storylist check: "+ storyList);
+
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
@@ -126,10 +130,6 @@ function ShowStory({ projectKey, issueId, sprintId }) {
         }
 
     };
-
-
-
-
 
     return (
         <div className='showStory' style={{
