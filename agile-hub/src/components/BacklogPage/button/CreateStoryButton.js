@@ -6,19 +6,6 @@ import ShowStory from '../show/ShowStory.js';
 function CreateStoryButton({projectKey}) {
     const [showModal, setShowModal] = useState(false);
     const [storyList, setStoryList] = useState([]);
-    console.log("createStorybutton storylist: "+ storyList.forEach((story, index) => {
-        console.log(`showstory storyList[${index}]: `, story);
-    }));
-
-
-
-    // storyList.forEach((story, index) => {
-    //     console.log(`showstory storyList[${index}]: `, story);
-    // });
-
-
-
-    
     
     const handleToggleModal = () => {
         setShowModal(!showModal);
@@ -33,7 +20,7 @@ function CreateStoryButton({projectKey}) {
         <div className='addStory'>
             {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} projectKey={projectKey} />} 
             {storyList.map((storyData, index) => (
-                <ShowStory key={index} storyData={storyData} projectKey={projectKey} storyList={storyList} />
+                <ShowStory key={index} storyData={storyData} projectKey={projectKey}/>
             ))}
             <div className='story_button_container'>
                 <button className="story_button" onClick={handleToggleModal}>
