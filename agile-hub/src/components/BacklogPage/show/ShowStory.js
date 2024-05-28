@@ -5,22 +5,22 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
-//코드 대폭 수정
+// 코드 대폭 수정
 function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
-    const [storyResult, setStoryResult ] = useState(''); // 새로 생성한 스토리 아이디 값 setter
+    const [storyResult, setStoryResult] = useState(''); // 새로 생성한 스토리 아이디 값 setter
 
-    console.log("`showstory  storyList : `", storyList);
-
-    if (Array.isArray(storyList)) {
-        storyList.forEach((story, index) => {
-            console.log(`showstory storyList[${index}]: `, story.result);
-            setStoryResult(story.result);
-        });
-    } else {
-        console.log('storyList is not an array or is undefined');
-    }
-
+    // storyList가 배열인지 확인하고 각 요소를 콘솔에 출력 및 storyResult 설정
+    useEffect(() => {
+        if (Array.isArray(storyList)) {
+            storyList.forEach((story, index) => {
+                console.log(`showstory storyList[${index}]: `, story.result);
+                setStoryResult(story.result);
+            });
+        } else {
+            console.log('storyList is not an array or is undefined');
+        }
+    }, [storyList]);
 
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
@@ -32,12 +32,12 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
     }, [issueId, storyResult]);
 
     const fetchStories = async () => {
-        const idToUse = issueId || (storyList && story.result);
+        const idToUse = issueId || storyResult;
         if (!idToUse) {
-            console.error('No valid issueId or story.result available');
+            console.error('No valid issueId or storyResult available');
             return;
         }
-        
+
         try {
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${idToUse}/stories`, {
                 headers: {
