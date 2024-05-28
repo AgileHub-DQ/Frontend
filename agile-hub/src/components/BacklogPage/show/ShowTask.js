@@ -8,8 +8,6 @@ function ShowTask({ projectKey, tasks, sprintId }) {
 
     const alignToSprint = async (issueId) => {
         try {
-            // const sprintId = 80;
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             const response = await axios.post(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 issueId: issueId
             }, {
@@ -19,16 +17,13 @@ function ShowTask({ projectKey, tasks, sprintId }) {
                 }
             });
             alert("할당되었습니다.");
-            console.log('Issue added to sprint:', response);
         } catch (error) {
             console.error('API request failed:', error);
         }
     };
 
     const removeFromSprint = async (issueId) => {
-        // const sprintId = 77; 
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             const response = await axios.delete(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 data: {
                     issueId: issueId
@@ -40,7 +35,6 @@ function ShowTask({ projectKey, tasks, sprintId }) {
             });
 
             alert("삭제되었습니다.")
-            console.log('Removed from sprint:', response);
         } catch (error) {
             console.error('Removing from sprint failed:', error);
         }
@@ -51,10 +45,8 @@ function ShowTask({ projectKey, tasks, sprintId }) {
     }
 
     const deleteTask = async (issueId) => {
-        console.log("deleteTask id: " + issueId);
         const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
         if (isConfirmed) {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             try {
                 await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`, {
                     headers: {

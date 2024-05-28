@@ -1,44 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import CreateStoryButton from '../button/CreateStoryButton'; // CreateStoryButton 컴포넌트의 경로에 맞게 수정
+import axios from 'axios'; // CreateStoryButton 컴포넌트의 경로에 맞게 수정
 import ShowStory from './ShowStory';
 import '../../../css/BacklogPage/ShowEpic.css';
-import { useAuth } from '../../../context/AuthContext.js'; 
+import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId, loginId}) {
-    const { authToken } = useAuth(); 
-    console.log("ShowEpic projectKey and sprintId and epicData check:", projectKey, sprintId, JSON.stringify(epicData));
+function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId, loginId }) {
+    const { authToken } = useAuth();
     const issueId = epicData.id;
     const [epicTitle, setEpicTitle] = useState('');
     const [stories, setStories] = useState([]);
     const title = epicTitle || epicData?.title;
 
+    useEffect(() => {
+        fetchIssues2();
+    }, []);
+    
     const fetchIssues = async () => { // 생성한 에픽 title 값 가져오는 로직 
         try {
             const issueId = epicData.result; // issueId
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'
                 }
             });
-            console.log("!!!!!!!!!!!!!"+response);
             setEpicTitle(response.data.result.issue.title);
-            
+
         } catch (error) {
             console.error('API request failed:', error);
         }
     };
 
-    
-    useEffect(() => {
-        fetchIssues2();
-    }, []);
-
     const fetchIssues2 = async () => { // 에픽의 아이디를 모두 가져와서 스토리 목록 출력
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -51,7 +45,7 @@ function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId, loginId}) {
             } else {
                 console.error('Unexpected API response format:', response.data);
             }
-            
+
         } catch (error) {
             console.error('API request failed:', error);
         }
@@ -61,8 +55,6 @@ function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId, loginId}) {
     const deleteIssue = async () => {
         const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
         if (isConfirmed) {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
-
             try {
                 await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${issueId}`, {
                     headers: {
@@ -88,7 +80,7 @@ function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId, loginId}) {
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             marginBottom: '10px',
             marginTop: '10px'
-            
+
         }}>
             <div style={{
                 display: 'flex',
@@ -119,7 +111,7 @@ function ShowEpic({epicData, projectKey, onEpicDeleted, sprintId, loginId}) {
                 }} onClick={() => deleteIssue(issueId)}>삭제하기</button>
             </div>
             <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId} loginId={loginId} />
-            <CreateStoryButton projectKey={projectKey} loginId={loginId}/>
+            <CreateStoryButton projectKey={projectKey} loginId={loginId} />
         </div>
     );
 }

@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../../context/AuthContext.js'; 
+import { useAuth } from '../../../context/AuthContext.js';
 
 function TaskModal({ onClose, onSubmit, projectKey }) {
-    const { authToken } = useAuth(); 
-
+    const { authToken } = useAuth();
     const [issueTitle, setIssueTitle] = useState('');
-    const [type, setType] = useState('TASK'); 
+    const [type, setType] = useState('TASK');
     const [status, setStatus] = useState('DO');
     const [content, setContent] = useState('');
-    const [files, setFiles] = useState([]); 
+    const [files, setFiles] = useState([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
     const [assigneeId, setAssigneeId] = useState('');
-    
+
     useEffect(() => {
         const savedLoginId = localStorage.getItem('loginId');
         if (savedLoginId) {
-          setAssigneeId(savedLoginId);
+            setAssigneeId(savedLoginId);
         }
-      }, []);
-      
+    }, []);
+
     const [parentId, setParentId] = useState('');
-    const [color, setColor] = useState('#FB55B3'); 
+    const [color, setColor] = useState('#FB55B3');
     const [storyList, setStoryList] = useState([]);
     const [label, setLabel] = useState(''); // label
 
     const handleBoxClick = (selectedLabel) => {
         setLabel(selectedLabel); // 선택된 라벨 상태 업데이트
     };
-  
+
     const getBoxStyle = (boxLabel) => ({
         cursor: 'pointer',
         padding: '3px',
         borderRadius: '5px',
-        border: label === boxLabel ? '2px solid blue' : 'none' 
+        border: label === boxLabel ? '2px solid blue' : 'none'
     });
 
     const handleSubmit = async (e) => {
@@ -43,7 +42,7 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
 
         const formData = new FormData();
         formData.append('title', issueTitle);
-        formData.append('type', type);  
+        formData.append('type', type);
         formData.append('status', status);
         formData.append('content', content);
         formData.append('startDate', startDate);
@@ -56,9 +55,8 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
                 formData.append('files', files[i]);
             }
         }
-        
+
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
             const endpoint = `https://api.agilehub.store/projects/${projectKey}/issues`;
             console.log("endpoint:" + endpoint);
             const response = await axios.post(endpoint, formData, {
@@ -68,7 +66,6 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
                 }
             });
 
-            console.log(response.data);
             onSubmit(response.data); // 입력된 값 전달
             onClose(); // 모달 닫기
         } catch (error) {
@@ -97,9 +94,9 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
     };
 
     const handleFileChange = (e) => {
-        setFiles(e.target.files); 
+        setFiles(e.target.files);
     };
-      
+
     const handleCloseModal = () => {
         onClose(); // onClose prop으로 전달된 함수를 호출하여 모달 닫기
     };
@@ -108,14 +105,13 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
 
     const fetchIssues = async () => { // 스토리 목록 출력하기 위한 코드
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'
                 }
             });
-            setStoryList(response.data.result); 
+            setStoryList(response.data.result);
         } catch (error) {
             console.error('API request failed:', error);
         }
@@ -188,7 +184,7 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
                     </div>
                     <div className='form-row-10'>
                         <p className="form-label">상위 항목</p>
-                        <select 
+                        <select
                             className="form-select-type"
                             value={parentId}
                             onChange={(e) => setParentId(e.target.value)}
@@ -216,7 +212,7 @@ function TaskModal({ onClose, onSubmit, projectKey }) {
                     </div>
                     <div className='form-row-7'>
                         <button className="createIssueButton" type="submit">이슈 생성</button>
-                    </div> 
+                    </div>
                 </form>
             </div>
         </div>

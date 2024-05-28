@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js';
 
-function PlanSprint({ projectKey, sprintId, sprintData,  }) {
-  console.log("여기는 plansprint 입니다.");
-
+function PlanSprint({ projectKey, sprintData, }) {
   const { authToken } = useAuth();
   const [issues, setIssues] = useState([]);
   const [count, setCount] = useState('');
@@ -14,7 +12,7 @@ function PlanSprint({ projectKey, sprintId, sprintData,  }) {
 
   useEffect(() => {
     if (projectKey) {
-      test(); // 타이밍 문제로 projectKey가 들어가지 않는 문제 해결
+      test();
     }
   }, [projectKey]);
 
@@ -38,16 +36,8 @@ function PlanSprint({ projectKey, sprintId, sprintData,  }) {
       const latestSprint = sprints[sprints.length - 1];
       const sprintIssues = latestSprint.issues;
       const issueCount = latestSprint.issueCount;
-      console.log("latestSprint:", latestSprint);
-
-      console.log("sprintId값: " + latestSprint.sprintId);
-
-      console.log("latestSprintJSON:", JSON.stringify(latestSprint));
-      console.log("issueCount:", issueCount);
-      console.log("sprintIssues:", sprintIssues);
 
       setIssues(sprintIssues);
-      console.log("issues:", issues);
       setCount(issueCount);
 
     } catch (error) {

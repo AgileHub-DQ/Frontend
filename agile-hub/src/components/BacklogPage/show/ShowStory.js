@@ -3,12 +3,10 @@ import axios from 'axios';
 import '../../../css/BacklogPage/ShowStory.css';
 import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
-import { useAuth } from '../../../context/AuthContext.js'; 
+import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
-    console.log(issueId);
-    const { authToken } = useAuth(); 
-
+function ShowStory({ projectKey, issueId, sprintId, loginId }) {
+    const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
     const [sprintAssignments, setSprintAssignments] = useState({});
@@ -19,7 +17,6 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
 
     const fetchStories = async () => {
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -30,7 +27,6 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
             setStories(response.data.result);
             response.data.result.forEach(story => {
                 fetchTasks(story.id);
-                // checkSprintAssignment(story.id);
             });
         } catch (error) {
             console.error('API request failed:', error);
@@ -39,7 +35,6 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
 
     const fetchTasks = async (storyId) => {
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/stories/${storyId}/tasks`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -56,31 +51,8 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
         }
     };
 
-    // const checkSprintAssignment = async (storyId) => {
-    //     const sprintId = 77;
-    //     try {
-    //         const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
-    //         const response = await axios.get(`/projects/${projectKey}/sprints/${sprintId}/issue/${storyId}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${accessToken}`,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         });
-
-    //         setSprintAssignments(prev => ({
-    //             ...prev,
-    //             [storyId]: response.data.isAssigned
-    //         }));
-    //     } catch (error) {
-    //         console.error('Checking sprint assignment failed:', error);
-    //     }
-    // };
-
     const assignToSprint = async (storyId) => {
-
-
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.post(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 issueId: storyId
             }, {
@@ -89,7 +61,6 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
                     'Content-Type': 'application/json'
                 }
             });
-
 
             setSprintAssignments(prev => ({
                 ...prev,
@@ -104,9 +75,7 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
     };
 
     const removeFromSprint = async (storyId) => {
-  
         try {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA'; // Use actual token
             const response = await axios.delete(`https://api.agilehub.store/projects/${projectKey}/sprints/${sprintId}/issue`, {
                 data: {
                     issueId: storyId
@@ -141,15 +110,13 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
 
         const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
         if (isConfirmed) {
-            //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';  // 액세스 토큰
-
             try {
                 await axios.delete(`https://api.agilehub.store/projects/${projectKey}/issues/${storyId}`, {
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
                 fetchStories();
 
             } catch (error) {
@@ -157,7 +124,7 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
 
             }
         }
-        
+
     };
 
 
@@ -178,22 +145,8 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
                     <div className='storyContainer'>
                         <div>
                             <div className='storytitle' style={{ marginLeft: '10px', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', marginBottom: '10px' }}>
-                                {/* <div style={{  display: 'flex', align-items: 'center'}}> */}
+
                                 <div>
-
-                                    {/* <div style={{
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    marginTop: '10px',
-                                    marginBottom: '10px',
-                                    padding: '15px',
-                                    borderRadius: '8px',
-                                    backgroundColor: '#fff',
-                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-                                }}> */}
-
-
-
 
                                     <div style={{
                                         border: '1px solid #ddd',
@@ -214,9 +167,9 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
                                             <div style={{ flex: 1 }}>
                                                 <strong>{story.title}</strong>
                                             </div>
-                                            {/* <div style={{ flex: 1, textAlign: 'center' }}> */}
+
                                             <div style={{ flex: 1 }}>
-                                                {/* <strong>{story.title}</strong> */}
+
                                                 <span className="storyType" style={{ marginLeft: '80px' }}>
                                                     {story.type}
                                                 </span>
@@ -265,24 +218,9 @@ function ShowStory({ projectKey, issueId, sprintId ,loginId}) {
                                                 <ShowTask projectKey={projectKey} tasks={tasks[story.id]} storyId={story.id} onDeleteTask={onDeleteTask} sprintId={sprintId} />
                                             )}
                                         </div>
-
                                     </div>
-
-
-
-
-
-
-
-
                                 </div>
-
                             </div>
-                            {/* <div className='taskcontainer'>
-                                    {tasks[story.id] && tasks[story.id].length > 0 && (
-                                        <ShowTask projectKey={projectKey} tasks={tasks[story.id]} storyId={story.id} onDeleteTask={onDeleteTask} />
-                                    )}
-                                </div> */}
                         </div>
                     </div>
                     <CreateTaskButton loginId={loginId} projectKey={projectKey} storyId={story.id} onTaskCreated={() => fetchTasks(story.id)} />

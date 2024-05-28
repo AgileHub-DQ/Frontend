@@ -7,8 +7,6 @@ import PlanSprint from '../components/BacklogPage/PlanSprint.js';
 import AddBacklog from '../components/BacklogPage/AddBacklog.js';
 
 function BacklogPage() {
-
-
   const location = useLocation();
   const [projectKey, setProjectKey] = useState('');
   const [sprintId, setSprintId] = useState('');
@@ -18,20 +16,12 @@ function BacklogPage() {
   useEffect(() => {
     if (location.state) {
       const { projectKey, sprintId, sprintData } = location.state;
-
-      
       const loginId = location.state?.loginId;
-      console.log("backlog page loginId: "+ loginId);
 
       setProjectKey(projectKey || '');
       setSprintId(sprintId || '');
       setSprintData(sprintData || {});
       setLoginId(loginId || '');
-      
-      console.log('projectKey:', projectKey);
-      console.log('sprintId:', sprintId);
-      console.log('sprintData:', JSON.stringify(sprintData));
-      console.log("BacklogPage projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
     }
   }, [location.state]);
 

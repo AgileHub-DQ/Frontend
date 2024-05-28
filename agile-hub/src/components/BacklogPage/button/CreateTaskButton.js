@@ -7,7 +7,6 @@ function CreateTaskButton({projectKey, loginId}) {
     const [showModal, setShowModal] = useState(false);
     const [taskList, setTaskList] = useState([]);
 
-    console.log("CreateTaskButton: "+projectKey);
     const handleToggleModal = () => {
         setShowModal(!showModal);
     };
