@@ -20,7 +20,7 @@ export default function DashBoard({ projectKey, sprintId, issues:backlogIssues})
   // }, []);
 
   useEffect(() => {
-    fetchIssues();
+    test();
   }, []);
 
 
@@ -288,13 +288,13 @@ const onDrop = async (e, newCategory) => {
             <div className={`status-indicator ${category}`} ></div>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
           </div>
-          <PlusBox projectKey={projectKey} sprintId={sprintId} fetchIssues={fetchIssues} onRendering={onRendering}/>
+          <PlusBox projectKey={projectKey} sprintId={sprintId} test={test} onRendering={onRendering}/>
           {issues[category].map((item) => (
           <div 
           key={item.id}
           draggable
           onDragStart={e => onDragStart(e, item, category)} >
-        <Task key={item.id} issue={item} projectKey={projectKey} fetchIssues={fetchIssues} />
+        <Task key={item.id} issue={item} projectKey={projectKey} test={test} />
                 </div>
         ))}
         </div>
