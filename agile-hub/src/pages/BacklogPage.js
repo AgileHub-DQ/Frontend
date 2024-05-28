@@ -41,7 +41,7 @@ function BacklogPage() {
       console.log('sprintId:', sprintId);
       console.log('sprintData:', JSON.stringify(sprintData));
       console.log("BacklogPage projectKey and sprintId and sprintData check:", projectKey, sprintId, JSON.stringify(sprintData));
-      console.log('issues:', JSON.stringify(issues));
+      // console.log('issues:', JSON.stringify(issues));
     }
   }, [location.state]);
 
