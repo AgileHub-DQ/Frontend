@@ -5,6 +5,7 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
+//코드 대폭 수정
 function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
     console.log("showstory storylist check: "+ JSON.stringify(storyList));
