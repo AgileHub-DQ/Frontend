@@ -6,6 +6,7 @@ import ShowStory from '../show/ShowStory.js';
 function CreateStoryButton({projectKey}) {
     const [showModal, setShowModal] = useState(false);
     const [storyList, setStoryList] = useState([]);
+    console.log("createStorybutton storylist: "+ storyList);
     
     const handleToggleModal = () => {
         setShowModal(!showModal);

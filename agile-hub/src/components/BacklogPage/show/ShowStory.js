@@ -8,8 +8,19 @@ import { useAuth } from '../../../context/AuthContext.js';
 //코드 대폭 수정
 function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
-    // storyList가 정의되어 있는지 확인 후 콘솔 로그 출력
-    console.log("새로 생성한 스토리 id: ", storyList ? storyList.result : 'No storyList');
+    const [storyResult, setStoryResult ] = useState(''); // 새로 생성한 스토리 아이디 값 setter
+
+    console.log("`showstory id storyList result: `", storyList.result);
+
+    if (Array.isArray(storyList)) {
+        storyList.forEach((story, index) => {
+            console.log(`showstory storyList[${index}]: `, story.result);
+            setStoryResult(story.result);
+        });
+    } else {
+        console.log('storyList is not an array or is undefined');
+    }
+
 
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
@@ -18,16 +29,15 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
     useEffect(() => {
         fetchStories();
-    }, [issueId, storyList]);
+    }, [issueId, storyResult]);
 
     const fetchStories = async () => {
-        // issueId나 storyList.result 둘 중 하나가 존재하는지 확인
         const idToUse = issueId || (storyList && storyList.result);
         if (!idToUse) {
             console.error('No valid issueId or storyList.result available');
             return;
         }
-
+        
         try {
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${idToUse}/stories`, {
                 headers: {
