@@ -6,7 +6,7 @@ import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
 // 코드 대폭 수정
-function ShowStory({ projectKey, issueId, sprintId, storyList }) {
+function ShowStory({ projectKey, issueId, sprintId, storyList, fetchIssues2 }) {
 
     const [storyResult, setStoryResult] = useState(''); // 새로 생성한 스토리 아이디 값 setter
 
@@ -49,10 +49,13 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
                 }
             });
 
+            console.log(response.data.result);
             setStories(response.data.result);
+            fetchIssues2();
             response.data.result.forEach(story => {
                 fetchTasks(story.id);
             });
+
         } catch (error) {
             console.error('API request failed:', error);
         }

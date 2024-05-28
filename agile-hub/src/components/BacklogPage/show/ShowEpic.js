@@ -94,7 +94,7 @@ function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
                     transition: 'all 0.15s ease'
                 }} onClick={() => deleteIssue(issueId)}>삭제하기</button>
             </div>
-            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId}  />
+            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId} fetchIssues2 = {fetchIssues2} />
             <CreateStoryButton projectKey={projectKey}  />
         </div>
     );
