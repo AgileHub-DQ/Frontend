@@ -8,7 +8,8 @@ import { useAuth } from '../../../context/AuthContext.js';
 //코드 대폭 수정
 function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
-    console.log("showstory storylist check: "+ storyList);
+
+    console.log("새로 생성한 스토리 id: "+ storyList.result);
 
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
@@ -17,11 +18,11 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
     useEffect(() => {
         fetchStories();
-    }, [issueId]);
+    }, [issueId, storyList]);
 
     const fetchStories = async () => {
         try {
-            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${storyList.result}/stories`, {
+            const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId || storyList.result}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'
