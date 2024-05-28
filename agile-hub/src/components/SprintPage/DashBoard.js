@@ -6,12 +6,12 @@ import PlusBox from './PlusBox.js';
 import Task from './Task.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-export default function DashBoard({ projectKey, sprintId, issues}) {
+export default function DashBoard({ projectKey, sprintId, issues:backlogIssues}) {
   const { authToken } = useAuth();
 
   const [imagesURLs, setImagesURLs] = useState('');
   const [issues, setIssues] = useState({ todo: [], doing: [], complete: [] });
-  const [sprintIssues, setSprintIssues] = useState(issues);
+  const [sprintIssues, setSprintIssues] = useState(backlogIssues);
 
   // const [sprintAssignments, setSprintAssignments] = useState({});
   
