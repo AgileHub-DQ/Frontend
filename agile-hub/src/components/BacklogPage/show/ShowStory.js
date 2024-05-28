@@ -10,7 +10,7 @@ function ShowStory({ projectKey, issueId, sprintId, storyList }) {
 
     const [storyResult, setStoryResult ] = useState(''); // 새로 생성한 스토리 아이디 값 setter
 
-    console.log("`showstory id storyList result: `", storyList.result);
+    console.log("`showstory  storyList : `", storyList);
 
     if (Array.isArray(storyList)) {
         storyList.forEach((story, index) => {
