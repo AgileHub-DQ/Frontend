@@ -1,10 +1,17 @@
 import React from 'react';
-
 import '../../css/LoginPage/KakaoLoginButton.css';
 
 const KakaoLoginButton = () => {
   const handleLogin = () => {
-    window.location.href = 'https://api.agilehub.store/oauth2/authorization/kakao';
+    const { origin, pathname, search } = window.location;
+    const redirectUrl = `${origin}${pathname}${search}`;
+
+    console.log(origin);
+    console.log(pathname);
+    console.log(search);
+
+    const authUrl = `https://api.agilehub.store/oauth2/authorization/kakao?redirect_url=${redirectUrl}`;
+    window.location.href = authUrl;
   };
 
   return (
