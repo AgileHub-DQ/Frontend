@@ -4,7 +4,7 @@ import '../../css/SprintPage/Task.css';
 import Modal from './StoryModal.js';
 import { useAuth } from '../../context/AuthContext.js';
 
-function Task({ projectKey, issue, fetchIssues}) {
+function Task({ projectKey, issue, test}) {
   const { authToken } = useAuth();
 
   const [response, setResponse] = useState('');
@@ -39,7 +39,7 @@ function Task({ projectKey, issue, fetchIssues}) {
 
   const onEdit = () => {
     fetchIssues2();
-    fetchIssues();
+    test();
   }
 
   const fetchIssues2 = async () => {

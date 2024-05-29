@@ -114,7 +114,9 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
       setIsModalOpen(false);
       alert("수정되었습니다.");
       onEdit();
+      console.log("onEdit()");
       onClose();
+      console.log("onClose()");
     } catch (error) {
       console.error('Failed to edit:', error);
     }
