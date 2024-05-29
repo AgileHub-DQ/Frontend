@@ -13,18 +13,23 @@ function ShowStory({ projectKey, issueId, sprintId }) {
     const [sprintAssignments, setSprintAssignments] = useState({});
 
     useEffect(() => {
+        console.log("useEffect 들어옴!!");
         fetchStories();
     }, [issueId]);
 
+
+
+
     const fetchStories = async () => {
         try {
+            console.log("fetchStories에서 issueId: "+issueId);
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     'Content-Type': 'application/json'
                 }
             });
-
+            console.log(response.data.result);
             setStories(response.data.result);
             response.data.result.forEach(story => {
                 fetchTasks(story.id);
@@ -127,9 +132,6 @@ function ShowStory({ projectKey, issueId, sprintId }) {
         }
 
     };
-
-
-
 
 
     return (

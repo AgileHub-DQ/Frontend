@@ -6,8 +6,10 @@ import { useAuth } from '../../../context/AuthContext.js';
 import CreateStoryButton from '../button/CreateStoryButton.js';
 
 function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
+    console.log("여기는 showEpic 페이지입니다.");
     const { authToken } = useAuth();
     const issueId = epicData.id;
+    console.log("showepic 에서 epicId: "+issueId);
     const [epicTitle, setEpicTitle] = useState('');
     const [stories, setStories] = useState([]);
     const title = epicTitle || epicData?.title;
