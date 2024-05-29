@@ -6,22 +6,19 @@ import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
 function ShowStory({ projectKey, issueId, sprintId }) {
-    console.log("showstory issueId: "+issueId);
+    console.log("showstory에서 issueId값: "+issueId);
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
     const [sprintAssignments, setSprintAssignments] = useState({});
 
     useEffect(() => {
-        console.log("useEffect 들어옴!!");
         fetchStories();
     }, [issueId]);
 
-
-
-
     const fetchStories = async () => {
         try {
+            
             console.log("fetchStories에서 issueId: "+issueId);
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
                 headers: {
@@ -29,7 +26,7 @@ function ShowStory({ projectKey, issueId, sprintId }) {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data.result);
+            console.log("에픽 안에 들어있는 스토리 목록 출력: "+response.data.result);
             setStories(response.data.result);
             response.data.result.forEach(story => {
                 fetchTasks(story.id);
