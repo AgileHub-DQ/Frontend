@@ -22,7 +22,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
   const [files, setFiles] = useState('');
   const [startDate, setStartDate] = useState(details.result.issue.startDate || '');
   const [endDate, setEndDate] = useState(details.result.issue.endDate || '');
-
   const [assigneeId, setAssigneeId] = useState(''); 
 
   useEffect(() => {
@@ -63,10 +62,6 @@ const Modal = ({ isVisible, details, onClose, projectKey, onEdit }) => {
       setImageURL(details.result.issue.content.imagesURLs[0]);
     }
   }, [details]);
-
-
-
-  
 
   const handleFileChange = (e) => { // 단일 파일
     setFiles(e.target.files);

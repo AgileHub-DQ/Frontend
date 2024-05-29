@@ -34,7 +34,7 @@ function ShowTask({ projectKey, tasks, sprintId }) {
                 }
             });
 
-            alert("삭제되었습니다.")
+            alert("취소되었습니다.")
         } catch (error) {
             console.error('Removing from sprint failed:', error);
         }

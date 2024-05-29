@@ -91,7 +91,7 @@ function ShowStory({ projectKey, issueId, sprintId , storyData}) {
                 [storyId]: false
             }));
 
-            alert("삭제되었습니다.")
+            alert("취소되었습니다.")
             console.log('Removed from sprint:', response);
         } catch (error) {
             console.error('Removing from sprint failed:', error);
