@@ -49,3 +49,20 @@ const AuthSuccess = () => {
 };
 
 export default AuthSuccess;
+
+// //     // 현재 위치와 URL 쿼리 스트링을 포함한 리다이렉트 URL 생성
+//     const redirectUrl = `${window.location.origin}${location.pathname}${location.search}`;
+
+//     console.log('redirectUrl:' + redirectUrl);
+
+//     // 로그인 URL 생성
+//     const loginUrl = `https://api.agilehub.store/oauth2/authorization/kakao?redirect_url=${redirectUrl}`;
+//     console.log('loginUrl' + loginUrl);
+//     console.log('디버깅 시작');
+
+//     // URL을 로그에 출력하여 디버깅
+//     console.log('Redirect URL: ', redirectUrl);
+//     console.log('Login URL: ', loginUrl);
+
+//     // 로그인 URL로 리다이렉트
+//     window.location.href = loginUrl;
