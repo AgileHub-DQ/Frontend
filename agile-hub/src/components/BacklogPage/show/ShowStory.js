@@ -5,7 +5,8 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowStory({ projectKey, issueId, sprintId , storyData}) {
+function ShowStory({ projectKey, issueId, sprintId }) {
+    console.log("showstory issueId: "+issueId);
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});

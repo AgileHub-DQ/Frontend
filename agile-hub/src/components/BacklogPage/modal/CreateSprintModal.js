@@ -44,19 +44,23 @@ function CreateSprintModal() {
         formData.append('description', description);
 
         try {
+          console.log('프로젝트 키:' + projectKey); 
           const endpoint = `https://api.agilehub.store/projects/${projectKey}/sprints`;
+          console.log('post 시작은 됨'); 
           const response = await axios.post(endpoint, formData, {
             headers: {
                 'Content-Type': 'application/json', 
                 'Authorization': `Bearer ${authToken}`
             }
           });
+          console.log('post 끝~'); 
           console.log(response.data.result);
           const sprintData = response.data.result;
           const sprintId = response.data.result.sprintId;
           navigate('/sprint', { state: { sprintData: response.data.result, projectKey: projectKey, sprintId: sprintId, projectName: projectName } });
         } catch (error) {
           console.error('create sprint error!!', error);
+          console.log('에러 메시지:', error.message); // 에러 메시지 출력
           setError('입력되지 않은 빈칸이 존재합니다.');
         }
       };
