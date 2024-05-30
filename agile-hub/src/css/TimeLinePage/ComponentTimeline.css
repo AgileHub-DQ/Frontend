@@ -100,3 +100,19 @@
   top: 75px;
   margin-left: 3%;
 }
+
+@keyframes flash {
+  0% {
+    background-color: blue;
+  }
+  50% {
+    background-color: lightblue;
+  }
+  100% {
+    background-color: blue;
+  }
+}
+
+.flash-animation:hover {
+  animation: flash 1s ease-in-out infinite;
+}
