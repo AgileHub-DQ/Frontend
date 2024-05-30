@@ -1,0 +1,38 @@
+/* .storytitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    width: 100%; 
+} */
+
+
+
+.typeandStatus {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; 
+}
+
+.storyType {
+    background-color: #f76c5e;
+    color: white; 
+    padding: 5px 10px; 
+    border-radius: 15px; 
+    font-size: 13px;
+    font-weight: bold;
+    height: 17px;
+}
+
+.storyStatus {
+    color: #3866CB;
+    font-weight: bold;
+    margin-left: 30px;
+}

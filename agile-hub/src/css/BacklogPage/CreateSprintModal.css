@@ -1,0 +1,234 @@
+.date{
+    left: 50%; /* 부모 요소의 왼쪽으로부터 50%만큼 떨어진 위치 */
+    top: 50%; /* 부모 요소의 상단으로부터 50%만큼 떨어진 위치 */
+    transform: translate(-50%, -50%); 
+    
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 537px;
+    height: 743px;
+    
+    background: #FFFFFF;
+    border: 1px solid #000000;
+}
+
+/* 스프린트 시작 */
+.sprintStart{
+    position: absolute;
+    width: 190px;
+    height: 35px;
+    left: 38px;
+    top: 37px;
+    
+    /* font-family: 'Abhaya Libre SemiBold'; */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px; 
+    line-height: 35px;
+    
+    color: #000000;
+}
+
+.errorMessage{
+    position: absolute;
+    width: 190px;
+    left: 180px;
+    top: 45px;
+    font-size: 15px; 
+    color: red;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+.red{
+    color:red;
+}
+
+/* 1개의 이슈를 이 스프린트에 포함합니다. */
+.dd{
+position: absolute;
+width: 322px;
+height: 24px;
+left: 38px;
+top: 98px;
+
+/* font-family: 'Abhaya Libre ExtraBold'; */
+font-style: normal;
+/* font-weight: 800; */
+font-size: 20px;
+line-height: 24px;
+
+color: #000000;
+white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+/* 필수 필드는 별표 *로 표시되어 있습니다. */
+.dd2{
+    position: absolute;
+    width: 325px;
+    height: 24px;
+    left: 38px;
+    top: 128px;
+    
+    /* font-family: 'Abhaya Libre ExtraBold'; */
+    font-style: normal;
+    /* font-weight: 800; */
+    font-size: 20px;
+    line-height: 24px;
+    
+    color: #000000;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+/* 스프린트 이름* */
+.titleText{
+    position: absolute;
+    width: 122px;
+    height: 24px; 
+    left: 38px;
+    top: 190px;
+    
+    /* font-family: 'Abhaya Libre ExtraBold'; */
+    font-style: normal;
+    /* font-weight: 800; */
+    font-size: 20px;
+    line-height: 24px;
+    
+    color: #000000;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+/* title */
+.title{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 325px;
+    height: 50px;
+    left: 35px;
+    top: 222px;
+    
+    border: 3px solid #DDDFE4;
+    border-radius: 5px;
+    
+}
+
+/* 시작 날짜* */
+.startDateText{
+    position: absolute;
+    width: 85px;
+    height: 24px;
+    left: 35px;
+    top: 298px;
+    
+    /* font-family: 'Abhaya Libre ExtraBold'; */
+    font-style: normal;
+    /* font-weight: 800; */
+    font-size: 20px;
+    line-height: 24px;
+    
+    color: #000000;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+.startDate{
+    position: absolute;
+    width: 185px;
+    height: 38px;
+    left: 35px;
+    top: 330px;
+}
+
+/* 종료 날짜* */
+.endDateText{
+    position: absolute;
+    width: 85px;
+    height: 24px;
+    left: 35px;
+    top: 394px;
+    
+    /* font-family: 'Abhaya Libre ExtraBold'; */
+    font-style: normal;
+    /* font-weight: 800; */
+    font-size: 20px;
+    line-height: 24px;
+    
+    color: #000000;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+/* endDate */
+.endDate{
+position: absolute;
+width: 196.33px;
+height: 38px;
+left: 33px;
+top: 426px;
+
+}
+
+/* 스프린트 목표 */
+.descriptionText{
+    position: absolute;
+    width: 115px;
+    height: 24px;
+    left: 33px;
+    top: 507px;
+    
+    /* font-family: 'Abhaya Libre ExtraBold'; */
+    font-style: normal;
+    /* font-weight: 800; */
+    font-size: 20px;
+    line-height: 24px;
+    
+    color: #000000;
+    white-space: nowrap; /* 줄 바꿈 방지 */
+}
+
+/* description */
+.description{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 467px;
+    height: 107px;
+    left: 33px;
+    top: 541px;
+    
+    border: 3px solid #DDDFE4;
+    border-radius: 5px;
+}
+
+/* startRec */
+.start{
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    left: 420px;
+    top: 666px;
+    
+    background: #2D64DC;
+    border-radius: 5px;
+    
+}
+
+/* cancel */
+.cancel{
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    left: 328.25px;
+    top: 666px;
+    
+    background: #ECECEC;
+    border-radius: 5px;
+    transform: rotate(0.35deg);
+}
+
+
+
+
+
+
+
+

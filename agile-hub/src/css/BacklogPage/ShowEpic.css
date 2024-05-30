@@ -1,0 +1,30 @@
+/* .epictitle{
+    color: #001762;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px;
+} */
+
+
+.epictitle {
+  font-size: 20px; /* 타이틀의 글자 크기 */
+  color: #333; /* 타이틀의 글자 색상 */
+  font-weight: bold; /* 글자 두께 */
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: space-between; /* 좌우 공간 동일하게 배치 */
+  padding: 10px; /* 패딩 */
+  background-color: #e0e0e0; /* 배경색 */
+  margin-bottom: 10px; /* 아래 마진 */
+  border-radius: 10px; /* 둥근 모서리 */
+  
+}
+
+.epicType {
+  font-size: 16px; /* 타입의 글자 크기 */
+  color: #555; /* 타입의 글자 색상 */
+  background-color: #f2f2f2; /* 배경색 */
+  padding: 5px 10px; /* 패딩 */
+  border-radius: 5px; /* 둥근 모서리 */
+  margin-left: 10px; /* 왼쪽 마진 */
+}

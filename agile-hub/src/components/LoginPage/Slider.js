@@ -1,66 +1,111 @@
-import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // 슬라이더 스타일 import
+import React, { useRef } from 'react';
+import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
+import { Sphere, Box, Icosahedron, Cylinder, Cone, MeshDistortMaterial } from '@react-three/drei';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import titanOneFont from '../../fonts/Titan One_Regular.json';
 
-const Slider = () => {
+extend({ TextGeometry });
+
+const AnimatedObject = ({ type, position, color, args, speedFactor }) => {
+  const meshRef = useRef();
+  const { mouse, clock } = useThree();
+  const speed = Math.random() * 0.1 + speedFactor;
+
+  useFrame(() => {
+    const maxX = 0.5; // x축 최대 이동 범위를 1.5로 더 줄임
+    const maxY = 0.5; // y축 최대 이동 범위 유지
+    const minX = -2; // x축 최소 이동 범위 유지
+    const minY = -2; // y축 최소 이동 범위 유지
+
+    const targetX = (mouse.x * 2 - meshRef.current.position.x) * 0.02; // 5에서 2로 줄임
+    const targetY = (-mouse.y * 2 - meshRef.current.position.y) * 0.02; // 5에서 2로 줄임
+
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.position.x = Math.max(minX, Math.min(maxX, meshRef.current.position.x + targetX));
+    meshRef.current.position.y = Math.max(minY, Math.min(maxY, meshRef.current.position.y + targetY));
+
+    // 도형 추가
+    const t = clock.getElapsedTime();
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.position.x = position[0] + Math.sin(t * speed) * 2; // 시간에 따라 X 위치 조정
+    meshRef.current.position.y = position[1] + Math.cos(t * speed) * 2; // 시간에 따라 Y 위치 조정
+  });
+
+  const components = {
+    Sphere: Sphere,
+    Icosahedron: Icosahedron,
+    Box: Box,
+    Cylinder: Cylinder,
+    Cone: Cone,
+  };
+
+  const Geometry = components[type];
+
+  if (!Geometry) {
+    console.error(`Unknown type: ${type}`);
+    return null;
+  }
+
   return (
-    <Carousel autoPlay interval={2000} infiniteLoop>
-      <div>
-        <img src="https://via.placeholder.com/600x400" alt="slide1" />
-        <p className="legend">어떤 환경에서든 AgileHub와 함께!</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/600x400" alt="slide2" />
-        <p className="legend">애자일을 원하는 모든 이를 위한 최적의 선택!</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/600x400" alt="slide3" />
-        <p className="legend">프로젝트 관리의 혁신, 간편하고 명확하게!</p>
-      </div>
-    </Carousel>
+    <Geometry ref={meshRef} args={args} position={position}>
+      <MeshDistortMaterial color={color} distort={0.3} speed={2} />
+    </Geometry>
   );
 };
 
-export default Slider;
+const Text3D = ({ text, position, color, fontSize }) => {
+  const meshRef = useRef();
+  const { mouse } = useThree();
 
+  const fontLoader = new FontLoader();
+  const font = fontLoader.parse(titanOneFont);
 
+  const textOptions = {
+    font: font,
+    size: fontSize,
+    height: 0.01, // 글씨의 깊이를 더 줄임
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.2, // 경사의 두께를 더 줄임
+    bevelSize: 0.01, // 경사의 크기를 더 줄임
+    bevelOffset: 0,
+    bevelSegments: 5,
+  };
 
-/* 
-import React, { useState, useEffect } from 'react';
-
-const Slider = () => {
-  const trainCompartment = ['1 칸', '2 칸', '3 칸']; // 이미지 = 칸
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % trainCompartment.length);
-    }, 3000); // 3초마다 슬라이드 변경
-
-    return () => clearInterval(intervalId); // 컴포넌트가 언마운트될 때 인터벌 제거
-  }, [trainCompartment.length]); // trainCompartment.length를 의존성 배열에 추가
+  useFrame(() => {
+    meshRef.current.rotation.x += 0.01;
+    meshRef.current.position.x += (mouse.x * 5 - meshRef.current.position.x) * 0.05;
+    meshRef.current.position.y += (-mouse.y * 5 - meshRef.current.position.y) * 0.05;
+  });
 
   return (
-    <div className='slider'>
-      <div className='slider-show'>
-        {trainCompartment.map((item, index) => (
-          <div
-            className='compartment'
-            key={index}
-            style={{
-              transform: `translateX(${index * -1100}px)`, // 슬라이드 이동 위치 계산
-              transition: 'transform 0.4s ease-in-out', // 슬라이드 효과
-              opacity: index === currentIndex ? 1 : 0, // 현재 슬라이드만 표시되도록 opacity 설정
-            }}
-          >
-            {item}
-          </div>
-        ))}
-      </div>
+    <mesh ref={meshRef} position={position}>
+      <textGeometry args={[text, textOptions]} />
+      <meshStandardMaterial metalness={0.9} roughness={0.1} emissive={color} />
+    </mesh>
+  );
+};
+
+const Slider = () => {
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        float: 'left',
+      }}
+    >
+      <Canvas>
+        <ambientLight intensity={0.9} />
+        <pointLight position={[0, 0, 10]} color="#ffffff" intensity={1.5} />
+        <pointLight position={[0, 10, 0]} color="#ffffff" intensity={0.7} />
+        <Text3D text="Agile Hub" position={[0, -2, 0]} color="#FF1493" fontSize={1} metalness={0.1} roughness={0.5} />
+        <directionalLight position={[0, 0, 10]} color="#ffffff" intensity={1.5} />
+        <spotLight position={[10, 10, 10]} angle={0.3} penumbra={0.1} intensity={2} color="#ffffff" />
+      </Canvas>
     </div>
   );
 };
 
 export default Slider;
-
-*/

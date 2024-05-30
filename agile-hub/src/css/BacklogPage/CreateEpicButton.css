@@ -1,0 +1,35 @@
+/* CreateEpicButton.css */
+.epic_button_container {
+    width: 50rem;
+    height: 3rem;
+    flex-shrink: 0;
+    margin-left: auto; /* 버튼 이동되는 현상 제거 */
+    margin-right: auto;  /* 버튼 이동되는 현상 제거 */
+}
+
+.epic_button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #001762;
+    /* background: #424c74; */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+.epic_button:hover {
+    background: #003b9e;
+}
+
+.epic_button__text {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px; 
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: 800;
+}
