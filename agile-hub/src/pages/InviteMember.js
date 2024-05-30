@@ -216,7 +216,8 @@ function InviteMember() {
       console.log('인증토큰 ㄴ');
       setAcceptStatus({ success: false, message: '인증 토큰이 없습니다. 로그인이 필요합니다.' });
       // 로그인 페이지로 리다이렉트하면서 현재 URL을 쿼리 파라미터로 전달
-      navigate(`/login?redirectUrl=${encodeURIComponent(location.pathname + location.search)}`);
+      navigate(`/login?redirectUrl=${location.pathname + location.search}`); //확실하지 ~
+      //못 돌아와.........................................
       console.log('인증토큰 ㄴ');
       return;
     }
@@ -225,8 +226,10 @@ function InviteMember() {
       inviteCode: inviteCode,
     };
 
+    console.log('redirect' + document.referrer);
     try {
-      const response = await axios.post('/projects/invite/receive', requestBody, {
+      console.log('redirect' + document.referrer);
+      const response = await axios.post('https://api.agilehub.store/projects/invite/receive', requestBody, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`, // Directly using the provided token
