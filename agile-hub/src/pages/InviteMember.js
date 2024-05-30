@@ -51,7 +51,7 @@ function InviteMember() {
       }
     } catch (error) {
       console.log('인증토큰' + authToken);
-      setAcceptStatus({ success: false, message: '오류로 인해 초대를 수락할 수 없습니다.' });
+      setAcceptStatus({ success: false, message: '초대코드가 만료되었습니다.' });
     }
   };
 
