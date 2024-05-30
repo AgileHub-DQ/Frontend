@@ -1,5 +1,5 @@
 // BacklogPage.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../css/BacklogPage/BacklogPage.css';
 import Menubar from '../components/Menubar.js';
@@ -25,11 +25,14 @@ function BacklogPage() {
     }
   }, [location.state]);
 
+
+
+
   return (
     <div className='backlog_container'>
       <Menubar projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
-      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData}  />
-      <AddBacklog projectKey={projectKey} sprintId={sprintId} sprintData={sprintData}  />
+      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
+      <AddBacklog projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
     </div>
   );
 }

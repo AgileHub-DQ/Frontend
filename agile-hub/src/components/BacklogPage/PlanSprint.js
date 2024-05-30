@@ -1,23 +1,80 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
-import { useAuth } from '../../context/AuthContext.js';
+import { useAuth } from '../../context/AuthContext.js'; 
 
-function PlanSprint({ projectKey, sprintData, }) {
-  const { authToken } = useAuth();
+function PlanSprint({}) {
+  console.log("여기는 plansprint 입니다.");
+
+  const location = useLocation();
+  const [projectKey, setProjectKey] = useState('');
+  const [sprintId, setSprintId] = useState('');
+  const [sprintData, setSprintData] = useState({});
+
+  useEffect(() => {
+      if (location.state) {
+        const { projectKey, sprintId, sprintData } = location.state;
+        setProjectKey(projectKey || '');
+        setSprintId(sprintId || '');
+        setSprintData(sprintData || {});
+        console.log('projectKey:', projectKey);
+        console.log('sprintId:', sprintId);
+        console.log('sprintData:', JSON.stringify(sprintData));
+        console.log("PlanSprint projectKey and sprintId and sprintData check:", projectKey + "sprintId: " + sprintId, JSON.stringify(sprintData));
+      }
+    }, [location.state]);
+
+
+  // const projectKey = 'p1';
+  const { authToken } = useAuth(); 
+
+
+
+  // 마지막에 생성한 스프린트에 관련된 값들이 설정
+  // const [issues, setIssues] = useState([]);
+  // const [count, setCount] = useState('');
+  // const navigate = useNavigate();
+
+  // 생성한 스프린트에 관련된 값들이 설정
   const [issues, setIssues] = useState([]);
   const [count, setCount] = useState('');
   const navigate = useNavigate();
 
+
+
+
+
+
+  // const handleCreateSprint = () => {
+  //   navigate('/sprint', { state: { projectKey, sprintId } });
+  // };
+
+
+  const handleCreateSprint = () => {
+    navigate('/sprint', { state: { sprintData, projectKey, issues } });
+  };
+  
+
+
+
+  // useEffect(() => {
+  //   test();
+  // }, []);
+
+
+
   useEffect(() => {
     if (projectKey) {
-      test();
+      test(); // 타이밍 문제로 projectkey 가 들어가지 않는 문제 해결
     }
-  }, [projectKey]);
+}, [projectKey]);
+
+
 
   const test = async () => {
     try {
+      //const accessToken = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBZ2lsZUh1YiIsInN1YiI6IkFjY2Vzc1Rva2VuIiwibmFtZSI6IuyLoOyKue2YnCIsInJvbGUiOiJST0xFX1VTRVIiLCJwcm92aWRlciI6Imtha2FvIiwiZGlzdGluY3RJZCI6IjM0NTcyMjMzOTYiLCJpYXQiOjE3MTU1NzM5OTcsImV4cCI6MTcxNjc4MzU5N30.1PRhxReTmFd2UV4CI5tCrDCNq7Re2p9PNslzwfwy0d8ZZbpuxOuKd1FTwjoTkRIwtYmL2V1gzxaDhchatjKhzA';
       const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -33,20 +90,37 @@ function PlanSprint({ projectKey, sprintData, }) {
         return;
       }
 
+      // const latestSprint = sprints[sprints.length - 1];
+      // const latestSprintIssues = latestSprint.issues;
+      // const issueCount = latestSprint.issueCount;
+      // console.log("latestSprint:", latestSprint);
+      // console.log("issueCount:", issueCount);
+      // console.log("latestSprintIssues:", latestSprintIssues);
+
       const latestSprint = sprints[sprints.length - 1];
       const sprintIssues = latestSprint.issues;
       const issueCount = latestSprint.issueCount;
+      console.log("latestSprint:", latestSprint);
+
+      console.log("sprintId값: "+latestSprint.sprintId);
+
+      console.log("latestSprintJSON:", JSON.stringify(latestSprint));
+      console.log("issueCount:", issueCount);
+      console.log("sprintIssues:", sprintIssues);
+
+      // setIssues(latestSprintIssues);
+      // setCount(issueCount);
 
       setIssues(sprintIssues);
+      console.log("issues:", issues);
       setCount(issueCount);
+
+      localStorage.setItem('sprintIssues', JSON.stringify(sprintIssues)); 
+
 
     } catch (error) {
       console.error('API request failed:', error);
     }
-  };
-
-  const handleCreateSprint = () => {
-    navigate('/sprint', { state: { sprintData, projectKey, issues } });
   };
 
   return (

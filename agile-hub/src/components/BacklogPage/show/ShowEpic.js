@@ -34,6 +34,8 @@ function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
         }
     };
 
+
+
     const fetchIssues2 = async () => { // 에픽의 아이디를 모두 가져와서 스토리 목록 출력
         try {
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
