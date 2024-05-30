@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../../src/context/AuthContext';
 import { useLocation } from 'react-router-dom';
 
-Modal.setAppElement('#root'); // Modal 접근성을 위해 설정
+Modal.setAppElement('#root');
 
 function InviteMember() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
@@ -31,7 +31,6 @@ function InviteMember() {
       inviteCode: inviteCode,
     };
 
-    //여기가 실행됨
     console.log('redirect' + document.referrer);
     try {
       console.log('redirect' + document.referrer);
@@ -46,6 +45,7 @@ function InviteMember() {
         console.log('제대로 수락이 되었습니다');
         setAcceptStatus({ success: true, message: '초대가 성공적으로 수락되었습니다.' });
         closeModal(); // 초대 수락 후 모달 닫기
+        window.location.href = 'https://www.agilehub.store/myPage';
       } else {
         setAcceptStatus({ success: false, message: response.data.message || '초대 수락에 실패했습니다.' });
       }
@@ -59,11 +59,10 @@ function InviteMember() {
     // URL에서 초대 코드를 추출
     const queryParams = new URLSearchParams(location.search);
     const code = queryParams.get('inviteCode');
-    console.log('Extracted inviteCode: ', code); // Debugging
+    console.log('Extracted inviteCode: ', code);
     if (code) {
       setInviteCode(code);
     }
-
     // 컴포넌트가 마운트될 때 모달을 열도록 설정
     setModalIsOpen(true);
   }, [location]);
@@ -126,6 +125,74 @@ function InviteMember() {
           </div>
         )}
       </Modal>
+
+      <style>
+        {`
+          .invite-member-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+
+          .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s;
+          }
+
+          .close-button:hover {
+            color: #000;
+          }
+
+          .modal-image {
+            display: block;
+            margin: 0 auto 20px;
+            width: 250px;
+            height: 100px;
+          }
+
+          .modal-section {
+            margin-bottom: 20px;
+            font-size: 20px; /* 전반적인 글자 크기를 더 키움 */
+            color: #333;
+            text-align: center;
+          }
+
+          .modal-buttons {
+            text-align: center;
+          }
+
+          .accept-button {
+            background-color: #24b4fb;
+            border: none;
+            color: white;
+            padding: 15px 30px; /* 패딩 유지 */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px; /* 버튼 글자 크기를 더 키움 */
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+          }
+
+          .accept-button:hover {
+            background-color: #0071e2;
+          }
+
+          .footer {
+            font-size: 18px; /* 푸터 글자 크기를 더 키움 */
+            color: #999;
+            text-align: center;
+          }
+        `}
+      </style>
     </div>
   );
 }
