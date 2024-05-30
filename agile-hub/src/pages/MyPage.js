@@ -153,7 +153,7 @@ function ProjectsList() {
           </div>
           <h1>나의 프로젝트 목록</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
+          <ul style={{ listStyleType: 'none', padding: 0, maxHeight: '1000px', overflowY: 'auto' }}>
             {projects.map((project) => (
               <li key={project.id} style={projectItemStyle}>
                 {editingProjectId === project.id ? (
