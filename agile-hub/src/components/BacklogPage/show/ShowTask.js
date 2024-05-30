@@ -4,8 +4,6 @@ import '../../../css/BacklogPage/ShowTask.css';
 import { useAuth } from '../../../context/AuthContext.js'; 
 
 function ShowTask({ projectKey, tasks, sprintId }) {
-    console.log("showtask에서 tasks: "+ JSON.stringify(tasks));
-    console.log("showtask에서 tasks: "+ JSON.stringify(tasks.id));
     const { authToken } = useAuth(); 
 
     const alignToSprint = async (issueId) => {
