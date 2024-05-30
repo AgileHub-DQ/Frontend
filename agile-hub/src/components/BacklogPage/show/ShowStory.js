@@ -35,6 +35,7 @@ import { useAuth } from '../../../context/AuthContext.js';
     };
 
     const fetchTasks = async (storyId) => {
+        console.log("storyId"+storyId);
         try {
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/stories/${storyId}/tasks`, {
                 headers: {
@@ -43,6 +44,8 @@ import { useAuth } from '../../../context/AuthContext.js';
                 }
             });
 
+            console.log(JSON.stringify(response));
+            
             setTasks(prevTasks => ({
                 ...prevTasks,
                 [storyId]: response.data.result
