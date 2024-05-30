@@ -5,7 +5,7 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
-    function ShowStory({ projectKey, issueId, sprintId, renderingSprint }) { // renderingSprint 를 createStoryButton이랑 showEpic 에 전달
+    function ShowStory({ projectKey, issueId, sprintId }) { // renderingSprint 를 createStoryButton이랑 showEpic 에 전달
 
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
@@ -69,7 +69,6 @@ import { useAuth } from '../../../context/AuthContext.js';
             }));
 
             alert("할당되었습니다.")
-            renderingSprint();
             console.log('Assigned to sprint:', response);
         } catch (error) {
             console.error('Assigning to sprint failed:', error);

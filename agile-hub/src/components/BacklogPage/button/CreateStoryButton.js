@@ -4,7 +4,7 @@ import StoryModal from '../modal/StoryModal.js';
 import ShowStory from '../show/ShowStory.js';
 
 
-function CreateStoryButton({projectKey, renderingSprint}) {
+function CreateStoryButton({projectKey}) {
     const [showModal, setShowModal] = useState(false);
     const [storyList, setStoryList] = useState([]);
     
@@ -21,7 +21,7 @@ function CreateStoryButton({projectKey, renderingSprint}) {
         <div className='addStory'>
             {showModal && <StoryModal onClose={handleToggleModal} onSubmit={handleStorySubmit} projectKey={projectKey} />} 
             {storyList.map((storyData, index) => (
-                <ShowStory key={index} storyData={storyData} projectKey={projectKey} renderingSprint={renderingSprint}/>
+                <ShowStory key={index} storyData={storyData} projectKey={projectKey} />
             ))}
             <div className='story_button_container'>
                 <button className="story_button" onClick={handleToggleModal}>

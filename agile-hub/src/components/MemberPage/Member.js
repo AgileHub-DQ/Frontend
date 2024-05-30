@@ -13,7 +13,7 @@ function Modal({ isOpen, onClose }) {
   const [error, setError] = useState(null);
 
   //수정 (임의 프로젝트 지정)
-  const projectId = 1;
+  const projectId = 19;
 
   const handleInvite = async () => {
     if (!authToken) {
@@ -280,7 +280,7 @@ function Member() {
         return;
       }
       try {
-        const response = await axios.get(`https://api.agilehub.store/projects/P1/members`, {
+        const response = await axios.get(`https://api.agilehub.store/projects/Capstone0531/members`, {
           //수정 (임의 프로젝트 지정)
           headers: {
             Authorization: `Bearer ${authToken}`,

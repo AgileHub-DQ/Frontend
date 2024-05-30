@@ -11,7 +11,6 @@ function BacklogPage() {
   const [projectKey, setProjectKey] = useState('');
   const [sprintId, setSprintId] = useState('');
   const [sprintData, setSprintData] = useState({});
-  const renderingSprintRef = useRef(null);
   // const [loginId, setLoginId] = useState('');
 
   useEffect(() => {
@@ -26,19 +25,14 @@ function BacklogPage() {
     }
   }, [location.state]);
 
-  const renderingSprint = () => {
-    if (renderingSprintRef.current) {
-      renderingSprintRef.current.test();
-    }
-  };
-  
+
 
 
   return (
     <div className='backlog_container'>
       <Menubar projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
-      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} renderingSprint={renderingSprint}  />
-      <AddBacklog projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} renderingSprint={renderingSprint} />
+      <PlanSprint projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
+      <AddBacklog projectKey={projectKey} sprintId={sprintId} sprintData={sprintData} />
     </div>
   );
 }
