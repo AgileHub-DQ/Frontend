@@ -66,6 +66,7 @@ function Modal({ isOpen, onClose }) {
     borderRadius: '8px',
     width: '400px',
     maxWidth: '90%',
+    zIndex: 1001, // 추가된 부분
   };
 
   const overlayStyle = {
@@ -75,6 +76,7 @@ function Modal({ isOpen, onClose }) {
     right: 0,
     bottom: 0,
     background: 'rgba(0, 0, 0, 0.3)',
+    zIndex: 1000, // 추가된 부분
   };
 
   const headerStyle = {
