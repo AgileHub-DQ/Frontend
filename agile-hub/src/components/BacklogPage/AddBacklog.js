@@ -6,7 +6,7 @@ import CreateEpicButton from './button/CreateEpicButton.js';
 import { useAuth } from '../../context/AuthContext.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-function AddBacklog() {
+function AddBacklog({renderingSprint}) {
     const location = useLocation();
     const [projectKey, setProjectKey] = useState('');
     const [sprintId, setSprintId] = useState('');
@@ -56,7 +56,7 @@ function AddBacklog() {
             ) : (
                 epics.map(epic => (
                     <div key={epic.id} className='epic-section'>
-                        <ShowEpic epicData={epic} projectKey={projectKey} sprintId={sprintId} onEpicDeleted={onEpicDeleted} />
+                        <ShowEpic epicData={epic} projectKey={projectKey} sprintId={sprintId} onEpicDeleted={onEpicDeleted} renderingSprint={renderingSprint}/>
                         <CreateEpicButton projectKey={projectKey} onEpicSubmit={epicIssue} />
                     </div>
                 ))

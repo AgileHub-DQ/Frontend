@@ -16,6 +16,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
   const [endDate, setEndDate] = useState('');
   const [assigneeId, setAssigneeId] = useState('');
   const [parentId, setParentId] = useState('');
+  // const [parentId, setParentId] = useState(epicList.length > 0 ? epicList[0].id || 1 : 1);
   const [color, setColor] = useState('#00FF75');
   const [epicList, setEpicList] = useState([]);
   const [label, setLabel] = useState('');
@@ -103,7 +104,7 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
     onClose();
   };
 
-  const fetchIssues = async () => { //에픽 목록 출력하기 위한 코드
+  const fetchIssues = async () => { // 에픽 목록 출력하기 위한 코드
     try {
       const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics`, {
         headers: {
@@ -111,6 +112,8 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
           'Content-Type': 'application/json'
         }
       });
+      console.log("response: "+ JSON.stringify(response));
+      console.log("response: "+ JSON.stringify(response.data.result));
       setEpicList(response.data.result);
     } catch (error) {
       console.error('API request failed:', error);
@@ -118,8 +121,18 @@ function StoryModal({ onClose, onSubmit, projectKey }) {
   };
 
   useEffect(() => {
+    console.log("에픽 목록 출력");
     fetchIssues();
   }, []);
+
+  useEffect(() => {
+    console.log("Epic List updated:");
+    epicList.forEach(epic => {
+      console.log(epic);
+      console.log(epic.id);
+      console.log(epic.title);
+    });
+  }, [epicList]);
 
   return (
     <div className="modal-content">

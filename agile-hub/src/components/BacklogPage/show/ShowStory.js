@@ -5,8 +5,8 @@ import CreateTaskButton from '../button/CreateTaskButton.js';
 import ShowTask from './ShowTask.js';
 import { useAuth } from '../../../context/AuthContext.js';
 
-function ShowStory({ projectKey, issueId, sprintId }) {
-    console.log("showstory에서 issueId값: "+issueId);
+    function ShowStory({ projectKey, issueId, sprintId, renderingSprint }) { // renderingSprint 를 createStoryButton이랑 showEpic 에 전달
+
     const { authToken } = useAuth();
     const [stories, setStories] = useState([]);
     const [tasks, setTasks] = useState({});
@@ -18,8 +18,6 @@ function ShowStory({ projectKey, issueId, sprintId }) {
 
     const fetchStories = async () => {
         try {
-            
-            console.log("fetchStories에서 issueId: "+issueId);
             const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/epics/${issueId}/stories`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -71,6 +69,7 @@ function ShowStory({ projectKey, issueId, sprintId }) {
             }));
 
             alert("할당되었습니다.")
+            renderingSprint();
             console.log('Assigned to sprint:', response);
         } catch (error) {
             console.error('Assigning to sprint failed:', error);

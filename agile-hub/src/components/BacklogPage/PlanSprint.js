@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+// PlanSprint.js
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../css/BacklogPage/PlanSprint.css';
 import { useAuth } from '../../context/AuthContext.js';
 
-function PlanSprint({ projectKey, sprintData, }) {
+const PlanSprint = forwardRef(({ projectKey, sprintData }, ref) => {
   const { authToken } = useAuth();
   const [issues, setIssues] = useState([]);
   const [count, setCount] = useState('');
@@ -16,7 +17,13 @@ function PlanSprint({ projectKey, sprintData, }) {
     }
   }, [projectKey]);
 
-  const test = async () => {
+  useImperativeHandle(ref, () => ({
+    test() {
+      fetchSprints();
+    }
+  }));
+
+  const fetchSprints = async () => {
     try {
       const response = await axios.get(`https://api.agilehub.store/projects/${projectKey}/sprints`, {
         headers: {
@@ -82,6 +89,6 @@ function PlanSprint({ projectKey, sprintData, }) {
       <button className='create-sprint-button' onClick={handleCreateSprint}>스프린트 시작</button>
     </div>
   );
-}
+});
 
 export default PlanSprint;

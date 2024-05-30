@@ -5,7 +5,7 @@ import '../../../css/BacklogPage/ShowEpic.css';
 import { useAuth } from '../../../context/AuthContext.js';
 import CreateStoryButton from '../button/CreateStoryButton.js';
 
-function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
+function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId ,renderingSprint}) {
     console.log("여기는 showEpic 페이지입니다.");
     const { authToken } = useAuth();
     const issueId = epicData.id;
@@ -33,6 +33,8 @@ function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
             console.error('API request failed:', error);
         }
     };
+
+
 
     const fetchIssues2 = async () => { // 에픽의 아이디를 모두 가져와서 스토리 목록 출력
         try {
@@ -113,8 +115,8 @@ function ShowEpic({ epicData, projectKey, onEpicDeleted, sprintId }) {
                     transition: 'all 0.15s ease'
                 }} onClick={() => deleteIssue(issueId)}>삭제하기</button>
             </div>
-            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId}  />
-            <CreateStoryButton projectKey={projectKey}  />
+            <ShowStory projectKey={projectKey} issueId={issueId} sprintId={sprintId} renderingSprint={renderingSprint} />
+            <CreateStoryButton projectKey={projectKey} renderingSprint={renderingSprint} />
         </div>
     );
 }

@@ -178,7 +178,7 @@ function Modal({ isOpen, onClose }) {
         <button style={submitButtonStyle} onClick={handleInvite}>
           멤버 초대
         </button>
-        <button style={submitButtonStyle} onClick={handleAIInvite}>
+        <button  onClick={handleAIInvite}>
           AI 초대장
         </button>
         {inviteStatus && <div style={{ color: inviteStatus.success ? 'green' : 'red' }}>{inviteStatus.message}</div>}
