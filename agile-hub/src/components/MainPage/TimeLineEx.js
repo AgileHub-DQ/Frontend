@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import '../../css/TimeLinePage/TimelineBoard.css';
+import '../../css/TimeLinePage/TimeLineEx.css';
 
 const data = [
   { task: 'AT-5 요구사항 설계', status: '완료됨', startDate: '2022-01-10', endDate: '2022-01-20' },

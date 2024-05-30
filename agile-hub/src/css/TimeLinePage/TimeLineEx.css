@@ -1,0 +1,67 @@
+.timeline-container {
+  display: flex;
+  overflow-y: hidden; /* Prevent vertical scrolling */
+}
+
+.timeline-issue {
+  width: 200px;
+  overflow-y: hidden; /* Prevent vertical scrolling */
+}
+
+.timeline-board {
+  flex: 1;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  position: relative;
+}
+
+.timeline-months {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px; /* Set height as needed */
+  z-index: 1;
+}
+
+.timeline-month {
+  flex: 1;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.timeline-grid {
+  position: relative;
+  top: 30px; /* Adjusted to account for the months header */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+.timeline-bar {
+  position: absolute;
+  height: 20px; /* Height of the bar */
+  background-color: #6495ed; /* Unified color */
+}
+
+.timeline-deadline {
+  position: absolute;
+  height: calc(100% - 30px); /* Adjust the height to fit within the grid */
+  width: 2px;
+  background-color: orange;
+  top: 0; /* Align with the top of the grid */
+}
+
+.timeline-orange-line {
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  background-color: orange;
+}
+
+.status-text {
+  font-size: 12px;
+  color: green;
+}
