@@ -5,12 +5,6 @@ import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.js';
 
-function ComponentTimeline({ onTitleClick, projectKey, projectName }) {
-  console.log("componentTimeline projectName: " + projectName);
-
-
-
-
 function Modal({ isOpen, onClose }) {
   const navigate = useNavigate();
   const { authToken } = useAuth();
@@ -159,7 +153,6 @@ function Modal({ isOpen, onClose }) {
 function ComponentTimeline({ onTitleClick, projectKey, projectName }) {
   console.log('componentTimeline projectName: ' + projectName);
   // const projectKey = 'P1';
-
   const { authToken } = useAuth();
 
   const [timelineTitle, setTimelineTitle] = useState([]);
@@ -229,13 +222,9 @@ function ComponentTimeline({ onTitleClick, projectKey, projectName }) {
   return (
     <div className="barentirecontainer">
       <div className="barcontainer">
-
-        <div className="project">프로젝트/[<span style={{ color: 'black' }}>{projectName}</span>]</div>
-
         <div className="project">
           프로젝트/[<span style={{ color: 'black' }}>{projectName}</span>]
         </div>
-
         <div className="timeline_text">타임라인</div>
       </div>
       <div className="bar2container">
@@ -250,14 +239,6 @@ function ComponentTimeline({ onTitleClick, projectKey, projectName }) {
           />
           <FaSearch className="search-icon" />
         </div>
-
-        {/* <div className="status-container">
-          <div className="status-label">상태 범주</div>
-
-        </div>
-        <div className="type-label">에픽</div> */}
-
-
         <button
           className="flash-animation"
           style={{
@@ -275,7 +256,6 @@ function ComponentTimeline({ onTitleClick, projectKey, projectName }) {
           AI 요약하기
         </button>
         <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
-
       </div>
       {searchTerm && (
         <div style={styles.resultsContainer}>
@@ -309,5 +289,5 @@ const styles = {
     borderBottom: '1px solid #ddd',
   },
 };
-}
+
 export default ComponentTimeline;
