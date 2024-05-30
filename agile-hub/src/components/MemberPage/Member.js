@@ -50,6 +50,41 @@ function Modal({ isOpen, onClose }) {
     }
   };
 
+  const handleAIInvite = async () => {
+    if (!authToken) {
+      setError('인증 토큰이 없습니다. 로그인이 필요합니다.');
+      return;
+    }
+
+    if (!email) {
+      alert('이메일을 입력해주세요.');
+      return;
+    }
+
+    const requestBody = {
+      email: email,
+      projectId: projectId, //수정 (임의 프로젝트 지정)
+    };
+
+    try {
+      const response = await axios.post('https://api.agilehub.store/reports/monthly', requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        setInviteStatus({ success: true, message: '초대 이메일이 성공적으로 발송되었습니다.' });
+      } else {
+        setInviteStatus({ success: false, message: response.data.message || '초대 이메일 발송에 실패했습니다.' });
+      }
+    } catch (error) {
+      console.error('Error inviting member:', error);
+      setInviteStatus({ success: false, message: '서버 오류로 인해 초대 이메일을 발송할 수 없습니다.' });
+    }
+  };
+
   if (!isOpen) {
     return null;
   }
@@ -142,6 +177,9 @@ function Modal({ isOpen, onClose }) {
         </div>
         <button style={submitButtonStyle} onClick={handleInvite}>
           멤버 초대
+        </button>
+        <button style={submitButtonStyle} onClick={handleAIInvite}>
+          AI 초대장
         </button>
         {inviteStatus && <div style={{ color: inviteStatus.success ? 'green' : 'red' }}>{inviteStatus.message}</div>}
         {error && <div style={{ color: 'red' }}>{error}</div>}
