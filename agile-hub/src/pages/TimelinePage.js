@@ -9,13 +9,13 @@ function TimelinePage() {
   const location = useLocation();
   const projectKey = location.state?.projectKey;
   const projectName = location.state?.projectName;
-  console.log("timelinepage projectKey and projectNamecheck: "+ projectKey +projectName);
+  console.log('timelinepage projectKey and projectNamecheck: ' + projectKey + projectName);
 
   const [selectedTitle, setSelectedTitle] = useState('');
   return (
     <div>
-        <Menubar projectKey={projectKey}  />
-        <ComponentTimeline onTitleClick={setSelectedTitle}  projectKey={projectKey} projectName={projectName}/>
+      <Menubar projectKey={projectKey} />
+      <ComponentTimeline onTitleClick={setSelectedTitle} projectKey={projectKey} projectName={projectName} />
       <TimelineBoard moveToTimelineTitle={selectedTitle} projectKey={projectKey} />
     </div>
   );
