@@ -1,0 +1,108 @@
+.kanban-board {
+    display: flex;
+    position: absolute;
+    top: 127px;
+    width: 81%;
+    height: calc(100vh - 127px); 
+    left: 20%;
+
+}
+
+
+.column {
+    flex: 1;
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+
+.task {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.task p {
+    font-size: 14px;
+    color: #666;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+
+/* .Todo{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #945EB4;
+} */
+
+.status-indicator.todo {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #945EB4;
+  }
+  
+  .status-indicator.doing {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #E97373; 
+  }
+  
+  .status-indicator.complete {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #0DC94D; 
+  }
+
+/* .complete {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #0DC94D; 
+}  */
+
+
+.textdiv {
+    display: flex;
+    align-items: center; 
+}
+
+
+/* .preparing {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px; 
+    background-color: #E97373; 
+} */
+
+
+
+
+

@@ -1,0 +1,65 @@
+.bar {
+    position: relative;
+    width: 79.5%;
+    height: 127px;
+    background: #f3efef;
+    top: 0px;
+    left: 20.5%;
+  }
+  
+  .sprintbarcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    width: 234px;
+    height: 53px;
+    margin-left: 3%;
+  }
+  
+  .sprint_title {
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    color: #B1B7C3;
+  }
+  
+  .sprint_description {
+    width: 100%;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    white-space: nowrap;
+  }
+  
+  .dateContainer {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    position: absolute;
+    width: 530px;
+    height: 40px;
+    top: 75px;
+    margin-left: 3%;
+  }
+  
+  .dateBar {
+    flex: 1;
+    height: 15px;
+    background-color: #ccc;
+    position: relative;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: blue;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  

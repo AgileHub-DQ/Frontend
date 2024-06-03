@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  background: linear-gradient(45deg, #b5fffc 10%, #ffdee9 80%);
+}
+
+.left-panel,
+.right-panel {
+  height: 100vh;
+}
+
+.left-panel {
+  width: 30%;
+}
+
+.right-panel {
+  width: 70%;
+}

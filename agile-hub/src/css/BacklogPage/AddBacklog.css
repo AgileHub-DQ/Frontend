@@ -1,0 +1,12 @@
+.addBacklog {
+    width: 80%; 
+    margin-left: 20.50%; 
+    position: absolute; 
+    top: 30%; 
+    bottom: 0; 
+    background: #ffffff;  
+    overflow-y: auto;
+}
+
+
+

@@ -1,0 +1,110 @@
+.issueCommentsContainer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+
+  .title-comments {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .comments-section {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .comment-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .comment-header {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .comment-body {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .edit-textarea, .new-comment-textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .add-comment-btn, .edit-btn, .delete-btn, .save-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .add-comment-btn {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .edit-btn {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .save-btn {
+    background-color: #ffc107;
+    color: #fff;
+  }
+  
+  .comment-input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px; /* 댓글 입력 섹션과 댓글 목록 사이의 간격 조절 */
+  }
+  
+  .comment-input-section textarea {
+    width: 100%;
+  }
+  
+  .comment-input-section button {
+    margin-top: 10px;
+  }
+  
+  .createIssue {
+    margin-top: 20px; /* 위쪽 여백 추가 */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }

@@ -1,0 +1,163 @@
+.timeline-container {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 21%);
+  height: calc(100vh - 127px);
+  margin-left: 10%;
+  overflow-y: auto;
+}
+
+.issue-column {
+  width: 30%;
+  overflow-y: auto;
+}
+
+.issue-column::-webkit-scrollbar {
+  width: 0;
+}
+
+.timeline-board {
+  width: 80%;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.fixed-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 고정된 셀 높이와 너비 설정 */
+.fixed-table th,
+.fixed-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.fixed-table th {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+}
+
+.gray-row {
+  background-color: #f9f9f9;
+}
+
+.white-row {
+  background-color: #fff;
+}
+
+.month-header {
+  min-width: 300px;
+  text-align: center;
+}
+
+.timeline-cell {
+  position: relative;
+  height: 80px;
+}
+
+.task-bar {
+  position: absolute;
+  top: 50%;
+  height: 20px;
+  background-color: #9f8fef;
+  transform: translateY(-50%);
+  border-radius: 5px;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  background-color: #ff6600;
+  margin-right: 10px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.boxandtitle {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.issueTitles {
+  flex-grow: 1;
+  word-break: break-word;
+  /* 제목과 완료됨 사이의 간격 */
+  margin-right: 70px;
+  white-space: normal;
+}
+
+.status-badge {
+  display: inline-block;
+  background-color: #e0ffe0;
+  color: #4e9e6f;
+  padding: 1px 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  white-space: nowrap;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.progressbaranddone {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50%;
+}
+
+.progress-box {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  background-color: grey;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  position: absolute;
+  height: 100%;
+  background-color: lightgrey;
+  z-index: 1;
+}
+
+.progress-bar-progress {
+  position: absolute;
+  height: 100%;
+  background-color: rgb(60, 120, 244);
+  z-index: 2;
+}
+
+.progress-bar-done {
+  position: absolute;
+  height: 100%;
+  background-color: rgb(78, 158, 111);
+  z-index: 3;
+}
+
+.fixed-table th {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.th-issue {
+  z-index: 100;
+  position: sticky;
+  top: 0;
+}

@@ -1,0 +1,5 @@
+/* BacklogPage.css */
+.backlog_container {
+    width: 100%; 
+    height: 100vh; /* 세로는 뷰포트의 높이와 같게 설정 */
+  }
